@@ -128,8 +128,8 @@ Success Metrics
 - Size (required, single): <Sand / Pebble / Rock / Boulder> — <why>
 - Category (required, single): <value> — <why: primary product grouping>
 - Our Objective (required, multi): <values> — <why>
-- Horizon (propose only — Steering owns the value): <value> — <why>
-- Commitment (propose only, Now quarter only): <Will Do / Aim to do / Strech, or — n/a unless Horizon = Now —>
+- Horizon (propose only — Steering owns placement; Now / Next / Later): <value> — <why>
+- Commitment (propose only, for Now items — Will Do / Aim to do / Stretch): <value or — n/a —> — <why>
 - Migration Relevance (optional, multi): <legacy products (Bepoz/SwiftPOS/IdealPOS/DeliverIT/OrderMate) or — none —>
 - Escalate (tag): <Yes/No>
 
@@ -251,8 +251,8 @@ Quick reference (required unless marked optional):
 | Size | `customfield_11557` | single-select | Directional effort: Sand / Pebble / Rock / Boulder. Not engineering estimation. |
 | Category | `customfield_11711` | single-select | The one primary product grouping. (Replaced the retired Product Area.) |
 | Our Objective | `customfield_11559` | multi-select | Business outcome(s) this supports. |
-| Horizon *(propose only)* | `customfield_11744` | single-select | Roadmap axis (Under consideration / Later / Next / Now / Shipped / Not planned). The groomer proposes with a rationale; **Steering owns the value** — never set Now/Next unilaterally. |
-| Commitment *(propose only, Now only)* | `customfield_11931` | single-select | How firm within the Now quarter: Will Do / Aim to do / Strech (Jira's typo'd labels). Set only when Horizon = Now; Steering owns it. |
+| Horizon *(propose only)* | `customfield_11744` | single-select | Roadmap timeframe — when we pull it in (Now / Next / Later). Steering owns placement; the groomer proposes with a rationale. Not a status: Shipped / Not planned / under-consideration live in status, not here. |
+| Commitment *(propose only, Now items)* | `customfield_11931` | single-select | How firm the intent is for a `Now` idea (Will Do / Aim to do / Stretch). Steering-owned; propose only alongside a Now proposal. |
 | Innovation | `customfield_10505` | rating 1–5 | How novel vs competitors/market, or does it use emerging tech (e.g. AI)? |
 | Migration Relevance *(optional)* | `customfield_11562` | multi-select | Legacy-product picker (Bepoz/SwiftPOS/IdealPOS/DeliverIT/OrderMate) — NOT Yes/No. |
 | Escalate *(tag)* | `customfield_10432` | number (1/0) | Set only for genuine executive/commercial urgency. Do not overuse. |

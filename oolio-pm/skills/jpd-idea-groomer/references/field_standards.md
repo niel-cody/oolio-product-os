@@ -157,28 +157,25 @@ Sentence case in Jira:
 
 ### Horizon — `customfield_11744` (single-select)
 
-The roadmap-commitment axis, orthogonal to status (status = where the idea is in the discovery process; Horizon = when we intend to act). Options:
+The roadmap timeframe: when we intend to pull the idea in. Orthogonal to status (status = where the idea sits in the discovery funnel) and to Commitment (how firm the intent is). Three options only:
 
-- `Under consideration`
-- `Later`
-- `Next`
 - `Now`
-- `Shipped`
-- `Not planned`
+- `Next`
+- `Later`
 
-**Ownership rule: skills propose, Steering decides.** The groomer may propose a Horizon with a rationale, but never sets `Now`/`Next` without an explicit Steering decision or Niel's instruction. Do not use FY-quarter labels for roadmap timing — that is Horizon's job.
+`Shipped`, `Not planned` and "under consideration" are **not** Horizon values — they are carried by **status** (the OHSI funnel: Captured, Exploring, Ready for delivery, In Engineering, Decision, Not Now, Shipped). Horizon is only for ideas we intend to act on, placed on a timeframe. (The former six-option list was trimmed to these three on 2026-07-25; the removed options were cleared from any idea that held them.)
 
-### Commitment — `customfield_11931` (single-select, Now quarter only)
+**Ownership rule: skills propose, Steering decides.** The groomer may propose a Horizon with a rationale, but does not set `Now` / `Next` / `Later` unilaterally — roadmap placement is Steering's (or Niel's) call. Do not use FY-quarter labels for roadmap timing — that is Horizon's job.
 
-Added 2026-07-25. Within the Now short list, how firmly we will really do it. Horizon says the idea is in this quarter; Commitment says how real that is. Set it **only** when Horizon is `Now`; leave empty otherwise. Like Horizon, it is a Steering-owned value — the groomer proposes, Steering sets.
+### Commitment — `customfield_11931` (single-select)
 
-**Send the exact live strings (they carry typos in the Jira option list — Jira enforces spelling, so match them literally):**
+How firm the intent is for an idea that is on the roadmap — primarily one in `Now`. Answers "how confident are we that we'll actually ship this?" (Spelling corrected in Jira on 2026-07-25.) Options:
 
-- `Will Do` (capital D in Jira)
-- `Aim to do`
-- `Strech` (misspelled in Jira — this is the real option value; not "Stretch")
+- `Will Do` — committed; we will do it, definitely. (Capital D in Jira.)
+- `Aim to do` — high confidence; we intend to, not yet locked.
+- `Stretch` — a stretch goal; may slip to the next period (Next / Later).
 
-If these option labels are corrected in Jira later, re-pull the metadata and update this list. Until then, `Strech` and `Will Do` are the only strings that will write successfully.
+Set Commitment for `Now` ideas (and `Next` where it helps). Like Horizon, it is Steering-owned: the groomer proposes it only alongside a `Now` proposal, with a rationale.
 
 ### Innovation — `customfield_10505` (rating, 1–5)
 
@@ -259,7 +256,7 @@ From `Ready for delivery` onward, every idea carries at least one **`Polaris wor
 
 - Single-select: `"customfield_11553": {"value": "Customer Problem"}` (Investment Type)
 - Single-select: `"customfield_11557": {"value": "Rock"}` (Size), `"customfield_11711": {"value": "POS"}` (Category), `"customfield_10088": {"value": "Ordering & Payments"}` (Theme)
-- Single-select, Now only: `"customfield_11931": {"value": "Will Do"}` (Commitment — mind the typo'd options)
+- Single-select, Now items: `"customfield_11931": {"value": "Will Do"}` (Commitment — Will Do / Aim to do / Stretch)
 - Multi-select: `"customfield_11552": [{"value": "Venue Profitability"}, {"value": "Operational Efficiency"}]` (Pillar)
 - Rating: `"customfield_10505": 4`
 - Escalate: `"customfield_10432": 1` (fall back to the UI toggle if rejected)

@@ -2,6 +2,14 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-25 — Horizon trimmed to Now/Next/Later; Commitment spelling fixed
+
+Follow-up to the model update below, syncing the skills to two further live-board changes Niel made the same day (Jira already at target, verified against OHSI metadata — skills-only edit).
+
+- **Horizon (`customfield_11744`) is now a clean roadmap timeframe: `Now` / `Next` / `Later` only.** The former `Under consideration`, `Shipped` and `Not planned` options were removed — those states are carried by status (the OHSI funnel), not Horizon. The three fields now have three non-overlapping jobs: status = where the idea sits, Horizon = when we pull it in, Commitment = how firm the intent is.
+- **Commitment (`customfield_11931`) options corrected in Jira** to `Will Do` / `Aim to do` / `Stretch` (the earlier `Strech` typo is gone). The skills now send the clean strings.
+- **Files:** `jpd-idea-groomer` (field_standards.md Horizon + Commitment blocks and write-back note; SKILL.md Horizon/Commitment table rows, proposal block, strategic-context bullet; atlassian_mcp.md trap note) and `steering-pack` (added a Commitment column to the pack table). The epic-titler "Horizon" codename example and the gtm "horizontal" matches were correctly left alone. No skill added or removed (27). Reader-facing Confluence already described Horizon as Now/Next/Later, so no page edit was needed.
+
 ## 2026-07-25 — JPD model update: the field standard catches up to the live board
 
 The live JPD board moved on, and the skills that write to it had drifted. Swept every JPD-related skill to the 2026+ model, verified field-by-field against the live OHSI board (issue type `Idea`, 10071) rather than trusting the handoff brief alone.

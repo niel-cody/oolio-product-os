@@ -37,7 +37,7 @@ Numbered. Decisions that unblock other items first, then by signal strength
 and strategic weight. One line each on why it is placed there.
 
 ## The table
-| Key | Idea (one line) | Pillar | Theme | Signal | Size | Horizon | Delivery link? | VPC verdict · confidence | Fit | Ask |
+| Key | Idea (one line) | Pillar | Theme | Signal | Size | Horizon | Commitment | Delivery link? | VPC verdict · confidence | Fit | Ask |
 Each row's "Ask" is the specific decision Steering is being asked to make:
 proceed / park / kill / fund / re-scope. An item with no ask does not belong
 in the pack.
