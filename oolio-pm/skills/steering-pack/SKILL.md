@@ -17,7 +17,7 @@ One of: a JQL slice (`status = Decision`), a list of keys, a Horizon value, or a
 
 ### 1. Pull the slice
 
-`searchJiraIssuesUsingJql` with `fields: ["*all"]` so the custom fields come back, always carrying the two mandatory guards from field_standards.md (`issuetype = Idea` + the archived filter). For each idea capture: summary, status, Strategic Pillar, Investment Type, Source, Customer Signal, Primary Persona, Product Area, Our Objective, Delivery Size, Innovation, Horizon, Escalate, the VPC fields where set (Verdict, Confidence, the four rubric scores, Loop State, Sign-off Status), and whether a **delivery link exists** (a `Polaris work item link` in the issue links — the Delivery status/progress fields are dynamic and read null via the API, so the link is the truth).
+`searchJiraIssuesUsingJql` with `fields: ["*all"]` so the custom fields come back, always carrying the two mandatory guards from field_standards.md (`issuetype = Idea` + the archived filter). For each idea capture: summary, status, Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, Innovation, Horizon, Commitment (where set), Escalate, the VPC fields where set (Verdict, Confidence, the four rubric scores, Loop State, Sign-off Status), and whether a **delivery link exists** (a `Polaris work item link` in the issue links — the Delivery status/progress fields are dynamic and read null via the API, so the link is the truth).
 
 ### 2. Fitness check each idea
 
@@ -37,7 +37,7 @@ Numbered. Decisions that unblock other items first, then by signal strength
 and strategic weight. One line each on why it is placed there.
 
 ## The table
-| Key | Idea (one line) | Pillar | Signal | Size | Horizon | Delivery link? | VPC verdict · confidence | Fit | Ask |
+| Key | Idea (one line) | Pillar | Theme | Signal | Size | Horizon | Delivery link? | VPC verdict · confidence | Fit | Ask |
 Each row's "Ask" is the specific decision Steering is being asked to make:
 proceed / park / kill / fund / re-scope. An item with no ask does not belong
 in the pack.

@@ -83,21 +83,22 @@ A centralised stock service that syncs in near real time across all venues and c
 
 A multi-venue stock idea, well set:
 
-- Strategic Pillar: `Multi-Venue Management`, `Operational Efficiency`
+- Pillar: `Multi-Venue Management`, `Operational Efficiency`
+- Theme: `Inventory & Enterprise Readiness`
 - Investment Type: `Customer Problem`
 - Source: `Customer`, `Support`
 - Customer Signal: `Repeated support trend`
 - Primary Persona: `Multi-site Operator`
 - Secondary Personas: `Kitchen Staff`, `Venue Manager`
 - Applicable Segments: `Multi-location`, `Franchise`, `Enterprise`, `QSR`
-- Product Area: `Inventory & Supply`
+- Category: `Products`
 - Our Objective: `Operational efficiency`, `Retention`
-- Delivery Size: `Large initiative | 1–3 months`
+- Size: `Rock`
 - Innovation: 2 (common in market, catch-up with execution upside)
 
 The same idea, badly set (and why):
 
-- Strategic Pillar: all seven (dilutes the signal; pick the two that are true)
+- Pillar: all seven (dilutes the signal; pick the two that are true)
 - Customer Signal: `Churn risk` when the evidence is three support tickets (overstating the signal corrupts prioritisation)
 - Applicable Segments: only `QSR` (understates reach; the problem is multi-location, not vertical-specific)
 - Innovation: 4 (generous; several competitors already offer central stock)

@@ -1,6 +1,6 @@
 ---
 name: jpd-idea-groomer
-description: Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Strategic Pillar, Investment Type, Source, Customer Signal, Primary Persona, Product Area, Our Objective, Delivery Size, plus Secondary Personas, Segments, Migration Relevance, Escalate). Trigger PROACTIVELY when the user pastes a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link) and asks to "groom", "polish", "fix up", "audit", or "get this Steering / roadmap ready". Also trigger when the user references Oolio's JPD field standards, Steering review, or pastes rough idea text to be written up to JPD standard. Prefer over generic writing help when the context smells like product discovery at Oolio.
+description: Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, plus Secondary Personas, Segments, Migration Relevance, Horizon and Commitment as proposals, Escalate). Trigger PROACTIVELY when the user pastes a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link) and asks to "groom", "polish", "fix up", "audit", or "get this Steering / roadmap ready". Also trigger when the user references Oolio's JPD field standards, Steering review, or pastes rough idea text to be written up to JPD standard. Prefer over generic writing help when the context smells like product discovery at Oolio.
 ---
 
 # JPD Idea Groomer
@@ -43,9 +43,9 @@ If the user pasted raw text with no key, skip the fetch and work directly from t
 Grade the idea on three axes before drafting anything:
 
 - **Narrative** — summary, description (Problem, Hypothesis, Success Metrics)
-- **Strategic context** — Strategic Pillar, Investment Type, Our Objective, Product Area, Horizon (proposed only)
+- **Strategic context** — Pillar, Theme, Investment Type, Category, Our Objective, plus Horizon and Commitment (proposed only — Steering owns the values)
 - **Signal & audience** — Source, Customer Signal, Primary Persona, Secondary Personas, Applicable Segments
-- **Delivery framing** — Delivery Size, Migration Relevance, Escalate
+- **Delivery framing** — Size, Migration Relevance, Escalate
 - **Innovation** — Innovation rating (1–5): novelty vs competitors/market, or use of emerging tech
 
 For each item, mark `strong` / `weak` / `missing` / `wrong`. The audit is what drives every later decision — record it.
@@ -116,7 +116,8 @@ Success Metrics
 - …
 
 ### Proposed Custom Fields
-- Strategic Pillar (required, multi): <values> — <why>
+- Pillar (required, multi): <values> — <why>
+- Theme (required, single): <value> — <why: this year's frame the idea belongs to>
 - Investment Type (required, single): <value> — <why>
 - Source (required, multi): <values> — <why>
 - Customer Signal (required, single): <value> — <why>
@@ -124,10 +125,11 @@ Success Metrics
 - Secondary Personas (optional, multi): <values or — none —>
 - Applicable Segments (multi): <values — every materially-relevant segment, not fringe>
 - Innovation (rating 1–5): <n> — <why: uniqueness vs market / emerging tech>
-- Delivery Size (required, single): <value> — <why>
-- Product Area (required, single): <value> — <why>
+- Size (required, single): <Sand / Pebble / Rock / Boulder> — <why>
+- Category (required, single): <value> — <why: primary product grouping>
 - Our Objective (required, multi): <values> — <why>
 - Horizon (propose only — Steering owns the value): <value> — <why>
+- Commitment (propose only, Now quarter only): <Will Do / Aim to do / Strech, or — n/a unless Horizon = Now —>
 - Migration Relevance (optional, multi): <legacy products (Bepoz/SwiftPOS/IdealPOS/DeliverIT/OrderMate) or — none —>
 - Escalate (tag): <Yes/No>
 
@@ -238,20 +240,24 @@ Quick reference (required unless marked optional):
 
 | Field | ID | Type | What to ask |
 |---|---|---|---|
-| Strategic Pillar | `customfield_11552` | multi-select | Which company priority does this serve? At least one. |
+| Pillar | `customfield_11552` | multi-select | Which durable company priority does this serve? At least one. (Renamed from Strategic Pillar; do not touch the separate Initiative pillar field.) |
+| Theme | `customfield_10088` | single-select | Which of this year's themes does the idea belong to? One only. |
 | Investment Type | `customfield_11553` | single-select | Where is the product effort being invested: customer problem, new capability, product optimisation, strategic investment? |
 | Source | `customfield_11554` | multi-select | Where did the signal come from? |
 | Customer Signal | `customfield_11560` | single-select | How strong is the signal? Strongest wins. |
 | Primary Persona | `customfield_11555` | single-select | Who benefits **most**? |
 | Secondary Personas *(optional)* | `customfield_11556` | multi-select | Anyone else genuinely impacted. |
 | Applicable Segments | `customfield_11558` | multi-select | Every segment the idea is materially relevant to — not just one, not fringe cases. |
-| Delivery Size | `customfield_11557` | single-select | Directional effort. Not engineering estimation. |
-| Product Area | `customfield_11561` | single-select | The one primary product domain. |
+| Size | `customfield_11557` | single-select | Directional effort: Sand / Pebble / Rock / Boulder. Not engineering estimation. |
+| Category | `customfield_11711` | single-select | The one primary product grouping. (Replaced the retired Product Area.) |
 | Our Objective | `customfield_11559` | multi-select | Business outcome(s) this supports. |
-| Horizon *(propose only)* | `customfield_11744` | single-select | Roadmap commitment (Under consideration / Later / Next / Now / Shipped / Not planned). The groomer proposes with a rationale; **Steering owns the value** — never set Now/Next unilaterally. |
+| Horizon *(propose only)* | `customfield_11744` | single-select | Roadmap axis (Under consideration / Later / Next / Now / Shipped / Not planned). The groomer proposes with a rationale; **Steering owns the value** — never set Now/Next unilaterally. |
+| Commitment *(propose only, Now only)* | `customfield_11931` | single-select | How firm within the Now quarter: Will Do / Aim to do / Strech (Jira's typo'd labels). Set only when Horizon = Now; Steering owns it. |
 | Innovation | `customfield_10505` | rating 1–5 | How novel vs competitors/market, or does it use emerging tech (e.g. AI)? |
 | Migration Relevance *(optional)* | `customfield_11562` | multi-select | Legacy-product picker (Bepoz/SwiftPOS/IdealPOS/DeliverIT/OrderMate) — NOT Yes/No. |
 | Escalate *(tag)* | `customfield_10432` | number (1/0) | Set only for genuine executive/commercial urgency. Do not overuse. |
+
+> **Retired:** Product Area (`customfield_11561`) is retired (2026-07-25). Never read, propose, or write it. Category (`customfield_11711`) replaced it.
 
 ### Innovation rating (1–5)
 

@@ -41,15 +41,16 @@ editJiraIssue {
   fields: {
     summary: "Cross-venue menu sync to end per-site price drift",
     description: "<the three-section description>",
-    customfield_11552: [{"value": "Multi-Venue Management"}],
-    customfield_11553: {"value": "Customer Problem"},
+    customfield_11552: [{"value": "Multi-Venue Management"}],   // Pillar
+    customfield_10088: {"value": "Menu & Kitchen Operations"},  // Theme
+    customfield_11553: {"value": "Customer Problem"},           // Investment Type
     customfield_11554: [{"value": "Customer"}, {"value": "Support"}],
     customfield_11560: {"value": "Repeated support trend"},
     customfield_11555: {"value": "Multi-site Operator"},
     customfield_11558: [{"value": "Multi-location"}, {"value": "Franchise"}],
-    customfield_11561: {"value": "Menu & Pricing"},
+    customfield_11711: {"value": "Products"},                   // Category (replaced Product Area 11561)
     customfield_11559: [{"value": "Operational efficiency"}],
-    customfield_11557: {"value": "Medium epic | 2–4 sprints"},
+    customfield_11557: {"value": "Rock"},                       // Size
     customfield_10505: 3
   }
 }
@@ -73,7 +74,8 @@ After a successful write, confirm to the user with the issue link (`https://ooli
 
 ## Traps
 
-- **Don't confuse Investment Type with "Category".** The standard's field is `customfield_11553`, renamed from "Category" to **Investment Type** on 2026-07-13. The only field still named "Category" in Jira is `customfield_11711`, which belongs to the Requests view; never write it.
+- **Investment Type and Category are two different, both-written fields.** Investment Type is `customfield_11553` (nature of the opportunity). Category is `customfield_11711` (product grouping), a required field as of 2026-07-25 that replaced the retired Product Area (`customfield_11561`). Earlier notes here said "never write 11711" — obsolete; write both. Never write `customfield_11561` (retired).
+- **Theme is `customfield_10088`; Commitment is `customfield_11931`.** Both added 2026-07-25. Theme is required (single-select). Commitment is single-select, Now-quarter only, and its Jira options carry typos (`Will Do`, `Aim to do`, `Strech`) — send them literally. Neither is the Initiative "Strategic Pillar"; the groomer never writes any epic/initiative pillar field.
 - **Do not touch the VPC loop fields** (`customfield_11663` through `11677`); they belong to `jpd-loop`.
 - **Never blind-overwrite.** If a field already holds a sensible value, leave it; propose changes only for wrong or missing values.
 - **Description formatting.** JPD renders simply: short paragraphs, bullets only under Success Metrics, no nested lists, no headings deeper than the three standard sections.

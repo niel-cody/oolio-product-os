@@ -1,6 +1,6 @@
 # JPD Field Standards, canonical field IDs and option labels
 
-The single source of truth for writing custom fields back to Jira Product Discovery (project `OHSI`, "Oolio One Ideas", issue type `Idea`, id `10071`). Labels below were pulled from the live Jira field metadata on 2026-07-06 and re-verified 2026-07-13. **Always send these exact strings.** The Confluence standard page describes intent; Jira enforces spelling. Where the two differ, this file wins.
+The single source of truth for writing custom fields back to Jira Product Discovery (project `OHSI`, "Oolio One Ideas", issue type `Idea`, id `10071`). Labels below were pulled from the live Jira field metadata on 2026-07-06, re-verified 2026-07-13, and updated 2026-07-25 for the JPD model change (Size, Pillar, Theme, Commitment, Category; Product Area retired). **Always send these exact strings.** The Confluence standard page describes intent; Jira enforces spelling. Where the two differ, this file wins.
 
 Canonical rules page: https://oolio.atlassian.net/wiki/spaces/PM/pages/1055653929/Jira+Product+Discovery+JPD+Field+Standards
 
@@ -21,7 +21,9 @@ Base pattern: `project = OHSI AND issuetype = Idea AND (cf[10835] IS EMPTY OR cf
 
 ## Required fields
 
-### Strategic Pillar — `customfield_11552` (multi-select)
+### Pillar — `customfield_11552` (multi-select)
+
+Renamed from "Strategic Pillar" on the JPD idea side on 2026-07-25 (options unchanged). The durable company strategy the idea serves: the "why". **Note (gotcha):** this is the JPD *idea* Pillar field only. The separate Initiative/epic "Strategic Pillar" field is a different custom field — never rename or write it from the JPD skills.
 
 - `Venue Profitability`
 - `Operational Efficiency`
@@ -32,6 +34,21 @@ Base pattern: `project = OHSI AND issuetype = Idea AND (cf[10835] IS EMPTY OR cf
 - `Migration & Modernisation`
 
 Select at least one. Multiple only when genuinely relevant. Never all of them.
+
+### Theme — `customfield_10088` (single-select)
+
+Added to the OHSI Idea type on 2026-07-25. This year's strategic frame: the single body of work the idea belongs to (the "what"). One theme per idea. Each theme rolls up to a primary FY27 mission pillar for reporting; the mapping lives in the brain vault (`04a_Pillar_Map.md`), not here.
+
+- `Platform & Scale`
+- `Ordering & Payments`
+- `Menu & Kitchen Operations`
+- `Data, AI & Insights`
+- `Customer Engagement & Loyalty`
+- `Inventory & Enterprise Readiness`
+- `Reservations & Vertical Expansion`
+- `Migration off Legacy`
+
+One value, required from Exploring onward. **ID note:** Theme lives on `customfield_10088`. Do not confuse it with the Initiative "Strategic Pillar"; the JPD skills only ever write Theme (10088) and Pillar (11552) on Ideas, never any epic/initiative pillar field.
 
 ### Investment Type — `customfield_11553` (single-select)
 
@@ -44,7 +61,7 @@ Renamed from "Category" on 2026-07-13. Describes where product effort is being i
 
 Choose the primary type only.
 
-**Note:** the only field still named "Category" in Jira is `customfield_11711` (options like POS, Payments, Reporting), which belongs to the Requests intake view. Never write `customfield_11711` from these skills; the standard's field is `customfield_11553` (Investment Type).
+**Note:** Investment Type (`11553`) and Category (`11711`) are two different fields — do not conflate them. Investment Type is the *nature* of the opportunity (customer problem / new capability / optimisation / strategic). Category (`11711`, below) is the *product grouping* and, as of 2026-07-25, is a required field the groomer sets (it replaced the retired Product Area). Earlier versions of this file said "never write 11711" — that instruction is obsolete; 11711 is now written on every idea.
 
 ### Source — `customfield_11554` (multi-select)
 
@@ -92,37 +109,36 @@ Choose the strongest signal that is actually true.
 
 One value: who benefits most.
 
-### Delivery Size — `customfield_11557` (single-select)
+### Size — `customfield_11557` (single-select)
 
-Jira labels include the effort suffix after a pipe. Send the whole string:
+Renamed from "Delivery Size" and consolidated to four options on 2026-07-25 (the old seven pipe-suffixed tiers no longer exist — do not send `Tiny tweak | Hours` etc., the write will fail). Send the plain single word:
 
-- `Tiny tweak | Hours`
-- `Quick win | Days`
-- `Small feature | 1 sprint`
-- `Medium epic | 2–4 sprints`
-- `Large initiative | 1–3 months`
-- `Multi-team programme | 3–6+ months`
-- `Moonshot | High uncertainty`
+- `Sand` — BAU, tweaks, fixes. Hours to days. Usually belongs in delivery, not discovery.
+- `Pebble` — a small, self-contained feature. A sprint or two.
+- `Rock` — a significant initiative. About a quarter for one team. Needs discovery.
+- `Boulder` — a strategic bet. 3 to 6+ months, multi-team. What a CEO deck is built around.
 
-Directional only. Not engineering estimation.
+Directional only, not engineering estimation. Sizing is also altitude: Boulders and Themes are the exec conversation, Rocks the product-lead conversation, Pebbles and Sand the team conversation. Fill the jar with boulders first, then rocks, then pebbles, then sand.
 
-### Product Area — `customfield_11561` (single-select)
+### Category — `customfield_11711` (single-select)
 
-- `POS & Service`
-- `Ordering`
-- `Menu & Pricing`
-- `Payments & Checkout`
-- `Kitchen & Production`
-- `Inventory & Supply`
-- `Finance & Reconciliation`
-- `Customer & Loyalty`
-- `Analytics & Reporting`
-- `Venue Management`
-- `Multi-site Management`
-- `Integrations & Ecosystem`
-- `Platform & Infrastructure`
+The primary product grouping the idea belongs to. Added to the groomer's required set on 2026-07-25, replacing the retired Product Area. Choose one:
 
-One primary area only. Ask: which product domain does the problem primarily belong to?
+- `Customers`
+- `Integrations`
+- `Kitchen Display`
+- `mPOS & Tap to Pay`
+- `Online Ordering`
+- `Payments`
+- `POS`
+- `Products`
+- `Reporting`
+- `Self Ordering Kiosk`
+- `Users & Staff`
+
+One primary grouping only. Ask: which product area does this idea primarily belong to? (The option list is due a tidy — a few values are personas or features rather than clean product areas — but send exactly what is here until the list changes.)
+
+> **Product Area (`customfield_11561`) is RETIRED (2026-07-25).** It is no longer on the Idea create screen. Do not read it, propose it, or write it — a write lands on a dead field. Category above replaces it.
 
 ### Our Objective — `customfield_11559` (multi-select)
 
@@ -151,6 +167,18 @@ The roadmap-commitment axis, orthogonal to status (status = where the idea is in
 - `Not planned`
 
 **Ownership rule: skills propose, Steering decides.** The groomer may propose a Horizon with a rationale, but never sets `Now`/`Next` without an explicit Steering decision or Niel's instruction. Do not use FY-quarter labels for roadmap timing — that is Horizon's job.
+
+### Commitment — `customfield_11931` (single-select, Now quarter only)
+
+Added 2026-07-25. Within the Now short list, how firmly we will really do it. Horizon says the idea is in this quarter; Commitment says how real that is. Set it **only** when Horizon is `Now`; leave empty otherwise. Like Horizon, it is a Steering-owned value — the groomer proposes, Steering sets.
+
+**Send the exact live strings (they carry typos in the Jira option list — Jira enforces spelling, so match them literally):**
+
+- `Will Do` (capital D in Jira)
+- `Aim to do`
+- `Strech` (misspelled in Jira — this is the real option value; not "Stretch")
+
+If these option labels are corrected in Jira later, re-pull the metadata and update this list. Until then, `Strech` and `Will Do` are the only strings that will write successfully.
 
 ### Innovation — `customfield_10505` (rating, 1–5)
 
@@ -229,8 +257,10 @@ From `Ready for delivery` onward, every idea carries at least one **`Polaris wor
 
 ## Write-back shapes (editJiraIssue `fields` object)
 
-- Single-select: `"customfield_11553": {"value": "Customer Problem"}`
-- Multi-select: `"customfield_11552": [{"value": "Venue Profitability"}, {"value": "Operational Efficiency"}]`
+- Single-select: `"customfield_11553": {"value": "Customer Problem"}` (Investment Type)
+- Single-select: `"customfield_11557": {"value": "Rock"}` (Size), `"customfield_11711": {"value": "POS"}` (Category), `"customfield_10088": {"value": "Ordering & Payments"}` (Theme)
+- Single-select, Now only: `"customfield_11931": {"value": "Will Do"}` (Commitment — mind the typo'd options)
+- Multi-select: `"customfield_11552": [{"value": "Venue Profitability"}, {"value": "Operational Efficiency"}]` (Pillar)
 - Rating: `"customfield_10505": 4`
 - Escalate: `"customfield_10432": 1` (fall back to the UI toggle if rejected)
 

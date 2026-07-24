@@ -11,7 +11,7 @@ The length budget exists because of real rendering limits, not taste: Tree reque
 
 This skill handles **titles only**. If the description or custom fields need work, hand off to `jpd-idea-groomer`. If the ticket is an epic, hand off to `jira-epic-titler`.
 
-**Evidence first — never trust the current title.** The existing title is a claim, not the truth. Ideas drift: the description, custom fields, linked insights, and comments often describe something sharper (or different) than what the title says. Whenever you have Jira access, read the full idea — description, Source, Primary/Secondary Personas, Product Area, Strategic Pillar, Investment Type, labels, and recent comments — and derive the title from that evidence. If the evidence contradicts the current title, say so in the audit; the rewrite should reflect what the idea actually is, not a polished version of a wrong label.
+**Evidence first — never trust the current title.** The existing title is a claim, not the truth. Ideas drift: the description, custom fields, linked insights, and comments often describe something sharper (or different) than what the title says. Whenever you have Jira access, read the full idea — description, Source, Primary/Secondary Personas, Category, Pillar, Theme, Investment Type, labels, and recent comments — and derive the title from that evidence. If the evidence contradicts the current title, say so in the audit; the rewrite should reflect what the idea actually is, not a polished version of a wrong label.
 
 **Draft-only by default.** Always present current → proposed and get approval before writing to Jira. If the user explicitly says "just fix them", write back without the confirm step. Titles are public to the whole business via Tree, so they should not churn silently.
 
@@ -64,7 +64,7 @@ But formatting is only half the job. When a pasted title is vague or a bare noun
      responseContentFormat: markdown
    ```
 2. Confirm it's a JPD idea (project is a Product Discovery project, e.g. OHSI). If it's an Epic → `jira-epic-titler`. If they want fields/description done too → offer `jpd-idea-groomer`.
-3. Read the whole idea, not just the summary: the description's Problem/Opportunity gives the outcome language; Primary Persona and Product Area give the "who/where" nouns; Source and Customer Signal tell you whether a stripped prefix should become a label; comments and linked insights sometimes reveal the scope has changed since the title was written. The title you propose must match this evidence — if the evidence and the current title disagree, the evidence wins, and the audit should note the drift.
+3. Read the whole idea, not just the summary: the description's Problem/Opportunity gives the outcome language; Primary Persona and Category give the "who/where" nouns; Source and Customer Signal tell you whether a stripped prefix should become a label; comments and linked insights sometimes reveal the scope has changed since the title was written. The title you propose must match this evidence — if the evidence and the current title disagree, the evidence wins, and the audit should note the drift.
 4. Audit the current title against the hard rules AND against the evidence, propose 2 options, recommend one.
 5. On approval:
    ```
