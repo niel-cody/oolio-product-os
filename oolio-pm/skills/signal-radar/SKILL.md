@@ -7,13 +7,13 @@ description: >-
   radar", "sync the brain", "what's the market saying about X", "validate
   this idea with real signal", "find gaps in the backlog / roadmap", "what
   are we missing", "scan HubSpot and social for signal on this", or asks to
-  keep Oolio Brain in sync with fresh market and customer research. Do
+  keep the Brain in sync with fresh market and customer research. Do
   NOT trigger for a single already-found piece of evidence the user just
   wants attached to ideas (use `add-insight`). Two
   modes: idea mode (given a JPD key, gathers external evidence and attaches
   it as native Insights on the idea) and gap-scan mode (no key, scans the
   whole backlog against market, customer, and social signal, then hands
-  candidate gaps to `feedback-to-idea`). Always writes findings into Oolio
+  candidate gaps to `feedback-to-idea`). Always writes findings into the
   Brain so research compounds instead of repeating. Do NOT trigger for raw
   pasted feedback (use `feedback-to-idea`), the full VPC loop (use
   `jpd-loop`), a single-topic deep-dive report with no backlog tie-in
@@ -24,7 +24,7 @@ description: >-
 
 # Signal radar
 
-The research layer that sits between the outside world and the backlog. It pulls signal from HubSpot (what customers actually say and do), the web and social media via Apify (what the market, competitors, and operators are saying), and Oolio Brain (what we already know), then does two things with it: strengthens an existing JPD idea with cited external evidence, or surfaces a gap the backlog does not yet cover. Every run leaves Brain richer than it found it, so the next run starts further ahead instead of re-researching the same ground.
+The research layer that sits between the outside world and the backlog. It pulls signal from HubSpot (what customers actually say and do), the web and social media via Apify (what the market, competitors, and operators are saying), and the Brain (what we already know), then does two things with it: strengthens an existing JPD idea with cited external evidence, or surfaces a gap the backlog does not yet cover. Every run leaves Brain richer than it found it, so the next run starts further ahead instead of re-researching the same ground.
 
 This skill gathers and synthesises. It does not groom fields, does not create or edit Jira issues, and does not run the council. Those stay with `jpd-idea-groomer`, `feedback-to-idea`, `jpd-loop`, and `convene-vpc` — hand off to them rather than duplicating their logic.
 
@@ -36,7 +36,7 @@ cloudId `98b2c73a-4f2e-4b23-aca7-dbc5b45b1e24`; project **OHSI — Oolio One Ide
 ## Required connectors & tools
 If one is missing, note the gap and continue with what's available; never pretend a source was checked when it wasn't.
 
-- **Oolio Brain** (`oolio-brain:wiki-query`, `wiki-new`, `wiki-ingest`, `wiki-status`) — our own accumulated knowledge. Query first, write last. This is what makes runs compound instead of repeat.
+- **The Brain** (`oolio-pm:wiki-query`, `wiki-new`, `wiki-ingest`, `wiki-status`) — our own accumulated knowledge in the `my_brain` vault. Query first, write last. This is what makes runs compound instead of repeat.
 - **Atlassian** (Jira) — `searchJiraIssuesUsingJql`, `getJiraIssue`. The backlog itself: what exists, in what state.
 - **HubSpot** — CRM signal: tickets, deals, conversations, campaign engagement. Needs the connector authorised; if it isn't, say so and continue with web and social.
 - **Web search + web browsing** — `WebSearch` to find, `web_fetch` (or Chrome tools for JS-heavy pages) to read.
@@ -48,7 +48,7 @@ Detail on how to search each source well, and the reliability/citation disciplin
 Trigger: a single JPD key given ("add insights to OHSI-612", "validate this idea").
 
 1. **Load.** `getJiraIssue` the key. Read the problem, hypothesis, and current Insights/evidence if any.
-2. **Check Brain first.** `oolio-brain:wiki-query` for existing knowledge on this problem, persona, or product area. Don't re-research what Brain already has settled; use it as a starting point and look for what's changed since.
+2. **Check Brain first.** `oolio-pm:wiki-query` for existing knowledge on this problem, persona, or product area. Don't re-research what Brain already has settled; use it as a starting point and look for what's changed since.
 3. **Gather external signal**, internal first per `references/signal-sources.md`:
    - HubSpot — tickets, deals, conversations naming this problem or a close synonym.
    - Web — competitor dossiers in Brain first (maintained by `competitor-watch`), then the competitor/brand pages in `${CLAUDE_PLUGIN_ROOT}/skills/jpd-loop/references/evidence-sources.md`, market and analyst sources.
@@ -62,7 +62,7 @@ Trigger: a single JPD key given ("add insights to OHSI-612", "validate this idea
 Trigger: no key given ("what are we missing", "scan for gaps", "run signal radar on the roadmap").
 
 1. **Snapshot the backlog.** `searchJiraIssuesUsingJql` across all OHSI ideas, all statuses (both mandatory guards), pulling summary, Pillar, Theme, Category, and status. This is "what we have." For a large backlog, batch the semantic cross-referencing in step 4 by Category rather than holding everything at once.
-2. **Check Brain first.** `oolio-brain:wiki-query` the gap ledger (`gaps/ledger`), competitor dossiers, and trend pages, so the scan builds on prior work instead of repeating it. Candidates already on the ledger get their evidence counts updated, not rediscovered.
+2. **Check Brain first.** `oolio-pm:wiki-query` the gap ledger (`gaps/ledger`), competitor dossiers, and trend pages, so the scan builds on prior work instead of repeating it. Candidates already on the ledger get their evidence counts updated, not rediscovered.
 3. **Scan for signal**, aggregated across the backlog rather than idea-by-idea. Concrete recipe, not a vibe: default window is the last 90 days (or since the last gap scan recorded in Brain, whichever is longer); each source below gets its own pass; a candidate needs evidence from **at least two distinct platforms, ideally spanning two of the three source classes** (HubSpot / web / social) before it reaches the report — two posts on the same platform are corroboration within a source, not independence.
    - HubSpot — recurring ticket/deal themes: query the problem-space nouns per Category, plus standing queries for "feature request", "missing", "competitor", "cancel"; note themes with 3+ independent accounts.
    - Web — every tier-1 competitor on `${CLAUDE_PLUGIN_ROOT}/skills/competitor-watch/references/watchlist.md` gets checked (dossier first — if `competitor-watch` sweeps are running, the dossiers already hold the deltas and this pass is cheap); then market/industry trend searches bounded to the window.

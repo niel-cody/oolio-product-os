@@ -2,7 +2,7 @@
 name: competitor-watch
 description: >-
   Run Oolio's competitor intelligence: maintain one living dossier per
-  competitor in Oolio Brain, sweep the watchlist for changes on a weekly
+  competitor in the Brain, sweep the watchlist for changes on a weekly
   cadence and report only the deltas, deep-dive a competitor's reviews and
   communities for weaknesses, and build Fact-Impact-Act battlecards. Trigger
   when the user says "run the sweep", "competitor sweep", "watch the
@@ -18,7 +18,7 @@ description: >-
 
 # Competitor watch
 
-The standing competitive-intelligence function. Four jobs, four modes: keep one truthful, dated dossier per competitor in Oolio Brain (**dossier**), detect what changed since last week and report only the deltas (**sweep**), mine a competitor's reviews and communities for exploitable weaknesses (**deep-dive**), and turn the accumulated intel into sales-usable battlecards (**battlecard**). The operating model, cadences, and Brain taxonomy live in `${CLAUDE_PLUGIN_ROOT}/references/research-os.md`; read it before the first run in a session.
+The standing competitive-intelligence function. Four jobs, four modes: keep one truthful, dated dossier per competitor in the Brain (**dossier**), detect what changed since last week and report only the deltas (**sweep**), mine a competitor's reviews and communities for exploitable weaknesses (**deep-dive**), and turn the accumulated intel into sales-usable battlecards (**battlecard**). The operating model, cadences, and Brain taxonomy live in `${CLAUDE_PLUGIN_ROOT}/references/research-os.md`; read it before the first run in a session.
 
 The discipline that makes this worth having: **diff, don't re-read** (compare against the dossier and surface only meaningful change), **date every claim** (verified-as-of, per research-os), and **honesty about where they win** (a battlecard that pretends the competitor has no strengths gets ignored by the first rep who loses to them).
 
@@ -30,7 +30,7 @@ House style: `${CLAUDE_PLUGIN_ROOT}/references/house-style.md`.
 - `references/mining-playbook.md` — the ordered source list and pinned Apify Actors for review/community mining.
 - `references/battlecard-standard.md` — the one-page Fact-Impact-Act battlecard format.
 
-Connectors: Oolio Brain (required — this skill is pointless without it), web search/fetch, Apify (deep-dive), Atlassian (publishing battlecards and sweep notes to Confluence when asked). If Apify is unavailable, deep-dive degrades to web-only and says so.
+Connectors: the Brain (required — this skill is pointless without it), web search/fetch, Apify (deep-dive), Atlassian (publishing battlecards and sweep notes to Confluence when asked). If Apify is unavailable, deep-dive degrades to web-only and says so.
 
 ## Mode: dossier — build or refresh one competitor
 Trigger: "update the Toast dossier", "build a dossier for Zeller", a sweep/deep-dive finding that needs recording, or a `win-loss` pattern to record against a competitor (creating the dossier first if none exists — win-loss evidence is often the only tier-1 material available for low-web-signal competitors like Redcat and H&L).

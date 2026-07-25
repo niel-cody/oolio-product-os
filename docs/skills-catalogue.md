@@ -1,6 +1,6 @@
 # Oolio PM — Skills Catalogue
 
-The plugin ships **27 skills**, organised here by where they sit in the product lifecycle,
+The plugin ships **32 skills**, organised here by where they sit in the product lifecycle,
 signal to shipped. The folders under `oolio-pm/skills/` stay flat (that is what the Claude
 Code plugin loader expects). This document is the map; the categories are a reading aid, not
 a folder structure.
@@ -27,6 +27,7 @@ per-skill version numbers, by design — the plugin versions by commit.
 | 4 | Delivery & Steering | Jira hygiene and executive-facing packs | 3 |
 | 5 | GTM | Take a launch to market | 3 |
 | 6 | Analysis | Close the loop after launch | 1 |
+| 7 | The Brain | Maintain the knowledge engine the research skills read and write | 5 |
 
 ---
 
@@ -44,9 +45,9 @@ Turn customer, support, and sales signal into groomed Jira Product Discovery ide
 - **jpd-title-standard** — Groom JPD idea titles to the Title Standard: max 65 characters, sentence case, capability-led.
 - **jpd-loop** — Run the full Virtual Product Council grooming loop over a single JPD idea, end to end.
 - **storm-research** — Multi-perspective, citation-verified research briefing (STORM method), delivered as a clean HTML report.
-- **signal-radar** *(New, July 2026)* — Synthesise HubSpot, web, and social signal (via Apify) into cited evidence for a JPD idea, or scan the backlog for gaps against real market and customer demand. Syncs findings into the brain.
+- **signal-radar** *(New, July 2026)* — Synthesise HubSpot, web, and social signal (via Apify) into cited evidence for a JPD idea, or scan the backlog for gaps against real market and customer demand. Syncs findings into the Brain.
 - **add-insight** *(New, July 2026)* — The evidence-first attach: hand it one useful thing and it finds every backlog idea the evidence genuinely supports and attaches it as native JPD Insights, one idea or several.
-- **competitor-watch** *(New, July 2026)* — The standing competitive-intelligence function: per-competitor dossiers in the brain, weekly delta sweeps, review/community deep-dives, campaign and claim-vs-reality mining, and Fact-Impact-Act battlecards.
+- **competitor-watch** *(New, July 2026)* — The standing competitive-intelligence function: per-competitor dossiers in the Brain, weekly delta sweeps, review/community deep-dives, campaign and claim-vs-reality mining, and Fact-Impact-Act battlecards.
 - **win-loss** *(New, July 2026)* — Mine HubSpot closed-lost and churn data monthly for the real loss drivers, cross-examined against deal metadata; gaps to the backlog, patterns to the dossiers.
 - **discovery-wayfinder** *(New, July 2026)* — Chart a discovery theme too big for one session as a Jira map of decision tickets (fog-of-war scoping, HITL/AFK ticket types, one decision per session), adapted from Matt Pocock's Wayfinder.
 
@@ -89,6 +90,16 @@ Take a single product launch to market.
 Close the loop once it is live.
 
 - **metrics-review** — Run a product metrics review against real data: post-launch validation of a PRD's success metrics, or a recurring weekly or monthly review.
+
+## 7. The Brain
+
+Maintain `my_brain`, the git-backed Obsidian vault that is the team's compounding knowledge engine. The research skills (`signal-radar`, `competitor-watch`, `jpd-loop`) read and write the Brain through these. Thin runbooks over the vault's own `_system/` rules; the portable shape is in [`references/vault-model.md`](../oolio-pm/references/vault-model.md).
+
+- **wiki-query** *(New, July 2026)* — Answer a question from the vault with citations, surface caveats and staleness, and offer to file durable answers back as a synthesis.
+- **wiki-ingest** *(New, July 2026)* — Read a source, surface takeaways for sign-off, then integrate it across the owning domain's pages with provenance; competitors route to Market.
+- **wiki-new** *(New, July 2026)* — Stand up a new Product Domain with a README-only front door and confirmed scope; no empty scaffolding.
+- **wiki-lint** *(New, July 2026)* — Health-check the vault for contradictions, stale claims, orphans, and frontmatter faults (missing `class`, past `review`); change only on approval.
+- **wiki-status** *(New, July 2026)* — A read-only snapshot: per-domain page counts, recent activity, stubs, orphans, and gaps worth filling.
 
 ---
 

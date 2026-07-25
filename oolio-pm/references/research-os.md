@@ -1,6 +1,6 @@
 # Research OS — the operating model for compounding research
 
-The shared standard every research skill follows (`signal-radar`, `competitor-watch`, `win-loss`, `storm-research`, and `jpd-loop`'s evidence step). Its one job: make research **compound**. A run that leaves no structured trace in Oolio Brain is a run the team pays for twice, because the next question starts cold. Insight repositories die from contribution tax and from insights that are never resurfaced (NN/g's repository-failure research: no owner, ad-hoc taxonomy, contribution treated as extra work). An agent removes the contribution tax; this file supplies the taxonomy and the resurfacing cadence.
+The shared standard every research skill follows (`signal-radar`, `competitor-watch`, `win-loss`, `storm-research`, and `jpd-loop`'s evidence step). Its one job: make research **compound**. A run that leaves no structured trace in the Brain is a run the team pays for twice, because the next question starts cold. Insight repositories die from contribution tax and from insights that are never resurfaced (NN/g's repository-failure research: no owner, ad-hoc taxonomy, contribution treated as extra work). An agent removes the contribution tax; this file supplies the taxonomy and the resurfacing cadence.
 
 ## The pipe
 
@@ -29,7 +29,7 @@ The brain is the `my_brain` Obsidian vault (git-backed, one source of truth), wh
 | Evidence log / source capture | `30 Knowledge/Market/Sources/` (or the owning domain's `Sources/`) | One page per source capture (a review batch, a scan, a closed-lost analysis), `type: source`, with provenance. Append-only; never rewritten after creation. |
 | Gap ledger | `01 Command Centre/Gap Ledger` | The standing dashboard of monitored candidate gaps and open research questions: evidence count, review-by date, status, JPD key once routed. The research queue and scoreboard. Create it on first use if absent. |
 
-Vault-wide rules that bind research pages: every page carries `type:` frontmatter (`source | entity | concept | synthesis | overview`) plus `created`/`updated`, provenance (`sources:` and inline links) is mandatory, page titles are globally unique in Title Case With Spaces, supersession never deletes, and contradictions are flagged, not overwritten. Access the vault through the `oolio-brain` wiki skills (`wiki-query`, `wiki-new`, `wiki-ingest`) where available.
+Vault-wide rules that bind research pages: every page carries `type:` frontmatter (`source | entity | concept | synthesis | overview`) plus `created`/`updated`, provenance (`sources:` and inline links) is mandatory, page titles are globally unique in Title Case With Spaces, supersession never deletes, and contradictions are flagged, not overwritten. Access the vault through the wiki skills (`oolio-pm:wiki-query`, `wiki-new`, `wiki-ingest`) where available.
 
 **The operator wall (hard):** research skills may write only the vault's work layers. `20 Areas/Personal` and `10 Projects/Personal` are NO-GO, always, per the vault's STRUCTURE.md §4 — no research run reads or writes them.
 
@@ -55,7 +55,7 @@ State these in the page body (or frontmatter where Brain supports it):
 ## Source reliability tiers
 
 1. HubSpot, direct and specific (a named account's blocker, churn reason, repeated request).
-2. Oolio Brain, `verified` status (vetted once already; `stale` pages drop to tier 4 until re-verified).
+2. The Brain, `verified` status (vetted once already; `stale` pages drop to tier 4 until re-verified).
 3. Primary competitor or brand source (their own pricing, docs, release notes), dated.
 4. Analyst or industry report, dated.
 5. Aggregated social or review signal (the same point across several independent posts or reviews).

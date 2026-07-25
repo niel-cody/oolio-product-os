@@ -31,9 +31,9 @@ Run the full pipeline end to end. Do not shortcut a phase. This is heavier than 
 
 The HTML half is self-contained: it depends only on the `Agent` tool with the built-in `general-purpose` agent, `Write`, web search/fetch inside those agents, and `report-template.html` in this folder. The Confluence half (Phase 5) uses the connected Atlassian/Confluence tools; if no Confluence connector is available, deliver the HTML and say the Confluence step was skipped.
 
-## Oolio Brain (when available)
+## The Brain (when available)
 
-Where the `oolio-brain` skills are available: query Brain before Phase 1 for what we already hold on the topic (competitor dossiers, trend pages, prior insights) and hand relevant findings to the lens agents as context, so they extend our knowledge rather than rediscovering it. After Phase 4 verification, sync the durable, report-independent findings (verified claims about the market, a competitor, a trend) to Brain per `${CLAUDE_PLUGIN_ROOT}/references/research-os.md` — the report is the deliverable, but the verified claims should outlive it. Skip both silently if Brain is not connected.
+Where the Brain wiki skills (`oolio-pm:wiki-query` and siblings) are available: query the Brain before Phase 1 for what we already hold on the topic (competitor dossiers, trend pages, prior insights) and hand relevant findings to the lens agents as context, so they extend our knowledge rather than rediscovering it. After Phase 4 verification, sync the durable, report-independent findings (verified claims about the market, a competitor, a trend) to Brain per `${CLAUDE_PLUGIN_ROOT}/references/research-os.md` — the report is the deliverable, but the verified claims should outlive it. Skip both silently if Brain is not connected.
 
 ## Phase 0: Scope the topic and the destination
 

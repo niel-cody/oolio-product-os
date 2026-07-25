@@ -15,9 +15,9 @@ A single Cowork plugin bundling Oolio's product-management skills. Install it on
 - `jpd-loop` — runs the full Virtual Product Council grooming loop over one JPD idea, end to end, and writes the result back to Jira. Depends on the council skills and `jpd-idea-groomer`, both bundled here.
 - `jpd-idea-groomer` — brings a JPD idea up to Oolio's JPD Field Standards.
 - `jpd-title-standard` — grooms JPD idea titles to the JPD Title Standard (max 65 characters, sentence case, capability-led with a clear outcome). Works on pasted text, a single idea, or in bulk via JQL.
-- `signal-radar` — synthesises HubSpot, web, and social signal (via Apify) into cited evidence for a JPD idea, or scans the backlog for gaps against real market and customer demand. Syncs every finding into Oolio Brain so research compounds instead of repeating.
+- `signal-radar` — synthesises HubSpot, web, and social signal (via Apify) into cited evidence for a JPD idea, or scans the backlog for gaps against real market and customer demand. Syncs every finding into the Brain (the `my_brain` vault) so research compounds instead of repeating.
 - `add-insight` — the evidence-first attach: hand it one useful thing (an article, a stat, a HubSpot ticket, a quote) and it finds every backlog idea the evidence genuinely supports and attaches it as native JPD Insights, on one idea or several.
-- `competitor-watch` — the standing competitive-intelligence function: one living dossier per competitor in Oolio Brain, weekly delta sweeps over a tiered watchlist, review/community deep-dives for weaknesses, and Fact-Impact-Act battlecards for sales.
+- `competitor-watch` — the standing competitive-intelligence function: one living dossier per competitor in the Brain, weekly delta sweeps over a tiered watchlist, review/community deep-dives for weaknesses, and Fact-Impact-Act battlecards for sales.
 - `win-loss` — mines HubSpot closed-lost and churn data monthly for the real reasons deals are won and lost, cross-examining rep-entered reasons against deal metadata, and routes product gaps to the backlog and competitor patterns to the dossiers.
 - `discovery-wayfinder` — charts a discovery theme too big for one session as a Jira map of decision tickets, worked one decision at a time until the way is clear. Routes research to `storm-research`/`signal-radar`, judgement calls to `grill-me`, and the output to the intake and loop skills.
 
@@ -55,6 +55,16 @@ A single Cowork plugin bundling Oolio's product-management skills. Install it on
 
 - `grill-me` — interviews you relentlessly about a plan, decision, or design until every branch of the decision tree is resolved. For Confluence PRDs, prefer `grill-my-prd`.
 - `behavioural-alchemist` — summons Roy, the Behavioural Alchemist: reads a decision, feature, price, loyalty scheme, or piece of positioning through behavioural economics and consumer psychology, and finds the perceived-value, contrarian, and disproportionate-intervention angles the rational lenses miss. Ten modes, from Pricing Psychology to Loyalty Architect to Experiment Designer. Also sits as an elevated cross-cutting lens inside the Virtual Product Council (`personas-library/behavioural-alchemist.md`); this skill is how you summon him on his own.
+
+**The Brain (the knowledge engine)**
+
+The maintenance skills for `my_brain`, the git-backed Obsidian vault that is the team's compounding knowledge base. The research skills above (`signal-radar`, `competitor-watch`, `jpd-loop`) read and write the Brain through these. Thin runbooks over the vault's own `_system/` rules; the portable shape is in `references/vault-model.md`.
+
+- `wiki-query` — answers a question from the vault with citations, and offers to file durable answers back as a synthesis.
+- `wiki-ingest` — reads a source, integrates it across the owning domain's pages with provenance, routes competitors to Market, updates the catalogue.
+- `wiki-new` — stands up a new Product Domain with a README-only front door and confirmed scope; no empty scaffolding.
+- `wiki-lint` — health-checks the vault for contradictions, stale claims, orphans, and frontmatter faults; changes only on approval.
+- `wiki-status` — a read-only snapshot: per-domain page counts, recent activity, stubs, and gaps worth filling.
 
 **Product context**
 

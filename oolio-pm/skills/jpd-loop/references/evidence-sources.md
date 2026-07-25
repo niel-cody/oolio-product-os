@@ -15,7 +15,7 @@ The loop should have these connected; if one is missing, note the gap and contin
 | **Figma** | Existing designs, flows, or prototypes the idea touches or duplicates. |
 
 ## Internal wikis (our own knowledge)
-- **Oolio Brain** wiki vault — query via the `oolio-brain:wiki-query` skill ("what does the brain say about …") for our own product/competitor/market knowledge before going external.
+- **The Brain** (the `my_brain` vault) — query via the `oolio-pm:wiki-query` skill ("what does the Brain say about …") for our own product/competitor/market knowledge before going external.
 - **Confluence** spaces — PM (concept, strategy), DISC (discovery), product-area spaces.
 
 ## Brand & competitor wikis (scour these for evidence)
@@ -88,10 +88,10 @@ Indirect competitors / specialists in areas we serve — scour for feature depth
 > Notes: prefer AU region pages where they exist (Square `/help/au/en`). Several KBs are login-gated (H&L, SevenRooms, ResDiary) or in-app (MarketMan, Zeller) — use public site/feature/pricing pages in those cases. Not found with a public KB: Craftable, Como, Menulog partner, Nory — revisit. Add more as we go.
 
 ## Social signal (optional, deeper)
-Neither this loop nor the connectors above cover social media, review sites, or scaled web scraping. For a decision where that signal matters (a contested Park/Kill, thin internal evidence), run `signal-radar` on the idea first and fold its Insight list into step 3 — it covers HubSpot theme aggregation and social/Apify sources this file doesn't, and syncs findings to Oolio Brain so future loops start ahead.
+Neither this loop nor the connectors above cover social media, review sites, or scaled web scraping. For a decision where that signal matters (a contested Park/Kill, thin internal evidence), run `signal-radar` on the idea first and fold its Insight list into step 3 — it covers HubSpot theme aggregation and social/Apify sources this file doesn't, and syncs findings to the Brain so future loops start ahead.
 
 ## How to search well
-- Start internal (Oolio Brain, Confluence, Slack, HubSpot) — cheaper and more specific — then go external (web) for market/competitor context.
+- Start internal (the Brain, Confluence, Slack, HubSpot) — cheaper and more specific — then go external (web) for market/competitor context.
 - Look for **disconfirming** evidence too, not just support. The council's value is the clash.
 - Capture the **source URL** for every claim — uncited claims don't become Insights.
 - Prefer primary sources (a competitor's own page, a real customer thread, an analytics figure) over second-hand summaries.
