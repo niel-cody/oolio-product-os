@@ -2,6 +2,8 @@
 
 The Product team's operating system for Cowork and Claude Code: the plugin collection (marketplace) that carries our skills. Other Oolio teams keep their own collections; this one belongs to Product. The human-readable front door is the **Product Operating System** page on Confluence; this repo is the source of truth it describes.
 
+**The map:** [oolio-product-os.vercel.app](https://oolio-product-os.vercel.app) shows how the OS runs end to end, generated from the skills themselves. See [site/](site/).
+
 ## Plugins
 
 - **oolio-pm** — the PM toolkit, signal to shipped: feedback intake into JPD, idea grooming, research and competitive intelligence, the Virtual Product Council, PRD writing and grilling, Jira hygiene, Steering packs, the GTM suite, and metrics review. Skill list and count in [oolio-pm/README.md](oolio-pm/README.md); the catalogue with stages in [docs/skills-catalogue.md](docs/skills-catalogue.md). Self-contained.
