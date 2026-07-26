@@ -62,12 +62,23 @@ const dirsIn = (p) =>
 /* ------------------------------------------------- discover, marketplace-first
    oolio-pm is the first plugin, not the only one. A second team's plugin appears
    here automatically, and its skills show as unplaced until someone maps them. */
+/* The repo may not be visible: on Vercel, a Root Directory of `site` hides everything above it.
+   site/data/os.json is committed for exactly that case, so the build still has the OS to render.
+   `--check` never accepts the snapshot, and it runs where the repo IS visible, so a stale file
+   cannot survive a push. Build falls back; check tells the truth. */
 if (!existsSync(join(ROOT, ".claude-plugin", "marketplace.json"))) {
-  // Fail loudly and say exactly what to change, rather than shipping a site with no skills on it.
+  const snapshot = join(SITE, "data", "os.json");
+  if (!CHECK && existsSync(snapshot)) {
+    const age = JSON.parse(readFileSync(snapshot, "utf8"));
+    console.warn(
+      `\n  warn  Repo not visible from site/, so using the committed snapshot ` +
+      `(${age.totals.skills} skills, generated at ${age.stamp}).\n` +
+      `        This is expected on Vercel with Root Directory = site.\n`);
+    process.exit(0);
+  }
   console.error(
-    "\n  Cannot see the repo from site/. The marketplace manifest and the plugins are one level up.\n" +
-    "  On Vercel this means the project's Root Directory is set to `site` with\n" +
-    "  \"Include source files outside of the Root Directory\" turned OFF. Turn it on.\n");
+    "\n  Cannot see the repo from site/, and there is no committed site/data/os.json to fall\n" +
+    "  back on. Run this from a full checkout, or restore the snapshot.\n");
   process.exit(1);
 }
 const marketplace = JSON.parse(readFileSync(join(ROOT, ".claude-plugin", "marketplace.json"), "utf8"));
@@ -218,13 +229,6 @@ console.log(
   `${edges.length} connections · ${gates.length} gates · ${loops.length} loops · ` +
   `${changelog.length} changelog entries`);
 
-if (CHECK) {
-  console.log(problems.length ? `\n  ${problems.length} problem(s). Fix, or update site/map.config.json.\n`
-                              : "\n  Site is in sync with the Product OS.\n");
-  process.exit(problems.length ? 1 : 0);
-}
-if (problems.length) console.error("\n  Building anyway; unplaced skills render in the red column.\n");
-
 /* ---------------------------------------------------------------------- emit */
 const typeColour = Object.fromEntries(Object.entries(cfg.types).map(([k, v]) => [k, v.colour]));
 const typeLabel = Object.fromEntries(Object.entries(cfg.types).map(([k, v]) => [k, v.label]));
@@ -251,6 +255,24 @@ const out = {
   changelog,
 };
 
+const target = join(SITE, "data", "os.json");
+const body = JSON.stringify(out, null, 2);
+
+if (CHECK) {
+  // The committed snapshot is what Vercel serves when it cannot see the repo, so a stale one
+  // is a silent lie. Compare everything but the build stamp, which changes every commit.
+  const strip = (s) => s.replace(/"stamp": "[^"]*"/, '"stamp": ""');
+  if (!existsSync(target)) fail("site/data/os.json is missing; run `npm run build` and commit it");
+  else if (strip(readFileSync(target, "utf8")) !== strip(body))
+    fail("site/data/os.json is out of date; run `npm run build` and commit it");
+
+  problems.slice(-2).forEach((p) => console.error(`  DRIFT ${p}`));
+  console.log(problems.length ? `\n  ${problems.length} problem(s). Fix, or update site/map.config.json.\n`
+                              : "\n  Site is in sync with the Product OS.\n");
+  process.exit(problems.length ? 1 : 0);
+}
+if (problems.length) console.error("\n  Building anyway; unplaced skills render in the red column.\n");
+
 mkdirSync(join(SITE, "data"), { recursive: true });
-writeFileSync(join(SITE, "data", "os.json"), JSON.stringify(out, null, 2));
-console.log(`  → site/data/os.json (${(JSON.stringify(out).length / 1024).toFixed(1)} KB)\n`);
+writeFileSync(target, body);
+console.log(`  → site/data/os.json (${(body.length / 1024).toFixed(1)} KB)\n`);

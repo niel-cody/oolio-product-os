@@ -1,0 +1,1478 @@
+{
+  "stamp": "318c145",
+  "marketplace": {
+    "name": "oolio-product-os",
+    "description": "Oolio Product OS: the product operating system plugins."
+  },
+  "plugins": [
+    {
+      "name": "oolio-pm",
+      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding. Thirty-two skills.",
+      "skills": [
+        {
+          "id": "add-insight",
+          "plugin": "oolio-pm",
+          "description": "Attach a single piece of evidence to the JPD backlog as native Insights, on one idea or several. Trigger when the user hands over one finding — a URL, an article, a HubSpot ticket or deal, a quote, a stat, a screenshot description, something spotted mid-session — and says \"attach this as an insight\", \"add this to OHSI-X (and OHSI-Y)\", \"this supports that idea about X\", \"where does this belong on the backlog\", \"file this against the relevant ideas\", or \"make this an insight\". Works evidence-first: given targets it attaches after a fit check; given none it sweeps the backlog for every idea the evidence genuinely supports and proposes the mapping. Do NOT trigger for gathering evidence about an idea or scanning for gaps (use `signal-radar`), for raw customer feedback that may need a new idea (use `feedback-to-idea`), or for the full grooming loop (use `jpd-loop`)."
+        },
+        {
+          "id": "behavioural-alchemist",
+          "plugin": "oolio-pm",
+          "description": "Summon Roy, the Behavioural Alchemist, to read a decision, feature, price, loyalty scheme, or piece of positioning through behavioural economics and consumer psychology, and find the value conventional product, engineering, finance, and analytics miss. Trigger when the user says \"ask Roy\", \"what would Roy say\", \"summon the Behavioural Alchemist\", \"run a behavioural review\", \"give me the behavioural read\", \"alchemy workshop\", \"loyalty architect\", \"pricing psychology\", \"reframe this feature\", \"contrarian review\", \"experience theatre\", \"narrative alchemist\", \"design an experiment for this\", or hands over a proposal and asks for the psychological angle, the contrarian case, the perceived-value read, or a cheaper non-engineering way to change the behaviour. Roy also sits as an elevated cross-cutting lens inside the Virtual Product Council; this skill is how you summon him on his own. Do NOT trigger for a full multi-panel council review (use convene-vpc), for grooming a JPD idea (use jpd-idea-groomer), or for a research briefing (use storm-research)."
+        },
+        {
+          "id": "competitor-watch",
+          "plugin": "oolio-pm",
+          "description": "Run Oolio's competitor intelligence: maintain one living dossier per competitor in the Brain, sweep the watchlist for changes on a weekly cadence and report only the deltas, deep-dive a competitor's reviews and communities for weaknesses, and build Fact-Impact-Act battlecards. Trigger when the user says \"run the sweep\", \"competitor sweep\", \"watch the competition\", \"what's changed in the market\", \"update the <name> dossier\", \"deep-dive <competitor>\", \"build a battlecard for <competitor>\", \"what are <competitor>'s weaknesses\", \"what are competitors marketing\", \"check their campaigns/socials\", \"is <claim> real or marketing\", or asks what a rival is doing, shipping, pricing, hiring, or campaigning on. Routes product-gap findings to `feedback-to-idea` and idea evidence to `signal-radar`; never writes Jira itself. Do NOT trigger for validating a specific JPD idea (use signal-radar), a general research briefing (use storm-research), or win/loss deal analysis (use win-loss)."
+        },
+        {
+          "id": "convene-vpc",
+          "plugin": "oolio-pm",
+          "description": "Convene the Oolio Virtual Product Council to pressure-test a product decision, design, requirement, spec, PRD, or piece of research. Use when the user says \"convene the VPC\", \"run the product council\", \"review this decision/design/PRD/spec\", \"pressure-test this\", \"validate this against our personas\", \"what would the council say\", or hands over a Confluence page, Jira ticket, Figma file, prototype URL, or document and asks for a validated decision. This is the orchestrator: it runs the whole loop, chairs the subcommittees, and produces a recorded, human-validated decision. It calls the child skills storm-research, operator-council-review, design-council-review, and leadership-subcommittee-review."
+        },
+        {
+          "id": "design-council-review",
+          "plugin": "oolio-pm",
+          "description": "Review a design against the Oolio Design Council, the panel of expert design and research lenses. Use when the user says \"run the Design Council\", \"is the design sound\", \"review this wireframe / Figma / flow / screen\", \"run the lenses\", or hands over a UI, mockup, or interaction to be critiqued by expert principles. Assigns mandatory and contextual lenses from the matrix, runs each lens's challenge questions, applies the decision rule, and records verdicts and clashes. Can run standalone or as part of a full council review."
+        },
+        {
+          "id": "discovery-wayfinder",
+          "plugin": "oolio-pm",
+          "description": "Chart a product discovery theme too big for one session (\"AI ordering strategy\", \"what does labour cost control mean for us\") as a shared map of decision tickets in Jira, then work the map one decision at a time until the way is clear. Trigger when the user says \"chart this theme\", \"build a discovery map\", \"wayfind this\", \"work the map\", \"what's the next decision on <map>\", or hands over a loose, multi-decision problem space rather than a single idea. Do NOT trigger for a single JPD idea needing end-to-end validation (use jpd-loop), for research not attached to a map (use storm-research or signal-radar), for grooming an idea (use jpd-idea-groomer), or for stress-testing a plan that already fits one session (use grill-me)."
+        },
+        {
+          "id": "drive",
+          "plugin": "oolio-pm",
+          "description": "Convert the user's most recent unstructured, rambling, or voice-dictated request into a clear execution contract, then plan, perform, review, and verify the work using whatever capabilities are available (files, connectors, web research, and document, spreadsheet, and presentation tools). Use whenever the user has rambled through an idea, given conflicting or half-formed instructions, described an outcome without a proper brief, referred loosely to \"the deck\" or \"the report\" or \"the latest file\", or wants Claude to take ownership and drive a task to a finished result rather than just discuss it. Invoke manually with /drive. Trigger automatically when a message reads as raw thinking aimed at a real outcome and the right move is to do the work, not to write back a tidier version of the request."
+        },
+        {
+          "id": "feedback-to-idea",
+          "plugin": "oolio-pm",
+          "description": "Turn raw customer, support, or sales signal into a Jira Product Discovery idea, or attach the signal to an existing idea, de-duped against the whole backlog. Trigger PROACTIVELY when the user pastes customer feedback, a support trend, a Slack thread, a HubSpot ticket or deal note, a churn reason, or a feature request and says \"raise this as an idea\", \"get this into JPD\", \"log this feedback\", \"is this already on the backlog\", or \"turn this into an idea\". Also trigger when the user asks to sweep a channel or ticket queue for product signal. Do NOT trigger for grooming an existing idea (use jpd-idea-groomer), for running the full loop (use jpd-loop), or for general feedback summarisation with no JPD intent."
+        },
+        {
+          "id": "grill-me",
+          "plugin": "oolio-pm",
+          "description": "Interview the user relentlessly about a plan, decision, PRD, or design until reaching shared understanding, resolving each branch of the decision tree. Use when the user wants to stress-test a plan, pressure-test their thinking, get grilled on a design or spec, or says \"grill me\"."
+        },
+        {
+          "id": "grill-my-prd",
+          "plugin": "oolio-pm",
+          "description": "Relentlessly interview the user about a Confluence PRD one question at a time, resolve its decision tree, then record the outcome as a versioned child \"Grill-me\" page under the PRD AND amend the PRD in place (strikethroughs, decision components, status badges, grill references). Trigger PROACTIVELY whenever the user pastes a Confluence PRD URL and asks to \"grill me on this PRD\", \"grill this PRD\", \"pressure-test this PRD\", \"run grill-me on the PRD\", \"stress-test this spec\", \"poke holes in this PRD\", or says \"grill-my-prd\" or \"grill my PRD\" — even if they only paste the PRD link. Prefer this over the generic grill-me skill whenever the thing being grilled is a Confluence PRD, because this skill also produces the versioned decision record and edits the PRD. Do NOT trigger for grilling a plan, design, or idea that is not a PRD (use grill-me), or for grooming a Jira epic or JPD idea (use the groomer skills)."
+        },
+        {
+          "id": "gtm-handover",
+          "plugin": "oolio-pm",
+          "description": "Build the executive GTM handover for a single Oolio product. Two artifacts, the One-Pager and the Supporting Deck. This is the narrative source of truth that gtm-playbooks and gtm-marketing read from downstream. Trigger PROACTIVELY when the user asks to \"build the GTM handover\", \"do the one-pager and deck for [product]\", \"draft the GTM narrative for [product]\", \"build the supporting deck\", \"write the product narrative\", or pastes a Jira epic key (OR-XXXX, EDU-XXXX, etc.) and asks for the executive launch story. Also trigger when the user mentions the Oolio GTM Framework and wants the upstream artifacts only. Don't trigger for sales / AM / onboarding playbooks, use gtm-playbooks. Don't trigger for campaign material, use gtm-marketing. Don't trigger for a single tagline edit, edit the file directly."
+        },
+        {
+          "id": "gtm-marketing",
+          "plugin": "oolio-pm",
+          "description": "Build the Marketing Pack for a single Oolio product launch. Launch announcement, social posts, email sequence, sales note, and campaign brief. Trigger PROACTIVELY when the user asks to \"build the marketing pack\", \"draft launch comms for [product]\", \"do the campaign brief for [product]\", \"write the launch announcement\", \"build the social posts for [product]\", \"draft the email sequence for [product]\", or \"build the marketing assets\". Also trigger when the user pastes a Jira epic key (OR-XXXX, EDU-XXXX) and asks for launch / campaign / customer comms material. Don't trigger for the executive One-Pager or Deck, use gtm-handover. Don't trigger for sales / AM / onboarding playbooks, use gtm-playbooks. Reads pack_content.json produced by gtm-handover and refuses to run if that file is missing."
+        },
+        {
+          "id": "gtm-playbooks",
+          "plugin": "oolio-pm",
+          "description": "Build the three internal-facing GTM playbooks for a single Oolio product. Sales (discovery, demo, objections, pricing, close), Account Management (adoption signals, expansion, renewal, at-risk, QBR), and Onboarding (configuration, migration, training, go-live, first-week). Trigger PROACTIVELY when the user asks to \"build the GTM playbooks for [product]\", \"do the sales playbook\", \"do the AM playbook\", \"do the onboarding playbook\", \"draft the playbooks for [product]\", \"build the rep enablement\", or any combination of the three. Also trigger when the user pastes a Jira epic key (OR-XXXX, EDU-XXXX) and asks for sales / AM / onboarding enablement. Don't trigger for the executive One-Pager or Deck, use gtm-handover. Don't trigger for campaign material, use gtm-marketing. Reads pack_content.json produced by gtm-handover and refuses to run if that file is missing."
+        },
+        {
+          "id": "jira-epic-groomer",
+          "plugin": "oolio-pm",
+          "description": "Groom or backfill the description on a Jira epic so it follows Oolio's standard What/Why/Who pattern. Trigger PROACTIVELY whenever the user references a Jira epic key (`OR-XXXX`, `EDU-XXXX`, `IDEA-XXXX` flagged as Epic, etc.) and asks to \"describe\", \"groom\", \"polish\", \"backfill\", \"tidy up\", \"sharpen\", \"rewrite\", or \"write a description for\" the epic. Also trigger when the user asks to standardise epic descriptions across a project, get an epic ready for Steering or roadmap review, or pastes a PRD link and asks for the matching epic description. Prefer this skill over generic writing help whenever an epic-level Jira ticket needs a clean, high-level description. Do NOT trigger for stories, tasks, bugs, sub-tasks, or JPD ideas. Use `jpd-idea-groomer` instead for IDEA / DISC / JPD tickets."
+        },
+        {
+          "id": "jira-epic-titler",
+          "plugin": "oolio-pm",
+          "description": "Suggest a stronger Oolio Jira epic title using the `[Capability] for [Outcome]` standard. Trigger PROACTIVELY when the user references a Jira epic key (`OR-XXXX`, `EDU-XXXX`) or URL and asks to rename, retitle, improve the title, sharpen the title, or rewrite the summary. Also trigger when the user mentions Oolio's epic title standard, asks to make a name executive-readable or roadmap-ready, complains it's too vague, too technical, or a codename, or pastes a weak epic name for help. Reads the current summary, description, child work items, and any linked Confluence/PRD pages, then proposes 2–3 stronger titles with reasoning. Prefer this skill over generic writing help when an epic-level Jira ticket needs a sharper name. Do NOT trigger for stories, tasks, bugs, sub-tasks, or JPD ideas — use `jpd-idea-groomer` for JPD/IDEA tickets and `jira-epic-groomer` if the description needs rewriting rather than the title."
+        },
+        {
+          "id": "jpd-idea-groomer",
+          "plugin": "oolio-pm",
+          "description": "Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, plus Secondary Personas, Segments, Migration Relevance, Horizon and Commitment as proposals, Escalate). Trigger PROACTIVELY when the user pastes a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link) and asks to \"groom\", \"polish\", \"fix up\", \"audit\", or \"get this Steering / roadmap ready\". Also trigger when the user references Oolio's JPD field standards, Steering review, or pastes rough idea text to be written up to JPD standard. Prefer over generic writing help when the context smells like product discovery at Oolio."
+        },
+        {
+          "id": "jpd-loop",
+          "plugin": "oolio-pm",
+          "description": "Run the Virtual Product Council grooming loop over a SINGLE Jira Product Discovery idea, end to end. Trigger when the user gives a JPD/Jira key (e.g. OHSI-123) and asks to \"run the jpd loop\", \"groom and review this idea\", \"VPC this idea\", \"run the council on this idea\", \"pressure-test this JPD idea\", or \"take this idea through the loop\". Grooms the idea, de-dupes and links it against the whole backlog, gathers cited evidence (Atlassian, web, HubSpot, Slack, Microsoft 365/Teams, Figma) and builds validation Insights, convenes the VPC, iterates to a verdict, takes a human sign-off, then writes the result back to JPD and moves the idea to Decision. Manual, human-gated (Phase 1). Do NOT trigger for non-JPD work, PRD/Figma reviews (use convene-vpc), or bulk runs."
+        },
+        {
+          "id": "jpd-title-standard",
+          "plugin": "oolio-pm",
+          "description": "Groom Jira Product Discovery (JPD) idea titles to Oolio's JPD Title Standard — max 65 characters (target 40–55), sentence case, capability- or verb-led with a clear outcome, no emoji, no bracket prefixes like [Feedback] or [PIB], no trailing punctuation. Trigger PROACTIVELY when the user pastes one or more JPD keys (OHSI-XX, IDEA-XX, DISC-XX), a Polaris/JPD URL, or raw idea titles and asks to \"fix the title\", \"standardise titles\", \"apply the title standard\", \"shorten the title\", \"clean up titles\", \"audit titles\", or complains titles truncate on the Tree/Requests page. Also trigger for bulk runs (\"standardise all titles in the project\") and when the user mentions the JPD Title Standard or Tree card truncation. Works on pasted text with no Jira access, on single ideas, or in bulk via JQL. Do NOT trigger for Jira epics (use jira-epic-titler), for full JPD field/description grooming (use jpd-idea-groomer), or for stories/tasks/bugs."
+        },
+        {
+          "id": "leadership-subcommittee-review",
+          "plugin": "oolio-pm",
+          "description": "Test a decision against the Oolio Leadership Subcommittee, the executive and commercial lenses. Use when the user says \"run the Leadership Subcommittee\", \"commercial review\", \"should we invest in this\", \"can we sell, support, and deliver this\", \"what is the risk\", or wants the executive and go-to-market view of a product direction. Convenes the default nine lenses plus any conditional lenses the decision touches, and runs each seat's challenge questions and review output. Can run standalone or as part of a full council review."
+        },
+        {
+          "id": "metrics-review",
+          "plugin": "oolio-pm",
+          "description": "Run a product metrics review against real data — post-launch validation of a PRD's success metrics, or a recurring weekly/monthly product review — producing a scorecard with targets, actuals, trends, verdicts, and actions. Trigger PROACTIVELY when the user says \"metrics review\", \"how is [feature] performing\", \"did [launch] work\", \"check the success metrics\", \"weekly product review\", \"validate the launch\", or names a shipped PRD/feature and asks whether it met its numbers. Uses the connected PostHog MCP where available, and PRD success metrics as the target source. Do NOT trigger for ad-hoc SQL help or building a dashboard (use the data skills), or for market research (storm-research)."
+        },
+        {
+          "id": "operator-council-review",
+          "plugin": "oolio-pm",
+          "description": "Test a decision against the Oolio Operator Council, the hospitality user personas (the UAT panel). Use when the user says \"run UAT\", \"run the operator council\", \"would real users accept this\", \"does this survive a Friday night\", \"check this against our personas\", or wants the in-venue, frontline reality of a feature. Convenes the user personas the decision touches, by role and by segment or vertical, and runs each persona's challenge. Can run standalone or as part of a full council review."
+        },
+        {
+          "id": "pm-compass",
+          "plugin": "oolio-pm",
+          "description": "The front door and router for the oolio-pm skills. Trigger when someone asks \"which skill should I use\", \"where do I start\", \"what can these skills do\", \"what have you got for X\", \"help me choose\", \"I'm new to this\", or describes a product-management task without naming a skill and the right one isn't obvious. Also trigger for \"show me the pipeline\" or \"how do these skills fit together\". Reads the situation, names the one skill (or short chain) that fits, and starts it on request. Do NOT trigger when the user already named a specific skill or their phrasing clearly matches one skill's own triggers — route straight there instead."
+        },
+        {
+          "id": "signal-radar",
+          "plugin": "oolio-pm",
+          "description": "Synthesise HubSpot, web, and social signal (via Apify) into evidence for JPD ideas, and scan for gaps between real market and customer demand and what is actually on the backlog. Trigger when the user says \"run signal radar\", \"sync the brain\", \"what's the market saying about X\", \"validate this idea with real signal\", \"find gaps in the backlog / roadmap\", \"what are we missing\", \"scan HubSpot and social for signal on this\", or asks to keep the Brain in sync with fresh market and customer research. Do NOT trigger for a single already-found piece of evidence the user just wants attached to ideas (use `add-insight`). Two modes: idea mode (given a JPD key, gathers external evidence and attaches it as native Insights on the idea) and gap-scan mode (no key, scans the whole backlog against market, customer, and social signal, then hands candidate gaps to `feedback-to-idea`). Always writes findings into the Brain so research compounds instead of repeating. Do NOT trigger for raw pasted feedback (use `feedback-to-idea`), the full VPC loop (use `jpd-loop`), a single-topic deep-dive report with no backlog tie-in (use `storm-research`), standing competitor intelligence, dossiers, sweeps, or battlecards (use `competitor-watch`), or closed-lost deal analysis (use `win-loss`)."
+        },
+        {
+          "id": "steering-pack",
+          "plugin": "oolio-pm",
+          "description": "Build a Steering-ready review pack over a slice of the JPD backlog — per-idea one-liners, field completeness, VPC verdicts and rubric scores, and a recommended discussion order — published as a Confluence page with a chat summary. Trigger PROACTIVELY when the user says \"build the Steering pack\", \"prep Steering\", \"what's going to Steering\", \"get these ideas Steering-ready\", \"roadmap review pack\", or gives a JQL slice, a list of JPD keys, or a status (e.g. everything in Decision) and asks for the review pack. Do NOT trigger for grooming a single idea (jpd-idea-groomer), running the loop (jpd-loop), or a general stakeholder update."
+        },
+        {
+          "id": "storm-research",
+          "plugin": "oolio-pm",
+          "description": "Use when someone asks to run Storm Research, use the storm-research skill, run the STORM method on a topic, says \"storm research this\" / \"storm report on X\" / \"give me a STORM briefing on X\", or wants a multi-perspective, citation-verified research briefing delivered as a clean HTML report and, optionally, a Confluence page. Also the research engine the Virtual Product Council calls before its panels argue. Runs a 4-phase pipeline: five expert lenses (Practitioner, Academic, Skeptic, Economist, Historian) -> contradiction map -> synthesized HTML report -> adversarial peer review + primary-source verification, then publishes. Best where multiple viewpoints and fact-checked claims matter; overkill for a simple factual lookup."
+        },
+        {
+          "id": "wiki-ingest",
+          "plugin": "oolio-pm",
+          "description": "Ingest a source into the my_brain vault — read it, distill it, and integrate it across the owning domain's Capability, Concept, Synthesis and Overview pages while writing a provenance-carrying source summary and updating the domain catalogue and log. Trigger when the user drops a file in a domain's Sources/ folder and says \"ingest this\", \"add this to the Brain\", \"file this in the vault\", or names a source to process. Routes to the correct Product Domain or the cross-cutting Market area, and handles competitor content via the canonical-in-Market rule. Do NOT trigger to answer a question (use wiki-query), to health-check the vault (use wiki-lint), or to stand up a new domain (use wiki-new)."
+        },
+        {
+          "id": "wiki-lint",
+          "plugin": "oolio-pm",
+          "description": "Health-check the my_brain vault for contradictions, stale claims, orphan pages, missing cross-references, missing or wrong frontmatter (including missing class or a past review date), competitor-pattern violations, and data gaps. Trigger when the user says \"lint\", \"lint the Brain\", \"lint Insights\", \"health-check the vault\", \"audit the Brain\", or \"check the vault for issues\". Proposes fixes and new questions to investigate, changes only on approval, and logs the pass. Do NOT trigger for a quick overview snapshot (use wiki-status), to ingest a source (use wiki-ingest), or to answer a question (use wiki-query)."
+        },
+        {
+          "id": "wiki-new",
+          "plugin": "oolio-pm",
+          "description": "Stand up a new Product Domain (or a cross-cutting knowledge area) in the my_brain vault with a README-only front door and confirmed scope, following the simplified 2026-07 structure. Trigger when the user says \"add a new domain\", \"create a Payments domain\", \"stand up a new wiki\", \"add a domain to the Brain\", or names a capability area they want tracked separately. Confirms scope and boundaries before any material lands, and creates no empty scaffolding. Do NOT trigger to ingest a source into an existing domain (use wiki-ingest), to answer a question (use wiki-query), or to health-check the vault (use wiki-lint)."
+        },
+        {
+          "id": "wiki-query",
+          "plugin": "oolio-pm",
+          "description": "Answer a question against the my_brain vault with citations to its pages, reading the domain README and Overview first to locate the right pages, then offering to file durable answers back as a synthesis so explorations compound. Trigger when the user asks something to be answered from the Brain, the vault, or the wiki — \"ask the Brain…\", \"what does the vault say about…\", \"query the Brain\", \"according to the Brain…\", \"what do we know about a competitor, feature, or metric\" — or asks an Oolio product, competitor, or capability question while working in the vault. Do NOT trigger to ingest a new source (use wiki-ingest), to health-check the vault (use wiki-lint), or to stand up a new domain (use wiki-new)."
+        },
+        {
+          "id": "wiki-status",
+          "plugin": "oolio-pm",
+          "description": "Produce a status snapshot of the my_brain vault — per-domain page counts by type, recent activity from the logs and git, stub domains, orphans, pages missing class or past their review date, and gaps worth filling. Trigger when the user says \"Brain status\", \"vault status\", \"what's in the Brain\", \"show me the state of the vault\", \"what's been ingested lately\", or wants an at-a-glance overview before deciding what to work on. Read-only. Do NOT trigger for a deep correctness pass (use wiki-lint), to ingest a source (use wiki-ingest), or to answer a question (use wiki-query)."
+        },
+        {
+          "id": "win-loss",
+          "plugin": "oolio-pm",
+          "description": "Mine HubSpot closed-lost and churn data for the real reasons Oolio wins and loses, monthly. Treats rep-entered loss reasons as hypotheses (buyer research shows they are wrong more often than right) and cross-examines deal metadata instead. Codes every loss on four drivers (product fit, sales experience, pricing/packaging, competitive), aggregates patterns by segment and competitor, routes product gaps to `feedback-to-idea`, competitor patterns to the `competitor-watch` dossiers, and drafts interview guides for the human follow-up calls. Trigger when the user says \"run win/loss\", \"why are we losing deals\", \"mine closed-lost\", \"what's the win/loss picture this month/quarter\", \"who are we losing to\", or asks why a segment or competitor keeps beating us. Do NOT trigger for a single deal post-mortem chat (just discuss it), competitor web research (use competitor-watch), or general idea validation (use signal-radar)."
+        },
+        {
+          "id": "write-prd",
+          "plugin": "oolio-pm",
+          "description": "Write an Oolio PRD from a groomed JPD idea, a brief, or a problem statement, in Oolio's high-level PRD format, grounded in the bundled persona library and product context, and publish it to Confluence. Trigger PROACTIVELY when the user says \"write a PRD\", \"draft the PRD for [feature]\", \"turn OHSI-XX into a PRD\", \"PRD this idea\", \"draft the spec\", or hands over a groomed JPD idea, epic, or brief and asks for the product requirements document. Do NOT trigger for reviewing or pressure-testing an existing PRD (use grill-my-prd or convene-vpc), for JPD idea grooming (use jpd-idea-groomer), or for epic descriptions (use jira-epic-groomer)."
+        }
+      ],
+      "counts": {
+        "skills": 32,
+        "inProgress": 0,
+        "archived": 0
+      }
+    }
+  ],
+  "totals": {
+    "skills": 32,
+    "plugins": 1,
+    "inProgress": 0,
+    "archived": 0,
+    "unplaced": 0
+  },
+  "about": {
+    "kicker": "Every product team has written down how it works. In forty Confluence pages, three stale Notion docs, and one person's head.",
+    "lede": [
+      "Written down is not the same as readable. Readable is not the same as running.",
+      "This is ours, readable and running. Every box on this map is one of {skills} real skills, installed by a real person, that an assistant runs against our actual tools. Not a diagram of how we intend to work. The thing itself."
+    ],
+    "sections": [
+      {
+        "label": "Why bother",
+        "paragraphs": [
+          "Product work is a small set of moves repeated forever. Turn signal into a shaped idea. Pressure-test it honestly. Write it down. Decide. Ship it. Find out whether you were right.",
+          "Doing those well is not a question of talent. It is a question of discipline, and discipline is the first thing to go when the quarter gets loud. Written down, the standard stops depending on who is having a good week."
+        ]
+      },
+      {
+        "label": "The people are the point",
+        "paragraphs": [
+          "None of this replaces a product manager. It removes the tax on being one: the blank page, the fourth rewrite, the research you know exists somewhere, the ticket nobody groomed, the decision relitigated because no one recorded it.",
+          "What is left is the part that needed a human all along. Judgement. Taste. Knowing which problem deserves the company's next quarter.",
+          "The car does not win the race. But nobody wins it in the wrong car."
+        ]
+      },
+      {
+        "label": "What keeps it honest",
+        "list": [
+          "A person signs off anything that counts. Those are the amber gates, and they do not move.",
+          "Every claim carries a citation.",
+          "Findings land in the Brain, so what the team learns compounds instead of restarting.",
+          "Nothing reaches Jira or Confluence unreviewed."
+        ]
+      },
+      {
+        "label": "Reading the map",
+        "paragraphs": [
+          "Left to right is the lifecycle, signal to shipped to learned. Colour is who runs it. The arcs underneath are the loops, which are the reason this is a system and not a pipeline. Click any flow to trace a path end to end."
+        ]
+      }
+    ],
+    "line": "Learn it once.",
+    "footnote": "Generated from the skills themselves, so it cannot drift from what we actually run."
+  },
+  "map": {
+    "title": "Oolio Product OS",
+    "subtitle": "THE PRODUCT OPERATING SYSTEM · SIGNAL → SHIPPED → LEARN",
+    "columns": [
+      "Front Door",
+      "Signals",
+      "Brain",
+      "Intake",
+      "Discovery",
+      "Grooming",
+      "Definition",
+      "Orchestration",
+      "Council",
+      "Steering",
+      "Delivery",
+      "GTM",
+      "Measure"
+    ],
+    "nodes": [
+      {
+        "id": "art-brain",
+        "label": "The Brain",
+        "note": "my_brain · Obsidian vault",
+        "badge": "VAULT",
+        "type": "output",
+        "col": 2,
+        "row": 0.8
+      },
+      {
+        "id": "art-idea",
+        "label": "JPD Idea",
+        "note": "native idea in Jira JPD",
+        "badge": "JIRA",
+        "type": "output",
+        "col": 3,
+        "row": 3
+      },
+      {
+        "id": "art-prd",
+        "label": "PRD",
+        "note": "published Confluence PRD",
+        "badge": "CONFLUENCE",
+        "type": "output",
+        "col": 6,
+        "row": 3
+      },
+      {
+        "id": "art-decision",
+        "label": "Decision Record",
+        "note": "validated VPC log",
+        "badge": "CONFLUENCE",
+        "type": "output",
+        "col": 8,
+        "row": 4
+      },
+      {
+        "id": "art-epic",
+        "label": "Groomed Epic",
+        "note": "delivery epic in Jira",
+        "badge": "JIRA",
+        "type": "output",
+        "col": 10,
+        "row": 2
+      },
+      {
+        "id": "art-pack",
+        "label": "GTM Pack",
+        "note": "6-artifact launch pack",
+        "badge": "PACK",
+        "type": "output",
+        "col": 11,
+        "row": 3
+      },
+      {
+        "id": "art-scorecard",
+        "label": "Scorecard",
+        "note": "target vs actual verdict",
+        "badge": "POSTHOG",
+        "type": "output",
+        "col": 12,
+        "row": 1
+      },
+      {
+        "id": "pm-compass",
+        "label": "PM Compass",
+        "note": "routes intent → one skill",
+        "badge": "CLAUDE",
+        "type": "orch",
+        "col": 0,
+        "row": 1,
+        "desc": "The front door and router for the oolio-pm skills. Trigger when someone asks \"which skill should I use\", \"where do I start\", \"what can these skills do\", \"what have you got for X\", \"help me choose\", \"I'm new to this\", or describes a product-management task without naming a skill and the right one isn't obvious. Also trigger for \"show me the pipeline\" or \"how do these skills fit together\". Reads the situation, names the one skill (or short chain) that fits, and starts it on request. Do NOT trigger when the user already named a specific skill or their phrasing clearly matches one skill's own triggers — route straight there instead."
+      },
+      {
+        "id": "drive",
+        "label": "Drive",
+        "note": "ramble → finished work",
+        "badge": "CLAUDE",
+        "type": "orch",
+        "col": 0,
+        "row": 2,
+        "desc": "Convert the user's most recent unstructured, rambling, or voice-dictated request into a clear execution contract, then plan, perform, review, and verify the work using whatever capabilities are available (files, connectors, web research, and document, spreadsheet, and presentation tools). Use whenever the user has rambled through an idea, given conflicting or half-formed instructions, described an outcome without a proper brief, referred loosely to \"the deck\" or \"the report\" or \"the latest file\", or wants Claude to take ownership and drive a task to a finished result rather than just discuss it. Invoke manually with /drive. Trigger automatically when a message reads as raw thinking aimed at a real outcome and the right move is to do the work, not to write back a tidier version of the request."
+      },
+      {
+        "id": "competitor-watch",
+        "label": "Competitor Watch",
+        "note": "dossiers · battlecards",
+        "badge": "CLAUDE·WEB",
+        "type": "signal",
+        "col": 1,
+        "row": 0,
+        "desc": "Run Oolio's competitor intelligence: maintain one living dossier per competitor in the Brain, sweep the watchlist for changes on a weekly cadence and report only the deltas, deep-dive a competitor's reviews and communities for weaknesses, and build Fact-Impact-Act battlecards. Trigger when the user says \"run the sweep\", \"competitor sweep\", \"watch the competition\", \"what's changed in the market\", \"update the <name> dossier\", \"deep-dive <competitor>\", \"build a battlecard for <competitor>\", \"what are <competitor>'s weaknesses\", \"what are competitors marketing\", \"check their campaigns/socials\", \"is <claim> real or marketing\", or asks what a rival is doing, shipping, pricing, hiring, or campaigning on. Routes product-gap findings to `feedback-to-idea` and idea evidence to `signal-radar`; never writes Jira itself. Do NOT trigger for validating a specific JPD idea (use signal-radar), a general research briefing (use storm-research), or win/loss deal analysis (use win-loss)."
+      },
+      {
+        "id": "win-loss",
+        "label": "Win / Loss",
+        "note": "mines closed-lost",
+        "badge": "CLAUDE·HUBSPOT",
+        "type": "signal",
+        "col": 1,
+        "row": 1,
+        "desc": "Mine HubSpot closed-lost and churn data for the real reasons Oolio wins and loses, monthly. Treats rep-entered loss reasons as hypotheses (buyer research shows they are wrong more often than right) and cross-examines deal metadata instead. Codes every loss on four drivers (product fit, sales experience, pricing/packaging, competitive), aggregates patterns by segment and competitor, routes product gaps to `feedback-to-idea`, competitor patterns to the `competitor-watch` dossiers, and drafts interview guides for the human follow-up calls. Trigger when the user says \"run win/loss\", \"why are we losing deals\", \"mine closed-lost\", \"what's the win/loss picture this month/quarter\", \"who are we losing to\", or asks why a segment or competitor keeps beating us. Do NOT trigger for a single deal post-mortem chat (just discuss it), competitor web research (use competitor-watch), or general idea validation (use signal-radar)."
+      },
+      {
+        "id": "signal-radar",
+        "label": "Signal Radar",
+        "note": "signal → cited Insights",
+        "badge": "CLAUDE·JIRA",
+        "type": "signal",
+        "col": 1,
+        "row": 2,
+        "desc": "Synthesise HubSpot, web, and social signal (via Apify) into evidence for JPD ideas, and scan for gaps between real market and customer demand and what is actually on the backlog. Trigger when the user says \"run signal radar\", \"sync the brain\", \"what's the market saying about X\", \"validate this idea with real signal\", \"find gaps in the backlog / roadmap\", \"what are we missing\", \"scan HubSpot and social for signal on this\", or asks to keep the Brain in sync with fresh market and customer research. Do NOT trigger for a single already-found piece of evidence the user just wants attached to ideas (use `add-insight`). Two modes: idea mode (given a JPD key, gathers external evidence and attaches it as native Insights on the idea) and gap-scan mode (no key, scans the whole backlog against market, customer, and social signal, then hands candidate gaps to `feedback-to-idea`). Always writes findings into the Brain so research compounds instead of repeating. Do NOT trigger for raw pasted feedback (use `feedback-to-idea`), the full VPC loop (use `jpd-loop`), a single-topic deep-dive report with no backlog tie-in (use `storm-research`), standing competitor intelligence, dossiers, sweeps, or battlecards (use `competitor-watch`), or closed-lost deal analysis (use `win-loss`)."
+      },
+      {
+        "id": "add-insight",
+        "label": "Add Insight",
+        "note": "one finding → Insight",
+        "badge": "CLAUDE·JIRA",
+        "type": "signal",
+        "col": 1,
+        "row": 3,
+        "desc": "Attach a single piece of evidence to the JPD backlog as native Insights, on one idea or several. Trigger when the user hands over one finding — a URL, an article, a HubSpot ticket or deal, a quote, a stat, a screenshot description, something spotted mid-session — and says \"attach this as an insight\", \"add this to OHSI-X (and OHSI-Y)\", \"this supports that idea about X\", \"where does this belong on the backlog\", \"file this against the relevant ideas\", or \"make this an insight\". Works evidence-first: given targets it attaches after a fit check; given none it sweeps the backlog for every idea the evidence genuinely supports and proposes the mapping. Do NOT trigger for gathering evidence about an idea or scanning for gaps (use `signal-radar`), for raw customer feedback that may need a new idea (use `feedback-to-idea`), or for the full grooming loop (use `jpd-loop`)."
+      },
+      {
+        "id": "wiki-ingest",
+        "label": "Wiki Ingest",
+        "note": "source → distilled pages",
+        "badge": "CLAUDE·BRAIN",
+        "type": "ai",
+        "col": 2,
+        "row": 0,
+        "desc": "Ingest a source into the my_brain vault — read it, distill it, and integrate it across the owning domain's Capability, Concept, Synthesis and Overview pages while writing a provenance-carrying source summary and updating the domain catalogue and log. Trigger when the user drops a file in a domain's Sources/ folder and says \"ingest this\", \"add this to the Brain\", \"file this in the vault\", or names a source to process. Routes to the correct Product Domain or the cross-cutting Market area, and handles competitor content via the canonical-in-Market rule. Do NOT trigger to answer a question (use wiki-query), to health-check the vault (use wiki-lint), or to stand up a new domain (use wiki-new)."
+      },
+      {
+        "id": "wiki-query",
+        "label": "Wiki Query",
+        "note": "ask the Brain, with cites",
+        "badge": "CLAUDE·BRAIN",
+        "type": "ai",
+        "col": 2,
+        "row": 1.6,
+        "desc": "Answer a question against the my_brain vault with citations to its pages, reading the domain README and Overview first to locate the right pages, then offering to file durable answers back as a synthesis so explorations compound. Trigger when the user asks something to be answered from the Brain, the vault, or the wiki — \"ask the Brain…\", \"what does the vault say about…\", \"query the Brain\", \"according to the Brain…\", \"what do we know about a competitor, feature, or metric\" — or asks an Oolio product, competitor, or capability question while working in the vault. Do NOT trigger to ingest a new source (use wiki-ingest), to health-check the vault (use wiki-lint), or to stand up a new domain (use wiki-new)."
+      },
+      {
+        "id": "wiki-lint",
+        "label": "Wiki Lint",
+        "note": "contradictions · stale claims",
+        "badge": "NIEL·BRAIN",
+        "type": "human",
+        "col": 2,
+        "row": 2.4,
+        "desc": "Health-check the my_brain vault for contradictions, stale claims, orphan pages, missing cross-references, missing or wrong frontmatter (including missing class or a past review date), competitor-pattern violations, and data gaps. Trigger when the user says \"lint\", \"lint the Brain\", \"lint Insights\", \"health-check the vault\", \"audit the Brain\", or \"check the vault for issues\". Proposes fixes and new questions to investigate, changes only on approval, and logs the pass. Do NOT trigger for a quick overview snapshot (use wiki-status), to ingest a source (use wiki-ingest), or to answer a question (use wiki-query)."
+      },
+      {
+        "id": "wiki-status",
+        "label": "Wiki Status",
+        "note": "read-only snapshot",
+        "badge": "CLAUDE·BRAIN",
+        "type": "ai",
+        "col": 2,
+        "row": 3.2,
+        "desc": "Produce a status snapshot of the my_brain vault — per-domain page counts by type, recent activity from the logs and git, stub domains, orphans, pages missing class or past their review date, and gaps worth filling. Trigger when the user says \"Brain status\", \"vault status\", \"what's in the Brain\", \"show me the state of the vault\", \"what's been ingested lately\", or wants an at-a-glance overview before deciding what to work on. Read-only. Do NOT trigger for a deep correctness pass (use wiki-lint), to ingest a source (use wiki-ingest), or to answer a question (use wiki-query)."
+      },
+      {
+        "id": "wiki-new",
+        "label": "Wiki New",
+        "note": "stand up a new domain",
+        "badge": "NIEL·BRAIN",
+        "type": "human",
+        "col": 2,
+        "row": 4,
+        "desc": "Stand up a new Product Domain (or a cross-cutting knowledge area) in the my_brain vault with a README-only front door and confirmed scope, following the simplified 2026-07 structure. Trigger when the user says \"add a new domain\", \"create a Payments domain\", \"stand up a new wiki\", \"add a domain to the Brain\", or names a capability area they want tracked separately. Confirms scope and boundaries before any material lands, and creates no empty scaffolding. Do NOT trigger to ingest a source into an existing domain (use wiki-ingest), to answer a question (use wiki-query), or to health-check the vault (use wiki-lint)."
+      },
+      {
+        "id": "feedback-to-idea",
+        "label": "Feedback → Idea",
+        "note": "raw signal → JPD idea",
+        "badge": "CLAUDE·JIRA",
+        "type": "signal",
+        "col": 3,
+        "row": 1,
+        "desc": "Turn raw customer, support, or sales signal into a Jira Product Discovery idea, or attach the signal to an existing idea, de-duped against the whole backlog. Trigger PROACTIVELY when the user pastes customer feedback, a support trend, a Slack thread, a HubSpot ticket or deal note, a churn reason, or a feature request and says \"raise this as an idea\", \"get this into JPD\", \"log this feedback\", \"is this already on the backlog\", or \"turn this into an idea\". Also trigger when the user asks to sweep a channel or ticket queue for product signal. Do NOT trigger for grooming an existing idea (use jpd-idea-groomer), for running the full loop (use jpd-loop), or for general feedback summarisation with no JPD intent."
+      },
+      {
+        "id": "storm-research",
+        "label": "Storm Research",
+        "note": "5-lens cited brief",
+        "badge": "CLAUDE·9 AGENTS",
+        "type": "ai",
+        "col": 4,
+        "row": 0,
+        "desc": "Use when someone asks to run Storm Research, use the storm-research skill, run the STORM method on a topic, says \"storm research this\" / \"storm report on X\" / \"give me a STORM briefing on X\", or wants a multi-perspective, citation-verified research briefing delivered as a clean HTML report and, optionally, a Confluence page. Also the research engine the Virtual Product Council calls before its panels argue. Runs a 4-phase pipeline: five expert lenses (Practitioner, Academic, Skeptic, Economist, Historian) -> contradiction map -> synthesized HTML report -> adversarial peer review + primary-source verification, then publishes. Best where multiple viewpoints and fact-checked claims matter; overkill for a simple factual lookup."
+      },
+      {
+        "id": "discovery-wayfinder",
+        "label": "Discovery Wayfinder",
+        "note": "theme → decision map",
+        "badge": "NIEL·JIRA",
+        "type": "human",
+        "col": 4,
+        "row": 1,
+        "desc": "Chart a product discovery theme too big for one session (\"AI ordering strategy\", \"what does labour cost control mean for us\") as a shared map of decision tickets in Jira, then work the map one decision at a time until the way is clear. Trigger when the user says \"chart this theme\", \"build a discovery map\", \"wayfind this\", \"work the map\", \"what's the next decision on <map>\", or hands over a loose, multi-decision problem space rather than a single idea. Do NOT trigger for a single JPD idea needing end-to-end validation (use jpd-loop), for research not attached to a map (use storm-research or signal-radar), for grooming an idea (use jpd-idea-groomer), or for stress-testing a plan that already fits one session (use grill-me)."
+      },
+      {
+        "id": "jpd-idea-groomer",
+        "label": "JPD Idea Groomer",
+        "note": "idea → field standard",
+        "badge": "CLAUDE·JIRA",
+        "type": "ai",
+        "col": 5,
+        "row": 0,
+        "desc": "Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, plus Secondary Personas, Segments, Migration Relevance, Horizon and Commitment as proposals, Escalate). Trigger PROACTIVELY when the user pastes a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link) and asks to \"groom\", \"polish\", \"fix up\", \"audit\", or \"get this Steering / roadmap ready\". Also trigger when the user references Oolio's JPD field standards, Steering review, or pastes rough idea text to be written up to JPD standard. Prefer over generic writing help when the context smells like product discovery at Oolio."
+      },
+      {
+        "id": "jpd-title-standard",
+        "label": "JPD Title Standard",
+        "note": "titles ≤65, cap+outcome",
+        "badge": "CLAUDE·JIRA",
+        "type": "ai",
+        "col": 5,
+        "row": 1,
+        "desc": "Groom Jira Product Discovery (JPD) idea titles to Oolio's JPD Title Standard — max 65 characters (target 40–55), sentence case, capability- or verb-led with a clear outcome, no emoji, no bracket prefixes like [Feedback] or [PIB], no trailing punctuation. Trigger PROACTIVELY when the user pastes one or more JPD keys (OHSI-XX, IDEA-XX, DISC-XX), a Polaris/JPD URL, or raw idea titles and asks to \"fix the title\", \"standardise titles\", \"apply the title standard\", \"shorten the title\", \"clean up titles\", \"audit titles\", or complains titles truncate on the Tree/Requests page. Also trigger for bulk runs (\"standardise all titles in the project\") and when the user mentions the JPD Title Standard or Tree card truncation. Works on pasted text with no Jira access, on single ideas, or in bulk via JQL. Do NOT trigger for Jira epics (use jira-epic-titler), for full JPD field/description grooming (use jpd-idea-groomer), or for stories/tasks/bugs."
+      },
+      {
+        "id": "write-prd",
+        "label": "Write PRD",
+        "note": "groomed idea → PRD",
+        "badge": "CLAUDE·CONFLUENCE",
+        "type": "ai",
+        "col": 6,
+        "row": 0,
+        "desc": "Write an Oolio PRD from a groomed JPD idea, a brief, or a problem statement, in Oolio's high-level PRD format, grounded in the bundled persona library and product context, and publish it to Confluence. Trigger PROACTIVELY when the user says \"write a PRD\", \"draft the PRD for [feature]\", \"turn OHSI-XX into a PRD\", \"PRD this idea\", \"draft the spec\", or hands over a groomed JPD idea, epic, or brief and asks for the product requirements document. Do NOT trigger for reviewing or pressure-testing an existing PRD (use grill-my-prd or convene-vpc), for JPD idea grooming (use jpd-idea-groomer), or for epic descriptions (use jira-epic-groomer)."
+      },
+      {
+        "id": "grill-my-prd",
+        "label": "Grill my PRD",
+        "note": "interview → PRD decisions",
+        "badge": "NIEL",
+        "type": "human",
+        "col": 6,
+        "row": 1,
+        "desc": "Relentlessly interview the user about a Confluence PRD one question at a time, resolve its decision tree, then record the outcome as a versioned child \"Grill-me\" page under the PRD AND amend the PRD in place (strikethroughs, decision components, status badges, grill references). Trigger PROACTIVELY whenever the user pastes a Confluence PRD URL and asks to \"grill me on this PRD\", \"grill this PRD\", \"pressure-test this PRD\", \"run grill-me on the PRD\", \"stress-test this spec\", \"poke holes in this PRD\", or says \"grill-my-prd\" or \"grill my PRD\" — even if they only paste the PRD link. Prefer this over the generic grill-me skill whenever the thing being grilled is a Confluence PRD, because this skill also produces the versioned decision record and edits the PRD. Do NOT trigger for grilling a plan, design, or idea that is not a PRD (use grill-me), or for grooming a Jira epic or JPD idea (use the groomer skills)."
+      },
+      {
+        "id": "grill-me",
+        "label": "Grill Me",
+        "note": "pressure-test any plan",
+        "badge": "NIEL",
+        "type": "human",
+        "col": 6,
+        "row": 2,
+        "desc": "Interview the user relentlessly about a plan, decision, PRD, or design until reaching shared understanding, resolving each branch of the decision tree. Use when the user wants to stress-test a plan, pressure-test their thinking, get grilled on a design or spec, or says \"grill me\"."
+      },
+      {
+        "id": "jpd-loop",
+        "label": "JPD Loop",
+        "note": "groom→council→decision",
+        "badge": "CLAUDE·NIEL",
+        "type": "orch",
+        "col": 7,
+        "row": 0,
+        "desc": "Run the Virtual Product Council grooming loop over a SINGLE Jira Product Discovery idea, end to end. Trigger when the user gives a JPD/Jira key (e.g. OHSI-123) and asks to \"run the jpd loop\", \"groom and review this idea\", \"VPC this idea\", \"run the council on this idea\", \"pressure-test this JPD idea\", or \"take this idea through the loop\". Grooms the idea, de-dupes and links it against the whole backlog, gathers cited evidence (Atlassian, web, HubSpot, Slack, Microsoft 365/Teams, Figma) and builds validation Insights, convenes the VPC, iterates to a verdict, takes a human sign-off, then writes the result back to JPD and moves the idea to Decision. Manual, human-gated (Phase 1). Do NOT trigger for non-JPD work, PRD/Figma reviews (use convene-vpc), or bulk runs."
+      },
+      {
+        "id": "convene-vpc",
+        "label": "Convene VPC",
+        "note": "chairs the council",
+        "badge": "CLAUDE·OWNER",
+        "type": "orch",
+        "col": 7,
+        "row": 1,
+        "desc": "Convene the Oolio Virtual Product Council to pressure-test a product decision, design, requirement, spec, PRD, or piece of research. Use when the user says \"convene the VPC\", \"run the product council\", \"review this decision/design/PRD/spec\", \"pressure-test this\", \"validate this against our personas\", \"what would the council say\", or hands over a Confluence page, Jira ticket, Figma file, prototype URL, or document and asks for a validated decision. This is the orchestrator: it runs the whole loop, chairs the subcommittees, and produces a recorded, human-validated decision. It calls the child skills storm-research, operator-council-review, design-council-review, and leadership-subcommittee-review."
+      },
+      {
+        "id": "operator-council-review",
+        "label": "Operator Council",
+        "note": "hospitality personas",
+        "badge": "CLAUDE",
+        "type": "ai",
+        "col": 8,
+        "row": 0,
+        "desc": "Test a decision against the Oolio Operator Council, the hospitality user personas (the UAT panel). Use when the user says \"run UAT\", \"run the operator council\", \"would real users accept this\", \"does this survive a Friday night\", \"check this against our personas\", or wants the in-venue, frontline reality of a feature. Convenes the user personas the decision touches, by role and by segment or vertical, and runs each persona's challenge. Can run standalone or as part of a full council review."
+      },
+      {
+        "id": "design-council-review",
+        "label": "Design Council",
+        "note": "14 design lenses",
+        "badge": "CLAUDE",
+        "type": "ai",
+        "col": 8,
+        "row": 1,
+        "desc": "Review a design against the Oolio Design Council, the panel of expert design and research lenses. Use when the user says \"run the Design Council\", \"is the design sound\", \"review this wireframe / Figma / flow / screen\", \"run the lenses\", or hands over a UI, mockup, or interaction to be critiqued by expert principles. Assigns mandatory and contextual lenses from the matrix, runs each lens's challenge questions, applies the decision rule, and records verdicts and clashes. Can run standalone or as part of a full council review."
+      },
+      {
+        "id": "leadership-subcommittee-review",
+        "label": "Leadership Sub-cttee",
+        "note": "CPO/CEO/CFO/CRO lenses",
+        "badge": "CLAUDE",
+        "type": "ai",
+        "col": 8,
+        "row": 2,
+        "desc": "Test a decision against the Oolio Leadership Subcommittee, the executive and commercial lenses. Use when the user says \"run the Leadership Subcommittee\", \"commercial review\", \"should we invest in this\", \"can we sell, support, and deliver this\", \"what is the risk\", or wants the executive and go-to-market view of a product direction. Convenes the default nine lenses plus any conditional lenses the decision touches, and runs each seat's challenge questions and review output. Can run standalone or as part of a full council review."
+      },
+      {
+        "id": "behavioural-alchemist",
+        "label": "Behavioural Alchemist",
+        "note": "behavioural-econ read",
+        "badge": "CLAUDE·ROY",
+        "type": "ai",
+        "col": 8,
+        "row": 3,
+        "desc": "Summon Roy, the Behavioural Alchemist, to read a decision, feature, price, loyalty scheme, or piece of positioning through behavioural economics and consumer psychology, and find the value conventional product, engineering, finance, and analytics miss. Trigger when the user says \"ask Roy\", \"what would Roy say\", \"summon the Behavioural Alchemist\", \"run a behavioural review\", \"give me the behavioural read\", \"alchemy workshop\", \"loyalty architect\", \"pricing psychology\", \"reframe this feature\", \"contrarian review\", \"experience theatre\", \"narrative alchemist\", \"design an experiment for this\", or hands over a proposal and asks for the psychological angle, the contrarian case, the perceived-value read, or a cheaper non-engineering way to change the behaviour. Roy also sits as an elevated cross-cutting lens inside the Virtual Product Council; this skill is how you summon him on his own. Do NOT trigger for a full multi-panel council review (use convene-vpc), for grooming a JPD idea (use jpd-idea-groomer), or for a research briefing (use storm-research)."
+      },
+      {
+        "id": "steering-pack",
+        "label": "Steering Pack",
+        "note": "roadmap review pack",
+        "badge": "CLAUDE·CONFLUENCE",
+        "type": "ai",
+        "col": 9,
+        "row": 1,
+        "desc": "Build a Steering-ready review pack over a slice of the JPD backlog — per-idea one-liners, field completeness, VPC verdicts and rubric scores, and a recommended discussion order — published as a Confluence page with a chat summary. Trigger PROACTIVELY when the user says \"build the Steering pack\", \"prep Steering\", \"what's going to Steering\", \"get these ideas Steering-ready\", \"roadmap review pack\", or gives a JQL slice, a list of JPD keys, or a status (e.g. everything in Decision) and asks for the review pack. Do NOT trigger for grooming a single idea (jpd-idea-groomer), running the loop (jpd-loop), or a general stakeholder update."
+      },
+      {
+        "id": "jira-epic-groomer",
+        "label": "Jira Epic Groomer",
+        "note": "epic → What/Why/Who",
+        "badge": "CLAUDE·JIRA",
+        "type": "ai",
+        "col": 10,
+        "row": 0,
+        "desc": "Groom or backfill the description on a Jira epic so it follows Oolio's standard What/Why/Who pattern. Trigger PROACTIVELY whenever the user references a Jira epic key (`OR-XXXX`, `EDU-XXXX`, `IDEA-XXXX` flagged as Epic, etc.) and asks to \"describe\", \"groom\", \"polish\", \"backfill\", \"tidy up\", \"sharpen\", \"rewrite\", or \"write a description for\" the epic. Also trigger when the user asks to standardise epic descriptions across a project, get an epic ready for Steering or roadmap review, or pastes a PRD link and asks for the matching epic description. Prefer this skill over generic writing help whenever an epic-level Jira ticket needs a clean, high-level description. Do NOT trigger for stories, tasks, bugs, sub-tasks, or JPD ideas. Use `jpd-idea-groomer` instead for IDEA / DISC / JPD tickets."
+      },
+      {
+        "id": "jira-epic-titler",
+        "label": "Jira Epic Titler",
+        "note": "[Capability] for [X]",
+        "badge": "CLAUDE·JIRA",
+        "type": "ai",
+        "col": 10,
+        "row": 1,
+        "desc": "Suggest a stronger Oolio Jira epic title using the `[Capability] for [Outcome]` standard. Trigger PROACTIVELY when the user references a Jira epic key (`OR-XXXX`, `EDU-XXXX`) or URL and asks to rename, retitle, improve the title, sharpen the title, or rewrite the summary. Also trigger when the user mentions Oolio's epic title standard, asks to make a name executive-readable or roadmap-ready, complains it's too vague, too technical, or a codename, or pastes a weak epic name for help. Reads the current summary, description, child work items, and any linked Confluence/PRD pages, then proposes 2–3 stronger titles with reasoning. Prefer this skill over generic writing help when an epic-level Jira ticket needs a sharper name. Do NOT trigger for stories, tasks, bugs, sub-tasks, or JPD ideas — use `jpd-idea-groomer` for JPD/IDEA tickets and `jira-epic-groomer` if the description needs rewriting rather than the title."
+      },
+      {
+        "id": "gtm-handover",
+        "label": "GTM Handover",
+        "note": "one-pager · deck · pack",
+        "badge": "CLAUDE·NIEL",
+        "type": "ai",
+        "col": 11,
+        "row": 0,
+        "desc": "Build the executive GTM handover for a single Oolio product. Two artifacts, the One-Pager and the Supporting Deck. This is the narrative source of truth that gtm-playbooks and gtm-marketing read from downstream. Trigger PROACTIVELY when the user asks to \"build the GTM handover\", \"do the one-pager and deck for [product]\", \"draft the GTM narrative for [product]\", \"build the supporting deck\", \"write the product narrative\", or pastes a Jira epic key (OR-XXXX, EDU-XXXX, etc.) and asks for the executive launch story. Also trigger when the user mentions the Oolio GTM Framework and wants the upstream artifacts only. Don't trigger for sales / AM / onboarding playbooks, use gtm-playbooks. Don't trigger for campaign material, use gtm-marketing. Don't trigger for a single tagline edit, edit the file directly."
+      },
+      {
+        "id": "gtm-playbooks",
+        "label": "GTM Playbooks",
+        "note": "sales · AM · onboarding",
+        "badge": "CLAUDE",
+        "type": "ai",
+        "col": 11,
+        "row": 1,
+        "desc": "Build the three internal-facing GTM playbooks for a single Oolio product. Sales (discovery, demo, objections, pricing, close), Account Management (adoption signals, expansion, renewal, at-risk, QBR), and Onboarding (configuration, migration, training, go-live, first-week). Trigger PROACTIVELY when the user asks to \"build the GTM playbooks for [product]\", \"do the sales playbook\", \"do the AM playbook\", \"do the onboarding playbook\", \"draft the playbooks for [product]\", \"build the rep enablement\", or any combination of the three. Also trigger when the user pastes a Jira epic key (OR-XXXX, EDU-XXXX) and asks for sales / AM / onboarding enablement. Don't trigger for the executive One-Pager or Deck, use gtm-handover. Don't trigger for campaign material, use gtm-marketing. Reads pack_content.json produced by gtm-handover and refuses to run if that file is missing."
+      },
+      {
+        "id": "gtm-marketing",
+        "label": "GTM Marketing",
+        "note": "launch · social · email",
+        "badge": "CLAUDE",
+        "type": "ai",
+        "col": 11,
+        "row": 2,
+        "desc": "Build the Marketing Pack for a single Oolio product launch. Launch announcement, social posts, email sequence, sales note, and campaign brief. Trigger PROACTIVELY when the user asks to \"build the marketing pack\", \"draft launch comms for [product]\", \"do the campaign brief for [product]\", \"write the launch announcement\", \"build the social posts for [product]\", \"draft the email sequence for [product]\", or \"build the marketing assets\". Also trigger when the user pastes a Jira epic key (OR-XXXX, EDU-XXXX) and asks for launch / campaign / customer comms material. Don't trigger for the executive One-Pager or Deck, use gtm-handover. Don't trigger for sales / AM / onboarding playbooks, use gtm-playbooks. Reads pack_content.json produced by gtm-handover and refuses to run if that file is missing."
+      },
+      {
+        "id": "metrics-review",
+        "label": "Metrics Review",
+        "note": "did it hit its metrics?",
+        "badge": "CLAUDE·POSTHOG",
+        "type": "ai",
+        "col": 12,
+        "row": 0,
+        "desc": "Run a product metrics review against real data — post-launch validation of a PRD's success metrics, or a recurring weekly/monthly product review — producing a scorecard with targets, actuals, trends, verdicts, and actions. Trigger PROACTIVELY when the user says \"metrics review\", \"how is [feature] performing\", \"did [launch] work\", \"check the success metrics\", \"weekly product review\", \"validate the launch\", or names a shipped PRD/feature and asks whether it met its numbers. Uses the connected PostHog MCP where available, and PRD success metrics as the target source. Do NOT trigger for ad-hoc SQL help or building a dashboard (use the data skills), or for market research (storm-research)."
+      }
+    ],
+    "edges": [
+      {
+        "f": "art-brain",
+        "t": "wiki-query"
+      },
+      {
+        "f": "art-brain",
+        "t": "wiki-status"
+      },
+      {
+        "f": "art-idea",
+        "t": "jpd-idea-groomer"
+      },
+      {
+        "f": "art-idea",
+        "t": "jpd-loop"
+      },
+      {
+        "f": "art-prd",
+        "t": "grill-my-prd"
+      },
+      {
+        "f": "art-prd",
+        "t": "jira-epic-groomer"
+      },
+      {
+        "f": "art-decision",
+        "t": "jira-epic-groomer"
+      },
+      {
+        "f": "art-epic",
+        "t": "gtm-handover"
+      },
+      {
+        "f": "art-pack",
+        "t": "metrics-review"
+      },
+      {
+        "f": "pm-compass",
+        "t": "feedback-to-idea"
+      },
+      {
+        "f": "pm-compass",
+        "t": "jpd-loop"
+      },
+      {
+        "f": "pm-compass",
+        "t": "write-prd"
+      },
+      {
+        "f": "pm-compass",
+        "t": "gtm-handover"
+      },
+      {
+        "f": "drive",
+        "t": "storm-research"
+      },
+      {
+        "f": "drive",
+        "t": "gtm-handover"
+      },
+      {
+        "f": "competitor-watch",
+        "t": "feedback-to-idea"
+      },
+      {
+        "f": "competitor-watch",
+        "t": "signal-radar"
+      },
+      {
+        "f": "competitor-watch",
+        "t": "wiki-ingest"
+      },
+      {
+        "f": "win-loss",
+        "t": "feedback-to-idea"
+      },
+      {
+        "f": "win-loss",
+        "t": "competitor-watch"
+      },
+      {
+        "f": "win-loss",
+        "t": "wiki-ingest"
+      },
+      {
+        "f": "signal-radar",
+        "t": "feedback-to-idea"
+      },
+      {
+        "f": "signal-radar",
+        "t": "jpd-loop"
+      },
+      {
+        "f": "signal-radar",
+        "t": "wiki-ingest"
+      },
+      {
+        "f": "add-insight",
+        "t": "feedback-to-idea"
+      },
+      {
+        "f": "wiki-ingest",
+        "t": "art-brain"
+      },
+      {
+        "f": "wiki-query",
+        "t": "feedback-to-idea"
+      },
+      {
+        "f": "wiki-query",
+        "t": "storm-research"
+      },
+      {
+        "f": "wiki-lint",
+        "t": "art-brain"
+      },
+      {
+        "f": "wiki-new",
+        "t": "art-brain"
+      },
+      {
+        "f": "feedback-to-idea",
+        "t": "art-idea"
+      },
+      {
+        "f": "storm-research",
+        "t": "convene-vpc"
+      },
+      {
+        "f": "discovery-wayfinder",
+        "t": "storm-research"
+      },
+      {
+        "f": "discovery-wayfinder",
+        "t": "feedback-to-idea"
+      },
+      {
+        "f": "discovery-wayfinder",
+        "t": "grill-me"
+      },
+      {
+        "f": "discovery-wayfinder",
+        "t": "jpd-loop"
+      },
+      {
+        "f": "jpd-idea-groomer",
+        "t": "write-prd"
+      },
+      {
+        "f": "jpd-idea-groomer",
+        "t": "jpd-loop"
+      },
+      {
+        "f": "jpd-idea-groomer",
+        "t": "steering-pack"
+      },
+      {
+        "f": "jpd-title-standard",
+        "t": "jpd-idea-groomer"
+      },
+      {
+        "f": "write-prd",
+        "t": "art-prd"
+      },
+      {
+        "f": "grill-my-prd",
+        "t": "convene-vpc"
+      },
+      {
+        "f": "grill-me",
+        "t": "convene-vpc"
+      },
+      {
+        "f": "grill-me",
+        "t": "jpd-idea-groomer"
+      },
+      {
+        "f": "jpd-loop",
+        "t": "jpd-idea-groomer"
+      },
+      {
+        "f": "jpd-loop",
+        "t": "convene-vpc"
+      },
+      {
+        "f": "jpd-loop",
+        "t": "storm-research"
+      },
+      {
+        "f": "jpd-loop",
+        "t": "jira-epic-groomer"
+      },
+      {
+        "f": "convene-vpc",
+        "t": "operator-council-review"
+      },
+      {
+        "f": "convene-vpc",
+        "t": "design-council-review"
+      },
+      {
+        "f": "convene-vpc",
+        "t": "leadership-subcommittee-review"
+      },
+      {
+        "f": "convene-vpc",
+        "t": "behavioural-alchemist"
+      },
+      {
+        "f": "convene-vpc",
+        "t": "art-decision"
+      },
+      {
+        "f": "operator-council-review",
+        "t": "art-decision"
+      },
+      {
+        "f": "design-council-review",
+        "t": "art-decision"
+      },
+      {
+        "f": "leadership-subcommittee-review",
+        "t": "art-decision"
+      },
+      {
+        "f": "behavioural-alchemist",
+        "t": "art-decision"
+      },
+      {
+        "f": "steering-pack",
+        "t": "metrics-review"
+      },
+      {
+        "f": "jira-epic-groomer",
+        "t": "art-epic"
+      },
+      {
+        "f": "jira-epic-titler",
+        "t": "jira-epic-groomer"
+      },
+      {
+        "f": "gtm-handover",
+        "t": "gtm-playbooks",
+        "lbl": "pack_content.json"
+      },
+      {
+        "f": "gtm-handover",
+        "t": "gtm-marketing",
+        "lbl": "pack_content.json"
+      },
+      {
+        "f": "gtm-handover",
+        "t": "art-pack"
+      },
+      {
+        "f": "gtm-playbooks",
+        "t": "art-pack"
+      },
+      {
+        "f": "gtm-marketing",
+        "t": "art-pack"
+      },
+      {
+        "f": "metrics-review",
+        "t": "art-scorecard"
+      }
+    ],
+    "gates": [
+      {
+        "after": 6,
+        "label": "GRILL GATE",
+        "who": "NIEL"
+      },
+      {
+        "after": 8,
+        "label": "VALIDATE",
+        "who": "OWNER"
+      },
+      {
+        "after": 10,
+        "label": "APPROVE TO PUBLISH",
+        "who": "NIEL"
+      }
+    ],
+    "loops": [
+      {
+        "f": "metrics-review",
+        "t": "feedback-to-idea",
+        "label": "SHIPPED METRICS → NEW IDEAS"
+      },
+      {
+        "f": "steering-pack",
+        "t": "jpd-idea-groomer",
+        "label": "BACK FROM THE FREEZER"
+      },
+      {
+        "f": "convene-vpc",
+        "t": "storm-research",
+        "label": "EVIDENCE GAP → RE-RESEARCH"
+      },
+      {
+        "f": "art-scorecard",
+        "t": "art-brain",
+        "label": "EVERY RUN COMPOUNDS IN THE BRAIN"
+      }
+    ],
+    "flows": [
+      {
+        "name": "Signal → Shipped → Learn",
+        "accent": "--ai",
+        "path": [
+          [
+            "competitor-watch",
+            "Competitor Watch",
+            "A rival ships. The weekly sweep catches the delta and flags the gap."
+          ],
+          [
+            "feedback-to-idea",
+            "Feedback → Idea",
+            "The gap becomes a cited JPD idea, de-duped against the whole backlog."
+          ],
+          [
+            "art-idea",
+            "JPD Idea",
+            "It lands natively in Jira with its evidence attached."
+          ],
+          [
+            "jpd-idea-groomer",
+            "JPD Idea Groomer",
+            "Groomed to Oolio's field standard: problem, hypothesis, metrics, all fields."
+          ],
+          [
+            "write-prd",
+            "Write PRD",
+            "The groomed idea becomes a high-level PRD."
+          ],
+          [
+            "art-prd",
+            "PRD",
+            "Published to Confluence for review."
+          ],
+          [
+            "grill-my-prd",
+            "Grill my PRD",
+            "Niel is interviewed one question at a time until the decision tree resolves."
+          ],
+          [
+            "convene-vpc",
+            "Convene VPC",
+            "The Virtual Product Council is chaired over the PRD."
+          ],
+          [
+            "operator-council-review",
+            "Operator Council",
+            "Hospitality personas test it against real venue reality."
+          ],
+          [
+            "art-decision",
+            "Decision Record",
+            "The chair records a validated decision on the log."
+          ],
+          [
+            "jira-epic-groomer",
+            "Jira Epic Groomer",
+            "The decision becomes a delivery epic in the What/Why/Who pattern."
+          ],
+          [
+            "art-epic",
+            "Groomed Epic",
+            "The epic anchors everything downstream."
+          ],
+          [
+            "gtm-handover",
+            "GTM Handover",
+            "One-pager, deck and pack_content.json: the launch source of truth."
+          ],
+          [
+            "gtm-playbooks",
+            "GTM Playbooks",
+            "Sales, AM and onboarding playbooks built from the pack."
+          ],
+          [
+            "art-pack",
+            "GTM Pack",
+            "Six launch artifacts, ready to ship."
+          ],
+          [
+            "metrics-review",
+            "Metrics Review",
+            "After launch, did it hit its success metrics?"
+          ],
+          [
+            "art-scorecard",
+            "Scorecard",
+            "Target vs actual. The verdict feeds the next idea."
+          ]
+        ]
+      },
+      {
+        "name": "JPD Loop — Idea to Decision",
+        "accent": "--orch",
+        "path": [
+          [
+            "art-idea",
+            "JPD Idea",
+            "One idea in Exploring status."
+          ],
+          [
+            "jpd-idea-groomer",
+            "JPD Idea Groomer",
+            "Groomed and de-duped against the whole backlog first."
+          ],
+          [
+            "jpd-loop",
+            "JPD Loop",
+            "The orchestrator picks it up and runs it end to end."
+          ],
+          [
+            "convene-vpc",
+            "Convene VPC",
+            "Council convened for a verdict."
+          ],
+          [
+            "design-council-review",
+            "Design Council",
+            "Reviewed against 14 design lenses."
+          ],
+          [
+            "art-decision",
+            "Decision Record",
+            "Human sign-off, then moved to Decision."
+          ]
+        ]
+      },
+      {
+        "name": "PRD → Launch",
+        "accent": "--ai",
+        "path": [
+          [
+            "write-prd",
+            "Write PRD",
+            "The idea becomes a PRD."
+          ],
+          [
+            "art-prd",
+            "PRD",
+            "Published to Confluence."
+          ],
+          [
+            "grill-my-prd",
+            "Grill my PRD",
+            "Pressure-tested with Niel until decisions are locked."
+          ],
+          [
+            "convene-vpc",
+            "Convene VPC",
+            "Council convened for the verdict."
+          ],
+          [
+            "art-decision",
+            "Decision Record",
+            "Validated and recorded."
+          ],
+          [
+            "jira-epic-groomer",
+            "Jira Epic Groomer",
+            "Turned into a delivery epic."
+          ],
+          [
+            "art-epic",
+            "Groomed Epic",
+            "The GTM anchor."
+          ],
+          [
+            "gtm-handover",
+            "GTM Handover",
+            "Launch narrative and pack built."
+          ],
+          [
+            "gtm-marketing",
+            "GTM Marketing",
+            "Launch, social and email drafted."
+          ],
+          [
+            "art-pack",
+            "GTM Pack",
+            "Ready to ship."
+          ]
+        ]
+      },
+      {
+        "name": "Evidence Engine",
+        "accent": "--signal",
+        "path": [
+          [
+            "win-loss",
+            "Win / Loss",
+            "Closed-lost mined from HubSpot for loss drivers."
+          ],
+          [
+            "competitor-watch",
+            "Competitor Watch",
+            "Rival dossiers and battlecards."
+          ],
+          [
+            "signal-radar",
+            "Signal Radar",
+            "Signal synthesised into cited Insights."
+          ],
+          [
+            "feedback-to-idea",
+            "Feedback → Idea",
+            "All of it converges into ideas."
+          ],
+          [
+            "art-idea",
+            "JPD Idea",
+            "Evidence-backed, in the backlog."
+          ]
+        ]
+      },
+      {
+        "name": "The Brain Compounds",
+        "accent": "--loop",
+        "path": [
+          [
+            "competitor-watch",
+            "Competitor Watch",
+            "A sweep turns up something worth keeping."
+          ],
+          [
+            "wiki-ingest",
+            "Wiki Ingest",
+            "The source is read, distilled, and integrated with its provenance."
+          ],
+          [
+            "art-brain",
+            "The Brain",
+            "It lands in my_brain, the vault the whole team reads."
+          ],
+          [
+            "wiki-query",
+            "Wiki Query",
+            "Next time someone asks, the answer comes back cited, not from zero."
+          ],
+          [
+            "feedback-to-idea",
+            "Feedback → Idea",
+            "What the vault knows becomes a shaped idea."
+          ],
+          [
+            "art-idea",
+            "JPD Idea",
+            "Nothing gets learned twice."
+          ]
+        ]
+      },
+      {
+        "name": "Ship & Learn Loop",
+        "accent": "--output",
+        "path": [
+          [
+            "gtm-handover",
+            "GTM Handover",
+            "The launch pack is built."
+          ],
+          [
+            "art-pack",
+            "GTM Pack",
+            "Shipped to the field."
+          ],
+          [
+            "metrics-review",
+            "Metrics Review",
+            "Measured against its targets, and the scorecard written down."
+          ],
+          [
+            "feedback-to-idea",
+            "Feedback → Idea",
+            "A breached metric becomes the next idea. The loop closes."
+          ],
+          [
+            "art-idea",
+            "JPD Idea",
+            "Back at the top of the funnel, with evidence this time."
+          ]
+        ]
+      }
+    ],
+    "typeColour": {
+      "ai": "#a78bfa",
+      "orch": "#2dd4bf",
+      "human": "#f59e0b",
+      "signal": "#93a3bd",
+      "output": "#34d399"
+    },
+    "typeLabel": {
+      "ai": "AI skill",
+      "orch": "Orchestrator",
+      "human": "Human-gated",
+      "signal": "Signal intake",
+      "output": "Output / artifact"
+    }
+  },
+  "changelog": [
+    {
+      "date": "2026-07-26",
+      "title": "The map becomes an app: navigation, skills index, changelog (32 skills)",
+      "heading": "2026-07-26 — The map becomes an app: navigation, skills index, changelog (32 skills)",
+      "body": "A single page could carry the map and nothing else. Everything a newcomer actually needs around it — what this is, what every skill does, what changed, how the tools connect — had nowhere to live. So the site is now a real app with navigation, built on Next.js, Tailwind and shadcn, and fully responsive. The zero-dependency rule that was right for one static page was the wrong rule for this, and was dropped deliberately rather than defended.\n\n- **Five pages, and three of them are pure renders of data we already generate.** Home is the About copy as a landing page, closing on \"Learn it once.\", plus how to install the plugin. The Map is unchanged. Skills is every skill grouped by lifecycle stage and searchable, which is `docs/skills-catalogue.md` finally maintaining itself. Changelog renders this file, so shipping a skill updates the site. Systems is a placeholder for the connectors map.\n- **The map was ported, not rewritten.** Its SVG drawing code moved wholesale into `site/lib/map-engine.js` and still runs imperatively inside a component, because reimplementing it as React components is how a design people like quietly drifts. The palette became the app's theme tokens, so shadcn inherits the existing design instead of imposing its own, and the app uses the map's own typefaces.\n- **Marketplace-shaped, not oolio-pm-shaped.** The generator now reads `marketplace.json` and walks every plugin it lists. `oolio-pm` is the first plugin rather than the only one: a second team's plugin appears on the site automatically, with its skills flagged as unplaced until someone maps them. Two plugins shipping the same skill id is now a drift failure.\n- **Responsive, including the map.** The map is 2,760px wide because that width is what makes it legible, so small screens get the real map plus pinch-zoom and drag rather than a shrunken useless one, opening zoomed to the first stage. A phone in landscape is close to the map's own aspect ratio, so landscape gets the full screen. Navigation collapses to a sheet.\n- **`--check` grew with the site**: it now also catches two plugins claiming one skill id, and fails the build with an explicit message if it cannot see the repo from `site/`, which is the shape a misconfigured Vercel root directory takes.\n- **The plugin is untouched.** All web machinery lives in `site/`. `oolio-pm/` has no `package.json`, and `scripts/package-plugin.sh` only zips the plugin's contents, so teammates installing it never see any of this. The old single-page template is archived, not deleted, in `site/_archive/`.\n- Known and not fixed: `npm audit` reports 12 high findings in `site/`, all one advisory (`brace-expansion`) reachable only through ESLint's own dependencies. It is dev-only lint tooling, never shipped to the browser, and the only clean fix is ESLint 10, which `eslint-config-next` does not support yet. Pinning it forward was tried and breaks ESLint outright."
+    },
+    {
+      "date": "2026-07-26",
+      "title": "An About for the map: what this is, and who it is for (32 skills)",
+      "heading": "2026-07-26 — An About for the map: what this is, and who it is for (32 skills)",
+      "body": "The map answered \"how does this work\" well (click a flow, read the path) and answered \"what is this and why does it exist\" not at all. A first-time viewer sees an infrastructure diagram and draws one of two wrong conclusions: that it is automated and nobody is driving, or that it is an aspirational slide rather than skills a teammate can install today. Both are expensive. An About button now sits under the title and opens a modal that settles it in about forty seconds of reading.\n\n- **Copy lives in `map.config.json`** under `about`, alongside the flows, because it is editorial in exactly the same way. The template renders it; nothing is hardcoded.\n- **Evergreen by rule.** The copy may not name a skill, a count, or a date. `{skills}` interpolates the live number at build time, the same source the footer uses, so the one number in the text cannot go stale. Anything needing an edit when the skills change belongs in the generated data instead. The rule is written into the config so the next person keeps it.\n- **The argument it makes**: this is our way of working made readable and executable, not a diagram of intentions; the discipline is written down so the standard stops depending on who is having a good week; and the product manager is the point, not the thing being replaced. Closes on the team line, **\"Learn it once.\"**\n- **No theme change.** The pill and modal reuse the existing tokens only: `--panel`, `--line`, the legend's 10px radius and backdrop blur, JetBrains Mono caps for labels, Space Grotesk for body. No new colour, no new font, no layout change. Escape, backdrop click and ✕ all close it; focus moves to the close button on open and back to the pill on close."
+    },
+    {
+      "date": "2026-07-26",
+      "title": "The Product OS map, generated from the OS itself (32 skills)",
+      "heading": "2026-07-26 — The Product OS map, generated from the OS itself (32 skills)",
+      "body": "The interactive lifecycle map of the **Oolio Product OS** now builds itself from `oolio-pm/skills/` instead of being hand-maintained alongside it. It is named for what it shows: not a diagram of some skills, but how the operating system runs end to end. The hand-built v1 page proved the problem within a day of being made: it showed 27 skills and was missing all five Brain skills the moment they shipped. A map that has to be remembered is a map that goes stale, so the page is now a **view of the skills**, regenerated on every push.\n\n- **New `site/` folder**: a zero-dependency Node generator (`build.mjs`), the editorial overlay (`map.config.json`), and the HTML shell (`template/index.html`, the SVG engine from the v1 page, unchanged in look). Output is `site/dist/`, already covered by `.gitignore`. No framework, no package.json, no dependencies: this stays a markdown repo with a build script in it. Root `vercel.json` points Vercel at `node site/build.mjs`.\n- **Two inputs, cleanly split.** Everything derivable comes from the skills: which exist, their names, and their real `description` (now the hover tooltip on each node). Everything editorial — lifecycle column, executor type, connections, gates, loops, the sidebar flows — lives in `map.config.json`. Skill frontmatter stays lean, per `references/skill-standard.md`; no `map:` block was added to any SKILL.md.\n- **Never silently missing.** A skill with no overlay entry renders in a red \"⚠ Unplaced\" column rather than vanishing. Verified by adding a throwaway skill and watching it appear.\n- **`--check` mode** fails on drift: unplaced skills, dead overlay entries, connections or flow steps pointing at nothing, and the hand-written skill count disagreeing with reality in `marketplace.json`, `plugin.json`, either README, the catalogue, or `pm-compass` (digits or words). Worth a pre-push hook once the map is live.\n- **The five Brain skills are on the map**, in a new \"Brain\" column between Signals and Intake, with `my_brain` itself as a node: the research skills write into it via `wiki-ingest`, and `wiki-query` reads back out into intake and discovery. New sixth flow, \"The Brain Compounds\", tells that story end to end.\n- **Three broken flow steps fixed, two of them pre-existing in v1.** The engine silently skipped flow steps that had no matching connection, so \"JPD Loop — Idea to Decision\" and \"Ship & Learn Loop\" both rendered with invisible gaps. The validator now catches that. Flows can also traverse loop wires, not just forward edges, so \"Ship & Learn Loop\" actually lights the shipped-metrics-to-new-ideas loop that is its whole point.\n- **Canvas sizes itself to the data**, so adding a column or a loop can no longer crop the map (the v1 viewBox was fixed at 2600×1180).\n- **The last per-skill `version` field is gone.** The build surfaced `version: 0.3.0` on `jpd-loop`, the only one left across all 32 skills (swept live, in-progress and archived to confirm). Removed, because the plugin versions by commit and a per-skill number pins nothing and misleads readers into thinking it does. `--check` now **fails** on a `version` field rather than warning, so it cannot come back quietly. The `v0.3.0` in `_archive/README.md` is a plugin version in a historical record and is correctly left alone."
+    },
+    {
+      "date": "2026-07-25",
+      "title": "The Brain skills packaged into the OS; \"Oolio Brain\" references migrated to my_brain (32 skills)",
+      "heading": "2026-07-25 — The Brain skills packaged into the OS; \"Oolio Brain\" references migrated to my_brain (32 skills)",
+      "body": "The vault the research skills read and write was renamed and restructured (the old \"Oolio Brain\" is now `my_brain`, a single git-backed PARA vault with a `_system/` engine, eleven Product Domains, a Metadata Standard, and a work/personal wall). Two things had fallen out of step: the five Brain-maintenance skills lived in a separate, unshipped `oolio-brain` plugin built pre-migration against the retired multi-wiki model, and the oolio-pm prose still called the vault \"Oolio Brain\". Both fixed, and the skills now ship with the OS.\n\n- **Five Brain skills rebuilt and folded into `oolio-pm`** (not a second plugin — one plugin the team installs and pulls as a unit, no distribution or version-skew tax). `wiki-query`, `wiki-ingest`, `wiki-new`, `wiki-lint`, `wiki-status` now live in `oolio-pm/skills/` and carry the `oolio-pm:` namespace. Each is a thin runbook pointing at the vault's own `_system/operating-system.md` and `_system/Metadata Standard.md` as the law; the portable vault shape is a new shared reference, `oolio-pm/references/vault-model.md`.\n- **Rebuilt to the current model, not ported.** The old skills assumed per-wiki `CLAUDE.md`/`index.md`/`Raw/`/`Wiki/{Sources,Entities,Concepts,Syntheses}` folders and four domains; `operating-system.md §2` retired all of that. The rebuilds use the simplified 2026-07 structure (a domain is a `README` + `Overview` + folders that appear only when filled), the `type` + `class` frontmatter contract, the eleven-domain list, competitors canonical in `30 Knowledge/Market/Competitors/`, and the hard work/personal wall (`20 Areas/Personal` and `10 Projects/Personal` NO-GO). `wiki-lint` gained the new checks the standard added: missing `class`, past `review` date, and `class`-backfill-from-`type`. `wiki-new` no longer writes a per-domain `CLAUDE.md` or pre-creates empty scaffolding.\n- **Namespace unified.** Folding the skills in turned every cross-reference from `oolio-brain:wiki-query` into `oolio-pm:wiki-query` — one namespace, nothing cross-plugin-coupled. Updated in `signal-radar` (SKILL + signal-sources.md), `jpd-loop` (SKILL + evidence-sources.md), and `research-os.md`.\n- **\"Oolio Brain\" → \"the Brain\" / `my_brain` across the prose.** The proper noun was stale, not the structure (`research-os.md` already used the new `30 Knowledge/...` paths). Corrected every running reference in `signal-radar`, `competitor-watch`, `jpd-loop`, `storm-research`, `research-os.md`, and both READMEs; the vault is named `my_brain`, the concept is \"the Brain\". Historical CHANGELOG entries left as-is (a record of what was true then).\n- **Counts and catalogues.** 27 → **32**. Updated both manifest descriptions, `oolio-pm/README.md` (new \"The Brain\" section), and `docs/skills-catalogue.md` (new Stage 7). The marketplace `metadata.version` is unchanged: no plugin was added, removed, or renamed (the skills joined the existing plugin). Team-visible (five new skills a user can trigger), so the Product Operating System Confluence page needs the same tables/changelog update."
+    },
+    {
+      "date": "2026-07-25",
+      "title": "Horizon trimmed to Now/Next/Later; Commitment spelling fixed",
+      "heading": "2026-07-25 — Horizon trimmed to Now/Next/Later; Commitment spelling fixed",
+      "body": "Follow-up to the model update below, syncing the skills to two further live-board changes Niel made the same day (Jira already at target, verified against OHSI metadata — skills-only edit).\n\n- **Horizon (`customfield_11744`) is now a clean roadmap timeframe: `Now` / `Next` / `Later` only.** The former `Under consideration`, `Shipped` and `Not planned` options were removed — those states are carried by status (the OHSI funnel), not Horizon. The three fields now have three non-overlapping jobs: status = where the idea sits, Horizon = when we pull it in, Commitment = how firm the intent is.\n- **Commitment (`customfield_11931`) options corrected in Jira** to `Will Do` / `Aim to do` / `Stretch` (the earlier `Strech` typo is gone). The skills now send the clean strings.\n- **Files:** `jpd-idea-groomer` (field_standards.md Horizon + Commitment blocks and write-back note; SKILL.md Horizon/Commitment table rows, proposal block, strategic-context bullet; atlassian_mcp.md trap note) and `steering-pack` (added a Commitment column to the pack table). The epic-titler \"Horizon\" codename example and the gtm \"horizontal\" matches were correctly left alone. No skill added or removed (27). Reader-facing Confluence already described Horizon as Now/Next/Later, so no page edit was needed."
+    },
+    {
+      "date": "2026-07-25",
+      "title": "JPD model update: the field standard catches up to the live board",
+      "heading": "2026-07-25 — JPD model update: the field standard catches up to the live board",
+      "body": "The live JPD board moved on, and the skills that write to it had drifted. Swept every JPD-related skill to the 2026+ model, verified field-by-field against the live OHSI board (issue type `Idea`, 10071) rather than trusting the handoff brief alone.\n\n- **The field changes.** Delivery Size → **Size** (`customfield_11557`), consolidated from seven pipe-suffixed tiers to four plain options: Sand / Pebble / Rock / Boulder. Strategic Pillar → **Pillar** (`customfield_11552`, options unchanged) on the idea side only. **Category** (`customfield_11711`) is now a required product-grouping field, replacing the retired **Product Area** (`customfield_11561`, confirmed off the create screen — do not write it). Two new required fields: **Theme** (`customfield_10088`, single-select, this year's strategic frame) and **Commitment** (`customfield_11931`, single-select, Now-quarter only). Horizon and Migration-Relevance-as-platform-picker were already correct.\n- **Verified live, two live-board surprises baked in.** Theme landed on `customfield_10088` — the same ID the brief named for the Initiative \"Strategic Pillar\" — so the standard now spells out, in three places, that the JPD skills only ever write Theme (10088) and Pillar (11552) on Ideas and never any epic/initiative pillar field (no skill referenced 10088, so there was no collision to fix, only a trap to document). And Commitment's live options carry typos — `Will Do`, `Aim to do`, `Strech` — so the skills send those literal strings; Jira enforces spelling.\n- **Reversed a now-wrong instruction.** The old `field_standards.md` said \"never write `customfield_11711`\" (it was the Requests-intake Category). Under the new model 11711 is the required grouping field the groomer sets on every idea. Corrected in `field_standards.md`, `atlassian_mcp.md`, and the groomer table.\n- **Skills changed.** `jpd-idea-groomer` (SKILL.md frontmatter, audit axes, output template, field table, and all three reference files — the enforcement arm), `steering-pack` (capture list and pack table now report by Pillar / Theme / Size / Horizon), `jpd-title-standard` and `signal-radar` (evidence-read field names). `jpd-loop`, `feedback-to-idea`, `add-insight` and the rest defer to the groomer's `field_standards.md` and needed no field edits. The epic skills (`jira-epic-groomer`, `jira-epic-titler`) were deliberately left untouched: they only reference JPD ideas to exclude them, and must not touch the separate Initiative pillar field.\n- No skill added or removed — count stays **27**. Team-visible (grooming behaviour a user notices), so the Product Operating System Confluence page and the JPD Field Standards page are mirrored."
+    },
+    {
+      "date": "2026-07-24",
+      "title": "Roy, the Behavioural Alchemist: a cross-cutting lens and a skill (27 skills)",
+      "heading": "2026-07-24 — Roy, the Behavioural Alchemist: a cross-cutting lens and a skill (27 skills)",
+      "body": "Added Roy, the Behavioural Alchemist, a virtual teammate who reads decisions through behavioural economics and consumer psychology (inspired by the published work of Rory Sutherland, never impersonating him, never given invented quotes). He fills a real gap: every existing lens is rational in its own way, and the collection had no voice for perceived value, the experienced problem, or the disproportionate intervention.\n\n- **Built as a combination, not one or the other.** Roy is both a persona-library lens and a standalone skill, because he needs to do two jobs. Inside the Virtual Product Council he is a lens the panels test against; on his own he is a workshop you can summon over a price, a loyalty scheme, or a piece of positioning.\n- **An elevated, cross-cutting lens.** `personas-library/behavioural-alchemist.md` is filed at the library root, a sibling to the Chair, not inside any one subcommittee, for the same reason the Chair is elevated: his remit (perceived value, pricing, loyalty, positioning, felt experience) lands on all three testing panels at once, and filing him in one would stop him challenging the others. He is a **conditional** seat, not a default one, so reviews do not become theatre. He is written to clash on purpose: with the CFO on \"expensive versus valuable\", the Data and Analytics Lead on \"measurable versus what matters\", and Norman and Nielsen on when friction is a fault and when it is the point.\n- **Wired into the council.** Registered as a conditional seat in the Leadership Subcommittee README, a cross-cutting contextual lens in the Design Council README and its assignment guidance, and an experienced-problem lens alongside the Operator Council. `convene-vpc` now decides at panel-scoping whether to convene him, on the triggers pricing / loyalty / positioning / packaging / retention / felt experience. The operating guide (`CLAUDE.md`) and the index (`personas.md`) explain the second elevated role and add \"Roy\" to the invocation vocabulary.\n- **One skill, ten modes, not ten skills.** `behavioural-alchemist` runs his Working Method and Default Response Format, mode-switched (Behavioural Review, Alchemy Workshop, Loyalty Architect, Product Reframing, Contrarian Review, Experience Theatre, Pricing Psychology, Executive Provocation, Experiment Designer, Narrative Alchemist), rather than fragmenting him across the catalogue. The skill reads the canonical lens file so the two never drift. Triggers include \"ask Roy\", \"what would Roy say\", \"behavioural review\", \"pricing psychology\", and \"reframe this feature\".\n- **Ethics built in.** Both the lens and the skill refuse dark patterns (deceptive scarcity, hidden charges, obstructive cancellation, misleading social proof, interface tricks) and separate a verified source from a paraphrased principle from an inference. Behavioural intelligence, not behavioural exploitation.\n- Skill count 26 → **27**. `pm-compass` (router row plus the count), `oolio-pm/README.md`, the skills catalogue (Stage 3), and both manifest descriptions updated; the stale counts in the marketplace description (25) and pm-compass body (25) corrected in the same pass, and `drive` added to the marketplace description where it had been missed. Product Operating System Confluence page mirrored (new skill, team-visible)."
+    },
+    {
+      "date": "2026-07-24",
+      "title": "New skill: drive, the generalist driver (26 skills)",
+      "heading": "2026-07-24 — New skill: drive, the generalist driver (26 skills)",
+      "body": "Every skill so far is a specialist: groom this idea, run this council, write this PRD. There was no front door for the opposite shape, a raw, half-formed, voice-dictated request where the user does not yet know which skill they need, or whether a skill is even the point. `drive` fills that gap.\n\n- **What it does.** Takes the user's most recent rambling message as raw thinking (not a spec), works out the real outcome behind it, turns that into an execution contract (objective, done-when criteria, constraints, verification, stopping condition), separates what they want from the solution they happened to suggest, picks a proportionate operating mode, does the actual work with whatever files, connectors, and tools are available, verifies against the completion criteria, and hands back the finished result with a Completed / Outputs / Verified / Remaining-limitation close. It executes rather than advising, and it does not hand back a tidied-up version of the request.\n- **Why it belongs here.** With the repo reframed as the Product OS, the collection covers the whole of what a PM does, not just discovery. `drive` is the \"turn my thinking into momentum without making me a prompt engineer first\" front door; where `pm-compass` routes you to the right skill, `drive` drives the task itself. It pairs with the compass under Start here.\n- **Design.** Lean, principle-led SKILL.md (the why, not heavy MUSTs) plus one reference file, `references/completion-criteria.md`, holding the per-deliverable \"done when\" checklists (document, presentation, research, product work, spreadsheet, file organisation, connector actions) so the core stays light and the model pulls the matching checklist on demand. Manual invocation is `/drive`; it also self-triggers when a message reads as raw thinking aimed at a real outcome. Environment-agnostic (no repo, terminal, or test assumptions), built for Cowork and general knowledge work.\n- **Evaluated before shipping.** Run against seven realistic scenarios (product ramble, deck revision, research-and-recommend, \"the latest report\" file analysis, a trivial request, a dangerous file reorg, and a missing-file task). All seven passed: it produced real deliverables rather than advice, inspected files before assuming, picked the latest report over an older one and a newer-but-draft one, refused to invent figures or delete versions on a guess, stopped at every permission boundary, and reported honestly when a dependency was missing. No revision pass was needed.\n- Skill count 25 → **26**. README, `oolio-pm/README.md`, the skills catalogue, and the plugin manifest description updated, and the Product Operating System Confluence page mirrored to match (new skill, team-visible). Shipped as GitHub Release `v0.11.0` (the Cowork upload zip)."
+    },
+    {
+      "date": "2026-07-20",
+      "title": "The repo becomes the Oolio Product OS",
+      "heading": "2026-07-20 — The repo becomes the Oolio Product OS",
+      "body": "The collection outgrew its name: with the research house, the councils, the GTM suite, the discovery maps, and the brain conventions, \"PM plugin\" undersold what teammates are actually installing. Renamed before wider sharing rather than after, while the audience is still small.\n\n- **Repo renamed** `oolio-pm-plugin` → **`oolio-product-os`** (human name: Oolio Product OS). GitHub redirects the old URLs. The marketplace identity in `marketplace.json` follows the repo name (the 0.9.1 lesson), `metadata.version` bumped to 3.0.0 per the maintenance rule.\n- **The `oolio-pm` plugin keeps its name, deliberately.** Renaming the plugin would break every installed `oolio-pm@…` reference and every skill namespace for zero user benefit. The framing: the Product OS is the collection; oolio-pm is its first plugin.\n- **The Confluence front door renamed** \"PM Skills\" → \"Product Operating System\" (same page id, Confluence redirects the old title's links).\n- README, PUBLISHING.md, CLAUDE.md, pm-compass, and the vault's registers updated to the new names. Historical CHANGELOG entries are left as written, per the archive rule. Teammates installed under the old marketplace slug should remove it and add `oolio-group/oolio-product-os` fresh; the old slug keeps working via redirect but registers as a separate marketplace.\n- The local working folder keeps its historical name (`~/Documents/Claude/Code/oolio-pm-plugins`); noted in the README layout, as before."
+    },
+    {
+      "date": "2026-07-20",
+      "title": "New reference: jira-teams, the team assignment map",
+      "heading": "2026-07-20 — New reference: jira-teams, the team assignment map",
+      "body": "Skills that create or triage Jira work (issues, epics, initiatives, ideas, incidents, orphan tasks) had no shared way to set the Team field correctly: the field stores an Atlassian team ID (a UUID), not a name. `references/jira-teams.md` is now the canonical map: eleven teams with their IDs, what each team actually owns (often wider than the name suggests, so the rule is match on domain, not name), routing hints, and the guard that a skill leaves the field unset and flags it rather than guessing.\n\n- Known gaps recorded in the file rather than papered over: the list is not exhaustive, and there are no leads, members or team-to-project mappings yet. Two flags raised at first publish were resolved by Niel the same day: Oolio Pay is MEL 2 (the duplicate MEL 3 was a numbering slip), and the prefixes are confirmed home bases (MEL Melbourne, IN India, VN Vietnam; hybrid-location teams such as DATA and eComm carry no geo prefix).\n- A summary register mirrors it in the vault at `_system/Jira Register/Jira Teams.md`, beside the project register, with the vault README linking the two (\"projects say where a ticket lives, teams say who owns it\").\n- Skill count unchanged (a reference, not a skill). Not mirrored to the PM Skills page (internal reference, per the mirroring rule)."
+    },
+    {
+      "date": "2026-07-20",
+      "title": "PM Skills Confluence page gains a plain-English changelog; mirroring becomes a maintenance step",
+      "heading": "2026-07-20 — PM Skills Confluence page gains a plain-English changelog; mirroring becomes a maintenance step",
+      "body": "The PM Skills page (the team-facing front door, Niel's space) now ends with a \"Skills changelog\" section: the full history condensed into dated, human-readable entries with the skill count at each point, so teammates can see what arrived when without opening GitHub. The repo CHANGELOG remains the technical record; the page entry is the reader's version.\n\n- The page was also brought current in the same pass: 25 skills, `add-insight` and `discovery-wayfinder` in the intake table, two roadmap items flipped to Shipped (wayfinder; native JPD evidence cards), and the install note corrected to reflect PUBLISHING.md (auto-update is the Claude Code path; Cowork has the zip fallback).\n- **CLAUDE.md** gains a step: team-visible changes (new/renamed skills, new capabilities, behaviour a user would notice) are mirrored to the page's tables and changelog section; internal refactors are not."
+    },
+    {
+      "date": "2026-07-20",
+      "title": "New skill: add-insight (the evidence-first attach)",
+      "heading": "2026-07-20 — New skill: add-insight (the evidence-first attach)",
+      "body": "The morning's route flip made native Insights creatable; this closes the workflow gap it exposed. Every existing path starts from an idea (`signal-radar` idea mode) or from customer signal (`feedback-to-idea`); nothing started from the evidence itself — \"here's something useful I found, which ideas does it belong to?\" — with multi-idea attach.\n\n- **`add-insight`** (new, twenty-fifth skill) — hand it one piece of evidence (a URL, an article, a HubSpot ticket or deal, a quote, a stat, a mid-session find) and it establishes the real source URL and reliability tier, finds every backlog idea the evidence genuinely supports (or fit-checks the keys you name — including parked and killed ideas, which fresh evidence resurfaces), proposes a mapping with a per-idea tailored description and per-idea impact rating, takes one batch approval, creates the native Insights via the jpd-insights-api routes (duplicate check first), and mirrors the lines to Brain. Deliberately small: one item per run, no gathering, no grooming, no council; evidence that fits no idea routes to `feedback-to-idea` as intake rather than being force-fitted. Guardrails: no link means no Insight, no undifferentiated copy-paste across ideas, social caps apply.\n- **`pm-compass`** — routing table gains rows for `add-insight` and `discovery-wayfinder` (the latter was missed at its launch), and the body's stale \"Twenty-three skills\" corrected.\n- **`signal-radar`** — trigger spec gains a do-NOT route to `add-insight` for single already-found items.\n- README, plugin.json, marketplace.json, the skills catalogue, and the vault's Skills Catalogue updated: twenty-four skills → twenty-five."
+    },
+    {
+      "date": "2026-07-20",
+      "title": "Native JPD Insight creation: the standard flips from paste-list to attach-natively",
+      "heading": "2026-07-20 — Native JPD Insight creation: the standard flips from paste-list to attach-natively",
+      "body": "Atlassian confirmed (June 2026) that native Polaris Insights are creatable via their public GraphQL API, and published an official AI skill with the full recipe; validated on 19 July against their reference repo and community confirmation. The Atlassian MCP connector still cannot do it, and the Anthropic cloud sandbox cannot reach the API endpoints, so the standard is route-based. Every skill that previously said \"native Insights aren't creatable from here\" is updated.\n\n- **`jpd-loop/references/jpd-insights-api.md`** (new reference) — the full recipe: route decision (Route A Polaris GraphQL API for local sessions with network access, needing a one-time 3LO OAuth app; Route B Chrome UI automation of the Insights tab for cloud sessions with the user's browser connected; Route C paste-ready list as last resort), token handling, the `createPolarisInsight` mutation with the verified payload schema and its gotchas (`CreatePolarisInsightInput` not `PolarisCreateInsightInput`, the mandatory `X-ExperimentalApi: polaris-v0` header, `quotes`/`quotesItem` snippet format, mandatory `context.icon`), the read query, and a common-errors table.\n- **`jpd-loop`** — write-back step 3 flips from \"hand the human a paste-ready list\" to \"create the native Insights on the idea\", with the paste list demoted to fallback. `references/insights-and-citations.md` rewritten from \"important limitation\" to the three creation routes; the standard is now that every strong piece of evidence gets attached as a native Insight, with the Description block and DISC page mirroring it.\n- **`signal-radar`** — Mode A step 5 now presents the drafted list for one batch approval, then creates the Insights natively (duplicate check first), with paste-ready as fallback; description and definition of done updated. The \"must never\" boundary clarified: an Insight is an evidence attachment, not an issue edit.\n- **`feedback-to-idea`** — the \"existing idea covers it\" path now creates the Insight natively where a route allows instead of always handing over a paste line.\n- **`discovery-wayfinder/references/jira-modelling.md`** — the Known API gaps note corrected: Insights are now creatable (links panel and idea-type creation remain UI-only).\n\nSkill count unchanged (a reference file, not a new skill). Open item: Route A needs Niel's one-time 3LO OAuth app before local sessions can use the API directly."
+    },
+    {
+      "date": "2026-07-19",
+      "title": "New skill: discovery-wayfinder (promoted from skills-in-progress)",
+      "heading": "2026-07-19 — New skill: discovery-wayfinder (promoted from skills-in-progress)",
+      "body": "The first skill to graduate through the `skills-in-progress/` lifecycle: `discovery-wayfinder`, adapted from Matt Pocock's Wayfinder, built from the handoff brief and promoted the same day after the required adversarial review and dry-run.\n\n- **`discovery-wayfinder`** (new, twenty-fourth skill) — charts a product discovery theme too big for one session (\"what does labour cost control mean for us\") as a shared Jira map of decision tickets, worked one at a time until the way is clear. Preserves the source's five disciplines: plan-don't-do, the map as index, fog of war, HITL/AFK ticket types with grilling as the default, and claim-by-assignment with a hard one-decision-per-session rule. Routes research to `storm-research`/`signal-radar` (narrow factual lookups run as a plain cited subagent), evidence to `signal-radar`/`competitor-watch`, judgement calls to `grill-me`, prototypes to Figma explorations, and its output to `feedback-to-idea`/`jpd-idea-groomer`/`jpd-loop`. It never runs the council.\n- **Jira modelling decided with Niel** (after researching current JPD capability): maps and tickets live in OHSI as dedicated JPD idea types (**Discovery** for maps, **Decision** for tickets), not as Ideas, so the mandatory Idea guards (`issuetype = Idea` + archived filter) exclude them from every existing sweep with zero changes elsewhere. Blocking uses native `Blocks` links; membership uses a `map-<key>` label plus a `Relates` link; JPD connection fields (Premium) are an optional display layer only. Mechanics and the one-time type setup in `references/jira-modelling.md`. Until the two idea types exist in OHSI (UI-only to create), the skill runs in proposal mode and writes nothing to Jira.\n- **Adversarial review pass** found and fixed one blocker (charting steps contradicted the setup gate; now an explicit type check and proposal mode) and five should-fixes, including closing the retype-to-research loophole in the one-decision rule and a claim-release rule.\n- **Dry-run on a real theme** (labour cost control, chosen with Niel): fourteen overlapping Exploring ideas charted into a seven-ticket map with one research ticket resolved AFK with cited findings. Record at `docs/wayfinder-dry-run-2026-07-19.md`; the charted map is ready to create once the idea types exist.\n- The handoff brief moved to `_archive/discovery-wayfinder-HANDOFF.md` per the archive rule; `skills-in-progress/` is empty again, and its README now records the graduation.\n- README, plugin.json, marketplace.json, the skills catalogue, and the vault's Skills Catalogue updated: twenty-three skills → twenty-four."
+    },
+    {
+      "date": "2026-07-19",
+      "title": "skills-in-progress opens with the discovery-wayfinder handoff",
+      "heading": "2026-07-19 — skills-in-progress opens with the discovery-wayfinder handoff",
+      "body": "First occupant of the `oolio-pm/skills-in-progress/` lifecycle directory: `discovery-wayfinder/HANDOFF.md`, a self-contained design brief for building the skill in a fresh session. It captures the source concepts from Matt Pocock's Wayfinder (plan-don't-do, the map as index, fog of war, HITL/AFK ticket types, one decision per session), the Oolio adaptation (discovery themes charted as Jira maps of decision tickets, typed tickets routed to storm-research/signal-radar/grill-me, output feeding the existing intake and loop skills), the open Jira-modelling decisions to grill Niel on, and the promotion bar. A `skills-in-progress/README.md` documents the folder's rules. Skill count unchanged (nothing here ships until promoted)."
+    },
+    {
+      "date": "2026-07-19",
+      "title": "Skill craft iteration: pm-compass, the skill standard, lifecycle statuses, vault alignment",
+      "heading": "2026-07-19 — Skill craft iteration: pm-compass, the skill standard, lifecycle statuses, vault alignment",
+      "body": "An iteration on how the skills themselves are built, drawing on a deep review of Matt Pocock's skills repo (the `writing-great-skills` discipline, the `ask-matt` router, directory-based lifecycle, engine/wrapper composition) and on direct access to the real brain vault (`my_brain`), whose conventions the research skills now match exactly.\n\n- **`pm-compass`** (new, twenty-third skill) — the router and front door, modelled on ask-matt: describe the task in plain English, get the one skill (or short chain) that fits and the hand-off in a sentence; gives newcomers the two-minute picture. Routes only; never does the destination skill's work. With twenty-three skills, discoverability is the biggest adoption barrier, and the compass is the answer that scales.\n- **`references/skill-standard.md`** (new) — the house authoring standard: description-as-trigger-spec with do-NOT routing, progressive disclosure, the no-op test (cut any sentence that changes no behaviour), leading words (compact pre-trained concepts over invented process), phrase-the-positive, engine/wrapper composition, and the operator guardrail block including the vault's work/personal wall.\n- **Lifecycle statuses, not versions** — skills now carry a status (In progress / New / Stable / Archived) expressed by directory and recorded in the catalogues, mirroring the promote-and-harden pattern. Deliberately no per-skill version numbers: the plugin versions by commit, and per-skill pins are precisely the mechanism that caused the historical stale-update bug. `skills-in-progress/` is the designated home for unshipped skills when the first one appears.\n- **Vault alignment** — research-os and the dossier standard now name the real brain: competitor dossiers are the canonical pages at `30 Knowledge/Market/Competitors/<Name>` with the vault's entity frontmatter (type/tags/created/updated/sources/status), evidence captures go to `Sources/` as `type: source`, trends are Market-level syntheses, and the gap ledger lives in `01 Command Centre`. Vault rules bind: globally unique Title Case titles, mandatory provenance, supersession never deletes, vendor-claim caveats, and the operator wall (`20 Areas/Personal` and `10 Projects/Personal` are NO-GO for every skill, always). Existing vault dossiers are extended toward the standard when touched, never blanked. The vault's own Skills Catalogue page was brought current (nineteen → twenty-three, with statuses).\n- **Deliberately not adopted (yet):** `disable-model-invocation` on the heavy orchestrators. It would cut context load, but our Cowork users invoke skills by describing the task in natural language, which model invocation makes possible; breaking that costs more than the tokens save. Recorded in skill-standard.md with the revisit condition.\n- **Planned work now has a visible home** — the catalogue lists the grilling engine split, a discovery wayfinder (decision-ticket maps with fog-of-war scoping), `setup-oolio` workspace config, and the operator producers, each becoming a CHANGELOG entry when it lands.\n- README, plugin.json, marketplace.json, and the skills catalogue updated: twenty-two skills → twenty-three."
+    },
+    {
+      "date": "2026-07-19",
+      "title": "The research house: competitor-watch, win-loss, research-os",
+      "heading": "2026-07-19 — The research house: competitor-watch, win-loss, research-os",
+      "body": "Builds the standing research function on top of the morning's signal-radar. Grounded in a five-agent research pass (competitive-intelligence programme practice, review/community mining and the Apify Actor landscape, research-ops and insight-repository design, a live July 2026 POS landscape scan, and an adversarial critique of the existing stack). The critique's core findings, all addressed here: everything was one-shot with no recurring operation, no per-competitor memory, no change detection, no win/loss mining, an underspecified gap scan, and Brain compounding as one skill's private habit rather than a system property.\n\n- **`references/research-os.md`** (new, shared) — the operating model every research skill now follows: the Brain page taxonomy (competitor dossiers, trend pages, atomic insights, append-only evidence logs, a gap ledger), last-verified/review-by dating with verified/contested/stale statuses, the canonical source-reliability tiers, the per-signal cadence table (pricing weekly, reviews quarterly, trigger events within the week), the routing pipe (signal → evidence → insight → JPD → council → shipped), a measurement scoreboard, and the agent/human division of labour.\n- **`competitor-watch`** (new skill) — the standing competitive-intelligence function, four modes: dossier (one living, dated, supersede-don't-stack page per competitor in Brain), sweep (weekly delta pass over a tiered watchlist, significance-scored, reporting only changes), deep-dive (review/community weakness mining), battlecard (one-page Fact-Impact-Act cards with verified-as-of dating and honest strengths). References ship with a seeded July 2026 watchlist (Toast's AU entry, Zeller's free AI-first POS, Lightspeed's orphaned ANZ base, TouchBistro's distressed sale to Constellation), a dossier standard, a mining playbook with verified pinned Apify Actors per source (chosen because Apify's runtime Actor search proved non-repeatable), and a battlecard standard. Oolio counter-claims on battlecards must trace to bundled context or a connected source, never invention.\n- **`win-loss`** (new skill) — monthly HubSpot closed-lost and churn mining. Treats rep-entered loss reasons as hypotheses (published buyer research finds them wrong more often than right), cross-examines deal metadata (time-in-stage, engagement drop-off, competitor named in notes vs the tag), codes every loss on four drivers with a corroborated/rep-reported-only flag, enforces pattern thresholds (5+ deals) before reporting, drafts buyer-interview guides for the human, and routes gaps to `feedback-to-idea` and competitor patterns to the dossiers.\n- **`signal-radar` upgraded** — gap-scan mode gets a concrete recipe (90-day default window, two-independent-source minimum per candidate, per-tier competitor coverage, HubSpot standing queries, a saturation stopping rule, and a delivery-project check so work already being built is not proposed as a gap); Apify usage now pins Actors from the shared mining playbook; Brain sync now follows research-os and writes the actual Insight lines, not just a run summary; monitored gap candidates land on the gap ledger with review-by dates so sweeps give them a heartbeat.\n- **Campaign mining, claim-vs-reality, and the independents scan** — competitor marketing is treated as free demand research: sweeps and deep-dives mine tier-1 competitors' public social campaigns, normalise engagement against each account's own baseline, and route outliers as desirability evidence for matching ideas (tier 5, capped, demand-not-execution by construction). Every loudly marketed claim can get a claim-vs-reality verdict (holds / oversold / vapour) tested against the competitor's own reviews and docs, feeding both battlecard landmines and our validation. A quarterly emerging-independents scan captures the sharp ideas small players market before they show up on anyone's threat list.\n- **Seam fixes (small, additive)** — `jpd-loop` step 3 now consumes existing dossiers and radar Insight lists before gathering fresh evidence; `storm-research` queries Brain before its lenses run and syncs verified durable findings back after; `feedback-to-idea` offers a Brain ingest when intake signal carries durable market knowledge.\n- README, plugin.json, marketplace.json, and the skills catalogue updated: twenty skills → twenty-two."
+    },
+    {
+      "date": "2026-07-19",
+      "title": "New skill: signal-radar",
+      "heading": "2026-07-19 — New skill: signal-radar",
+      "body": "Closes the market/social research gap: until now nothing in the plugin pulled HubSpot themes, web trends, or social signal in to strengthen a JPD idea or find what the backlog is missing, and nothing persisted research so it compounded across runs instead of repeating.\n\n- **`signal-radar`** (new, twentieth skill) — two modes. Idea mode takes a JPD key, gathers cited evidence from HubSpot, the web, and social media (via Apify Actors), and hands over a paste-ready Insight list in the same format `jpd-loop` uses, so the two are interchangeable. Gap-scan mode takes no key: snapshots the whole OHSI backlog, scans HubSpot ticket themes, web/competitor trends, and social signal, cross-checks every candidate against the backlog (including Not Now/Rejected ideas, not just open ones) and against Oolio Brain, then hands approved candidates to `feedback-to-idea` rather than drafting them itself.\n- **Brain-first, Brain-last.** Every run queries `oolio-brain:wiki-query` before researching (don't repeat settled knowledge) and writes findings back via `wiki-new`/`wiki-ingest` after (so the next run starts ahead). This is the \"keep my data in sync\" half of the skill and the reason gap-scans get cheaper over time instead of staying flat cost.\n- **Deliberately narrow write surface.** signal-radar never creates or edits a Jira issue or field itself; it hands off to `jpd-idea-groomer` / `feedback-to-idea` / `jpd-loop`, which already own that logic and its field-standard guards. Keeps one source of truth for backlog writes instead of a second copy drifting in a new skill.\n- **Social-evidence impact cap.** A single scraped social post or review caps at 2/5 impact, aggregated corroborated social signal caps at 4/5 — HubSpot-direct and Brain-vetted evidence remain the only sources that can hit 5/5. Full reliability tiers in `references/signal-sources.md`.\n- Additive cross-links only, no behaviour change to either: `jpd-loop`'s `evidence-sources.md` now points to signal-radar as the optional deeper social/HubSpot-theme pass; `feedback-to-idea` now accepts an approved signal-radar gap candidate as an intake input (still runs its own de-dupe sweep, never skips it).\n- README, plugin.json, marketplace.json, and `docs/skills-catalogue.md` updated: nineteen skills → twenty."
+    },
+    {
+      "date": "2026-07-14",
+      "title": "Commit-based versioning; repo-URL install restored",
+      "heading": "2026-07-14 — Commit-based versioning; repo-URL install restored",
+      "body": "Fixes the root cause of edits not reaching the team. The plugin no longer carries a `version` field in either `oolio-pm/.claude-plugin/plugin.json` or the `marketplace.json` plugin entry, so **every commit is a new version** and updates propagate without a manual bump. This also removes the duplicate version pin (it was set in both files; the plugin spec warns against that, as `plugin.json` silently wins and stale numbers block updates).\n\n- **README.md and PUBLISHING.md rewritten** to make repo-URL install the supported path, with a team `settings.json` snippet that sets `\"autoUpdate\": true` (private marketplaces do not auto-update otherwise). The release zip is retained only as a Cowork fallback, pending a clean re-add test in Cowork.\n- **CLAUDE.md** maintenance rule updated: no version to bump; do not reintroduce a `version` field.\n- No skill content changed."
+    },
+    {
+      "date": null,
+      "title": "0.10.1 — 2026-07-13",
+      "heading": "0.10.1 — 2026-07-13",
+      "body": "Packaging fix: the release zip now installs. No plugin content changed from 0.10.0.\n\n- **`scripts/package-plugin.sh` zipped the wrong root.** It ran `zip -r … oolio-pm`, which wraps everything under a top-level `oolio-pm/` folder, putting `plugin.json` at `oolio-pm/.claude-plugin/plugin.json` and skills at `oolio-pm/skills/…`. Cowork's local upload (and the Claude plugin loader) expect `.claude-plugin/plugin.json` and `skills/` at the **archive root**. Result: the v0.10.0 zip uploaded, showed the plugin name and toggle, but reported \"This plugin doesn't have any skills or agents.\" This bug affected every script-built zip since v0.9.5; the last install that worked (v0.9.3) was zipped by hand before the script existed, with the contents already at root.\n- **Fix:** the script now zips the *contents* of `oolio-pm/` from inside the directory, so the archive root is the plugin root, and asserts `.claude-plugin/plugin.json` is at the root before finishing (fails loudly otherwise).\n- The v0.10.0 release zip is superseded; install from the v0.10.1 release."
+    },
+    {
+      "date": null,
+      "title": "0.10.0 — 2026-07-13",
+      "heading": "0.10.0 — 2026-07-13",
+      "body": "JPD operating-model alignment (EVITA-87 + EVITA-88, one release): the skills catch up with the live instance and every backlog sweep gets guard rails. Decisions recorded on EVITA-77 plus Niel's 13 Jul rulings. Middle-number bump because the release adds new abilities (Horizon proposal, stage-gating, customer connection, new steering-pack sections), per the versioning rule above.\n\n- **field_standards.md**: new \"Canonical statuses and mandatory JQL guards\" section — the 2026-07-13 workflow merge (Planning + Ready for Engineering → `Ready for delivery`, lowercase d), two mandatory guards for every OHSI query (`issuetype = Idea` + the `Idea archived` filter), and the VPC-verdict → exit-status mapping. cf11553 documented under its new name **Investment Type**; **Horizon** (cf11744) added with the skills-propose/Steering-decides rule; **Escalate** corrected to `1`/`0` writes; **Likes** (cf11710) protected as the public-portal voting field; **Revisit on** (`customfield_11811`, Polaris date, verified attached) documented for the targeted Not Now bubble-up; interval fields marked verified-unwritable; new dynamic-fields blind-spot section; delivery-linking standard (`Polaris work item link` from Ready for delivery onward).\n- **Archived guard verified live and corrected.** Both JQL spellings proposed in the runbook (`\"Idea archived[Select List (single choice)]\"`, `\"Idea archived[Dropdown]\"`) match nothing in this instance, and a bare `!= Yes` also excludes ideas with the field empty (every non-archived idea), silently returning zero results. The shipped guard is the tested form `(cf[10835] IS EMPTY OR cf[10835] != Yes)`, verified 2026-07-13: it returns the live backlog and excludes exactly the 43 archived ideas.\n- **jpd-idea-groomer**: Category → Investment Type throughout; Horizon added to the audit axes, quick-reference table and proposed-fields output (propose-only, Steering owns the value); stage-gating recorded — the full standard applies from Exploring, Captured only needs title + sketch + Source (EVITA-80 ruling). examples.md updated to match. No Steering Score — ruled Won't Do (EVITA-81). Grill amendments: Escalate documented as `1`/`0` (never `true`/`false`) consistently with field_standards.md, and the proposed-fields template now presents Migration Relevance as the legacy-product picker, not Yes/No. atlassian_mcp.md's \"Category\" trap note updated to the Investment Type name.\n- **jpd-loop**: de-dupe sweep carries the mandatory guards; Environment section records the post-Decision exit mapping; step 7 gains an offer to create the implements link when a delivery epic already exists; field-map.md gains canonical statuses, the Escalate 1/0 rule, the Revisit on pointer, and the verified-interval verdict on VPC Last Run; insights-and-citations.md rewritten — native Insight creation is now possible via the Polaris GraphQL API (Atlassian AI-clients guidance, May 2026) but only from a local runtime, so paste-ready lists remain the loop's workflow pending EVITA-86.\n- **feedback-to-idea**: guards on the de-dupe sweep; new customer-connection step (`Discovery - Connected` links; Customer records only for recurring/strategic accounts; customer-name labels banned).\n- **steering-pack**: guards; Horizon + Delivery link? columns; missing-delivery-link = fitness failure; new \"Back from the freezer\" and \"Shipped 90-day checks due\" sections.\n- **jpd-title-standard**: guards on the bulk-audit JQL; the evidence-first field list updated to the Investment Type name."
+    },
+    {
+      "date": null,
+      "title": "0.9.5 — 2026-07-09",
+      "heading": "0.9.5 — 2026-07-09",
+      "body": "Distribution: the release zip is now the official install path; the Cowork marketplace path is retired until Anthropic fixes their cache.\n\n- All recovery steps for the marketplace cache are exhausted: both slugs are burnt (`oolio-pm-plugin` frozen at 0.3.3, `oolio-pm-plugins` at 0.5.0), the Update button does nothing, and remove-and-re-add resolves to the same stale record. Nothing pushed to GitHub changes what the marketplace serves.\n- Every release is now packaged as `oolio-pm-vX.Y.Z.zip` and attached to a GitHub Release, so anyone can grab the exact current version from the releases page and install it via Cowork's local plugin upload (the path proven working in the v0.9.3 test).\n- Added `scripts/package-plugin.sh` to build the zip (it refuses to package on a version mismatch between the two manifests). README and PUBLISHING.md rewritten to make the zip the primary path and warn away from the marketplace option.\n- Trade-off accepted: zip installs do not auto-update, so each release is announced and re-uploaded. When Anthropic fixes the cache, the marketplace path can come back."
+    },
+    {
+      "date": null,
+      "title": "0.9.4 — 2026-07-09",
+      "heading": "0.9.4 — 2026-07-09",
+      "body": "Fix: two skills had unparseable YAML frontmatter and were shipping with empty metadata.\n\n- A fresh `claude plugin validate --strict` pass (run against the current official plugin docs) failed on `convene-vpc` and `storm-research`. Both descriptions were single-line unquoted YAML scalars containing a colon followed by a space (\"This is the orchestrator: it runs…\", \"Runs a 4-phase pipeline: five expert lenses…\"), which YAML cannot parse. At runtime the whole frontmatter block was silently dropped, so those two skills loaded with no name and no trigger description, breaking auto-invocation.\n- Converted both descriptions to the `>-` folded block style already used by grill-my-prd and jpd-loop. Text unchanged. The full plugin now passes `claude plugin validate --strict` with zero errors."
+    },
+    {
+      "date": null,
+      "title": "0.9.3 — 2026-07-07",
+      "heading": "0.9.3 — 2026-07-07",
+      "body": "Fix: plugin description brought under Cowork's 500-character validation cap.\n\n- Niel's local zip-upload test surfaced a real validation failure: \"Plugin description must be at most 500 characters.\" The plugin.json description was 600 characters, and notably had been over the cap since at least v0.5.0 (552 characters), so the breach predates the audit build-out; the marketplace install path simply never enforced it, while the local-upload path does.\n- Rewrote the description to 394 characters and aligned marketplace.json to the same text.\n- Practical consequence: **local zip upload is now a working distribution path** that bypasses the stuck server-side marketplace cache entirely. Download the repo zip from GitHub, upload the `oolio-pm` folder via Cowork's Settings → Plugins → Add → Upload local plugin."
+    },
+    {
+      "date": null,
+      "title": "0.9.2 — 2026-07-07",
+      "heading": "0.9.2 — 2026-07-07",
+      "body": "Docs: the Cowork stale-cache issue is now documented for teammates.\n\n- New evidence narrowed the diagnosis: Cowork's backend caches one snapshot per source slug, taken when the marketplace is first added, and never refreshes it (the singular slug is frozen at 0.3.3 from the rename day; the plural slug at 0.5.0 from the day it was first tried). The scheduled re-sync assumed earlier does not happen.\n- Added a \"Known issue — Cowork can serve a stale version\" section to PUBLISHING.md with the check (CHANGELOG on GitHub is the truth) and the recovery steps (Update button, then the unused slug, then Anthropic support), and a pointer in the README install section.\n- The durable fix sits with Anthropic's backend; a bug report is being raised. Nothing in this repo can force their cache to refresh."
+    },
+    {
+      "date": null,
+      "title": "0.9.1 — 2026-07-07",
+      "heading": "0.9.1 — 2026-07-07",
+      "body": "Cache-bust: marketplace identity renamed to unstick Cowork's stale sync.\n\n- Niel reinstalled the plugin in Cowork and received v0.3.3 with nine skills — exactly the version at which the GitHub repo was renamed from `oolio-pm-plugins` to `oolio-pm-plugin` (2026-07-01). GitHub serves v0.9.0 correctly at HEAD, so the evidence points at Cowork's server-side marketplace cache having frozen at the rename, with remove/re-add resolving back to the same stale record.\n- **Renamed the marketplace itself** in `marketplace.json` from `oolio-pm-plugins` to `oolio-pm-plugin` (now matching the repo), bumping `metadata.version` to 2.0.0 per the maintenance rule. If Cowork keys its cache by marketplace name, adding the marketplace afresh now creates a new record and syncs from scratch.\n- Refreshed both manifest descriptions and the plugin keywords, which still described the eleven-skill era; they now describe the full nineteen-skill toolkit.\n- Anyone who installed under the old marketplace identity should remove the old marketplace entry in Cowork and add `oolio-group/oolio-pm-plugin` fresh."
+    },
+    {
+      "date": null,
+      "title": "0.9.0 — 2026-07-06",
+      "heading": "0.9.0 — 2026-07-06",
+      "body": "Persona library expansion: seven new UAT personas, one leadership seat, two design lenses. Shipped via pull request rather than direct to main.\n\n- **Stadia trio** (the vertical segments.md held open for swiftpos's market, all at one invented benchmark stadium so the account is coherent): Michael \"Mick\" Torrance (catering director, contract-caterer P&L), Danielle \"Dani\" Hartigan (venue operations manager, event-day F&B), Josh Bennett (concourse bar supervisor, event-day frontline). Stadium kitchen/BOH deliberately left open.\n- **Mid-market back of house closed**: Sofia Marchetti, kitchen operations director of a 14-venue casual-dining group. The coverage grid no longer has an empty cell.\n- **Enterprise buyer side part-closed**: Devinder \"Dev\" Chandra, IT and systems manager (the enterprise deal gate: security, PCI scope, change control), filed at the same invented estate as the enterprise COO. Lucy Tran, finance manager and bookkeeper of a six-venue group (month-end close, payout reconciliation, tips and GST), filed in back-of-house beside the stock controller as head-office cost-and-control.\n- **First US persona**: Danielle \"Dee\" Alvarez, GM of a high-volume Austin smokehouse: tip pooling, sales tax, card-first payments, aggregator dominance. Exists to test whether AU/UK-shaped assumptions travel. (Nickname set to Dee to avoid colliding with Dani Hartigan; nicknames are the invoke-by-name handle.)\n- **New Leadership Subcommittee seat (conditional)**: Payments Risk Lead, the fraud/chargeback/settlement/PCI/onboarding-risk lens previously spread across CFO, Security, and Legal. Convened when a decision touches money movement, payment flows, refunds, settlement, or Oolio Pay.\n- **Two new Design Council lenses**: Edward Tufte (data and evidence display: dashboards, reporting, information density under pressure) and Ben Shneiderman (human-centred AI and control: comprehensible, predictable, controllable automation). Assignment matrix gains Dashboards-and-analytics and AI-suggestions rows, BackOffice reporting now carries Tufte, and the standing rule \"always include Shneiderman on anything that recommends, drafts, or acts on the operator's behalf\" is added. Both lenses build only on published work, no invented quotes, per the panel rule.\n- **Integration**: personas.md, segments.md (all four views), uat-panel/design-council/leadership READMEs, and both council skills updated; lens counts corrected (twelve to fourteen, sixteen to seventeen). segments.md View 4 is also now **reconciled against the live JPD Applicable Segments picklist** (fetched 2026-07-06) with an explicit mapping rule, closing the reconcile-later note from 2026-06-24."
+    },
+    {
+      "date": null,
+      "title": "0.8.0 — 2026-07-06",
+      "heading": "0.8.0 — 2026-07-06",
+      "body": "Three new skills closing the intake, prioritisation, and measurement gaps. Nineteen skills total.\n\n- **New skill `feedback-to-idea`.** The intake end of discovery: raw customer/support/sales signal in (pasted feedback, Slack thread, HubSpot ticket, support trend), a well-formed JPD idea out — or, more often, the signal attached to an existing idea, because the skill de-dupes against the whole backlog before ever creating. Carries quotes verbatim, sets signal strength from actual evidence (never inflated), reuses jpd-idea-groomer's canonical field standards, supports bulk sweeps, and hands off to jpd-loop.\n- **New skill `steering-pack`.** Builds the Steering/roadmap review pack over a backlog slice: objective fitness checks (title standard, field completeness), VPC verdicts and rubric scores, a per-idea \"ask\" (an item with no ask does not belong in the pack), a recommended discussion order, and a not-fit list with owners. Published to Confluence append-only, summarised in chat. Reports and orders; the room decides.\n- **New skill `metrics-review`.** Closes the loop the PRD opened: launch validation against the PRD's own success metrics, or a recurring product review, from real data (PostHog MCP first, other connectors or user-supplied numbers marked as such). Every figure traces to a source and window; metrics whose measurement dependency does not exist are reported as Unmeasurable with an owner, never substituted with a vanity proxy.\n- Repo hygiene: untracked `.claude/settings.json` (machine-specific session permissions, not plugin content) and added `.claude/` to `.gitignore`."
+    },
+    {
+      "date": null,
+      "title": "0.7.0 — 2026-07-06",
+      "heading": "0.7.0 — 2026-07-06",
+      "body": "Five new skills and a product-context scaffold: the definition and launch stages of the PM lifecycle join the toolkit. Sixteen skills total.\n\n- **New skill `write-prd`.** Writes an Oolio PRD from a groomed JPD idea, brief, or problem statement and publishes it to Confluence. The format (`references/prd-format.md`) was extracted from the live FY27 Customer Engagement PRDs, not invented: header block with status lozenges, In one line, Governing principle (functional/technical/commercial ownership split), What/Why/Who with named library personas, Scope, Non-goals, Key requirements, Dependencies, Success metrics with measurement dependencies, Open questions with decision owners. Hands off to grill-my-prd and convene-vpc, completing the write → grill → council → deliver loop.\n- **Ported `grill-my-prd`** from Niel's personal skill library: the PRD-specialised sibling of grill-me that records the grilling as a versioned child page and badged, non-destructive in-place PRD amendments, with its two fixed-format references. Persona-library path now resolves via the plugin root.\n- **Ported the GTM suite** from Niel's personal library and the Insights project: `gtm-handover` (One-Pager + Supporting Deck, and the `pack_content.json` narrative source of truth), `gtm-playbooks` (Sales / AM / Onboarding DOCX playbooks), and `gtm-marketing` (Marketing Pack: announcement, social, email sequence, sales note, campaign brief). The current-generation SKILL.mds are backed by the proven shared pack engine (`build_pack.js`/`.py`, preview and QA scripts, references, and the pack template) consolidated under `gtm-handover`, which the two downstream skills reference relatively. The deprecated `oolio-gtm-pack` single-pack skill was not ported; its engine lives on under gtm-handover.\n- **Added `oolio-pm/products/`**: one product brief per Oolio product as the facts skills may rely on, with a template and rules (dated review stamps, no fabrication, public-repo hygiene). Scaffolded empty; briefs land as product owners supply them. Leo1 is a flagged candidate with no source material in the system yet.\n- Updated the plugin README with the new skill groups (Definition and specs, Launch and GTM, Product context) and the root layout diagram."
+    },
+    {
+      "date": null,
+      "title": "0.6.0 — 2026-07-06",
+      "heading": "0.6.0 — 2026-07-06",
+      "body": "Quality pass across the existing skills, from the toolkit audit.\n\n- **Rebuilt `grill-me` from a ten-line stub into a full skill**: operating rules (one question at a time, recommendation attached to every question, evidence before asking, graceful handling of missing connectors), a decision-tree map with branch prioritisation by uncertainty times impact, a stop rule, a written grilling record as the deliverable, and a definition of done. The spirit is unchanged; the behaviour is now specified instead of improvised.\n- **Added a shared references folder at the plugin root** (`oolio-pm/references/`): `house-style.md` (the full writing rules the skills previously each carried a fragment of) and `council-review-output.md` (a standalone output template shared by the three council sub-skills, which previously described their output only in prose). The three council skills now point at the template for standalone runs.\n- **Unified the title rules.** `jpd-idea-groomer`'s Summary Rules now defer to the JPD Title Standard as canonical (a JPD summary is its title) and align on the 65-character cap; the groomer previously said ~80, which conflicted with `jpd-title-standard`.\n- `jira-epic-groomer`: the persona shorthand list now points at the bundled persona library for depth instead of standing alone.\n- `convene-vpc`: the domain-panel handoff to `storm-research` is now concrete (name the replacement lenses explicitly, drawn from the persona library, per STORM's Phase 1 panel-swap note).\n- `jpd-loop`: added partial-failure guidance for the five-output write-back (finish what can run, report exactly what landed and what did not, never leave a partial run looking complete).\n- `storm-research`: the report path now has a fallback (scratchpad or ask) and always states the absolute path in chat."
+    },
+    {
+      "date": null,
+      "title": "0.5.1 — 2026-07-06",
+      "heading": "0.5.1 — 2026-07-06",
+      "body": "Fixes from the full toolkit audit: missing reference files, stale docs, licence.\n\n- **Created the three `jpd-idea-groomer` reference files the skill has pointed at since 0.1.0 but which never existed**: `references/field_standards.md` (canonical field IDs and option labels, pulled from live Jira field metadata on 2026-07-06, including the real divergences from the Confluence wording such as `Product optimisation`, `FOH Staff`, the pipe-suffixed Delivery Size labels, and the second \"Category\" field to avoid), `references/examples.md` (strong/weak summary and description pairs across the typical idea shapes, plus field-setting examples), and `references/atlassian_mcp.md` (tool call shapes, write-back patterns, failure isolation, and traps).\n- Updated `oolio-pm/README.md` \"What's inside\" to list all eleven skills; `grill-me` and `jpd-title-standard` had been missing since 0.4.0/0.5.0. Fixed PUBLISHING.md's stale \"all nine skills\" line to defer to the README.\n- Fixed the root README layout diagram: the local folder is `oolio-pm-plugins` while the GitHub repo is `oolio-group/oolio-pm-plugin`; the diagram now says so instead of using the wrong name. The skill count in the diagram now defers to `oolio-pm/README.md` so it cannot go stale again.\n- Added a LICENSE: public visibility is for install convenience, not a licence to reuse; all rights reserved to Oolio Group.\n- Documented `metadata.version` in CLAUDE.md: it versions the marketplace itself and is only bumped when the marketplace structure changes, not on plugin releases."
+    },
+    {
+      "date": null,
+      "title": "0.5.0 — 2026-07-02",
+      "heading": "0.5.0 — 2026-07-02",
+      "body": "New skill: `jpd-title-standard`.\n\n- Added `skills/jpd-title-standard/`, a JPD idea-title groomer that enforces Oolio's JPD Title Standard: max 65 characters (target 40–55), sentence case, capability- or verb-led with a clear outcome, no emoji, no bracket/pipe prefixes, no trailing punctuation. Works on pasted text with no Jira access, on a single idea by key/URL, or in bulk via JQL. Draft-only by default.\n- Bundled `scripts/check_titles.py`, the objective per-rule validator the skill runs on its own proposals. Left the source skill's dev-time `evals/` folder out to match the plugin's convention (no other skill ships evals).\n- Complements `jpd-idea-groomer` (full field/description grooming) and `jira-epic-titler` (epics); the skill hands off to those where relevant.\n- Brings the plugin to eleven skills."
+    },
+    {
+      "date": null,
+      "title": "0.4.0 — 2026-07-01",
+      "heading": "0.4.0 — 2026-07-01",
+      "body": "New skill: `grill-me`.\n\n- Added `skills/grill-me/`, a stress-test skill that interviews you relentlessly about a plan, decision, PRD, or design one question at a time, walking each branch of the decision tree and recommending an answer for each. Triggers on \"grill me\" or a request to pressure-test thinking.\n- Adapted the source skill's closing line for this plugin: it resolves questions from context already given, the bundled personas and Oolio context, or a connected source (Confluence, Jira, Slack, HubSpot) before asking.\n- Brings the plugin to ten skills."
+    },
+    {
+      "date": null,
+      "title": "0.3.4 — 2026-07-01",
+      "heading": "0.3.4 — 2026-07-01",
+      "body": "Governance: this repo is the single source of truth.\n\n- Declared in `CLAUDE.md` that all plugin edits (skills, personas, lenses, templates) are made in this repo and shipped from here; the bundled `oolio-pm/personas-library/` is canonical.\n- Put a redirect banner on the legacy working copy at `~/Documents/Claude/personas/` so edits are not made there by mistake."
+    },
+    {
+      "date": null,
+      "title": "0.3.3 — 2026-07-01",
+      "heading": "0.3.3 — 2026-07-01",
+      "body": "Docs: repo renamed and made public.\n\n- The GitHub repo was renamed `oolio-pm-plugins` → `oolio-pm-plugin` (singular) and set to public. Updated the install URL to the singular name and dropped the org-access prerequisite in the README and PUBLISHING, since a public repo installs without GitHub org membership.\n- Noted in the README that the repo is intentionally public and bundles Oolio-internal material."
+    },
+    {
+      "date": null,
+      "title": "0.3.2 — 2026-07-01",
+      "heading": "0.3.2 — 2026-07-01",
+      "body": "Fix: marketplace manifest location.\n\n- Moved `marketplace.json` to `.claude-plugin/marketplace.json`. Cowork looks for the marketplace manifest at `.claude-plugin/marketplace.json`; at the repo root it was not detected (\"This repository isn't a marketplace\"). This is what lets teammates add the marketplace.\n- Updated the README, PUBLISHING, and CLAUDE maintenance rules to point at the new path."
+    },
+    {
+      "date": null,
+      "title": "0.3.1 — 2026-07-01",
+      "heading": "0.3.1 — 2026-07-01",
+      "body": "Housekeeping and governance.\n\n- Archived the STORM Subcommittee's five Co-STORM role files (plus its README and template) to `oolio-pm/_archive/`. They were superseded by the `storm-research` skill in 0.3.0. The STORM Subcommittee remains a named council body; only its execution moved. All council docs (`personas.md`, the persona-library `CLAUDE.md`, `vpc-concept.md`) now point to the skill.\n- Added this CHANGELOG and a repo `CLAUDE.md` carrying the maintenance rules (bump the version and log every change; archive, never delete).\n- Established `oolio-pm/_archive/` as the plugin's archive area, with its own README and the \"archive with a dated reason\" rule."
+    },
+    {
+      "date": null,
+      "title": "0.3.0 — 2026-07-01",
+      "heading": "0.3.0 — 2026-07-01",
+      "body": "`storm-research` upgraded to a verified HTML + Confluence research engine.\n\n- Replaced the skill's engine with the five-lens, citation-verified pipeline: Practitioner / Academic / Skeptic / Economist / Historian → contradiction map → synthesized HTML report → adversarial peer review + primary-source verification.\n- Phase 0 now asks for the topic and the Confluence destination. New Phase 5 publishes the verified report to Confluence as a faithful native rendering (panels, status lozenges, tables); the local HTML file stays the canonical artefact.\n- Preserved council integration through a \"council mode\": keeps the jpd-loop recording contract (key decisions only), routes recording through the Chair's Decision Log instead of a standalone page, and supports a domain-panel swap so Economist/Historian are not forced onto internal decisions.\n- Bundled `report-template.html` with the skill. `convene-vpc` step 4 now calls `storm-research` in council mode."
+    },
+    {
+      "date": null,
+      "title": "0.2.0 — 2026-06-30",
+      "heading": "0.2.0 — 2026-06-30",
+      "body": "Standard VPC decision-record format.\n\n- Added `skills/convene-vpc/references/decision-record-format.md` as the canonical decision-record output format: fixed section order, status lozenge vocabulary, register ID scheme, and the per-persona / per-lens / per-seat breakdown.\n- Wired `convene-vpc`'s output step and the Chair file to it, so there is one format spec rather than two that can drift.\n- Docs (2026-06-30, no version change): added a Cowork install guide to the README for Oolio teammates, and corrected the stale repo path and push note in PUBLISHING.md."
+    },
+    {
+      "date": null,
+      "title": "0.1.0 — 2026-06-29",
+      "heading": "0.1.0 — 2026-06-29",
+      "body": "First release of the `oolio-pm-plugins` marketplace and the `oolio-pm` plugin.\n\n- Nine skills: `convene-vpc` (plus the `operator-council-review`, `design-council-review`, `leadership-subcommittee-review`, and `storm-research` subcommittees), `jpd-loop`, `jpd-idea-groomer`, `jira-epic-groomer`, and `jira-epic-titler`.\n- Bundled persona-library snapshot: the Operator Council (UAT panel), Design Council, Leadership Subcommittee, STORM Subcommittee, the Product Council Chair, segments, and the framework reference set."
+    }
+  ]
+}
