@@ -1,0 +1,197 @@
+{
+  "_comment": [
+    "The editorial overlay for the skills map. Everything here is a judgement call:",
+    "where a skill sits in the lifecycle, who runs it, what it feeds, and the curated flows.",
+    "Everything derivable (which skills exist, their real descriptions, their status) is read",
+    "from oolio-pm/skills/ at build time and is NOT repeated here.",
+    "",
+    "Add a skill to oolio-pm/skills/ and it appears on the map on the next build. Until it has",
+    "an entry below it renders in a red 'unplaced' column, so it is never silently missing.",
+    "",
+    "stage = a column name below. row = vertical position within that column (0 at the top).",
+    "type  = ai | orch | human | signal | output.",
+    "feeds = outgoing connections; a string, or {to, label} for a labelled wire."
+  ],
+
+  "title": "Oolio PM — Skills & Loops",
+  "subtitle": "PRODUCT LIFECYCLE · SIGNAL → SHIPPED → LEARN",
+
+  "columns": [
+    "Front Door", "Signals", "Brain", "Intake", "Discovery", "Grooming", "Definition",
+    "Orchestration", "Council", "Steering", "Delivery", "GTM", "Measure"
+  ],
+
+  "types": {
+    "ai":     { "colour": "#a78bfa", "label": "AI skill" },
+    "orch":   { "colour": "#2dd4bf", "label": "Orchestrator" },
+    "human":  { "colour": "#f59e0b", "label": "Human-gated" },
+    "signal": { "colour": "#93a3bd", "label": "Signal intake" },
+    "output": { "colour": "#34d399", "label": "Output / artifact" }
+  },
+
+  "gates": [
+    { "after": "Definition", "label": "GRILL GATE",         "who": "NIEL" },
+    { "after": "Council",    "label": "VALIDATE",           "who": "OWNER" },
+    { "after": "Delivery",   "label": "APPROVE TO PUBLISH", "who": "NIEL" }
+  ],
+
+  "loops": [
+    { "from": "metrics-review", "to": "feedback-to-idea", "label": "SHIPPED METRICS → NEW IDEAS" },
+    { "from": "steering-pack",  "to": "jpd-idea-groomer", "label": "BACK FROM THE FREEZER" },
+    { "from": "convene-vpc",    "to": "storm-research",   "label": "EVIDENCE GAP → RE-RESEARCH" },
+    { "from": "art-scorecard",  "to": "art-brain",        "label": "EVERY RUN COMPOUNDS IN THE BRAIN" }
+  ],
+
+  "artifacts": {
+    "art-brain":     { "label": "The Brain",       "note": "my_brain · Obsidian vault",   "badge": "VAULT",      "stage": "Brain",    "row": 0.8, "feeds": ["wiki-query", "wiki-status"] },
+    "art-idea":      { "label": "JPD Idea",        "note": "native idea in Jira JPD",     "badge": "JIRA",       "stage": "Intake",   "row": 3, "feeds": ["jpd-idea-groomer", "jpd-loop"] },
+    "art-prd":       { "label": "PRD",             "note": "published Confluence PRD",    "badge": "CONFLUENCE", "stage": "Definition", "row": 3, "feeds": ["grill-my-prd", "jira-epic-groomer"] },
+    "art-decision":  { "label": "Decision Record", "note": "validated VPC log",           "badge": "CONFLUENCE", "stage": "Council",  "row": 4, "feeds": ["jira-epic-groomer"] },
+    "art-epic":      { "label": "Groomed Epic",    "note": "delivery epic in Jira",       "badge": "JIRA",       "stage": "Delivery", "row": 2, "feeds": ["gtm-handover"] },
+    "art-pack":      { "label": "GTM Pack",        "note": "6-artifact launch pack",      "badge": "PACK",       "stage": "GTM",      "row": 3, "feeds": ["metrics-review"] },
+    "art-scorecard": { "label": "Scorecard",       "note": "target vs actual verdict",    "badge": "POSTHOG",    "stage": "Measure",  "row": 1, "feeds": [] }
+  },
+
+  "skills": {
+    "pm-compass": { "label": "PM Compass", "note": "routes intent → one skill", "badge": "CLAUDE", "type": "orch", "stage": "Front Door", "row": 1,
+      "feeds": ["feedback-to-idea", "jpd-loop", "write-prd", "gtm-handover"] },
+    "drive": { "label": "Drive", "note": "ramble → finished work", "badge": "CLAUDE", "type": "orch", "stage": "Front Door", "row": 2,
+      "feeds": ["storm-research", "gtm-handover"] },
+
+    "competitor-watch": { "label": "Competitor Watch", "note": "dossiers · battlecards", "badge": "CLAUDE·WEB", "type": "signal", "stage": "Signals", "row": 0,
+      "feeds": ["feedback-to-idea", "signal-radar", "wiki-ingest"] },
+    "win-loss": { "label": "Win / Loss", "note": "mines closed-lost", "badge": "CLAUDE·HUBSPOT", "type": "signal", "stage": "Signals", "row": 1,
+      "feeds": ["feedback-to-idea", "competitor-watch", "wiki-ingest"] },
+    "signal-radar": { "label": "Signal Radar", "note": "signal → cited Insights", "badge": "CLAUDE·JIRA", "type": "signal", "stage": "Signals", "row": 2,
+      "feeds": ["feedback-to-idea", "jpd-loop", "wiki-ingest"] },
+    "add-insight": { "label": "Add Insight", "note": "one finding → Insight", "badge": "CLAUDE·JIRA", "type": "signal", "stage": "Signals", "row": 3,
+      "feeds": ["feedback-to-idea"] },
+
+    "wiki-ingest": { "label": "Wiki Ingest", "note": "source → distilled pages", "badge": "CLAUDE·BRAIN", "type": "ai", "stage": "Brain", "row": 0,
+      "feeds": ["art-brain"] },
+    "wiki-query": { "label": "Wiki Query", "note": "ask the Brain, with cites", "badge": "CLAUDE·BRAIN", "type": "ai", "stage": "Brain", "row": 1.6,
+      "feeds": ["feedback-to-idea", "storm-research"] },
+    "wiki-lint": { "label": "Wiki Lint", "note": "contradictions · stale claims", "badge": "NIEL·BRAIN", "type": "human", "stage": "Brain", "row": 2.4,
+      "feeds": ["art-brain"] },
+    "wiki-status": { "label": "Wiki Status", "note": "read-only snapshot", "badge": "CLAUDE·BRAIN", "type": "ai", "stage": "Brain", "row": 3.2,
+      "feeds": [] },
+    "wiki-new": { "label": "Wiki New", "note": "stand up a new domain", "badge": "NIEL·BRAIN", "type": "human", "stage": "Brain", "row": 4,
+      "feeds": ["art-brain"] },
+
+    "feedback-to-idea": { "label": "Feedback → Idea", "note": "raw signal → JPD idea", "badge": "CLAUDE·JIRA", "type": "signal", "stage": "Intake", "row": 1,
+      "feeds": ["art-idea"] },
+
+    "storm-research": { "label": "Storm Research", "note": "5-lens cited brief", "badge": "CLAUDE·9 AGENTS", "type": "ai", "stage": "Discovery", "row": 0,
+      "feeds": ["convene-vpc"] },
+    "discovery-wayfinder": { "label": "Discovery Wayfinder", "note": "theme → decision map", "badge": "NIEL·JIRA", "type": "human", "stage": "Discovery", "row": 1,
+      "feeds": ["storm-research", "feedback-to-idea", "grill-me", "jpd-loop"] },
+
+    "jpd-idea-groomer": { "label": "JPD Idea Groomer", "note": "idea → field standard", "badge": "CLAUDE·JIRA", "type": "ai", "stage": "Grooming", "row": 0,
+      "feeds": ["write-prd", "jpd-loop", "steering-pack"] },
+    "jpd-title-standard": { "label": "JPD Title Standard", "note": "titles ≤65, cap+outcome", "badge": "CLAUDE·JIRA", "type": "ai", "stage": "Grooming", "row": 1,
+      "feeds": ["jpd-idea-groomer"] },
+
+    "write-prd": { "label": "Write PRD", "note": "groomed idea → PRD", "badge": "CLAUDE·CONFLUENCE", "type": "ai", "stage": "Definition", "row": 0,
+      "feeds": ["art-prd"] },
+    "grill-my-prd": { "label": "Grill my PRD", "note": "interview → PRD decisions", "badge": "NIEL", "type": "human", "stage": "Definition", "row": 1,
+      "feeds": ["convene-vpc"] },
+    "grill-me": { "label": "Grill Me", "note": "pressure-test any plan", "badge": "NIEL", "type": "human", "stage": "Definition", "row": 2,
+      "feeds": ["convene-vpc", "jpd-idea-groomer"] },
+
+    "jpd-loop": { "label": "JPD Loop", "note": "groom→council→decision", "badge": "CLAUDE·NIEL", "type": "orch", "stage": "Orchestration", "row": 0,
+      "feeds": ["jpd-idea-groomer", "convene-vpc", "storm-research", "jira-epic-groomer"] },
+    "convene-vpc": { "label": "Convene VPC", "note": "chairs the council", "badge": "CLAUDE·OWNER", "type": "orch", "stage": "Orchestration", "row": 1,
+      "feeds": ["operator-council-review", "design-council-review", "leadership-subcommittee-review", "behavioural-alchemist", "art-decision"] },
+
+    "operator-council-review": { "label": "Operator Council", "note": "hospitality personas", "badge": "CLAUDE", "type": "ai", "stage": "Council", "row": 0,
+      "feeds": ["art-decision"] },
+    "design-council-review": { "label": "Design Council", "note": "14 design lenses", "badge": "CLAUDE", "type": "ai", "stage": "Council", "row": 1,
+      "feeds": ["art-decision"] },
+    "leadership-subcommittee-review": { "label": "Leadership Sub-cttee", "note": "CPO/CEO/CFO/CRO lenses", "badge": "CLAUDE", "type": "ai", "stage": "Council", "row": 2,
+      "feeds": ["art-decision"] },
+    "behavioural-alchemist": { "label": "Behavioural Alchemist", "note": "behavioural-econ read", "badge": "CLAUDE·ROY", "type": "ai", "stage": "Council", "row": 3,
+      "feeds": ["art-decision"] },
+
+    "steering-pack": { "label": "Steering Pack", "note": "roadmap review pack", "badge": "CLAUDE·CONFLUENCE", "type": "ai", "stage": "Steering", "row": 1,
+      "feeds": ["metrics-review"] },
+
+    "jira-epic-groomer": { "label": "Jira Epic Groomer", "note": "epic → What/Why/Who", "badge": "CLAUDE·JIRA", "type": "ai", "stage": "Delivery", "row": 0,
+      "feeds": ["art-epic"] },
+    "jira-epic-titler": { "label": "Jira Epic Titler", "note": "[Capability] for [X]", "badge": "CLAUDE·JIRA", "type": "ai", "stage": "Delivery", "row": 1,
+      "feeds": ["jira-epic-groomer"] },
+
+    "gtm-handover": { "label": "GTM Handover", "note": "one-pager · deck · pack", "badge": "CLAUDE·NIEL", "type": "ai", "stage": "GTM", "row": 0,
+      "feeds": [{ "to": "gtm-playbooks", "label": "pack_content.json" }, { "to": "gtm-marketing", "label": "pack_content.json" }, "art-pack"] },
+    "gtm-playbooks": { "label": "GTM Playbooks", "note": "sales · AM · onboarding", "badge": "CLAUDE", "type": "ai", "stage": "GTM", "row": 1,
+      "feeds": ["art-pack"] },
+    "gtm-marketing": { "label": "GTM Marketing", "note": "launch · social · email", "badge": "CLAUDE", "type": "ai", "stage": "GTM", "row": 2,
+      "feeds": ["art-pack"] },
+
+    "metrics-review": { "label": "Metrics Review", "note": "did it hit its metrics?", "badge": "CLAUDE·POSTHOG", "type": "ai", "stage": "Measure", "row": 0,
+      "feeds": ["art-scorecard"] }
+  },
+
+  "flows": [
+    { "name": "Signal → Shipped → Learn", "accent": "--ai", "path": [
+      ["competitor-watch", "Competitor Watch", "A rival ships. The weekly sweep catches the delta and flags the gap."],
+      ["feedback-to-idea", "Feedback → Idea", "The gap becomes a cited JPD idea, de-duped against the whole backlog."],
+      ["art-idea", "JPD Idea", "It lands natively in Jira with its evidence attached."],
+      ["jpd-idea-groomer", "JPD Idea Groomer", "Groomed to Oolio's field standard: problem, hypothesis, metrics, all fields."],
+      ["write-prd", "Write PRD", "The groomed idea becomes a high-level PRD."],
+      ["art-prd", "PRD", "Published to Confluence for review."],
+      ["grill-my-prd", "Grill my PRD", "Niel is interviewed one question at a time until the decision tree resolves."],
+      ["convene-vpc", "Convene VPC", "The Virtual Product Council is chaired over the PRD."],
+      ["operator-council-review", "Operator Council", "Hospitality personas test it against real venue reality."],
+      ["art-decision", "Decision Record", "The chair records a validated decision on the log."],
+      ["jira-epic-groomer", "Jira Epic Groomer", "The decision becomes a delivery epic in the What/Why/Who pattern."],
+      ["art-epic", "Groomed Epic", "The epic anchors everything downstream."],
+      ["gtm-handover", "GTM Handover", "One-pager, deck and pack_content.json: the launch source of truth."],
+      ["gtm-playbooks", "GTM Playbooks", "Sales, AM and onboarding playbooks built from the pack."],
+      ["art-pack", "GTM Pack", "Six launch artifacts, ready to ship."],
+      ["metrics-review", "Metrics Review", "After launch, did it hit its success metrics?"],
+      ["art-scorecard", "Scorecard", "Target vs actual. The verdict feeds the next idea."]
+    ]},
+    { "name": "JPD Loop — Idea to Decision", "accent": "--orch", "path": [
+      ["art-idea", "JPD Idea", "One idea in Exploring status."],
+      ["jpd-idea-groomer", "JPD Idea Groomer", "Groomed and de-duped against the whole backlog first."],
+      ["jpd-loop", "JPD Loop", "The orchestrator picks it up and runs it end to end."],
+      ["convene-vpc", "Convene VPC", "Council convened for a verdict."],
+      ["design-council-review", "Design Council", "Reviewed against 14 design lenses."],
+      ["art-decision", "Decision Record", "Human sign-off, then moved to Decision."]
+    ]},
+    { "name": "PRD → Launch", "accent": "--ai", "path": [
+      ["write-prd", "Write PRD", "The idea becomes a PRD."],
+      ["art-prd", "PRD", "Published to Confluence."],
+      ["grill-my-prd", "Grill my PRD", "Pressure-tested with Niel until decisions are locked."],
+      ["convene-vpc", "Convene VPC", "Council convened for the verdict."],
+      ["art-decision", "Decision Record", "Validated and recorded."],
+      ["jira-epic-groomer", "Jira Epic Groomer", "Turned into a delivery epic."],
+      ["art-epic", "Groomed Epic", "The GTM anchor."],
+      ["gtm-handover", "GTM Handover", "Launch narrative and pack built."],
+      ["gtm-marketing", "GTM Marketing", "Launch, social and email drafted."],
+      ["art-pack", "GTM Pack", "Ready to ship."]
+    ]},
+    { "name": "Evidence Engine", "accent": "--signal", "path": [
+      ["win-loss", "Win / Loss", "Closed-lost mined from HubSpot for loss drivers."],
+      ["competitor-watch", "Competitor Watch", "Rival dossiers and battlecards."],
+      ["signal-radar", "Signal Radar", "Signal synthesised into cited Insights."],
+      ["feedback-to-idea", "Feedback → Idea", "All of it converges into ideas."],
+      ["art-idea", "JPD Idea", "Evidence-backed, in the backlog."]
+    ]},
+    { "name": "The Brain Compounds", "accent": "--loop", "path": [
+      ["competitor-watch", "Competitor Watch", "A sweep turns up something worth keeping."],
+      ["wiki-ingest", "Wiki Ingest", "The source is read, distilled, and integrated with its provenance."],
+      ["art-brain", "The Brain", "It lands in my_brain, the vault the whole team reads."],
+      ["wiki-query", "Wiki Query", "Next time someone asks, the answer comes back cited, not from zero."],
+      ["feedback-to-idea", "Feedback → Idea", "What the vault knows becomes a shaped idea."],
+      ["art-idea", "JPD Idea", "Nothing gets learned twice."]
+    ]},
+    { "name": "Ship & Learn Loop", "accent": "--output", "path": [
+      ["gtm-handover", "GTM Handover", "The launch pack is built."],
+      ["art-pack", "GTM Pack", "Shipped to the field."],
+      ["metrics-review", "Metrics Review", "Measured against its targets, and the scorecard written down."],
+      ["feedback-to-idea", "Feedback → Idea", "A breached metric becomes the next idea. The loop closes."],
+      ["art-idea", "JPD Idea", "Back at the top of the funnel, with evidence this time."]
+    ]}
+  ]
+}

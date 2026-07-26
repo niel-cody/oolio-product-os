@@ -11,7 +11,6 @@ description: >-
   the VPC, iterates to a verdict, takes a human sign-off, then writes the result
   back to JPD and moves the idea to Decision. Manual, human-gated (Phase 1).
   Do NOT trigger for non-JPD work, PRD/Figma reviews (use convene-vpc), or bulk runs.
-version: 0.3.0
 ---
 
 # jpd-loop — manual VPC grooming loop for one JPD idea
