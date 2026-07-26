@@ -2,6 +2,15 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-26 — An About for the map: what this is, and who it is for (32 skills)
+
+The map answered "how does this work" well (click a flow, read the path) and answered "what is this and why does it exist" not at all. A first-time viewer sees an infrastructure diagram and draws one of two wrong conclusions: that it is automated and nobody is driving, or that it is an aspirational slide rather than skills a teammate can install today. Both are expensive. An About button now sits under the title and opens a modal that settles it in about forty seconds of reading.
+
+- **Copy lives in `map.config.json`** under `about`, alongside the flows, because it is editorial in exactly the same way. The template renders it; nothing is hardcoded.
+- **Evergreen by rule.** The copy may not name a skill, a count, or a date. `{skills}` interpolates the live number at build time, the same source the footer uses, so the one number in the text cannot go stale. Anything needing an edit when the skills change belongs in the generated data instead. The rule is written into the config so the next person keeps it.
+- **The argument it makes**: this is our way of working made readable and executable, not a diagram of intentions; the discipline is written down so the standard stops depending on who is having a good week; and the product manager is the point, not the thing being replaced. Closes on the team line, **"Learn it once."**
+- **No theme change.** The pill and modal reuse the existing tokens only: `--panel`, `--line`, the legend's 10px radius and backdrop blur, JetBrains Mono caps for labels, Space Grotesk for body. No new colour, no new font, no layout change. Escape, backdrop click and ✕ all close it; focus moves to the close button on open and back to the pill on close.
+
 ## 2026-07-26 — The Product OS map, generated from the OS itself (32 skills)
 
 The interactive lifecycle map of the **Oolio Product OS** now builds itself from `oolio-pm/skills/` instead of being hand-maintained alongside it. It is named for what it shows: not a diagram of some skills, but how the operating system runs end to end. The hand-built v1 page proved the problem within a day of being made: it showed 27 skills and was missing all five Brain skills the moment they shipped. A map that has to be remembered is a map that goes stale, so the page is now a **view of the skills**, regenerated on every push.

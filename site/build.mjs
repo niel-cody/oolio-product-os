@@ -198,6 +198,7 @@ const data =
   `const FLOWS=${JSON.stringify(cfg.flows)};\n` +
   `const TYPE_COLOR=${JSON.stringify(typeColour)};\n` +
   `const TYPE_LABEL=${JSON.stringify(typeLabel)};\n` +
+  `const ABOUT=${JSON.stringify(cfg.about || {})};\n` +
   `const BUILD=${JSON.stringify({ skills: skillCount, unplaced: unplaced.length, stamp: sha.slice(0, 7) })};\n`;
 
 const html = readFileSync(join(SITE, "template", "index.html"), "utf8")

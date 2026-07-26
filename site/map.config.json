@@ -16,6 +16,49 @@
   "title": "Oolio Product OS",
   "subtitle": "THE PRODUCT OPERATING SYSTEM · SIGNAL → SHIPPED → LEARN",
 
+  "_about_note": "Evergreen only. Nothing here may name a skill, a count, or a date; {skills} interpolates the live number at build time. Anything that would need editing when the skills change belongs in the generated data instead.",
+  "about": {
+    "kicker": "Every product team has written down how it works. In forty Confluence pages, three stale Notion docs, and one person's head.",
+    "lede": [
+      "Written down is not the same as readable. Readable is not the same as running.",
+      "This is ours, readable and running. Every box on this map is one of {skills} real skills, installed by a real person, that an assistant runs against our actual tools. Not a diagram of how we intend to work. The thing itself."
+    ],
+    "sections": [
+      {
+        "label": "Why bother",
+        "paragraphs": [
+          "Product work is a small set of moves repeated forever. Turn signal into a shaped idea. Pressure-test it honestly. Write it down. Decide. Ship it. Find out whether you were right.",
+          "Doing those well is not a question of talent. It is a question of discipline, and discipline is the first thing to go when the quarter gets loud. Written down, the standard stops depending on who is having a good week."
+        ]
+      },
+      {
+        "label": "The people are the point",
+        "paragraphs": [
+          "None of this replaces a product manager. It removes the tax on being one: the blank page, the fourth rewrite, the research you know exists somewhere, the ticket nobody groomed, the decision relitigated because no one recorded it.",
+          "What is left is the part that needed a human all along. Judgement. Taste. Knowing which problem deserves the company's next quarter.",
+          "The car does not win the race. But nobody wins it in the wrong car."
+        ]
+      },
+      {
+        "label": "What keeps it honest",
+        "list": [
+          "A person signs off anything that counts. Those are the amber gates, and they do not move.",
+          "Every claim carries a citation.",
+          "Findings land in the Brain, so what the team learns compounds instead of restarting.",
+          "Nothing reaches Jira or Confluence unreviewed."
+        ]
+      },
+      {
+        "label": "Reading the map",
+        "paragraphs": [
+          "Left to right is the lifecycle, signal to shipped to learned. Colour is who runs it. The arcs underneath are the loops, which are the reason this is a system and not a pipeline. Click any flow to trace a path end to end."
+        ]
+      }
+    ],
+    "line": "Learn it once.",
+    "footnote": "Generated from the skills themselves, so it cannot drift from what we actually run."
+  },
+
   "columns": [
     "Front Door", "Signals", "Brain", "Intake", "Discovery", "Grooming", "Definition",
     "Orchestration", "Council", "Steering", "Delivery", "GTM", "Measure"

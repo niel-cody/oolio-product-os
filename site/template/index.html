@@ -72,6 +72,37 @@
   #hint{position:absolute;bottom:10px;right:14px;z-index:5;font-family:'JetBrains Mono',monospace;
     font-size:9.5px;color:var(--muted)}
 
+  /* about: same tokens as the legend, no new colours or fonts */
+  #aboutbtn{margin-top:7px;background:rgba(13,18,27,.82);border:1px solid var(--line);
+    border-radius:6px;padding:3px 9px;color:var(--muted);cursor:pointer;transition:.18s;
+    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+  #aboutbtn:hover{border-color:#33415a;color:#c3ccdb}
+  #about{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;
+    background:rgba(10,14,20,.72);backdrop-filter:blur(3px);padding:24px}
+  #about.on{display:flex}
+  #about .card{position:relative;max-width:620px;max-height:84vh;overflow-y:auto;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:30px 34px 26px}
+  #about .card::-webkit-scrollbar{width:7px}
+  #about .card::-webkit-scrollbar-thumb{background:#1c2534;border-radius:4px}
+  #about .x{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);
+    cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:15px;line-height:1;padding:4px}
+  #about .x:hover{color:var(--ink)}
+  #about .eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;
+    color:var(--muted);text-transform:uppercase}
+  #about .kicker{margin:14px 0 0;font-size:18px;font-weight:700;line-height:1.35}
+  #about p{margin:11px 0 0;font-size:13.5px;line-height:1.6;color:#c3ccdb}
+  #about .lab{margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:9px;
+    letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+  #about ul{margin:9px 0 0;padding:0;list-style:none}
+  #about li{position:relative;padding-left:15px;margin-top:7px;font-size:13.5px;
+    line-height:1.55;color:#c3ccdb}
+  #about li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;
+    border-radius:2px;background:var(--orch)}
+  #about .line{margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line);
+    font-size:22px;font-weight:700;letter-spacing:.01em}
+  #about .note{margin:9px 0 0;font-family:'JetBrains Mono',monospace;font-size:9.5px;
+    line-height:1.5;color:var(--muted)}
+
   /* svg element classes */
   .colhead{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
     fill:var(--muted);text-transform:uppercase}
@@ -110,6 +141,7 @@
     <div id="title">
       <h1>__TITLE__</h1>
       <p>__SUBTITLE__</p>
+      <button id="aboutbtn" aria-haspopup="dialog">About</button>
     </div>
     <div id="legend"></div>
     <svg id="map" viewBox="0 0 2600 1180" preserveAspectRatio="xMidYMid meet" aria-label="Skills map"></svg>
@@ -121,6 +153,9 @@
     <div id="flows"></div>
     <div id="steps"></div>
   </aside>
+</div>
+<div id="about" role="dialog" aria-modal="true" aria-label="About the Oolio Product OS">
+  <div class="card"><button class="x" aria-label="Close">✕</button><div id="aboutbody"></div></div>
 </div>
 
 <script>
@@ -314,6 +349,31 @@ document.getElementById("foot").innerHTML=
   `<span><b>${GATES.length}</b> gates</span><span><b>${LOOPS.length}</b> loops</span>`+
   (BUILD.unplaced ? `<span style="color:#f87171"><b>${BUILD.unplaced}</b> unplaced</span>` : "")+
   `<span>GENERATED ${BUILD.stamp}</span>`;
+
+/* ---- about ---- */
+(function(){
+  const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const fill=s=>esc(s).replaceAll("{skills}",BUILD.skills);
+  let h=`<div class="eyebrow">${esc(ABOUT.eyebrow||"What this is")}</div>`+
+        `<p class="kicker">${fill(ABOUT.kicker)}</p>`;
+  (ABOUT.lede||[]).forEach(p=>h+=`<p>${fill(p)}</p>`);
+  (ABOUT.sections||[]).forEach(s=>{
+    h+=`<div class="lab">${esc(s.label)}</div>`;
+    (s.paragraphs||[]).forEach(p=>h+=`<p>${fill(p)}</p>`);
+    if(s.list) h+=`<ul>${s.list.map(li=>`<li>${fill(li)}</li>`).join("")}</ul>`;
+  });
+  if(ABOUT.line) h+=`<p class="line">${fill(ABOUT.line)}</p>`;
+  if(ABOUT.footnote) h+=`<p class="note">${fill(ABOUT.footnote)}</p>`;
+  document.getElementById("aboutbody").innerHTML=h;
+
+  const box=document.getElementById("about"), btn=document.getElementById("aboutbtn");
+  const open=()=>{box.classList.add("on"); box.querySelector(".x").focus();};
+  const shut=()=>{box.classList.remove("on"); btn.focus();};
+  btn.addEventListener("click",open);
+  box.querySelector(".x").addEventListener("click",shut);
+  box.addEventListener("click",e=>{ if(e.target===box) shut(); });   // click the backdrop, not the card
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&box.classList.contains("on")) shut(); });
+})();
 
 /* ============================================================================
    INTERACTION
