@@ -1,37 +1,48 @@
-# The Product OS map
+# The Product OS site
 
 Live at **[oolio-product-os.vercel.app](https://oolio-product-os.vercel.app)**.
 
-The visual front door to the **Oolio Product OS**: how the operating system actually runs, end to
-end. Every skill in `oolio-pm/skills/`, where it sits in the lifecycle, what feeds what, the review
-gates a person owns, the loops that close, and the artifacts the whole thing produces. Published on
-Vercel, rebuilt on every push, so the map is a **view of the OS**, not a second thing to keep in
-step with it.
+The front door to the **Oolio Product OS**: what it is, every skill it ships, how the work moves
+end to end, and what changed. A Next.js app, rebuilt on every push, so the site is a **view of the
+OS** rather than a second thing to keep in step with it.
 
 ```bash
-node site/build.mjs          # write site/dist/index.html
-node site/build.mjs --check  # validate only; non-zero exit if the map has drifted
+npm --prefix site install
+npm --prefix site run dev      # http://localhost:3000
+npm --prefix site run check    # validate only; non-zero exit if the site has drifted
+npm --prefix site run build
 ```
 
-Zero dependencies, deliberately. This stays a markdown repo with a build script in it, not a web
-project. Open `site/dist/index.html` in a browser to preview.
+`dev` and `build` regenerate the data first, so the site cannot render a stale view of the repo.
+
+## The pages
+
+| Page | What it is | Where it comes from |
+|---|---|---|
+| `/` | What the OS is and who it is for, and how to install it | `map.config.json` under `about` |
+| `/map` | The lifecycle map: skills, gates, loops, flows | the skills, plus the editorial overlay |
+| `/skills` | Every skill, grouped by lifecycle stage, searchable | the skills themselves |
+| `/changelog` | What changed, newest first | `CHANGELOG.md` at the repo root |
+| `/systems` | How the tools connect. Not built yet | placeholder |
 
 ## The two inputs
 
-**`oolio-pm/skills/`** is the source of truth for everything derivable: which skills exist, what
-each one is called, and its real `description` (which becomes the hover tooltip on its node). None
-of that is repeated anywhere else, so it cannot drift.
+**The marketplace and its plugins** are the source of truth for everything derivable: which plugins
+exist, which skills they ship, and each skill's real `description` (which becomes the hover tooltip
+on its node and the summary on the Skills page). None of that is repeated anywhere, so it cannot
+drift. `oolio-pm` is the first plugin, not the only one: add a second to `marketplace.json` and its
+skills appear here on the next build.
 
-**`map.config.json`** is the editorial overlay, and only holds judgement calls: which lifecycle
-column a skill belongs to, who runs it, what it feeds, the review gates, the loops, and the flows
-in the sidebar. Those are authored, not derived. Skill frontmatter stays lean, per
+**`map.config.json`** is the editorial overlay, and holds only judgement calls: which lifecycle
+column a skill belongs to, who runs it, what it feeds, the review gates, the loops, the flows in the
+sidebar, and the About copy. Skill frontmatter stays lean, per
 [`references/skill-standard.md`](../oolio-pm/references/skill-standard.md).
 
 ## Adding a skill
 
-Add it to `oolio-pm/skills/` as usual. Nothing else is required for it to appear: the generator
-discovers it and renders it in a red **⚠ Unplaced** column, so a new skill is never silently
-missing from the map. Then give it an entry in `map.config.json` to place it properly:
+Add it to a plugin's `skills/` folder as usual. Nothing else is required for it to appear: the
+generator discovers it and renders it in a red **⚠ Unplaced** column, so a new skill is never
+silently missing. Then give it an entry in `map.config.json` to place it properly:
 
 ```json
 "my-new-skill": {
@@ -45,15 +56,36 @@ missing from the map. Then give it an entry in `map.config.json` to place it pro
 column, and may be fractional to pack a crowded column (the Brain column uses 0.8 steps).
 `type` is `ai`, `orch`, `human`, `signal` or `output`, which sets the colour and the legend entry.
 
-## What `--check` catches
+## What `check` catches
 
-It fails, rather than quietly producing a map that looks fine but lies:
+It fails, rather than quietly producing a site that looks fine but lies:
 
-- a skill with no overlay entry, or an overlay entry whose skill folder is gone
+- a skill with no overlay entry, or an overlay entry whose skill no longer exists
+- two plugins shipping the same skill id, which the map cannot disambiguate
 - a `feeds`, gate, loop or flow step pointing at something that is not on the map
 - a flow whose consecutive steps have no connection to draw, so the path would render with
   invisible gaps
+- a per-skill `version` field, which the skill standard forbids
 - the hand-written skill count drifting in `marketplace.json`, `plugin.json`, either README,
   the catalogue, or `pm-compass`, in digits or in words
 
-Worth wiring into a pre-push hook or CI once the map is live.
+Worth wiring into a pre-push hook or CI.
+
+## Deploying
+
+Vercel, from this repo. Two project settings matter:
+
+- **Root Directory** = `site`
+- **Include source files outside of the Root Directory** = **on**, because the generator reads the
+  plugins, the marketplace manifest and `CHANGELOG.md`, all of which live a level up. With it off
+  the build fails immediately and says so, rather than shipping a site with no skills on it.
+
+## House rules
+
+The web app lives entirely in this folder. `oolio-pm/` never gets a `package.json`, and
+`scripts/package-plugin.sh` only zips the plugin's contents, so teammates installing the plugin
+never see any of this.
+
+The map's drawing code in [`lib/map-engine.js`](lib/map-engine.js) is deliberately imperative SVG
+rather than React components. It was carried over unchanged from the original single-page version,
+and rewriting it is how a design people like quietly drifts.

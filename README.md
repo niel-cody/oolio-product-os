@@ -2,7 +2,7 @@
 
 The Product team's operating system for Cowork and Claude Code: the plugin collection (marketplace) that carries our skills. Other Oolio teams keep their own collections; this one belongs to Product. The human-readable front door is the **Product Operating System** page on Confluence; this repo is the source of truth it describes.
 
-**The map:** [oolio-product-os.vercel.app](https://oolio-product-os.vercel.app) shows how the OS runs end to end, generated from the skills themselves. See [site/](site/).
+**The site:** [oolio-product-os.vercel.app](https://oolio-product-os.vercel.app) is the front door: what the OS is, every skill, the lifecycle map, and the changelog. Generated from the skills themselves, so it cannot fall behind. See [site/](site/README.md).
 
 ## Plugins
 
@@ -48,7 +48,7 @@ oolio-pm-plugins/           local folder name (historical); the GitHub repo is o
 ├── CLAUDE.md               maintenance rules (commit-based versioning, log changes, archive)
 ├── PUBLISHING.md           how to edit, version, and publish (read this)
 ├── LICENSE                 usage terms (public repo, internal material)
-├── site/                   the Product OS map: generated from the skills, published on Vercel
+├── site/                   the Product OS site: Next.js, generated from the skills, on Vercel
 └── oolio-pm/               the plugin
     ├── .claude-plugin/plugin.json
     ├── personas-library/   bundled persona-library snapshot

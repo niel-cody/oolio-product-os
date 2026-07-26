@@ -1,14 +1,17 @@
 #!/usr/bin/env node
 /**
- * Generates the skills map from the skills themselves.
+ * Generates the site's data from the Product OS itself.
  *
- *   node site/build.mjs            build site/dist/index.html
- *   node site/build.mjs --check    validate only, no write, non-zero exit on drift
+ *   node site/scripts/generate.mjs            write site/data/os.json
+ *   node site/scripts/generate.mjs --check    validate only, no write, non-zero exit on drift
  *
- * Two inputs: oolio-pm/skills/ (the source of truth for which skills exist and what they
- * say) and site/map.config.json (the editorial overlay: stages, connections, flows).
- * Zero dependencies, on purpose. This stays a markdown repo with a build script in it,
- * not a web project.
+ * Two inputs. The marketplace manifest and the plugins it lists are the source of truth
+ * for everything derivable: which plugins exist, which skills they ship, and what each
+ * skill actually says. site/map.config.json is the editorial overlay, and holds only
+ * judgement calls: lifecycle stages, connections, gates, loops, flows and the About copy.
+ *
+ * Runs as a prebuild step, so every page renders from generated data. The moment a page
+ * hand-maintains a list of skills, we have rebuilt the problem this exists to fix.
  */
 
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, statSync } from "node:fs";
@@ -16,11 +19,8 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
 
-const SITE = dirname(fileURLToPath(import.meta.url));
+const SITE = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ROOT = join(SITE, "..");
-const SKILLS_DIR = join(ROOT, "oolio-pm", "skills");
-const ARCHIVE_DIR = join(ROOT, "oolio-pm", "_archive");
-const WIP_DIR = join(ROOT, "oolio-pm", "skills-in-progress");
 const CHECK = process.argv.includes("--check");
 
 const problems = [];
@@ -29,8 +29,8 @@ const fail = (m) => problems.push(m);
 const warn = (m) => warnings.push(m);
 
 /* ---------------------------------------------------------------- frontmatter
-   Deliberately minimal: these files only ever use scalars and folded (>-) blocks.
-   A YAML dependency would buy nothing and cost the zero-dependency property. */
+   Deliberately minimal: SKILL.md files only ever use scalars and folded (>-) blocks.
+   A YAML dependency would buy nothing here. */
 function frontmatter(text) {
   const lines = text.split("\n");
   if (lines[0].trim() !== "---") return {};
@@ -59,21 +59,53 @@ function frontmatter(text) {
 const dirsIn = (p) =>
   existsSync(p) ? readdirSync(p).filter((d) => statSync(join(p, d)).isDirectory()) : [];
 
-/* ------------------------------------------------------------------- discover */
+/* ------------------------------------------------- discover, marketplace-first
+   oolio-pm is the first plugin, not the only one. A second team's plugin appears
+   here automatically, and its skills show as unplaced until someone maps them. */
+if (!existsSync(join(ROOT, ".claude-plugin", "marketplace.json"))) {
+  // Fail loudly and say exactly what to change, rather than shipping a site with no skills on it.
+  console.error(
+    "\n  Cannot see the repo from site/. The marketplace manifest and the plugins are one level up.\n" +
+    "  On Vercel this means the project's Root Directory is set to `site` with\n" +
+    "  \"Include source files outside of the Root Directory\" turned OFF. Turn it on.\n");
+  process.exit(1);
+}
+const marketplace = JSON.parse(readFileSync(join(ROOT, ".claude-plugin", "marketplace.json"), "utf8"));
+
+const plugins = [];
 const discovered = {};
-for (const dir of dirsIn(SKILLS_DIR).sort()) {
-  const file = join(SKILLS_DIR, dir, "SKILL.md");
-  if (!existsSync(file)) { warn(`${dir}/ has no SKILL.md, skipped`); continue; }
-  const fm = frontmatter(readFileSync(file, "utf8"));
-  if (!fm.name) fail(`${dir}/SKILL.md has no name in its frontmatter`);
-  else if (fm.name !== dir) fail(`${dir}/SKILL.md declares name "${fm.name}", which does not match its folder`);
-  // The plugin versions by commit; a per-skill version pins nothing and misleads. See CLAUDE.md.
-  if (fm.version) fail(`${dir}/SKILL.md carries a version field, which the skill standard forbids`);
-  discovered[dir] = { id: dir, desc: fm.description || "" };
+for (const entry of marketplace.plugins) {
+  const base = join(ROOT, entry.source.replace(/^\.\//, ""));
+  const skillsDir = join(base, "skills");
+  if (!existsSync(skillsDir)) { fail(`plugin "${entry.name}" has no skills/ directory at ${entry.source}`); continue; }
+
+  const skills = [];
+  for (const dir of dirsIn(skillsDir).sort()) {
+    const file = join(skillsDir, dir, "SKILL.md");
+    if (!existsSync(file)) { warn(`${entry.name}/${dir}/ has no SKILL.md, skipped`); continue; }
+    const fm = frontmatter(readFileSync(file, "utf8"));
+    if (!fm.name) fail(`${dir}/SKILL.md has no name in its frontmatter`);
+    else if (fm.name !== dir) fail(`${dir}/SKILL.md declares name "${fm.name}", which does not match its folder`);
+    // The plugin versions by commit; a per-skill version pins nothing and misleads. See CLAUDE.md.
+    if (fm.version) fail(`${dir}/SKILL.md carries a version field, which the skill standard forbids`);
+    if (discovered[dir]) fail(`skill id "${dir}" is shipped by two plugins, which the map cannot disambiguate`);
+    const skill = { id: dir, plugin: entry.name, description: fm.description || "" };
+    skills.push(skill);
+    discovered[dir] = skill;
+  }
+
+  plugins.push({
+    name: entry.name,
+    description: entry.description || "",
+    skills,
+    counts: {
+      skills: skills.length,
+      inProgress: dirsIn(join(base, "skills-in-progress")).filter((d) => existsSync(join(base, "skills-in-progress", d, "SKILL.md"))).length,
+      archived: dirsIn(join(base, "_archive")).filter((d) => existsSync(join(base, "_archive", d, "SKILL.md"))).length,
+    },
+  });
 }
 const skillCount = Object.keys(discovered).length;
-const wipCount = dirsIn(WIP_DIR).filter((d) => existsSync(join(WIP_DIR, d, "SKILL.md"))).length;
-const archivedCount = dirsIn(ARCHIVE_DIR).filter((d) => existsSync(join(ARCHIVE_DIR, d, "SKILL.md"))).length;
 
 /* -------------------------------------------------------------------- overlay */
 const cfg = JSON.parse(readFileSync(join(SITE, "map.config.json"), "utf8"));
@@ -81,7 +113,7 @@ const columns = [...cfg.columns];
 const colIndex = (name) => columns.indexOf(name);
 
 for (const id of Object.keys(cfg.skills)) {
-  if (!discovered[id]) fail(`map.config.json places "${id}", but oolio-pm/skills/${id}/ does not exist`);
+  if (!discovered[id]) fail(`map.config.json places "${id}", but no plugin ships a skill by that name`);
 }
 const unplaced = Object.keys(discovered).filter((id) => !cfg.skills[id]);
 if (unplaced.length) {
@@ -98,7 +130,7 @@ const push = (id, e, type) => {
   nodes.push({
     id, label: e.label, note: e.note, badge: e.badge, type,
     col: Math.max(col, 0), row: e.row,
-    ...(discovered[id]?.desc ? { desc: discovered[id].desc } : {}),
+    ...(discovered[id]?.description ? { desc: discovered[id].description } : {}),
   });
 };
 for (const [id, e] of Object.entries(cfg.artifacts)) push(id, e, "output");
@@ -135,7 +167,7 @@ const wired = new Set([...edges.map((e) => e.f + ">" + e.t), ...loops.map((l) =>
 for (const fl of cfg.flows) {
   for (const [id] of fl.path)
     if (!known.has(id)) fail(`flow "${fl.name}" steps through "${id}", which is not a node on the map`);
-  // The renderer skips flow steps with no matching edge, drawing a flow with invisible gaps.
+  // The renderer skips flow steps with no matching link, drawing a flow with invisible gaps.
   // Catch that here rather than letting the page quietly lie about the path.
   for (let i = 0; i < fl.path.length - 1; i++) {
     const [a] = fl.path[i], [b] = fl.path[i + 1];
@@ -144,9 +176,23 @@ for (const fl of cfg.flows) {
   }
 }
 
+/* ----------------------------------------------------------------- changelog
+   Parsed from CHANGELOG.md so shipping a skill updates the site, with no second copy. */
+const changelog = [];
+{
+  const raw = readFileSync(join(ROOT, "CHANGELOG.md"), "utf8");
+  for (const part of raw.split(/^## /m).slice(1)) {
+    const nl = part.indexOf("\n");
+    const heading = (nl < 0 ? part : part.slice(0, nl)).trim();
+    const body = nl < 0 ? "" : part.slice(nl + 1).trim();
+    const m = heading.match(/^(\d{4}-\d{2}-\d{2})\s*[—–-]\s*(.*)$/);
+    changelog.push({ date: m ? m[1] : null, title: m ? m[2] : heading, heading, body });
+  }
+}
+
 /* --------------------------------------------------- counts stated elsewhere
    The skill count is written by hand in several places. Catching that drift here is
-   the point: the map staying current is worth little if the README still says 27. */
+   the point: the site staying current is worth little if the README still says 27. */
 const WORDS = ["zero","one","two","three","four","five","six","seven","eight","nine","ten",
   "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
 const TENS = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
@@ -168,14 +214,13 @@ for (const rel of [".claude-plugin/marketplace.json", "oolio-pm/.claude-plugin/p
 warnings.forEach((w) => console.warn(`  warn  ${w}`));
 problems.forEach((p) => console.error(`  DRIFT ${p}`));
 console.log(
-  `\n  ${skillCount} skills · ${nodes.length} nodes · ${edges.length} connections · ` +
-  `${gates.length} gates · ${loops.length} loops` +
-  (wipCount ? ` · ${wipCount} in progress` : "") +
-  (archivedCount ? ` · ${archivedCount} archived` : ""));
+  `\n  ${plugins.length} plugin(s) · ${skillCount} skills · ${nodes.length} nodes · ` +
+  `${edges.length} connections · ${gates.length} gates · ${loops.length} loops · ` +
+  `${changelog.length} changelog entries`);
 
 if (CHECK) {
   console.log(problems.length ? `\n  ${problems.length} problem(s). Fix, or update site/map.config.json.\n`
-                              : "\n  Map is in sync with the skills.\n");
+                              : "\n  Site is in sync with the Product OS.\n");
   process.exit(problems.length ? 1 : 0);
 }
 if (problems.length) console.error("\n  Building anyway; unplaced skills render in the red column.\n");
@@ -189,24 +234,23 @@ const sha = process.env.VERCEL_GIT_COMMIT_SHA
   || (() => { try { return execSync("git rev-parse --short HEAD", { cwd: ROOT }).toString().trim(); }
               catch { return "local"; } })();
 
-const data =
-  `const COLUMNS=${JSON.stringify(columns)};\n` +
-  `const NODES=${JSON.stringify(nodes)};\n` +
-  `const EDGES=${JSON.stringify(edges)};\n` +
-  `const GATES=${JSON.stringify(gates)};\n` +
-  `const LOOPS=${JSON.stringify(loops)};\n` +
-  `const FLOWS=${JSON.stringify(cfg.flows)};\n` +
-  `const TYPE_COLOR=${JSON.stringify(typeColour)};\n` +
-  `const TYPE_LABEL=${JSON.stringify(typeLabel)};\n` +
-  `const ABOUT=${JSON.stringify(cfg.about || {})};\n` +
-  `const BUILD=${JSON.stringify({ skills: skillCount, unplaced: unplaced.length, stamp: sha.slice(0, 7) })};\n`;
+const out = {
+  stamp: sha.slice(0, 7),
+  marketplace: { name: marketplace.name, description: marketplace.metadata?.description || "" },
+  plugins,
+  totals: {
+    skills: skillCount,
+    plugins: plugins.length,
+    inProgress: plugins.reduce((n, p) => n + p.counts.inProgress, 0),
+    archived: plugins.reduce((n, p) => n + p.counts.archived, 0),
+    unplaced: unplaced.length,
+  },
+  about: cfg.about || {},
+  map: { title: cfg.title, subtitle: cfg.subtitle, columns, nodes, edges, gates, loops,
+         flows: cfg.flows, typeColour, typeLabel },
+  changelog,
+};
 
-const html = readFileSync(join(SITE, "template", "index.html"), "utf8")
-  .replace("/*__MAP_DATA__*/", data.replace(/<\//g, "<\\/"))
-  .replaceAll("__TITLE__", cfg.title)
-  .replaceAll("__SUBTITLE__", cfg.subtitle);
-
-const outDir = join(SITE, "dist");
-mkdirSync(outDir, { recursive: true });
-writeFileSync(join(outDir, "index.html"), html);
-console.log(`  → site/dist/index.html (${(html.length / 1024).toFixed(1)} KB)\n`);
+mkdirSync(join(SITE, "data"), { recursive: true });
+writeFileSync(join(SITE, "data", "os.json"), JSON.stringify(out, null, 2));
+console.log(`  → site/data/os.json (${(JSON.stringify(out).length / 1024).toFixed(1)} KB)\n`);

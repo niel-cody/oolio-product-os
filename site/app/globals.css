@@ -1,0 +1,185 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+/* ============================================================================
+   Product OS palette. The map's tokens are the app's tokens, so shadcn inherits
+   the existing design rather than imposing its own. Dark only, by design.
+   Note: the map's original --muted (a text colour) is --muted-ink here, because
+   shadcn already uses --muted for a surface.
+   ========================================================================== */
+:root, .dark {
+  --bg: #0A0E14; --panel: #0d121b; --line: #1c2534; --ink: #e6ecf5; --muted-ink: #7d8aa0;
+  --ai: #a78bfa; --orch: #2dd4bf; --human: #f59e0b; --signal: #93a3bd; --output: #34d399; --loop: #f5b942;
+
+  --background: #0A0E14;
+  --foreground: #e6ecf5;
+  --card: #0d121b;
+  --card-foreground: #e6ecf5;
+  --popover: #0d121b;
+  --popover-foreground: #e6ecf5;
+  --primary: #2dd4bf;
+  --primary-foreground: #05120f;
+  --secondary: #141d2b;
+  --secondary-foreground: #e6ecf5;
+  --muted: #141d2b;
+  --muted-foreground: #7d8aa0;
+  --accent: #141d2b;
+  --accent-foreground: #e6ecf5;
+  --destructive: #f87171;
+  --border: #1c2534;
+  --input: #1c2534;
+  --ring: #33415a;
+  --radius: 0.625rem;
+}
+
+.mono { font-family: var(--font-mono), ui-monospace, monospace; }
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted-ink);
+}
+
+/* changelog: markdown rendered from CHANGELOG.md */
+.changelog-body { font-size: 14.5px; line-height: 1.65; color: var(--muted-ink); }
+.changelog-body p { margin: 0 0 0.85em; }
+.changelog-body ul { margin: 0 0 1em; padding-left: 1.1em; list-style: none; }
+.changelog-body li { position: relative; margin-bottom: 0.6em; padding-left: 0.35em; }
+.changelog-body li::before {
+  content: ""; position: absolute; left: -0.75em; top: 0.62em;
+  width: 4px; height: 4px; border-radius: 1px; background: var(--orch); opacity: .75;
+}
+.changelog-body strong { color: var(--ink); font-weight: 600; }
+.changelog-body code {
+  font-family: var(--font-mono), monospace; font-size: 0.86em;
+  background: var(--secondary); border: 1px solid var(--line);
+  border-radius: 4px; padding: 0.1em 0.34em; color: #c3ccdb;
+}
+.changelog-body a { color: var(--orch); text-decoration: none; }
+.changelog-body a:hover { text-decoration: underline; }
+.changelog-body h3 { color: var(--ink); font-size: 15px; font-weight: 600; margin: 1.4em 0 0.5em; }
