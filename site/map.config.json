@@ -1,6 +1,6 @@
 {
   "_comment": [
-    "The editorial overlay for the skills map. Everything here is a judgement call:",
+    "The editorial overlay for the Product OS map. Everything here is a judgement call:",
     "where a skill sits in the lifecycle, who runs it, what it feeds, and the curated flows.",
     "Everything derivable (which skills exist, their real descriptions, their status) is read",
     "from oolio-pm/skills/ at build time and is NOT repeated here.",
@@ -13,8 +13,8 @@
     "feeds = outgoing connections; a string, or {to, label} for a labelled wire."
   ],
 
-  "title": "Oolio PM — Skills & Loops",
-  "subtitle": "PRODUCT LIFECYCLE · SIGNAL → SHIPPED → LEARN",
+  "title": "Oolio Product OS",
+  "subtitle": "THE PRODUCT OPERATING SYSTEM · SIGNAL → SHIPPED → LEARN",
 
   "columns": [
     "Front Door", "Signals", "Brain", "Intake", "Discovery", "Grooming", "Definition",

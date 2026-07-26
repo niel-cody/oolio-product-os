@@ -46,6 +46,7 @@ oolio-pm-plugins/           local folder name (historical); the GitHub repo is o
 ├── CLAUDE.md               maintenance rules (commit-based versioning, log changes, archive)
 ├── PUBLISHING.md           how to edit, version, and publish (read this)
 ├── LICENSE                 usage terms (public repo, internal material)
+├── site/                   the Product OS map: generated from the skills, published on Vercel
 └── oolio-pm/               the plugin
     ├── .claude-plugin/plugin.json
     ├── personas-library/   bundled persona-library snapshot

@@ -2,9 +2,9 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
-## 2026-07-26 — The skills map is generated from the skills (32 skills)
+## 2026-07-26 — The Product OS map, generated from the OS itself (32 skills)
 
-The interactive lifecycle map now builds itself from `oolio-pm/skills/` instead of being hand-maintained alongside it. The hand-built v1 page proved the problem within a day of being made: it showed 27 skills and was missing all five Brain skills the moment they shipped. A map that has to be remembered is a map that goes stale, so the page is now a **view of the skills**, regenerated on every push.
+The interactive lifecycle map of the **Oolio Product OS** now builds itself from `oolio-pm/skills/` instead of being hand-maintained alongside it. It is named for what it shows: not a diagram of some skills, but how the operating system runs end to end. The hand-built v1 page proved the problem within a day of being made: it showed 27 skills and was missing all five Brain skills the moment they shipped. A map that has to be remembered is a map that goes stale, so the page is now a **view of the skills**, regenerated on every push.
 
 - **New `site/` folder**: a zero-dependency Node generator (`build.mjs`), the editorial overlay (`map.config.json`), and the HTML shell (`template/index.html`, the SVG engine from the v1 page, unchanged in look). Output is `site/dist/`, already covered by `.gitignore`. No framework, no package.json, no dependencies: this stays a markdown repo with a build script in it. Root `vercel.json` points Vercel at `node site/build.mjs`.
 - **Two inputs, cleanly split.** Everything derivable comes from the skills: which exist, their names, and their real `description` (now the hover tooltip on each node). Everything editorial — lifecycle column, executor type, connections, gates, loops, the sidebar flows — lives in `map.config.json`. Skill frontmatter stays lean, per `references/skill-standard.md`; no `map:` block was added to any SKILL.md.

@@ -1,8 +1,10 @@
-# The skills map
+# The Product OS map
 
-The visual front door to the Product OS: every skill in `oolio-pm/skills/`, where it sits in the
-lifecycle, what feeds what, and the curated end-to-end flows. Published on Vercel, rebuilt on every
-push, so the map is a **view of the skills**, not a second thing to keep in step with them.
+The visual front door to the **Oolio Product OS**: how the operating system actually runs, end to
+end. Every skill in `oolio-pm/skills/`, where it sits in the lifecycle, what feeds what, the review
+gates a person owns, the loops that close, and the artifacts the whole thing produces. Published on
+Vercel, rebuilt on every push, so the map is a **view of the OS**, not a second thing to keep in
+step with it.
 
 ```bash
 node site/build.mjs          # write site/dist/index.html
