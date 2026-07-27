@@ -2,6 +2,17 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-27 — Insights actually attach now (32 skills)
+
+Five skills have been promising to attach evidence to JPD ideas as native Insights and quietly failing, because the Atlassian MCP connector cannot write Insights and offers a comment instead. A comment is not an Insight: it does not show on the Insights tab, does not carry a source card, and does not roll up. That gap is closed.
+
+- **A helper owns the whole job**, `oolio-pm/bin/jpd-insight.mjs`: OAuth token storage, silent refresh, cloud and issue id lookup, the create mutation, and reads. Skills now run one command instead of each hand-rolling curl against the Polaris GraphQL API, which is why the failure mode used to differ depending on which skill you were in.
+- **`get` before `create`, always.** The helper reads an idea's existing Insights so a second pass over the same evidence does not duplicate the card, and it can pull every Insight in the project in a single call.
+- **Cards match what JPD writes itself.** Group `Web Page`, favicon icon derived from the source host, quote block in the shape the UI produces. Read back from the API, an agent-created card is indistinguishable from one a human added, which was not a given.
+- **Impact is not an API field, and the docs now say so.** The create payload has no impact control; it exists only in the UI. Impact ratings travel as labels and in the written record. The skills previously implied otherwise.
+- **One-time setup, done.** A 3LO OAuth app on Niel's account, token at `~/.jpd-insights-token.json` at mode 600, refreshing itself. `offline_access` matters and Atlassian's own sample authorize URL omits it; without it auth recurs hourly.
+- Proven live on OHSI-80. `jpd-loop`, `signal-radar`, `add-insight`, `feedback-to-idea` and `discovery-wayfinder` all point at the helper; `jpd-insights-api.md` is rewritten from a curl recipe into helper usage, keeping the schema traps for whoever maintains it.
+
 ## 2026-07-27 — The systems map: how data moves between the tools (32 skills)
 
 The Systems page has been a placeholder since the site became an app. It is now the second real map, and it answers a different question from the first. The lifecycle map shows how the **work** moves, skill to skill. This one shows what it moves **through**: thirteen systems, eighteen flows between them, and six routes you can trace end to end.

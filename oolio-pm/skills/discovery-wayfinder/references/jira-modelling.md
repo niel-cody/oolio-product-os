@@ -40,4 +40,4 @@ The two mandatory Idea guards (`issuetype = Idea` + the archived filter, see `${
 
 ## Known API gaps
 
-Same instance limits `jpd-loop` documents: the idea Links panel's web links are not API-writable, and idea types are UI-only to create. Native Polaris Insights ARE now creatable (via the Polaris GraphQL API or Chrome UI automation — see `${CLAUDE_PLUGIN_ROOT}/skills/jpd-loop/references/jpd-insights-api.md`), though still not via the Atlassian MCP connector. None of these block the wayfinder; they shape the setup step above.
+Same instance limits `jpd-loop` documents: the idea Links panel's web links are not API-writable, and idea types are UI-only to create. Native Polaris Insights ARE creatable, via the plugin helper `${CLAUDE_PLUGIN_ROOT}/bin/jpd-insight.mjs` (see `${CLAUDE_PLUGIN_ROOT}/skills/jpd-loop/references/jpd-insights-api.md`), though still not via the Atlassian MCP connector. None of these block the wayfinder; they shape the setup step above.

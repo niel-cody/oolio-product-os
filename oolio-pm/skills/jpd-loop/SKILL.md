@@ -88,11 +88,11 @@ Present a concise summary: verdict, rubric, top objections, the Insight list, li
      persona-by-persona transcript;
    - the rubric (with why), de-dupe, a balanced evidence table referencing sources by number,
      and a mandatory **References** section listing every source URL in full.
-3. **Create the native Insights on the idea** (description · link · impact each). Native
-   creation IS now supported — see `references/jpd-insights-api.md` for the two routes
-   (Polaris GraphQL API when network + creds allow; Chrome UI automation from cloud
-   sessions). Only if both routes are unavailable, fall back to handing the human a
-   paste-ready native-Insight list.
+3. **Create the native Insights on the idea** (description · link each). Run the plugin
+   helper — `node ${CLAUDE_PLUGIN_ROOT}/bin/jpd-insight.mjs create --file <batch>.json` —
+   after a `get` on the idea to skip duplicates; see `references/jpd-insights-api.md`.
+   Fall back to Chrome UI automation from cloud sessions, and only if neither works,
+   to handing the human a paste-ready native-Insight list.
 4. **Notify the reporter** (see Step 7a).
 5. Set `VPC Loop State = Done (Decision)`, `VPC Reviewed = 1`, then move `Exploring → Decision`.
 6. **If a matching delivery epic already exists** (found during evidence/de-dupe), offer to create the `Polaris work item link` (implements) idea → epic via `createIssueLink` — the delivery-link standard applies from `Ready for delivery` onward, and creating it now saves the Stage-6 backfill a row.

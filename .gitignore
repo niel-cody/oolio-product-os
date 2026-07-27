@@ -4,3 +4,7 @@
 *.bak-*
 .claude/
 dist/
+
+# JPD Insights credentials — these live in $HOME, never here. Belt and braces.
+.jpd-insights-token.json
+*insights-token*.json

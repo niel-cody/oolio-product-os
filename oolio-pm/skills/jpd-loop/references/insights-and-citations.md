@@ -23,12 +23,14 @@ Insights are how we make the verdict defensible: every meaningful claim in the V
 3. For each strong item, draft an Insight: one-line description + the real source URL + an impact rating with a one-line reason.
 4. Feed these to the council (they argue from the evidence, not assumption). The rubric scores (Desirability/Feasibility/Viability/Strategic Fit) should reflect the Insights.
 
-## Recording Insights — creation routes (updated Jul 2026)
-**Native Insight creation is now supported** (Atlassian confirmed the public Polaris GraphQL API for Insights, Jun 2026; the MCP connector still cannot do it). **Standard: every strong piece of evidence found for an idea gets attached as a native Insight on that idea** — not just listed in the description. Pick the first route that works in the current environment:
+## Recording Insights — how (updated Jul 2026)
+**Standard: every strong piece of evidence found for an idea gets attached as a native Insight on that idea** — not just listed in the description. The Atlassian MCP connector cannot write Insights and will offer a comment instead; a comment is not an Insight.
 
-1. **Route A — Polaris GraphQL API** (local Cowork / Claude Code sessions with network access): full recipe, auth flow, payload schema and gotchas in `references/jpd-insights-api.md`. Requires a one-time 3LO OAuth app setup by the user.
-2. **Route B — Chrome UI automation** (cloud sessions with the user's browser connected via Claude-in-Chrome): open the idea → Insights tab → paste the source URL into the link field (JPD unfurls it into a card) → set description and impact dots → Create. No setup needed; uses the user's logged-in JPD session.
-3. **Route C — paste-ready list (fallback only)**: if neither route is available, record the evidence in the idea Description append block and DISC page as before, and hand the human a ready-to-paste list (description · link · impact each).
+1. **The helper (default).** `node ${CLAUDE_PLUGIN_ROOT}/bin/jpd-insight.mjs` — `get` the idea to check for duplicates, then `create` (one Insight) or `create --file` (a batch). Auth is already set up and refreshes itself. Full usage in `references/jpd-insights-api.md`.
+2. **Chrome UI automation** (cloud sessions, which cannot reach the API host): open the idea → Insights tab → paste the source URL into the link field (JPD unfurls it into a card) → set description and impact dots → Create. Uses the user's logged-in JPD session.
+3. **Paste-ready list (fallback only)**: if neither works, record the evidence in the idea Description append block and DISC page as before, and hand the human a ready-to-paste list (description · link · impact each), saying why the helper failed.
+
+Note that impact is not settable through the API — it exists only in the UI. Impact ratings drafted for the council travel as labels on the card and in the written record; do not claim a created Insight carries an impact rating.
 
 Regardless of route, ALSO record the Insights as cited evidence in the **idea Description** append block and the **DISC decision-record page** — the native Insights and the written record must match.
 
