@@ -59,6 +59,22 @@ function frontmatter(text) {
 const dirsIn = (p) =>
   existsSync(p) ? readdirSync(p).filter((d) => statSync(join(p, d)).isDirectory()) : [];
 
+/* Everything a skill says, SKILL.md plus its reference files, as one string. The systems map
+   matches against this rather than the frontmatter alone: a skill's real connector list lives
+   in its reference pages as often as in its description. */
+function skillText(dir) {
+  const out = [];
+  const walk = (p) => {
+    for (const name of readdirSync(p)) {
+      const child = join(p, name);
+      if (statSync(child).isDirectory()) walk(child);
+      else if (/\.(md|json)$/.test(name)) out.push(readFileSync(child, "utf8"));
+    }
+  };
+  walk(dir);
+  return out.join("\n");
+}
+
 /* ------------------------------------------------- discover, marketplace-first
    oolio-pm is the first plugin, not the only one. A second team's plugin appears
    here automatically, and its skills show as unplaced until someone maps them. */
@@ -85,6 +101,7 @@ const marketplace = JSON.parse(readFileSync(join(ROOT, ".claude-plugin", "market
 
 const plugins = [];
 const discovered = {};
+const corpus = {};   // skill id -> everything that skill says, for the systems map to match against
 for (const entry of marketplace.plugins) {
   const base = join(ROOT, entry.source.replace(/^\.\//, ""));
   const skillsDir = join(base, "skills");
@@ -103,6 +120,7 @@ for (const entry of marketplace.plugins) {
     const skill = { id: dir, plugin: entry.name, description: fm.description || "" };
     skills.push(skill);
     discovered[dir] = skill;
+    corpus[dir] = skillText(join(skillsDir, dir));
   }
 
   plugins.push({
@@ -187,6 +205,53 @@ for (const fl of cfg.flows) {
   }
 }
 
+/* ------------------------------------------------------------------- systems
+   The second map. Where map.config.json is about how the work moves, this is about what it
+   moves through. Same split: the wires, the cadences and the routes are judgement calls and
+   live in systems.config.json; which skills actually touch which system is derived by matching
+   each system's patterns against everything its skills say, so the counts cannot go stale. */
+const sys = JSON.parse(readFileSync(join(SITE, "systems.config.json"), "utf8"));
+const systems = [];
+{
+  const bands = Object.keys(sys.kinds);
+  for (const [id, s] of Object.entries(sys.systems)) {
+    if (!bands.includes(s.band)) fail(`system "${id}" sits in band "${s.band}", which is not one of the kinds`);
+    // A pattern that matches nothing is either a renamed tool or a typo, and both look identical
+    // on the page: a system that quietly claims no skill uses it.
+    const res = (s.match || []).map((m) => new RegExp(m));
+    const touched = res.length
+      ? Object.keys(corpus).filter((k) => res.some((re) => re.test(corpus[k]))).sort()
+      : [];
+    // Only worth warning about for skill-driven systems. Granola and GitHub are moved by the
+    // nightly ingest and the vault's autosync, so no skill naming them is the fact, not drift.
+    if (s.driver !== "ingest")
+      for (const m of s.match || [])
+        if (!Object.values(corpus).some((t) => new RegExp(m).test(t)))
+          warn(`systems.config.json: "${id}" matches on /${m}/, which no skill mentions`);
+    systems.push({ id, ...s, match: undefined, skills: touched, skillCount: touched.length });
+  }
+}
+const knownSys = new Set(systems.map((s) => s.id));
+const sysWires = sys.wires.filter((w) => {
+  const ok = knownSys.has(w.from) && knownSys.has(w.to);
+  if (!ok) fail(`systems wire "${w.from}" → "${w.to}" names a system that does not exist`);
+  return ok;
+});
+{
+  const wired = new Set(sysWires.map((w) => w.from + ">" + w.to));
+  for (const r of sys.routes) {
+    for (const [id] of r.path)
+      if (!knownSys.has(id)) fail(`route "${r.name}" steps through "${id}", which is not a system`);
+    // Same trap as the map's flows: a step with no wire draws an invisible gap, and the page
+    // then shows a route that looks continuous and is not.
+    for (let i = 0; i < r.path.length - 1; i++) {
+      const [a] = r.path[i], [b] = r.path[i + 1];
+      if (!wired.has(a + ">" + b) && !wired.has(b + ">" + a))
+        fail(`route "${r.name}" step ${i + 1}→${i + 2} ("${a}" to "${b}") has no wire to draw`);
+    }
+  }
+}
+
 /* ----------------------------------------------------------------- changelog
    Parsed from CHANGELOG.md so shipping a skill updates the site, with no second copy. */
 const changelog = [];
@@ -227,6 +292,7 @@ problems.forEach((p) => console.error(`  DRIFT ${p}`));
 console.log(
   `\n  ${plugins.length} plugin(s) · ${skillCount} skills · ${nodes.length} nodes · ` +
   `${edges.length} connections · ${gates.length} gates · ${loops.length} loops · ` +
+  `${systems.length} systems · ${sysWires.length} wires · ${sys.routes.length} routes · ` +
   `${changelog.length} changelog entries`);
 
 /* ---------------------------------------------------------------------- emit */
@@ -252,6 +318,8 @@ const out = {
   about: cfg.about || {},
   map: { title: cfg.title, subtitle: cfg.subtitle, columns, nodes, edges, gates, loops,
          flows: cfg.flows, typeColour, typeLabel },
+  systems: { title: sys.title, subtitle: sys.subtitle, intro: sys.intro, kinds: sys.kinds,
+             systems, wires: sysWires, routes: sys.routes },
   changelog,
 };
 

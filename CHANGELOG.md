@@ -2,6 +2,17 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-27 — The systems map: how data moves between the tools (32 skills)
+
+The Systems page has been a placeholder since the site became an app. It is now the second real map, and it answers a different question from the first. The lifecycle map shows how the **work** moves, skill to skill. This one shows what it moves **through**: thirteen systems, eighteen flows between them, and six routes you can trace end to end.
+
+- **A different shape on purpose.** Signal enters on the left (Granola, Slack, Microsoft 365, HubSpot, Apify, the open web, PostHog, Figma), everything crosses through the Product OS in the middle, work lands in the systems of record on the right (JPD, Jira, Confluence, GitHub), and the Brain runs underneath the whole thing as the floor rather than a peer. The layout enforces the rule that matters: nothing on the left ever touches anything on the right directly. Every wire goes through the middle, which is what stops thirteen tools becoming thirteen conventions.
+- **Click anything.** A system opens a panel giving its cadence, whether we only read it or read and write it, exactly what we read and what we write, and every skill that touches it. A route traces its path across the map with the steps written out beside it, the same interaction the lifecycle map already uses.
+- **The skill-to-system links are derived, not drawn.** `generate.mjs` now reads everything each skill says, its `SKILL.md` and its reference files, and matches it against per-system patterns. Confluence reading "22 skills" is counted, not typed, so a new skill that talks to HubSpot raises HubSpot's number on the next build with nobody remembering to edit anything. Granola and GitHub honestly read "INGEST": no skill names them, because the nightly ingest and the vault's autosync move them.
+- **The judgement calls sit in `site/systems.config.json`**, the same split the lifecycle map uses. Cadence and scope are taken from the Brain's `_system/Sources.md`, which is the actual ingestion contract, rather than from memory. Nothing on the page is a guess about how we work.
+- **`--check` grew again**: a route step with no wire to draw, a wire naming a system that does not exist, a band that is not a declared kind, and a match pattern that no skill mentions are all now build-time problems. The last one is a warning rather than a failure, because a renamed tool and a typo look identical from here.
+- The paths list and step rows moved from the lifecycle map's stylesheet into `globals.css`, since two pages now share them.
+
 ## 2026-07-26 — The map becomes an app: navigation, skills index, changelog (32 skills)
 
 A single page could carry the map and nothing else. Everything a newcomer actually needs around it — what this is, what every skill does, what changed, how the tools connect — had nowhere to live. So the site is now a real app with navigation, built on Next.js, Tailwind and shadcn, and fully responsive. The zero-dependency rule that was right for one static page was the wrong rule for this, and was dropped deliberately rather than defended.

@@ -1,0 +1,134 @@
+/* The systems map's own styles. It shares the map's tokens and its sidebar furniture
+   (.flowbtn, .step, #legend) so the two pages read as one app, and owns everything that
+   is specific to a diagram about systems rather than about a lifecycle. */
+
+.sysstage svg#sysmap { display: block; width: 100%; height: 100%; touch-action: none; }
+
+#syslegend {
+  position: absolute; top: 12px; right: 14px; z-index: 5; background: rgba(13, 18, 27, .82);
+  border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; backdrop-filter: blur(4px);
+}
+#syslegend .lt {
+  font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: .14em;
+  color: var(--muted-ink); text-transform: uppercase; margin-bottom: 6px;
+}
+#syslegend .row { display: flex; gap: 14px; flex-wrap: wrap; }
+#syslegend .k {
+  display: flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono), monospace; font-size: 9.5px; color: #c3ccdb;
+}
+#syslegend .dot { width: 9px; height: 9px; border-radius: 3px; }
+#syslegend .key {
+  margin-top: 7px; padding-top: 7px; border-top: 1px dashed #1c2534;
+}
+#syslegend .key .k { color: var(--muted-ink); }
+
+#sysroutes { display: flex; flex-direction: column; gap: 6px; }
+
+/* No `display` here: an ID selector would beat Tailwind's `hidden md:flex` and drop the
+   stats on top of the map on a phone. Same trap as the lifecycle map's footer. */
+#sysfoot {
+  font-family: var(--font-mono), monospace; font-size: 10px; color: var(--muted-ink);
+  letter-spacing: .05em; gap: 16px; flex-wrap: wrap;
+}
+#sysfoot b { color: #aeb9cc; font-weight: 600; }
+
+/* ---- svg element classes ---- */
+.sys-band {
+  font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: .18em;
+  fill: var(--muted-ink); text-transform: uppercase;
+}
+.sys-label { font-family: var(--font-sans), sans-serif; font-weight: 600; font-size: 14px; fill: var(--ink); }
+.sys-note { font-family: var(--font-mono), monospace; font-size: 9px; fill: #8493aa; }
+.sys-cad { font-family: var(--font-mono), monospace; font-size: 8.5px; font-weight: 500; letter-spacing: .06em; }
+.sys-count { font-family: var(--font-mono), monospace; font-size: 8.5px; letter-spacing: .07em; fill: #6d7b91; }
+.core-title { font-family: var(--font-sans), sans-serif; font-weight: 700; font-size: 19px; fill: var(--ink); }
+.core-num { font-family: var(--font-sans), sans-serif; font-weight: 700; font-size: 46px; }
+.core-line { font-family: var(--font-mono), monospace; font-size: 9.5px; fill: #7f8da3; }
+
+.sw {
+  fill: none; stroke-width: 1.8; stroke-linecap: round; opacity: .38;
+  stroke-dasharray: 5 8; animation: sysflow 3s linear infinite;
+}
+.swire.on .sw, .swire.hl .sw { opacity: 1; stroke-dasharray: none; stroke-width: 2.4; animation: none; }
+.swlbl { opacity: .5; transition: opacity .2s; }
+.swire.on .swlbl, .swire.hl .swlbl { opacity: 1; }
+.sw-lbl { font-family: var(--font-mono), monospace; font-size: 8.5px; letter-spacing: .04em; }
+
+.snode { cursor: pointer; outline: none; }
+.snode:focus-visible .sbox { filter: drop-shadow(0 0 0 2px var(--orch)); }
+.sbox { transition: opacity .2s; }
+
+@keyframes sysflow { to { stroke-dashoffset: -26; } }
+/* The core is the only always-on thing here, so it is the only thing that breathes. */
+@keyframes corepulse {
+  0%, 100% { stroke-opacity: .07; transform: scale(1); }
+  50%      { stroke-opacity: .3;  transform: scale(1.012); }
+}
+/* origin must track CORE_X / CORE_Y in systems-engine.js */
+.corehalo { animation: corepulse 3.6s ease-in-out infinite; transform-origin: 770px 476px; }
+
+svg.has-sel .swire:not(.on):not(.hl) { opacity: .07; }
+svg.has-sel .snode:not(.on):not(.hl) { opacity: .16; }
+svg.has-sel #sysambient { opacity: .12; }
+.spart { pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sw { animation: none; }
+  .spart, .corehalo { display: none; }
+}
+
+/* ---- the detail panel ---- */
+.sd-t { font-size: 19px; font-weight: 700; line-height: 1.2; margin: 2px 0 7px; color: var(--sc, var(--ink)); }
+.sd-meta {
+  display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 12px;
+  font-family: var(--font-mono), monospace; font-size: 8.5px; letter-spacing: .1em;
+}
+.sd-meta span {
+  border: 1px solid var(--line); border-radius: 5px; padding: 3px 6px; color: var(--muted-ink);
+  background: #0f1521;
+}
+.sd-p { font-size: 12.5px; line-height: 1.55; color: var(--muted-ink); margin: 0 0 14px; }
+.sd-h {
+  font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted-ink); margin: 0 0 7px;
+  border-top: 1px dashed #182131; padding-top: 11px;
+}
+.sd-l { list-style: none; margin: 0 0 14px; padding: 0; }
+.sd-l li {
+  position: relative; padding-left: 13px; margin-bottom: 5px;
+  font-size: 12px; line-height: 1.4; color: #b5bfd0;
+}
+.sd-l li::before {
+  content: ""; position: absolute; left: 0; top: 6.5px;
+  width: 4px; height: 4px; border-radius: 1px; background: var(--sc, var(--orch)); opacity: .8;
+}
+.sd-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+.sd-tags span {
+  font-family: var(--font-mono), monospace; font-size: 9px; color: #97a3b7;
+  border: 1px solid var(--line); background: #0f1521; border-radius: 5px; padding: 2.5px 5px;
+}
+.sd-back {
+  font-family: var(--font-mono), monospace; font-size: 9.5px; letter-spacing: .08em;
+  color: var(--muted-ink); background: none; border: none; padding: 4px 0; cursor: pointer;
+}
+.sd-back:hover { color: var(--ink); }
+
+/* the overview copy the panel opens with, and returns to */
+.sd-intro-k { font-size: 15px; font-weight: 600; line-height: 1.35; margin-bottom: 10px; }
+.sd-intro-p { font-size: 12.5px; line-height: 1.55; color: var(--muted-ink); margin: 0 0 10px; }
+.sd-intro-n {
+  font-family: var(--font-mono), monospace; font-size: 10px; line-height: 1.5;
+  color: #6d7b91; border-top: 1px dashed #182131; padding-top: 10px; margin-top: 4px;
+}
+
+@media (min-width: 1024px) {
+  /* flex: none matters: without it flex-basis beats height on the main axis and the row
+     grows to fit the sidebar. 3.5rem header + its 1px border. */
+  .sysroot { flex: none; height: calc(100dvh - 3.5rem - 1px); }
+  .sysroot .sysstage, .sysroot > aside { height: 100%; }
+}
+
+@media (max-width: 1023px) and (orientation: landscape) {
+  .sysroot .sysstage { height: calc(100dvh - 3.5rem - 1px); }
+}

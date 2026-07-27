@@ -1,5 +1,5 @@
 {
-  "stamp": "318c145",
+  "stamp": "4674ee8",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -1233,7 +1233,732 @@
       "output": "Output / artifact"
     }
   },
+  "systems": {
+    "title": "How the data moves",
+    "subtitle": "SIGNAL IN · THE OS · SYSTEMS OF RECORD · THE VAULT UNDERNEATH",
+    "intro": {
+      "kicker": "Thirteen systems. One direction of travel.",
+      "lede": [
+        "Signal arrives from wherever it lives: a meeting, a deal, a rival's pricing page, a Slack thread nobody else read. The Product OS is what reads it, and the systems of record are where it lands as work.",
+        "Nothing here talks to anything else directly. Every arrow passes through the middle, which is the whole point: one place that knows the standard, so the same thing does not get written four different ways in four different tools."
+      ],
+      "note": "Cadence and scope come from the Brain's ingestion contract, not from memory. Click a system to see what we read from it and what we write back."
+    },
+    "kinds": {
+      "source": {
+        "colour": "#93a3bd",
+        "label": "Signal in"
+      },
+      "core": {
+        "colour": "#2dd4bf",
+        "label": "The Product OS"
+      },
+      "record": {
+        "colour": "#a78bfa",
+        "label": "System of record"
+      },
+      "vault": {
+        "colour": "#f5b942",
+        "label": "The vault"
+      }
+    },
+    "systems": [
+      {
+        "id": "granola",
+        "label": "Granola",
+        "note": "every meeting, transcribed",
+        "band": "source",
+        "row": 0,
+        "cadence": "NIGHTLY",
+        "driver": "ingest",
+        "access": "read",
+        "reads": [
+          "Every meeting transcript, all folders"
+        ],
+        "writes": [],
+        "detail": "A meeting earns a page in the vault only if it produced a decision, a material action, or a knowledge signal. Everything else becomes one line in that month's log, carrying its Granola id. Granola stays the full record; the vault keeps the distillate.",
+        "skills": [],
+        "skillCount": 0
+      },
+      {
+        "id": "slack",
+        "label": "Slack",
+        "note": "channels · mentions · threads",
+        "band": "source",
+        "row": 1,
+        "cadence": "NIGHTLY",
+        "driver": "both",
+        "access": "read",
+        "reads": [
+          "#product-mgmt and #core-pos",
+          "Anything that mentions Niel",
+          "Threads he took part in since the last run"
+        ],
+        "writes": [
+          "Drafted announcements, never sent unreviewed"
+        ],
+        "detail": "Distil only. Full message bodies never leave Slack and never land in the vault, which keeps a channel's noise out of the knowledge layer while its signal still gets through.",
+        "skills": [
+          "feedback-to-idea",
+          "grill-me",
+          "grill-my-prd",
+          "gtm-handover",
+          "gtm-marketing",
+          "gtm-playbooks",
+          "jira-epic-groomer",
+          "jira-epic-titler",
+          "jpd-loop",
+          "jpd-title-standard",
+          "steering-pack"
+        ],
+        "skillCount": 11
+      },
+      {
+        "id": "m365",
+        "label": "Microsoft 365",
+        "note": "Teams · Outlook · calendar",
+        "band": "source",
+        "row": 2,
+        "cadence": "NIGHTLY",
+        "driver": "both",
+        "access": "read",
+        "reads": [
+          "Teams mentions and threads",
+          "Unread and flagged mail addressed to Niel",
+          "Today's calendar, to frame the morning brief",
+          "SharePoint strategy and QBR material, on demand"
+        ],
+        "writes": [],
+        "detail": "What gets extracted is the ask, the decision, the commitment. Not the mail. An inbox copied into a vault is still an inbox.",
+        "skills": [
+          "jpd-loop"
+        ],
+        "skillCount": 1
+      },
+      {
+        "id": "hubspot",
+        "label": "HubSpot",
+        "note": "deals · tickets · closed-lost",
+        "band": "source",
+        "row": 3,
+        "cadence": "ON DEMAND",
+        "driver": "skills",
+        "access": "read",
+        "reads": [
+          "Closed-lost deals and their loss reasons",
+          "Support tickets and their trends",
+          "Deal notes behind a specific claim"
+        ],
+        "writes": [],
+        "detail": "Deliberately not in the nightly sweep. Commercial data is pulled when a question needs it and cited when it is used, rather than mirrored wholesale into a second place it can go stale.",
+        "skills": [
+          "add-insight",
+          "competitor-watch",
+          "feedback-to-idea",
+          "grill-me",
+          "grill-my-prd",
+          "jpd-loop",
+          "pm-compass",
+          "signal-radar",
+          "win-loss"
+        ],
+        "skillCount": 9
+      },
+      {
+        "id": "apify",
+        "label": "Apify",
+        "note": "the scraping layer",
+        "band": "source",
+        "row": 4,
+        "cadence": "ON DEMAND",
+        "driver": "skills",
+        "access": "read",
+        "reads": [
+          "Competitor sites, pricing and changelogs",
+          "Review sites and app store ratings",
+          "Operator communities and social"
+        ],
+        "writes": [],
+        "detail": "The outside world does not have an API, so Apify is how we read it. Actors are pinned per source, and every finding carries the URL it came from, because an uncited competitor claim is a rumour.",
+        "skills": [
+          "competitor-watch",
+          "jpd-loop",
+          "signal-radar"
+        ],
+        "skillCount": 3
+      },
+      {
+        "id": "web",
+        "label": "The open web",
+        "note": "market moves · public claims",
+        "band": "source",
+        "row": 5,
+        "cadence": "NIGHTLY",
+        "driver": "both",
+        "access": "read",
+        "reads": [
+          "Competitors named in the Market wiki",
+          "Material moves only: funding, launches, pricing, M&A"
+        ],
+        "writes": [],
+        "detail": "Scoped to the competitors we already track, and to moves that would change a decision. A general news feed would be noise wearing a research badge.",
+        "skills": [
+          "competitor-watch",
+          "jpd-loop",
+          "signal-radar",
+          "storm-research",
+          "wiki-lint",
+          "wiki-query"
+        ],
+        "skillCount": 6
+      },
+      {
+        "id": "posthog",
+        "label": "PostHog",
+        "note": "did anyone use it?",
+        "band": "source",
+        "row": 6,
+        "cadence": "PER LAUNCH",
+        "driver": "skills",
+        "access": "read",
+        "reads": [
+          "Events and funnels behind a PRD's success metrics",
+          "Adoption and retention after a launch"
+        ],
+        "writes": [],
+        "detail": "The only system on this map that can tell us we were wrong. Its numbers are read against targets a PRD committed to before launch, so the verdict is not chosen after the fact.",
+        "skills": [
+          "metrics-review"
+        ],
+        "skillCount": 1
+      },
+      {
+        "id": "figma",
+        "label": "Figma",
+        "note": "designs under review",
+        "band": "source",
+        "row": 7,
+        "cadence": "ON DEMAND",
+        "driver": "skills",
+        "access": "read",
+        "reads": [
+          "Frames, flows and prototypes handed to the Design Council"
+        ],
+        "writes": [],
+        "detail": "Read as evidence, not as a source of truth. A design enters the map when someone asks the council to test it, and leaves as a verdict on the decision record.",
+        "skills": [
+          "convene-vpc",
+          "design-council-review",
+          "discovery-wayfinder",
+          "grill-me",
+          "jpd-idea-groomer",
+          "jpd-loop",
+          "write-prd"
+        ],
+        "skillCount": 7
+      },
+      {
+        "id": "core",
+        "label": "The Product OS",
+        "note": "Cowork · Claude · the skills",
+        "band": "core",
+        "row": 0,
+        "cadence": "ALWAYS ON",
+        "driver": "skills",
+        "access": "run",
+        "reads": [
+          "Everything on the left, through MCP connectors"
+        ],
+        "writes": [
+          "Everything on the right, through the same connectors"
+        ],
+        "detail": "Not a system we bought. It is the plugin, installed by real people in Cowork, that knows the house standard and applies it the same way every time. Every arrow on this page passes through here, which is what stops thirteen tools becoming thirteen conventions.",
+        "skills": [],
+        "skillCount": 0
+      },
+      {
+        "id": "jpd",
+        "label": "Jira Product Discovery",
+        "note": "ideas · insights · fields",
+        "band": "record",
+        "row": 0,
+        "cadence": "AMBER GATE",
+        "driver": "skills",
+        "access": "read-write",
+        "reads": [
+          "The whole idea backlog, for de-duplication",
+          "Existing insights already attached to an idea"
+        ],
+        "writes": [
+          "New ideas, de-duped against the backlog first",
+          "Native insights, carrying their citation",
+          "The full field standard: pillar, theme, size, persona, commitment"
+        ],
+        "detail": "Where a signal stops being a message and becomes a candidate. Evidence attaches natively rather than being pasted into a description, so an idea's case can be read without reading the thread it came from.",
+        "skills": [
+          "add-insight",
+          "behavioural-alchemist",
+          "competitor-watch",
+          "discovery-wayfinder",
+          "feedback-to-idea",
+          "grill-me",
+          "grill-my-prd",
+          "jira-epic-groomer",
+          "jira-epic-titler",
+          "jpd-idea-groomer",
+          "jpd-loop",
+          "jpd-title-standard",
+          "metrics-review",
+          "pm-compass",
+          "signal-radar",
+          "steering-pack",
+          "write-prd"
+        ],
+        "skillCount": 17
+      },
+      {
+        "id": "jira",
+        "label": "Jira",
+        "note": "epics · the delivery backlog",
+        "band": "record",
+        "row": 1,
+        "cadence": "AMBER GATE",
+        "driver": "both",
+        "access": "read-write",
+        "reads": [
+          "Existing issues, before anything is created",
+          "Status changes and due-soon items, for the brief"
+        ],
+        "writes": [
+          "Groomed epics in the What / Why / Who pattern",
+          "Titles held to the capability-for-outcome standard"
+        ],
+        "detail": "Search, link, check, validate, and only create if it is genuinely needed. Every write is amber: a person approves it. The fastest way to ruin a backlog is to let something tireless write to it.",
+        "skills": [
+          "competitor-watch",
+          "convene-vpc",
+          "discovery-wayfinder",
+          "feedback-to-idea",
+          "grill-me",
+          "grill-my-prd",
+          "gtm-handover",
+          "gtm-marketing",
+          "gtm-playbooks",
+          "jira-epic-groomer",
+          "jira-epic-titler",
+          "jpd-idea-groomer",
+          "jpd-loop",
+          "jpd-title-standard",
+          "pm-compass",
+          "signal-radar",
+          "win-loss",
+          "write-prd"
+        ],
+        "skillCount": 18
+      },
+      {
+        "id": "confluence",
+        "label": "Confluence",
+        "note": "PRDs · decisions · packs",
+        "band": "record",
+        "row": 2,
+        "cadence": "AMBER GATE",
+        "driver": "skills",
+        "access": "read-write",
+        "reads": [
+          "Existing PRDs and decision records",
+          "Pages changed since the last run, in scope spaces"
+        ],
+        "writes": [
+          "PRDs, and the grill record that resolved them",
+          "Validated council decisions",
+          "Steering review packs"
+        ],
+        "detail": "The human-readable front door. A decision that only exists in a chat log gets relitigated in six weeks, so the council's verdict is written down where the next person will actually find it.",
+        "skills": [
+          "competitor-watch",
+          "convene-vpc",
+          "design-council-review",
+          "discovery-wayfinder",
+          "grill-me",
+          "grill-my-prd",
+          "gtm-handover",
+          "gtm-marketing",
+          "gtm-playbooks",
+          "jira-epic-groomer",
+          "jira-epic-titler",
+          "jpd-idea-groomer",
+          "jpd-loop",
+          "leadership-subcommittee-review",
+          "metrics-review",
+          "operator-council-review",
+          "pm-compass",
+          "signal-radar",
+          "steering-pack",
+          "storm-research",
+          "win-loss",
+          "write-prd"
+        ],
+        "skillCount": 22
+      },
+      {
+        "id": "github",
+        "label": "GitHub",
+        "note": "the OS and the vault",
+        "band": "record",
+        "row": 3,
+        "cadence": "EVERY 10 MIN",
+        "driver": "ingest",
+        "access": "read-write",
+        "reads": [
+          "Activity across the OS repo and the vault repo"
+        ],
+        "writes": [
+          "The vault, pushed automatically",
+          "The Product OS itself, versioned by commit"
+        ],
+        "detail": "Two repos: the plugin the team installs, and the vault it writes into. Both are versioned by commit rather than by a number someone has to remember to bump, which is why an edit reaches the team without a release.",
+        "skills": [],
+        "skillCount": 0
+      },
+      {
+        "id": "brain",
+        "label": "The Brain",
+        "note": "my_brain · Obsidian, git-backed",
+        "band": "vault",
+        "row": 0,
+        "cadence": "CONTINUOUS",
+        "driver": "both",
+        "access": "read-write",
+        "reads": [
+          "Whatever a question needs, answered with citations"
+        ],
+        "writes": [
+          "Meeting distillates, decisions and actions",
+          "Competitor dossiers and market findings",
+          "Product domain knowledge, with provenance"
+        ],
+        "detail": "The floor the whole thing stands on. Owned markdown, typed pages, supersession instead of deletion, and answers that come back with receipts. It is why the second time someone asks a question, the answer does not start from zero.",
+        "skills": [
+          "competitor-watch",
+          "jpd-loop",
+          "pm-compass",
+          "signal-radar",
+          "storm-research",
+          "wiki-ingest",
+          "wiki-lint",
+          "wiki-new",
+          "wiki-query",
+          "wiki-status"
+        ],
+        "skillCount": 10
+      }
+    ],
+    "wires": [
+      {
+        "from": "granola",
+        "to": "core",
+        "kind": "in",
+        "label": "transcripts"
+      },
+      {
+        "from": "slack",
+        "to": "core",
+        "kind": "in",
+        "label": "distilled"
+      },
+      {
+        "from": "m365",
+        "to": "core",
+        "kind": "in"
+      },
+      {
+        "from": "hubspot",
+        "to": "core",
+        "kind": "in",
+        "label": "on demand"
+      },
+      {
+        "from": "apify",
+        "to": "core",
+        "kind": "in",
+        "label": "scraped"
+      },
+      {
+        "from": "web",
+        "to": "core",
+        "kind": "in"
+      },
+      {
+        "from": "posthog",
+        "to": "core",
+        "kind": "in",
+        "label": "actuals"
+      },
+      {
+        "from": "figma",
+        "to": "core",
+        "kind": "in"
+      },
+      {
+        "from": "core",
+        "to": "jpd",
+        "kind": "out",
+        "label": "ideas · insights"
+      },
+      {
+        "from": "core",
+        "to": "jira",
+        "kind": "out",
+        "label": "epics"
+      },
+      {
+        "from": "core",
+        "to": "confluence",
+        "kind": "out",
+        "label": "PRDs · decisions"
+      },
+      {
+        "from": "core",
+        "to": "github",
+        "kind": "out"
+      },
+      {
+        "from": "jpd",
+        "to": "core",
+        "kind": "back"
+      },
+      {
+        "from": "jira",
+        "to": "core",
+        "kind": "back"
+      },
+      {
+        "from": "confluence",
+        "to": "core",
+        "kind": "back",
+        "label": "read back as context"
+      },
+      {
+        "from": "core",
+        "to": "brain",
+        "kind": "vault",
+        "label": "distilled, with provenance"
+      },
+      {
+        "from": "brain",
+        "to": "core",
+        "kind": "vault",
+        "label": "answered with citations"
+      },
+      {
+        "from": "brain",
+        "to": "github",
+        "kind": "vault",
+        "label": "pushed every 10 min"
+      }
+    ],
+    "routes": [
+      {
+        "name": "A meeting becomes work",
+        "accent": "--signal",
+        "path": [
+          [
+            "granola",
+            "Granola",
+            "Someone says something that matters in a call nobody wrote up."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "The nightly ingest reads the transcript and asks one question: did this produce a decision, an action, or something worth knowing?"
+          ],
+          [
+            "brain",
+            "The Brain",
+            "If it did, it earns a page. The decision is typed and dated, the action becomes a checkbox, and both carry the meeting they came from."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "Actions that turn out to be real work get picked up and routed."
+          ],
+          [
+            "jira",
+            "Jira",
+            "It becomes a ticket, with a person approving the write. The thing said out loud in a call is now on a board."
+          ]
+        ]
+      },
+      {
+        "name": "Customer signal reaches the backlog",
+        "accent": "--ai",
+        "path": [
+          [
+            "hubspot",
+            "HubSpot",
+            "A deal closes lost, or the same complaint arrives on the fourth ticket this month."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "The signal is checked against the entire idea backlog before anything is created, because the fastest way to break a backlog is to fill it with the same idea five times."
+          ],
+          [
+            "jpd",
+            "Jira Product Discovery",
+            "It lands as an idea, or attaches to the one that already exists, with the evidence as a native insight rather than a pasted quote."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "The finding is worth keeping beyond this one idea."
+          ],
+          [
+            "brain",
+            "The Brain",
+            "It joins what we already know about that domain, so the next person to ask starts further ahead."
+          ]
+        ]
+      },
+      {
+        "name": "Watching the market",
+        "accent": "--signal",
+        "path": [
+          [
+            "apify",
+            "Apify",
+            "A rival changes their pricing page. The weekly sweep reads the site, the reviews and the communities around it."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "The delta is what matters, not the snapshot. Only what changed since last time gets reported."
+          ],
+          [
+            "brain",
+            "The Brain",
+            "The competitor's dossier is updated in place, so there is one living page per rival instead of nine dated documents."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "A change that opens a real gap gets routed forward."
+          ],
+          [
+            "jpd",
+            "Jira Product Discovery",
+            "The gap becomes a cited insight on the ideas it actually supports."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "The sales team need it in a form they can use in a room."
+          ],
+          [
+            "confluence",
+            "Confluence",
+            "A battlecard: fact, impact, act."
+          ]
+        ]
+      },
+      {
+        "name": "Idea to shipped",
+        "accent": "--orch",
+        "path": [
+          [
+            "jpd",
+            "Jira Product Discovery",
+            "A groomed idea with a problem, a hypothesis and success metrics it has agreed to be judged on."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "It becomes a PRD, gets pressure-tested question by question, and goes to the council for a verdict."
+          ],
+          [
+            "confluence",
+            "Confluence",
+            "The PRD and the validated decision are published where the next person will find them."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "The decision becomes delivery work, in the house pattern."
+          ],
+          [
+            "jira",
+            "Jira",
+            "A groomed epic, and the launch pack that hangs off it."
+          ]
+        ]
+      },
+      {
+        "name": "Did it actually work?",
+        "accent": "--output",
+        "path": [
+          [
+            "posthog",
+            "PostHog",
+            "The feature has been live a month. The numbers exist whether or not anyone looks."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "Actuals are read against the targets the PRD committed to before launch, so the bar cannot move after the result is known."
+          ],
+          [
+            "confluence",
+            "Confluence",
+            "A scorecard: target, actual, trend, verdict. Including the verdicts nobody enjoys."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "A breached metric is not a post-mortem, it is a signal."
+          ],
+          [
+            "jpd",
+            "Jira Product Discovery",
+            "It goes back in the top of the funnel as a new idea, with evidence this time."
+          ]
+        ]
+      },
+      {
+        "name": "The nightly sweep",
+        "accent": "--loop",
+        "path": [
+          [
+            "slack",
+            "Slack",
+            "At 10pm, with nobody watching: Slack channels and mentions, Teams and Outlook, Jira movement, Confluence changes, GitHub activity, and every meeting of the day."
+          ],
+          [
+            "core",
+            "The Product OS",
+            "One run, one contract. Each source has a declared scope, and anything found outside it is proposed in the morning brief rather than quietly ingested."
+          ],
+          [
+            "brain",
+            "The Brain",
+            "What survives the promotion gate becomes pages. What does not becomes one line in a log, still findable, not cluttering the vault."
+          ],
+          [
+            "github",
+            "GitHub",
+            "Committed and pushed automatically. By morning the brief is written, and the vault on every device is the same vault."
+          ]
+        ]
+      }
+    ]
+  },
   "changelog": [
+    {
+      "date": "2026-07-27",
+      "title": "The systems map: how data moves between the tools (32 skills)",
+      "heading": "2026-07-27 — The systems map: how data moves between the tools (32 skills)",
+      "body": "The Systems page has been a placeholder since the site became an app. It is now the second real map, and it answers a different question from the first. The lifecycle map shows how the **work** moves, skill to skill. This one shows what it moves **through**: thirteen systems, eighteen flows between them, and six routes you can trace end to end.\n\n- **A different shape on purpose.** Signal enters on the left (Granola, Slack, Microsoft 365, HubSpot, Apify, the open web, PostHog, Figma), everything crosses through the Product OS in the middle, work lands in the systems of record on the right (JPD, Jira, Confluence, GitHub), and the Brain runs underneath the whole thing as the floor rather than a peer. The layout enforces the rule that matters: nothing on the left ever touches anything on the right directly. Every wire goes through the middle, which is what stops thirteen tools becoming thirteen conventions.\n- **Click anything.** A system opens a panel giving its cadence, whether we only read it or read and write it, exactly what we read and what we write, and every skill that touches it. A route traces its path across the map with the steps written out beside it, the same interaction the lifecycle map already uses.\n- **The skill-to-system links are derived, not drawn.** `generate.mjs` now reads everything each skill says, its `SKILL.md` and its reference files, and matches it against per-system patterns. Confluence reading \"22 skills\" is counted, not typed, so a new skill that talks to HubSpot raises HubSpot's number on the next build with nobody remembering to edit anything. Granola and GitHub honestly read \"INGEST\": no skill names them, because the nightly ingest and the vault's autosync move them.\n- **The judgement calls sit in `site/systems.config.json`**, the same split the lifecycle map uses. Cadence and scope are taken from the Brain's `_system/Sources.md`, which is the actual ingestion contract, rather than from memory. Nothing on the page is a guess about how we work.\n- **`--check` grew again**: a route step with no wire to draw, a wire naming a system that does not exist, a band that is not a declared kind, and a match pattern that no skill mentions are all now build-time problems. The last one is a warning rather than a failure, because a renamed tool and a typo look identical from here.\n- The paths list and step rows moved from the lifecycle map's stylesheet into `globals.css`, since two pages now share them."
+    },
     {
       "date": "2026-07-26",
       "title": "The map becomes an app: navigation, skills index, changelog (32 skills)",

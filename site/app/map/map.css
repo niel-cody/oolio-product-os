@@ -19,34 +19,9 @@
 }
 #legend .dot { width: 9px; height: 9px; border-radius: 3px; }
 
+/* The path list and its step rows are shared with the systems map, so they live in
+   globals.css. Only the container is the map's own. */
 #flows { display: flex; flex-direction: column; gap: 6px; }
-.flowbtn {
-  text-align: left; background: #0f1521; border: 1px solid var(--line); border-radius: 8px;
-  padding: 8px 11px; color: var(--ink); cursor: pointer; font-family: inherit; transition: .18s;
-  display: flex; align-items: center; gap: 9px; width: 100%;
-}
-.flowbtn:hover { border-color: #33415a; background: #121a28; }
-.flowbtn.on {
-  border-color: var(--accent-line, #a78bfa); background: #141d2b;
-  box-shadow: 0 0 0 1px var(--accent-line, #a78bfa) inset;
-}
-.flowbtn .idx { font-family: var(--font-mono), monospace; font-size: 10px; color: var(--muted-ink); width: 14px; }
-.flowbtn .nm { font-size: 12.5px; font-weight: 500; }
-.flowbtn .ct { margin-left: auto; font-family: var(--font-mono), monospace; font-size: 9px; color: var(--muted-ink); }
-
-#steps .shd {
-  font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: .14em;
-  color: var(--muted-ink); text-transform: uppercase; margin-bottom: 10px;
-}
-.step { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px dashed #182131; }
-.step:last-child { border-bottom: none; }
-.step .n {
-  font-family: var(--font-mono), monospace; font-size: 10px; color: #0a0e14;
-  background: var(--sc, #a78bfa); min-width: 19px; height: 19px; border-radius: 5px;
-  display: flex; align-items: center; justify-content: center; font-weight: 600; margin-top: 1px;
-}
-.step .b { font-size: 12.5px; font-weight: 600; line-height: 1.25; }
-.step .d { font-size: 11px; color: var(--muted-ink); line-height: 1.3; margin-top: 2px; font-weight: 400; }
 
 /* No `display` here on purpose: this is an ID selector, so it would beat Tailwind's
    `hidden md:flex` and the stats would sit on top of the map on a phone. */
