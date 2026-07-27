@@ -12,6 +12,7 @@ Five skills have been promising to attach evidence to JPD ideas as native Insigh
 - **Impact is not an API field, and the docs now say so.** The create payload has no impact control; it exists only in the UI. Impact ratings travel as labels and in the written record. The skills previously implied otherwise.
 - **One-time setup, done.** A 3LO OAuth app on Niel's account, token at `~/.jpd-insights-token.json` at mode 600, refreshing itself. `offline_access` matters and Atlassian's own sample authorize URL omits it; without it auth recurs hourly.
 - Proven live on OHSI-80. `jpd-loop`, `signal-radar`, `add-insight`, `feedback-to-idea` and `discovery-wayfinder` all point at the helper; `jpd-insights-api.md` is rewritten from a curl recipe into helper usage, keeping the schema traps for whoever maintains it.
+- **Two defects found in review the same day and fixed.** The token store was written whole from a caller's copy, so a write landing after a refresh would restore the pre-refresh values; because Atlassian rotates refresh tokens, that could restore a dead one and force a full re-authorisation. Writes are now field-level patches merged against the file on disk. Separately, the auth command's timeout timer kept the event loop alive, so a successful auth left the terminal sitting idle for five minutes before exiting; the timer is now unreferenced and says something useful when it does fire.
 
 ## 2026-07-27 — The systems map: how data moves between the tools (32 skills)
 

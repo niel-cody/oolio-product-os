@@ -62,8 +62,14 @@ function loadStore() {
   return JSON.parse(readFileSync(TOKEN_FILE, 'utf8'));
 }
 
-function saveStore(store) {
-  writeFileSync(TOKEN_FILE, JSON.stringify(store, null, 2));
+// Merge on write rather than overwrite. A caller can hold a copy of the store
+// from before an api() call refreshed the token underneath it; writing that copy
+// back verbatim would restore the old refresh token, and since Atlassian rotates
+// them, the old one may already be dead. Losing the refresh token means a full
+// browser re-auth, so this is worth the extra read.
+function saveStore(patch) {
+  const current = existsSync(TOKEN_FILE) ? JSON.parse(readFileSync(TOKEN_FILE, 'utf8')) : {};
+  writeFileSync(TOKEN_FILE, JSON.stringify({ ...current, ...patch }, null, 2));
   chmodSync(TOKEN_FILE, 0o600);
 }
 
@@ -146,7 +152,12 @@ async function cmdAuth(args) {
       resolve();
     });
     server.listen(7777);
-    setTimeout(() => { server.close(); resolve(); }, 300000);
+    // unref so a successful auth exits immediately instead of the process sitting
+    // idle until this timer fires. Node keeps the loop alive for a pending timer.
+    setTimeout(() => {
+      console.error('✗ timed out waiting for the redirect. Re-run and click Accept sooner.');
+      server.close(); resolve();
+    }, 300000).unref();
   });
 
   if (existsSync(TOKEN_FILE)) await resolveCloudId();
@@ -165,11 +176,12 @@ async function accessToken() {
   });
   if (!data.access_token) die(`refresh failed (${JSON.stringify(data)}). Delete ${TOKEN_FILE} and re-run auth.`);
 
-  store.access_token = data.access_token;
-  store.expires_at = Date.now() + (data.expires_in || 3600) * 1000;
-  if (data.refresh_token) store.refresh_token = data.refresh_token;
-  saveStore(store);
-  return store.access_token;
+  saveStore({
+    access_token: data.access_token,
+    expires_at: Date.now() + (data.expires_in || 3600) * 1000,
+    ...(data.refresh_token ? { refresh_token: data.refresh_token } : {}),
+  });
+  return data.access_token;
 }
 
 // -------------------------------------------------------------- id resolution
@@ -192,8 +204,7 @@ async function resolveCloudId() {
   const resources = await api('/oauth/token/accessible-resources');
   const match = resources.find((r) => r.url.includes(store.site || DEFAULT_SITE));
   if (!match) die(`site ${store.site || DEFAULT_SITE} not in accessible resources: ${resources.map((r) => r.url).join(', ')}`);
-  store.cloud_id = match.id;
-  saveStore(store);
+  saveStore({ cloud_id: match.id });
   console.log(`✓ cloud id for ${match.url}: ${match.id}`);
   return match.id;
 }
