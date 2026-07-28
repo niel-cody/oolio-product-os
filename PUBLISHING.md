@@ -67,9 +67,19 @@ That's it. On the next session, everyone on auto-update has the change. No relea
 
 ## D. Cowork note and the zip fallback
 
-Cowork is a separate surface from Claude Code, and its marketplace sync **freezes per slug**: once a slug stops updating it does not recover, and re-adding the same slug inherits the freeze. This is Anthropic-side and there is nothing to fix in this repo.
+**Cowork cannot add this marketplace at all.** Not a stale cache and not a per-slug freeze, which is what we assumed until 2026-07-28. A brand-new add fails too, with "Marketplace sync failed. Check the repository URL and try again."
 
-**This is now observed, not suspected.** Three slugs have frozen: `oolio-pm-plugin`, `oolio-pm-plugins`, and (on 2026-07-28) `oolio-product-os`, the last with a valid newer commit sitting on `main` and the UI reporting "Failed to update marketplace". The plugin content was verified clean at the time: valid manifests, 32 skills parsing, no symlinks, 1.4 MB. Do not spend time debugging this again.
+**The evidence, gathered 2026-07-28.** The fault is not in this repo:
+
+| Check | Result |
+|---|---|
+| `claude plugin validate` on this repo | passes (one warning, the deliberate no-version) |
+| Same validation on a fresh anonymous clone | passes |
+| Anonymous GitHub API / raw / `git clone` | 200 / 200 / OK |
+| `claude plugin marketplace add oolio-group/oolio-product-os` | **succeeds** |
+| Cowork → Add marketplace, same URL | **fails** |
+
+Same URL, same manifest, same commit: Claude Code accepts it and Cowork rejects it. This is a Cowork bug and nothing in this repo can fix it. Do not re-debug it; if you want it fixed, chase the bug report rather than the config.
 
 **So in Cowork, the zip is the path, not the fallback:**
 1. Ask me to *"cut the release zip."* I run `scripts/package-plugin.sh` (it builds `dist/oolio-pm.zip` with the plugin root at the archive root).

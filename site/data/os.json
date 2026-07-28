@@ -1,5 +1,5 @@
 {
-  "stamp": "05c8a86",
+  "stamp": "cdacc6a",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -1953,6 +1953,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-07-28",
+      "title": "Isolate the Cowork sync failure to Cowork (32 skills)",
+      "heading": "2026-07-28 — Isolate the Cowork sync failure to Cowork (32 skills)",
+      "body": "We had assumed Cowork was serving a stale cache that froze per marketplace slug. That was wrong, and the wrong explanation was briefly written into PUBLISHING.md.\n\n- **A fresh marketplace add fails too**, with \"Marketplace sync failed. Check the repository URL and try again.\" A freeze cannot explain a first-time add.\n- **The repo is provably not at fault.** `claude plugin validate` passes on the repo and on a fresh anonymous clone; the GitHub API, raw file access and `git clone` all succeed unauthenticated; and `claude plugin marketplace add` accepts the identical URL and manifest.\n- **Same input, two results**: Claude Code adds it, Cowork rejects it. PUBLISHING section D now carries that evidence table instead of the freeze story, so nobody re-debugs the repo.\n- Confirmed along the way that omitting `version` is correct, not a workaround: the plugins reference states that without it Claude Code falls back to the git commit SHA, which is exactly the behaviour we want."
+    },
     {
       "date": "2026-07-28",
       "title": "Documentation audit: fix what the docs got wrong (32 skills)",

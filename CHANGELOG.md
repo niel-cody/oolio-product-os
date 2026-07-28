@@ -2,6 +2,15 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-28 — Isolate the Cowork sync failure to Cowork (32 skills)
+
+We had assumed Cowork was serving a stale cache that froze per marketplace slug. That was wrong, and the wrong explanation was briefly written into PUBLISHING.md.
+
+- **A fresh marketplace add fails too**, with "Marketplace sync failed. Check the repository URL and try again." A freeze cannot explain a first-time add.
+- **The repo is provably not at fault.** `claude plugin validate` passes on the repo and on a fresh anonymous clone; the GitHub API, raw file access and `git clone` all succeed unauthenticated; and `claude plugin marketplace add` accepts the identical URL and manifest.
+- **Same input, two results**: Claude Code adds it, Cowork rejects it. PUBLISHING section D now carries that evidence table instead of the freeze story, so nobody re-debugs the repo.
+- Confirmed along the way that omitting `version` is correct, not a workaround: the plugins reference states that without it Claude Code falls back to the git commit SHA, which is exactly the behaviour we want.
+
 ## 2026-07-28 — Documentation audit: fix what the docs got wrong (32 skills)
 
 An audit against Anthropic's plugin documentation and the live Cowork UI found five defects. Skill counts, internal links, and the no-version-field rule were all already consistent; these were not.
