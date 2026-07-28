@@ -2,6 +2,14 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-28 — Trim two skill descriptions under the 1024-character limit (32 skills)
+
+`signal-radar` (1280) and `behavioural-alchemist` (1060) had description fields over the 1024-character limit. Both load today, so nothing was broken, but a limit that is not enforced yet is still a limit.
+
+- **Every trigger phrase survives.** The description is what routes a request to a skill, so the cuts came out of prose and duplication rather than the phrases people actually type. `signal-radar` carried two separate "Do NOT trigger" blocks; they are now one.
+- Down to 1003 and 971. The remaining margin is deliberate: landing one character under the limit just moves the problem to the next edit.
+- `competitor-watch` (981), `jpd-idea-groomer` (963) and `jpd-title-standard` (942) are the next closest and were left alone.
+
 ## 2026-07-27 — Insights actually attach now (32 skills)
 
 Five skills have been promising to attach evidence to JPD ideas as native Insights and quietly failing, because the Atlassian MCP connector cannot write Insights and offers a comment instead. A comment is not an Insight: it does not show on the Insights tab, does not carry a source card, and does not roll up. That gap is closed.

@@ -1,25 +1,20 @@
 ---
 name: signal-radar
 description: >-
-  Synthesise HubSpot, web, and social signal (via Apify) into evidence for
-  JPD ideas, and scan for gaps between real market and customer demand and
-  what is actually on the backlog. Trigger when the user says "run signal
-  radar", "sync the brain", "what's the market saying about X", "validate
-  this idea with real signal", "find gaps in the backlog / roadmap", "what
-  are we missing", "scan HubSpot and social for signal on this", or asks to
-  keep the Brain in sync with fresh market and customer research. Do
-  NOT trigger for a single already-found piece of evidence the user just
-  wants attached to ideas (use `add-insight`). Two
-  modes: idea mode (given a JPD key, gathers external evidence and attaches
-  it as native Insights on the idea) and gap-scan mode (no key, scans the
-  whole backlog against market, customer, and social signal, then hands
-  candidate gaps to `feedback-to-idea`). Always writes findings into the
-  Brain so research compounds instead of repeating. Do NOT trigger for raw
-  pasted feedback (use `feedback-to-idea`), the full VPC loop (use
-  `jpd-loop`), a single-topic deep-dive report with no backlog tie-in
-  (use `storm-research`), standing competitor intelligence, dossiers,
-  sweeps, or battlecards (use `competitor-watch`), or closed-lost deal
-  analysis (use `win-loss`).
+  Synthesise HubSpot, web, and social signal (via Apify) into evidence for JPD
+  ideas, and scan for gaps between market demand and the backlog. Two modes:
+  idea mode (a JPD key: gathers evidence and attaches it as
+  native Insights) and gap-scan mode (no key: scans the backlog against market,
+  customer, and social signal, handing candidates to `feedback-to-idea`).
+  Findings always land in the Brain, so research compounds. Trigger when the
+  user says "run signal radar", "sync the brain",
+  "what's the market saying about X", "validate this idea with real signal",
+  "find gaps in the backlog / roadmap", "what are we missing", or "scan HubSpot
+  and social for signal". Do NOT trigger for one already-found piece of evidence
+  to attach (use `add-insight`), raw pasted feedback (use `feedback-to-idea`),
+  the full VPC loop (use `jpd-loop`), a deep-dive with no backlog tie-in (use
+  `storm-research`), competitor dossiers, sweeps, or battlecards (use
+  `competitor-watch`), or closed-lost deal analysis (use `win-loss`).
 ---
 
 # Signal radar

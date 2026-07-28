@@ -1,5 +1,5 @@
 {
-  "stamp": "294c84d",
+  "stamp": "19d87ab",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -17,7 +17,7 @@
         {
           "id": "behavioural-alchemist",
           "plugin": "oolio-pm",
-          "description": "Summon Roy, the Behavioural Alchemist, to read a decision, feature, price, loyalty scheme, or piece of positioning through behavioural economics and consumer psychology, and find the value conventional product, engineering, finance, and analytics miss. Trigger when the user says \"ask Roy\", \"what would Roy say\", \"summon the Behavioural Alchemist\", \"run a behavioural review\", \"give me the behavioural read\", \"alchemy workshop\", \"loyalty architect\", \"pricing psychology\", \"reframe this feature\", \"contrarian review\", \"experience theatre\", \"narrative alchemist\", \"design an experiment for this\", or hands over a proposal and asks for the psychological angle, the contrarian case, the perceived-value read, or a cheaper non-engineering way to change the behaviour. Roy also sits as an elevated cross-cutting lens inside the Virtual Product Council; this skill is how you summon him on his own. Do NOT trigger for a full multi-panel council review (use convene-vpc), for grooming a JPD idea (use jpd-idea-groomer), or for a research briefing (use storm-research)."
+          "description": "Summon Roy, the Behavioural Alchemist, to read a decision, feature, price, loyalty scheme, or piece of positioning through behavioural economics and consumer psychology, and find value that conventional analysis misses. Trigger when the user says \"ask Roy\", \"what would Roy say\", \"summon the Behavioural Alchemist\", \"run a behavioural review\", \"give me the behavioural read\", \"alchemy workshop\", \"loyalty architect\", \"pricing psychology\", \"reframe this feature\", \"contrarian review\", \"experience theatre\", \"narrative alchemist\", \"design an experiment for this\", or hands over a proposal and asks for the psychological angle, the contrarian case, the perceived-value read, or a cheaper non-engineering way to change the behaviour. He also sits as a cross-cutting lens in the Virtual Product Council; this summons him alone. Do NOT trigger for a full council review (use convene-vpc), grooming a JPD idea (use jpd-idea-groomer), or a research briefing (use storm-research)."
         },
         {
           "id": "competitor-watch",
@@ -122,7 +122,7 @@
         {
           "id": "signal-radar",
           "plugin": "oolio-pm",
-          "description": "Synthesise HubSpot, web, and social signal (via Apify) into evidence for JPD ideas, and scan for gaps between real market and customer demand and what is actually on the backlog. Trigger when the user says \"run signal radar\", \"sync the brain\", \"what's the market saying about X\", \"validate this idea with real signal\", \"find gaps in the backlog / roadmap\", \"what are we missing\", \"scan HubSpot and social for signal on this\", or asks to keep the Brain in sync with fresh market and customer research. Do NOT trigger for a single already-found piece of evidence the user just wants attached to ideas (use `add-insight`). Two modes: idea mode (given a JPD key, gathers external evidence and attaches it as native Insights on the idea) and gap-scan mode (no key, scans the whole backlog against market, customer, and social signal, then hands candidate gaps to `feedback-to-idea`). Always writes findings into the Brain so research compounds instead of repeating. Do NOT trigger for raw pasted feedback (use `feedback-to-idea`), the full VPC loop (use `jpd-loop`), a single-topic deep-dive report with no backlog tie-in (use `storm-research`), standing competitor intelligence, dossiers, sweeps, or battlecards (use `competitor-watch`), or closed-lost deal analysis (use `win-loss`)."
+          "description": "Synthesise HubSpot, web, and social signal (via Apify) into evidence for JPD ideas, and scan for gaps between market demand and the backlog. Two modes: idea mode (a JPD key: gathers evidence and attaches it as native Insights) and gap-scan mode (no key: scans the backlog against market, customer, and social signal, handing candidates to `feedback-to-idea`). Findings always land in the Brain, so research compounds. Trigger when the user says \"run signal radar\", \"sync the brain\", \"what's the market saying about X\", \"validate this idea with real signal\", \"find gaps in the backlog / roadmap\", \"what are we missing\", or \"scan HubSpot and social for signal\". Do NOT trigger for one already-found piece of evidence to attach (use `add-insight`), raw pasted feedback (use `feedback-to-idea`), the full VPC loop (use `jpd-loop`), a deep-dive with no backlog tie-in (use `storm-research`), competitor dossiers, sweeps, or battlecards (use `competitor-watch`), or closed-lost deal analysis (use `win-loss`)."
         },
         {
           "id": "steering-pack",
@@ -355,7 +355,7 @@
         "type": "signal",
         "col": 1,
         "row": 2,
-        "desc": "Synthesise HubSpot, web, and social signal (via Apify) into evidence for JPD ideas, and scan for gaps between real market and customer demand and what is actually on the backlog. Trigger when the user says \"run signal radar\", \"sync the brain\", \"what's the market saying about X\", \"validate this idea with real signal\", \"find gaps in the backlog / roadmap\", \"what are we missing\", \"scan HubSpot and social for signal on this\", or asks to keep the Brain in sync with fresh market and customer research. Do NOT trigger for a single already-found piece of evidence the user just wants attached to ideas (use `add-insight`). Two modes: idea mode (given a JPD key, gathers external evidence and attaches it as native Insights on the idea) and gap-scan mode (no key, scans the whole backlog against market, customer, and social signal, then hands candidate gaps to `feedback-to-idea`). Always writes findings into the Brain so research compounds instead of repeating. Do NOT trigger for raw pasted feedback (use `feedback-to-idea`), the full VPC loop (use `jpd-loop`), a single-topic deep-dive report with no backlog tie-in (use `storm-research`), standing competitor intelligence, dossiers, sweeps, or battlecards (use `competitor-watch`), or closed-lost deal analysis (use `win-loss`)."
+        "desc": "Synthesise HubSpot, web, and social signal (via Apify) into evidence for JPD ideas, and scan for gaps between market demand and the backlog. Two modes: idea mode (a JPD key: gathers evidence and attaches it as native Insights) and gap-scan mode (no key: scans the backlog against market, customer, and social signal, handing candidates to `feedback-to-idea`). Findings always land in the Brain, so research compounds. Trigger when the user says \"run signal radar\", \"sync the brain\", \"what's the market saying about X\", \"validate this idea with real signal\", \"find gaps in the backlog / roadmap\", \"what are we missing\", or \"scan HubSpot and social for signal\". Do NOT trigger for one already-found piece of evidence to attach (use `add-insight`), raw pasted feedback (use `feedback-to-idea`), the full VPC loop (use `jpd-loop`), a deep-dive with no backlog tie-in (use `storm-research`), competitor dossiers, sweeps, or battlecards (use `competitor-watch`), or closed-lost deal analysis (use `win-loss`)."
       },
       {
         "id": "add-insight",
@@ -555,7 +555,7 @@
         "type": "ai",
         "col": 8,
         "row": 3,
-        "desc": "Summon Roy, the Behavioural Alchemist, to read a decision, feature, price, loyalty scheme, or piece of positioning through behavioural economics and consumer psychology, and find the value conventional product, engineering, finance, and analytics miss. Trigger when the user says \"ask Roy\", \"what would Roy say\", \"summon the Behavioural Alchemist\", \"run a behavioural review\", \"give me the behavioural read\", \"alchemy workshop\", \"loyalty architect\", \"pricing psychology\", \"reframe this feature\", \"contrarian review\", \"experience theatre\", \"narrative alchemist\", \"design an experiment for this\", or hands over a proposal and asks for the psychological angle, the contrarian case, the perceived-value read, or a cheaper non-engineering way to change the behaviour. Roy also sits as an elevated cross-cutting lens inside the Virtual Product Council; this skill is how you summon him on his own. Do NOT trigger for a full multi-panel council review (use convene-vpc), for grooming a JPD idea (use jpd-idea-groomer), or for a research briefing (use storm-research)."
+        "desc": "Summon Roy, the Behavioural Alchemist, to read a decision, feature, price, loyalty scheme, or piece of positioning through behavioural economics and consumer psychology, and find value that conventional analysis misses. Trigger when the user says \"ask Roy\", \"what would Roy say\", \"summon the Behavioural Alchemist\", \"run a behavioural review\", \"give me the behavioural read\", \"alchemy workshop\", \"loyalty architect\", \"pricing psychology\", \"reframe this feature\", \"contrarian review\", \"experience theatre\", \"narrative alchemist\", \"design an experiment for this\", or hands over a proposal and asks for the psychological angle, the contrarian case, the perceived-value read, or a cheaper non-engineering way to change the behaviour. He also sits as a cross-cutting lens in the Virtual Product Council; this summons him alone. Do NOT trigger for a full council review (use convene-vpc), grooming a JPD idea (use jpd-idea-groomer), or a research briefing (use storm-research)."
       },
       {
         "id": "steering-pack",
@@ -1953,6 +1953,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-07-28",
+      "title": "Trim two skill descriptions under the 1024-character limit (32 skills)",
+      "heading": "2026-07-28 — Trim two skill descriptions under the 1024-character limit (32 skills)",
+      "body": "`signal-radar` (1280) and `behavioural-alchemist` (1060) had description fields over the 1024-character limit. Both load today, so nothing was broken, but a limit that is not enforced yet is still a limit.\n\n- **Every trigger phrase survives.** The description is what routes a request to a skill, so the cuts came out of prose and duplication rather than the phrases people actually type. `signal-radar` carried two separate \"Do NOT trigger\" blocks; they are now one.\n- Down to 1003 and 971. The remaining margin is deliberate: landing one character under the limit just moves the problem to the next edit.\n- `competitor-watch` (981), `jpd-idea-groomer` (963) and `jpd-title-standard` (942) are the next closest and were left alone."
+    },
     {
       "date": "2026-07-27",
       "title": "Insights actually attach now (32 skills)",

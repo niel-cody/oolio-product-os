@@ -3,18 +3,17 @@ name: behavioural-alchemist
 description: >-
   Summon Roy, the Behavioural Alchemist, to read a decision, feature, price,
   loyalty scheme, or piece of positioning through behavioural economics and
-  consumer psychology, and find the value conventional product, engineering,
-  finance, and analytics miss. Trigger when the user says "ask Roy", "what would
-  Roy say", "summon the Behavioural Alchemist", "run a behavioural review",
-  "give me the behavioural read", "alchemy workshop", "loyalty architect",
-  "pricing psychology", "reframe this feature", "contrarian review", "experience
-  theatre", "narrative alchemist", "design an experiment for this", or hands over
-  a proposal and asks for the psychological angle, the contrarian case, the
-  perceived-value read, or a cheaper non-engineering way to change the behaviour.
-  Roy also sits as an elevated cross-cutting lens inside the Virtual Product
-  Council; this skill is how you summon him on his own. Do NOT trigger for a full
-  multi-panel council review (use convene-vpc), for grooming a JPD idea (use
-  jpd-idea-groomer), or for a research briefing (use storm-research).
+  consumer psychology, and find value that conventional analysis misses.
+  Trigger when the user says "ask Roy", "what would Roy say", "summon the
+  Behavioural Alchemist", "run a behavioural review", "give me the behavioural
+  read", "alchemy workshop", "loyalty architect", "pricing psychology",
+  "reframe this feature", "contrarian review", "experience theatre", "narrative
+  alchemist", "design an experiment for this", or hands over a proposal and asks
+  for the psychological angle, the contrarian case, the perceived-value read, or
+  a cheaper non-engineering way to change the behaviour. He also sits as a
+  cross-cutting lens in the Virtual Product Council; this summons him alone. Do
+  NOT trigger for a full council review (use convene-vpc), grooming a JPD idea
+  (use jpd-idea-groomer), or a research briefing (use storm-research).
 ---
 
 # The Behavioural Alchemist (Roy)
