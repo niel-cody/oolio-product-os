@@ -89,7 +89,7 @@ Present a concise summary: verdict, rubric, top objections, the Insight list, li
    - the rubric (with why), de-dupe, a balanced evidence table referencing sources by number,
      and a mandatory **References** section listing every source URL in full.
 3. **Create the native Insights on the idea** (description · link each). Run the plugin
-   helper — `node ${CLAUDE_PLUGIN_ROOT}/bin/jpd-insight.mjs create --file <batch>.json` —
+   helper — `node ${CLAUDE_PLUGIN_ROOT}/skills/jpd-loop/scripts/jpd-insight.mjs create --file <batch>.json` —
    after a `get` on the idea to skip duplicates; see `references/jpd-insights-api.md`.
    Fall back to Chrome UI automation from cloud sessions, and only if neither works,
    to handing the human a paste-ready native-Insight list.

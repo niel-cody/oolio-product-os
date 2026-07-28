@@ -1,5 +1,5 @@
 {
-  "stamp": "cdacc6a",
+  "stamp": "a758f0b",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -1953,6 +1953,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-07-28",
+      "title": "A plugin-root `bin/` directory broke Cowork's sync (32 skills)",
+      "heading": "2026-07-28 — A plugin-root `bin/` directory broke Cowork's sync (32 skills)",
+      "body": "Found by bisect, after Niel repeatedly said the breakage started with the insights change and was repeatedly right. The helper has moved from `oolio-pm/bin/jpd-insight.mjs` to `oolio-pm/skills/jpd-loop/scripts/jpd-insight.mjs`. Nothing else changed.\n\n**The evidence.** Four repositories, each a fresh marketplace with a distinct name so nothing could collide:\n\n| Tree | Helper location | Cowork sync |\n|---|---|---|\n| pre-insights `ff12dd8` | no helper | ✅ |\n| current `a758f0b` | `bin/` at plugin root | ❌ |\n| current | `skills/jpd-loop/scripts/` | ✅ |\n\nOne directory. That was the whole thing.\n\n- **The failure mode is nasty**, which is why it cost most of a day. Claude Code kept working perfectly, `claude plugin validate` passed, the manifests were valid, and Cowork's only message was \"Marketplace sync failed. Check the repository URL and try again.\" Every signal pointed away from the truth, and three earlier theories (a per-slug cache freeze, an org-ownership problem, a missing GitHub App) were all wrong.\n- **`scripts/` inside a skill is a documented location** and this repo already proved it works, since `gtm-handover/scripts/build_pack.py` has synced happily for weeks. A top-level `bin/` is not in the plugins reference. It loaded fine locally, which is exactly what made it easy to add without thinking.\n- **CLAUDE.md now forbids undocumented top-level directories** outright, with the date and the symptom, because nothing about the error would lead the next person back here.\n- Confirmed in passing: the token refresh path added yesterday works. It renewed silently on first expiry and kept the refresh token."
+    },
     {
       "date": "2026-07-28",
       "title": "Isolate the Cowork sync failure to Cowork (32 skills)",

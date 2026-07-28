@@ -1,13 +1,13 @@
 # Creating native JPD Insights (reference)
 
-How to attach evidence to a JPD idea as a native Insight. **Do not hand-roll curl for this.** The plugin ships a helper that owns auth, token refresh, ID lookup and the mutation: `${CLAUDE_PLUGIN_ROOT}/bin/jpd-insight.mjs`.
+How to attach evidence to a JPD idea as a native Insight. **Do not hand-roll curl for this.** The plugin ships a helper that owns auth, token refresh, ID lookup and the mutation: `${CLAUDE_PLUGIN_ROOT}/skills/jpd-loop/scripts/jpd-insight.mjs`.
 
 Set up and proven live on 27 Jul 2026 (first agent-written Insight: OHSI-80). The Atlassian MCP connector still cannot write Insights and will offer a comment instead; a comment is not an Insight and is not an acceptable substitute.
 
 ## Use the helper
 
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/bin/jpd-insight.mjs create \
+node ${CLAUDE_PLUGIN_ROOT}/skills/jpd-loop/scripts/jpd-insight.mjs create \
   --idea OHSI-80 \
   --description "One line saying what this evidence shows and how strong it is" \
   --url "https://source.example.com/article" \
@@ -54,7 +54,7 @@ Credentials and tokens live at `~/.jpd-insights-token.json`, mode 600, **never i
 Re-authorisation is only needed if the file is deleted, the refresh token goes unused for 30 to 90 days, or access is revoked at id.atlassian.com/manage-profile/apps. To redo it:
 
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/bin/jpd-insight.mjs auth --client-id <ID> --client-secret <SECRET>
+node ${CLAUDE_PLUGIN_ROOT}/skills/jpd-loop/scripts/jpd-insight.mjs auth --client-id <ID> --client-secret <SECRET>
 ```
 
 It prints an authorize URL, the user clicks Accept, and the local callback on port 7777 captures the code. The agent must not run this with the secret on the command line; hand the command to the user. If port 7777 is held by a stale run, `lsof -ti:7777 | xargs kill`.

@@ -8,7 +8,7 @@ All edits to the `oolio-pm` plugin — skills, personas, lenses, templates — a
 
 ## On every change — do all five, every time
 
-1. **Make the change** under `oolio-pm/` (skills in `oolio-pm/skills/`, personas in `oolio-pm/personas-library/`, shared executables in `oolio-pm/bin/`). Skill `description` fields have a **1024-character limit**; it is not enforced today but it is real, and the description is what routes a request to a skill, so trim prose rather than trigger phrases when one runs long.
+1. **Make the change** under `oolio-pm/` (skills in `oolio-pm/skills/`, personas in `oolio-pm/personas-library/`, executables in the owning skill's `scripts/`). **Never add a directory at the plugin root that the plugins reference does not document** — a top-level `bin/` broke Cowork's marketplace sync outright on 2026-07-28, silently, while Claude Code kept working. Skill `description` fields have a **1024-character limit**; it is not enforced today but it is real, and the description is what routes a request to a skill, so trim prose rather than trigger phrases when one runs long.
 2. **No version to bump.** The plugin is versioned by git commit: every push is automatically a new version, so edits reach the team without a bump. This is deliberate — there is **no `version` field** in `oolio-pm/.claude-plugin/plugin.json` or in the marketplace plugin entry. **Do not reintroduce one.** A plugin `version` pins the plugin, and Claude Code then serves updates only when the number changes, so a forgotten bump silently stops your edits from propagating (this was the old bug). The `metadata.version` at the top of `marketplace.json` versions the marketplace structure only; leave it unless a plugin is added, removed, or renamed.
 3. **Add a CHANGELOG entry.** Update [CHANGELOG.md](CHANGELOG.md) with a new section for the version, newest first, saying what changed and why. This is not optional. A version bump without a changelog entry is an incomplete change.
 4. **Mirror team-visible changes to the Product Operating System Confluence page.** The page (Niel's space, id `1175420929`, formerly titled "PM Skills") is the human-readable front door: it carries the skill count, the per-skill tables, and a plain-English "Skills changelog" section at the foot. When a change is team-visible — a new skill, a removed or renamed skill, a new capability, changed behaviour a user would notice — update the tables and add a dated entry to that section, written for a reader, not a maintainer (no file paths, no field IDs). Internal refactors, reference-file edits, and doc fixes do not need mirroring.
@@ -20,9 +20,9 @@ All edits to the `oolio-pm` plugin — skills, personas, lenses, templates — a
 - Record the move in `oolio-pm/_archive/README.md` with the date, the version, and what replaced it, and note it in the CHANGELOG.
 - After archiving, **fix every reference** to the moved files so no live doc points at a dead path. Historical changelog entries are left as-is (they are a record of what was true then).
 
-## The shared helper in `oolio-pm/bin/`
+## The shared helper
 
-`bin/jpd-insight.mjs` writes and reads native JPD Insights over the Polaris GraphQL API. Five skills depend on it (`jpd-loop`, `signal-radar`, `add-insight`, `feedback-to-idea`, `discovery-wayfinder`), so treat it as load-bearing:
+`skills/jpd-loop/scripts/jpd-insight.mjs` writes and reads native JPD Insights over the Polaris GraphQL API. Five skills depend on it (`jpd-loop`, `signal-radar`, `add-insight`, `feedback-to-idea`, `discovery-wayfinder`), so treat it as load-bearing:
 
 - **It needs credentials that are not in this repo and never should be**: an OAuth token at `~/.jpd-insights-token.json`, mode 600. A fresh machine needs a one-time `auth` run before any of those five skills can attach evidence. `.gitignore` guards against the file being committed; leave that guard in place.
 - **It needs network access to `api-private.atlassian.com`**, which local sessions have and Anthropic's cloud sandbox does not. Skills fall back to Chrome automation there, by design.

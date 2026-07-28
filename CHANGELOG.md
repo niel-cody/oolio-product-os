@@ -2,6 +2,25 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-28 — A plugin-root `bin/` directory broke Cowork's sync (32 skills)
+
+Found by bisect, after Niel repeatedly said the breakage started with the insights change and was repeatedly right. The helper has moved from `oolio-pm/bin/jpd-insight.mjs` to `oolio-pm/skills/jpd-loop/scripts/jpd-insight.mjs`. Nothing else changed.
+
+**The evidence.** Four repositories, each a fresh marketplace with a distinct name so nothing could collide:
+
+| Tree | Helper location | Cowork sync |
+|---|---|---|
+| pre-insights `ff12dd8` | no helper | ✅ |
+| current `a758f0b` | `bin/` at plugin root | ❌ |
+| current | `skills/jpd-loop/scripts/` | ✅ |
+
+One directory. That was the whole thing.
+
+- **The failure mode is nasty**, which is why it cost most of a day. Claude Code kept working perfectly, `claude plugin validate` passed, the manifests were valid, and Cowork's only message was "Marketplace sync failed. Check the repository URL and try again." Every signal pointed away from the truth, and three earlier theories (a per-slug cache freeze, an org-ownership problem, a missing GitHub App) were all wrong.
+- **`scripts/` inside a skill is a documented location** and this repo already proved it works, since `gtm-handover/scripts/build_pack.py` has synced happily for weeks. A top-level `bin/` is not in the plugins reference. It loaded fine locally, which is exactly what made it easy to add without thinking.
+- **CLAUDE.md now forbids undocumented top-level directories** outright, with the date and the symptom, because nothing about the error would lead the next person back here.
+- Confirmed in passing: the token refresh path added yesterday works. It renewed silently on first expiry and kept the refresh token.
+
 ## 2026-07-28 — Isolate the Cowork sync failure to Cowork (32 skills)
 
 We had assumed Cowork was serving a stale cache that froze per marketplace slug. That was wrong, and the wrong explanation was briefly written into PUBLISHING.md.

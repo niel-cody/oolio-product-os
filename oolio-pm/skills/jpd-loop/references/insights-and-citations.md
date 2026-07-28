@@ -26,7 +26,7 @@ Insights are how we make the verdict defensible: every meaningful claim in the V
 ## Recording Insights — how (updated Jul 2026)
 **Standard: every strong piece of evidence found for an idea gets attached as a native Insight on that idea** — not just listed in the description. The Atlassian MCP connector cannot write Insights and will offer a comment instead; a comment is not an Insight.
 
-1. **The helper (default).** `node ${CLAUDE_PLUGIN_ROOT}/bin/jpd-insight.mjs` — `get` the idea to check for duplicates, then `create` (one Insight) or `create --file` (a batch). Auth is already set up and refreshes itself. Full usage in `references/jpd-insights-api.md`.
+1. **The helper (default).** `node ${CLAUDE_PLUGIN_ROOT}/skills/jpd-loop/scripts/jpd-insight.mjs` — `get` the idea to check for duplicates, then `create` (one Insight) or `create --file` (a batch). Auth is already set up and refreshes itself. Full usage in `references/jpd-insights-api.md`.
 2. **Chrome UI automation** (cloud sessions, which cannot reach the API host): open the idea → Insights tab → paste the source URL into the link field (JPD unfurls it into a card) → set description and impact dots → Create. Uses the user's logged-in JPD session.
 3. **Paste-ready list (fallback only)**: if neither works, record the evidence in the idea Description append block and DISC page as before, and hand the human a ready-to-paste list (description · link · impact each), saying why the helper failed.
 
