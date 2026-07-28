@@ -10,7 +10,9 @@ The Product team's operating system for Cowork and Claude Code: the plugin colle
 
 ## Install (for Oolio teammates)
 
-Install straight from the repo URL. You install once and get updates automatically, because the plugin is versioned by commit (no version numbers to chase). Use exactly one URL: **`oolio-group/oolio-product-os`**. The repo's earlier names (`oolio-pm-plugin`, `oolio-pm-plugins`) redirect here, but each name registers as a *separate* marketplace, so do not mix them: remove any old entry before adding this one.
+The plugin is versioned by commit, so there are no version numbers to chase. Use exactly one URL: **`oolio-group/oolio-product-os`**. The repo's earlier names (`oolio-pm-plugin`, `oolio-pm-plugins`) redirect here, but each name registers as a *separate* marketplace, so do not mix them: remove any old entry before adding this one.
+
+**In Claude Code you install once and updates arrive on their own. In Cowork they do not** — its marketplace sync freezes and does not recover, so Cowork runs on zip uploads instead. See [PUBLISHING.md](PUBLISHING.md) section D.
 
 **Claude Code (CLI):**
 
@@ -33,7 +35,7 @@ Install straight from the repo URL. You install once and get updates automatical
 }
 ```
 
-**Cowork:** Settings → Plugins → Add plugin → GitHub, and enter `oolio-group/oolio-product-os`. Install **oolio-pm**. If Cowork serves an old version (a known backend cache issue in mid-2026), fall back to the release zip, see [PUBLISHING.md](PUBLISHING.md).
+**Cowork and Claude Desktop:** **Customize** in the left sidebar → **Plugins**. Ask Niel for the current `oolio-pm.zip` and upload it there. The GitHub marketplace path exists in this UI but its sync is frozen for this plugin, so the zip is what actually stays current. Plugins you upload are stored locally on your own machine.
 
 The skills then appear in your skill list (for example, ask "convene the VPC"). The current content is always whatever is on `main`; [CHANGELOG.md](CHANGELOG.md) records what changed.
 

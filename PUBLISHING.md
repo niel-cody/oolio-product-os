@@ -39,7 +39,7 @@ GitHub repo (the home of this collection): **`oolio-group/oolio-product-os`** (p
 
 `"autoUpdate": true` matters: for private marketplaces auto-update is **off** unless you switch it on, which is why updates felt stuck before.
 
-**Cowork:** Settings → Plugins → Add plugin → GitHub → `oolio-group/oolio-product-os` → install **oolio-pm**. See section D if Cowork serves a stale version.
+**Cowork and Claude Desktop:** **Customize** in the left sidebar → **Plugins** → Browse plugins, or upload a plugin file directly. Read section D before choosing: in Cowork the zip upload is the working path, not the marketplace.
 
 ---
 
@@ -67,14 +67,16 @@ That's it. On the next session, everyone on auto-update has the change. No relea
 
 ## D. Cowork note and the zip fallback
 
-Cowork is a separate surface from Claude Code and, in mid-2026, its marketplace backend was observed to **snapshot a repo once per URL and not refresh**, serving a frozen old version. The config in this repo is now correct, so this should be retested cleanly:
+Cowork is a separate surface from Claude Code, and its marketplace sync **freezes per slug**: once a slug stops updating it does not recover, and re-adding the same slug inherits the freeze. This is Anthropic-side and there is nothing to fix in this repo.
 
-**One-time Cowork test.** Remove any existing oolio-pm marketplace entry first (the `oolio-product-os`, `oolio-pm-plugin`, and `oolio-pm-plugins` slugs, whichever are present), then add `oolio-group/oolio-product-os` fresh and install. Check the skill list against [oolio-pm/README.md](oolio-pm/README.md). If it shows the current skill set, the marketplace path works in Cowork and you are done. If it still serves an old version, the freeze is Anthropic-side and the zip fallback below is the reliable path there.
+**This is now observed, not suspected.** Three slugs have frozen: `oolio-pm-plugin`, `oolio-pm-plugins`, and (on 2026-07-28) `oolio-product-os`, the last with a valid newer commit sitting on `main` and the UI reporting "Failed to update marketplace". The plugin content was verified clean at the time: valid manifests, 32 skills parsing, no symlinks, 1.4 MB. Do not spend time debugging this again.
 
-**Zip fallback (Cowork only, if the test fails):**
+**So in Cowork, the zip is the path, not the fallback:**
 1. Ask me to *"cut the release zip."* I run `scripts/package-plugin.sh` (it builds `dist/oolio-pm.zip` with the plugin root at the archive root).
-2. Cowork → Settings → Plugins → Add plugin → **Upload local plugin** → upload the zip.
+2. Cowork → **Customize** (left sidebar) → **Plugins** → remove the existing entry under Local uploads, then add the zip. Removing first matters: uploading over a registration whose sync is already stuck is how slugs get burnt.
 3. Re-uploading a newer zip replaces the old version. This path has no auto-update, so you re-upload on each change.
+
+Claude Code is unaffected and does auto-update properly. Keep using the marketplace path there.
 
 ---
 

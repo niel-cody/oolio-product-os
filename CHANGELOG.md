@@ -2,6 +2,16 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-28 — Documentation audit: fix what the docs got wrong (32 skills)
+
+An audit against Anthropic's plugin documentation and the live Cowork UI found five defects. Skill counts, internal links, and the no-version-field rule were all already consistent; these were not.
+
+- **The Cowork install path was wrong in three places.** README and PUBLISHING both said "Settings → Plugins → Add plugin". It is **Customize → Plugins**. Anyone following our own instructions would not have found the screen.
+- **We were still describing the Cowork sync freeze as a hypothesis to retest.** It is now observed on a third slug, with a valid newer commit waiting and the plugin verified clean. PUBLISHING section D records the evidence and says plainly that in Cowork the zip is the path rather than the fallback, so nobody re-debugs it. README no longer promises automatic updates on a surface that does not deliver them.
+- **The shared helper was documented nowhere.** `oolio-pm/bin/jpd-insight.mjs` is load-bearing for five skills, needs a credential file that is deliberately not in this repo, and needs network access a cloud sandbox does not have. A maintainer had no way to learn any of that. CLAUDE.md now carries it.
+- **The 1024-character description limit is written down**, along with the rule that follows from it: trim prose, never trigger phrases, because the description is what routes a request.
+- CLAUDE.md said "do all four" above a list of five steps.
+
 ## 2026-07-28 — Trim two skill descriptions under the 1024-character limit (32 skills)
 
 `signal-radar` (1280) and `behavioural-alchemist` (1060) had description fields over the 1024-character limit. Both load today, so nothing was broken, but a limit that is not enforced yet is still a limit.
