@@ -81,10 +81,19 @@ find one, it is a leftover and Git integration supersedes it.
 
 Two project settings matter:
 
-- **Root Directory** = `site`
+- **Root Directory** = `site`. Leaving it empty does not fail loudly: Vercel builds from the repo
+  root, finds no `package.json`, emits an empty deployment in under a second, and reports it
+  **READY**. Every route then 404s on a green deploy. This happened on the first git-triggered
+  build, 2026-07-31.
 - **Include source files outside of the Root Directory** = **on**, because the generator reads the
   plugins, the marketplace manifest and `CHANGELOG.md`, all of which live a level up. With it off
   the build fails immediately and says so, rather than shipping a site with no skills on it.
+- **Skip deployments when there are no changes to the root directory or its dependencies** =
+  **off**. Vercel switches this on by itself the moment Root Directory gets a value, and here it is
+  wrong: the build's inputs deliberately live *outside* the root, so a commit touching only
+  `CHANGELOG.md` or a skill under `oolio-pm/` would be skipped and the published site would quietly
+  keep serving the old content. It also fails confusingly, looking like a hung deploy rather than a
+  skipped one. Every push builds; that is the intent, not an oversight.
 
 ### Environment variables
 
