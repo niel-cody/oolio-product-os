@@ -2,6 +2,17 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-31 — The landing page becomes a star chart (32 skills)
+
+The front door earns its name. The outline grid is replaced by a star map: every skill a point of light, the six end-to-end flows drawn as constellations that light one at a time, with a pulse travelling the path.
+
+- **The metaphor does the security work for us.** The problem with a public teaser is that redaction looks like redaction. On a star chart, faint unnamed stars are what you expect to see, so "there is clearly a lot here and you cannot read it yet" reads as depth rather than as a wall. Five ordinary skills are named; the other thirty-four are simply further away.
+- **Flows are the point.** Constellations trace the real paths through the map (Signal → Shipped → Learn, JPD Loop, PRD → Launch, Evidence Engine, The Brain Compounds, Ship & Learn Loop), cycling every few seconds, with the unlit ones held faint so the chart never looks like it has only one route through it.
+- **The payload was the trap, again.** Flow steps in the source are `[id, label, description]`: the label is the skill's name and the description says what that step does. Rendering the chart from the raw flows would have published all 49 step descriptions to anyone opening devtools, on the very page that exists to protect them. `landing-map.tsx` strips every step to its bare id, and ids are only ever used to look up coordinates. Verified against the built page: 0 of 49 descriptions present, no edges, no topology, no unrevealed labels.
+- **Positions are hashed, not random.** `Math.random()` in a component that renders on both server and client is a hydration mismatch waiting to happen, so the jitter that stops the chart looking like a spreadsheet is derived from each node's id.
+- **Motion is optional.** Everything animated is switched off under `prefers-reduced-motion`, where the chart becomes a still image with all six constellations drawn at once rather than a thing that rewrites itself every few seconds.
+- Two things caught in review: the chart claimed 39 skills, which is the node count including seven artifacts, and is now the real 32; and labels near the right edge were clipping mid-word, so they now read inward.
+
 ## 2026-07-31 — A public front door, and everything else behind it (32 skills)
 
 The site stops being a public wiki with a private dashboard bolted on, and becomes one app with a front door. Signed out you get a landing page; signed in you get the whole thing.
