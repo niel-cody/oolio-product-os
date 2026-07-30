@@ -73,12 +73,39 @@ Worth wiring into a pre-push hook or CI.
 
 ## Deploying
 
-Vercel, from this repo. Two project settings matter:
+Vercel, from this repo, **on every push to `main`**. The Git integration was connected on
+2026-07-31, once the repo moved to Niel's account and he could grant the Vercel GitHub App himself.
+Before that the project was CLI-upload only and pushes never reached the live URL, which is why the
+site sat four days stale without anyone noticing. There is no deploy workflow in `.github/`; if you
+find one, it is a leftover and Git integration supersedes it.
+
+Two project settings matter:
 
 - **Root Directory** = `site`
 - **Include source files outside of the Root Directory** = **on**, because the generator reads the
   plugins, the marketplace manifest and `CHANGELOG.md`, all of which live a level up. With it off
   the build fails immediately and says so, rather than shipping a site with no skills on it.
+
+### Environment variables
+
+Flightdeck (`/app/*`) reads these at runtime, so a deploy without them builds green and then throws
+on every dashboard request. Set in Vercel under Settings → Environment Variables, for all three
+environments. Template in [`.env.example`](.env.example).
+
+| Variable | Notes |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Public by design |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Public by design; **not** the service-role key, which this app never uses |
+| `FLIGHTDECK_ALLOWED_EMAILS` | Who may sign in. Empty denies everyone, deliberately |
+| `FLIGHTDECK_ALLOWED_DOMAINS` | Optional; defaults to `oolio.com` |
+
+Leave Vercel's **Sensitive** toggle **off** on these. Sensitive variables cannot be used in the
+Development environment, and none of these is a secret.
+
+Supabase must also know where to send people back to: **Authentication → URL Configuration**, Site
+URL `https://oolio-product-os.vercel.app` plus that origin's `/auth/callback` in Redirect URLs. A new
+Supabase project defaults its Site URL to localhost, so magic links from production go nowhere until
+this is changed.
 
 ## House rules
 
