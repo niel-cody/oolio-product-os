@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Flightdeck snapshots. Real snapshots carry email subjects, Slack DMs, meeting decisions
+# and customer names. Git history is permanent and repository ownership can change (it did,
+# on 2026-07-30), so these must never be committed. See the V1 scope doc, section 2.2.
+/.snapshots/
+/fixtures/20*.json
+!/fixtures/2026-07-29.json

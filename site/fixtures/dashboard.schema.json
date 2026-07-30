@@ -1,0 +1,715 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://oolio.local/morning-dashboard/dashboard.schema.json",
+  "title": "Morning Dashboard snapshot",
+  "description": "One weekday snapshot written by the collector and read by the renderer. The collector is the only writer. The renderer never calls a connector.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "for_date",
+    "timezone",
+    "run",
+    "headline",
+    "day",
+    "panels",
+    "trajectory",
+    "debt",
+    "gaps"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "for_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "timezone": {
+      "type": "string",
+      "default": "Australia/Melbourne"
+    },
+    "run": {
+      "type": "object",
+      "description": "Collector telemetry. Drives the Gaps panel and the staleness banner.",
+      "required": [
+        "connector_calls",
+        "duration_ms",
+        "sources"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "connector_calls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sources": {
+          "type": "object",
+          "description": "One entry per source. A source that fails must still appear, with ok:false.",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "ok"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "ok": {
+                "type": "boolean"
+              },
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "error": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "last_ok": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      }
+    },
+    "headline": {
+      "type": "object",
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string",
+          "maxLength": 240,
+          "description": "One sentence. Names the single thing that makes today distinct. Never a command, never padding."
+        },
+        "anchor_item_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The item the headline points at, so the renderer can link it."
+        }
+      }
+    },
+    "day": {
+      "type": "object",
+      "required": [
+        "load",
+        "booked_minutes",
+        "standup_count",
+        "window",
+        "events",
+        "acts"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "load": {
+          "enum": [
+            "HEAVY",
+            "NORMAL",
+            "OPEN"
+          ],
+          "description": "HEAVY: 300+ booked minutes or a cluster of 3+. OPEN: one short meeting or fewer."
+        },
+        "booked_minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Excludes focus blocks and travel."
+        },
+        "standup_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "free_minutes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "window": {
+          "type": "object",
+          "required": [
+            "start",
+            "end"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "start": {
+              "type": "string",
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+            },
+            "end": {
+              "type": "string",
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+            }
+          },
+          "description": "Local wall-clock bounds of the day bar. The renderer positions blocks as a percentage of this span."
+        },
+        "events": {
+          "type": "array",
+          "maxItems": 25,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "start",
+              "end",
+              "title",
+              "kind"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "start": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "Local wall clock, already converted from the Graph UTC payload."
+              },
+              "end": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+              },
+              "title": {
+                "type": "string"
+              },
+              "domain": {
+                "$ref": "#/$defs/domain"
+              },
+              "kind": {
+                "enum": [
+                  "standup",
+                  "meeting",
+                  "focus",
+                  "travel",
+                  "personal"
+                ]
+              },
+              "attending": {
+                "enum": [
+                  "accepted",
+                  "tentative",
+                  "declined"
+                ]
+              },
+              "organiser": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "acts": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Exactly three. Morning, middle, evening. Each sentence must be earned from the calendar, never templated.",
+          "items": {
+            "type": "object",
+            "required": [
+              "range",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "range": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string",
+                "maxLength": 260
+              }
+            }
+          }
+        }
+      }
+    },
+    "panels": {
+      "type": "object",
+      "required": [
+        "decide",
+        "blocked",
+        "at_risk",
+        "shipped",
+        "signals"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "decide": {
+          "$ref": "#/$defs/itemPanel"
+        },
+        "blocked": {
+          "$ref": "#/$defs/itemPanel"
+        },
+        "at_risk": {
+          "$ref": "#/$defs/itemPanel"
+        },
+        "signals": {
+          "$ref": "#/$defs/itemPanel"
+        },
+        "shipped": {
+          "type": "object",
+          "required": [
+            "cap",
+            "considered",
+            "groups"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "cap": {
+              "type": "integer"
+            },
+            "considered": {
+              "type": "integer",
+              "description": "Total completions found. The renderer shows this against the cap so suppression is visible."
+            },
+            "window_days": {
+              "type": "integer"
+            },
+            "groups": {
+              "type": "array",
+              "maxItems": 7,
+              "items": {
+                "type": "object",
+                "required": [
+                  "label",
+                  "count",
+                  "text"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "domain": {
+                    "$ref": "#/$defs/domain"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "count_label": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string",
+                    "maxLength": 320
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "trajectory": {
+      "type": "array",
+      "maxItems": 8,
+      "description": "One row per goal from _system/Goals.md. current is written by the collector and never by hand.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "horizon",
+          "period",
+          "statement",
+          "measure",
+          "state"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "horizon": {
+            "enum": [
+              "week",
+              "month",
+              "quarter",
+              "year"
+            ]
+          },
+          "period": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          },
+          "measure": {
+            "enum": [
+              "jira",
+              "posthog",
+              "manual",
+              "derived"
+            ]
+          },
+          "target": {
+            "type": [
+              "number",
+              "string",
+              "null"
+            ]
+          },
+          "current": {
+            "type": [
+              "number",
+              "string",
+              "null"
+            ]
+          },
+          "progress": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1,
+            "description": "null renders as a hatched bar labelled unmeasured. Never render null as zero, and never as green."
+          },
+          "state": {
+            "enum": [
+              "on-track",
+              "at-risk",
+              "slipped",
+              "done",
+              "unmeasured"
+            ]
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "debt": {
+      "type": "array",
+      "description": "What was suppressed, counted rather than listed. This is the honesty line.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "count",
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "text": {
+            "type": "string"
+          },
+          "query": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The JQL or search that produced the count, so the number is auditable."
+          }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "level",
+          "source",
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "level": {
+            "$ref": "#/$defs/statusLevel"
+          },
+          "source": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "_synthetic": {
+      "type": "string",
+      "description": "Present only on invented fixtures. A snapshot built from real sources must never carry this field, and any snapshot-shaped file committed to the repo must. Enforced by scripts/check-no-snapshots.mjs. See V1 scope doc 2.2."
+    }
+  },
+  "$defs": {
+    "domain": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "insights",
+        "products-app",
+        "inventory",
+        "customer-engagement",
+        "core-pos",
+        "kiosk",
+        "pay",
+        "leadership",
+        "other",
+        null
+      ],
+      "description": "Fixed colour slot order. A ninth domain folds into other, it never gets a generated hue. Derived from the Outlook category, the Jira project, or the Slack channel."
+    },
+    "statusLevel": {
+      "enum": [
+        "good",
+        "warning",
+        "serious",
+        "critical"
+      ]
+    },
+    "itemPanel": {
+      "type": "object",
+      "required": [
+        "cap",
+        "considered",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "cap": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 7
+        },
+        "considered": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How many candidates scored into this panel before the cap. Rendered as 'N of M'."
+        },
+        "window_days": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 7,
+          "items": {
+            "$ref": "#/$defs/item"
+          }
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "required": [
+        "id",
+        "source",
+        "kind",
+        "title",
+        "why",
+        "score"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Deterministic. <source>:<external-id>[#suffix]. A re-run updates, never duplicates."
+        },
+        "source": {
+          "enum": [
+            "granola",
+            "slack",
+            "teams",
+            "outlook",
+            "jira",
+            "confluence",
+            "hubspot",
+            "posthog",
+            "vault"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "decision",
+            "ask",
+            "deadline",
+            "completion",
+            "signal"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Ten words or fewer."
+        },
+        "question": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Decide items only. The actual call, phrased as a question."
+        },
+        "why": {
+          "type": "string",
+          "maxLength": 400,
+          "description": "One sentence carrying the source in prose, who waits, and what breaks if it waits."
+        },
+        "who_waits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Named humans only. A team name is not a blocked person."
+        },
+        "asked_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "due": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "domain": {
+          "$ref": "#/$defs/domain"
+        },
+        "gate_clause": {
+          "enum": [
+            "live_slip",
+            "imminent",
+            "delivery_gate",
+            "incident",
+            "spoken_commitment"
+          ],
+          "description": "at_risk only. Which clause of the overdue gate admitted this item. Required so the gate is auditable."
+        },
+        "jira": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "string"
+            },
+            "updated": {
+              "type": "string"
+            }
+          }
+        },
+        "evidence": {
+          "type": "string",
+          "description": "Human-readable provenance. Rendered as the link text."
+        },
+        "evidence_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "related_item_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Cross-panel link, e.g. an at_risk ticket that is late because of a decide item."
+        },
+        "promote_to": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "signals only. The vault layer this should be filed into, e.g. 41 Decisions."
+        },
+        "status": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "required": [
+            "level",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "level": {
+              "$ref": "#/$defs/statusLevel"
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 32,
+              "description": "Always paired with the colour. A status colour never carries meaning alone."
+            }
+          }
+        },
+        "signals": {
+          "type": "object",
+          "description": "The scoring inputs, kept on the item so a wrong ranking can be diagnosed without re-running the collector.",
+          "additionalProperties": false,
+          "properties": {
+            "blocks_a_named_person": {
+              "type": "boolean"
+            },
+            "window_closes_48h": {
+              "type": "boolean"
+            },
+            "direct_to_niel": {
+              "type": "boolean"
+            },
+            "mission_weight": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "unanswered_over_48h": {
+              "type": "boolean"
+            },
+            "recurrence": {
+              "type": "boolean"
+            },
+            "already_actioned": {
+              "type": "boolean"
+            },
+            "is_noise": {
+              "type": "boolean"
+            }
+          }
+        },
+        "score": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

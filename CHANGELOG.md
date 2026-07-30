@@ -2,6 +2,19 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-30 — Flightdeck: sign-in, and the dashboard behind it (32 skills)
+
+The site gets its first private surface. `/app/*` is gated; everything public is untouched. This is M0 and M1 of the Flightdeck build order, against the committed synthetic fixture. There is no collector yet, and no real data has been anywhere near the repo.
+
+- **Sign-in is Supabase Auth, magic link**, not the Entra ID via Auth.js the V1 spec named. Entra needed an app registration from IT that had not moved, and it was the long pole. Supabase unblocks this today, gives real per-person identities rather than the spec's shared-password stopgap, and can take Entra as an OAuth provider later without touching app code. Recorded as decision 23 in the vault; the Entra request is deferred, not cancelled.
+- **Access is two gates, both config**: an allowed domain *and* an explicit address. An empty address list denies everyone on purpose, so a missing env var can never be why somebody gets in. Adding the second person is an env change.
+- **The gate verifies the token rather than trusting the cookie** (`getUser`, not `getSession`), and the allowlist is checked again in the callback so a non-allowed address never holds a valid session even briefly.
+- **The dashboard matches the site.** It was first built with its own light/dark palette; that was wrong and got corrected mid-build. It now sits under the site header and every colour resolves to a Product OS token, so there is one palette with one owner. The only new values are the domain hues, which encode data rather than chrome. Dark only, like the rest of the site, which amends V1 scope §1.
+- **The day bar is computed, not drawn.** The prototype hard-coded eleven percentages, so a different day would have rendered a confidently wrong bar. Positions now come from the window and each event's real times, tick labels land on round hours, and a live marker shows how much of the day is already gone.
+- **Snapshots are validated before they render.** The collector is a Claude session rather than a deterministic script, so a half-written snapshot is a realistic Tuesday; a malformed one now shows the validation errors instead of quietly rendering four of six panels. Ajv's 2020 build is required, as the schema is draft 2020-12.
+- **Two leak guards, per V1 scope §2.2**: `.snapshots/` and dated fixtures are gitignored, and `npm run check` now fails if any file under `site/data/` has a snapshot's shape. The test is structural rather than name-based, because the danger is a snapshot saved under an innocent name.
+- **Each ranked item can explain itself.** The `signals` object behind the ranking is exposed as a collapsed "why this ranked here". The ranking is the risky part of this product; this is what makes a wrong one correctable rather than just annoying.
+
 ## 2026-07-30 — The repo moved to `niel-cody/oolio-product-os` (32 skills)
 
 The repo left the `oolio-group` org for Niel's personal account. Combined with going private on 2026-07-29, that changed how everyone installs, so the install URL and the access story are updated everywhere.

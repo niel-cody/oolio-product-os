@@ -1,0 +1,783 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-28T19:40:00+10:00",
+  "for_date": "2026-07-29",
+  "timezone": "Australia/Melbourne",
+  "run": {
+    "connector_calls": 22,
+    "duration_ms": 94000,
+    "sources": {
+      "outlook_calendar": {
+        "ok": true,
+        "items": 22,
+        "last_ok": "2026-07-28T19:38:11+10:00"
+      },
+      "outlook_mail": {
+        "ok": true,
+        "items": 90,
+        "last_ok": "2026-07-28T19:38:31+10:00"
+      },
+      "teams": {
+        "ok": true,
+        "items": 15,
+        "last_ok": "2026-07-28T19:38:44+10:00"
+      },
+      "slack": {
+        "ok": true,
+        "items": 38,
+        "last_ok": "2026-07-28T19:39:02+10:00"
+      },
+      "granola": {
+        "ok": true,
+        "items": 8,
+        "last_ok": "2026-07-28T19:39:20+10:00"
+      },
+      "jira": {
+        "ok": true,
+        "items": 168,
+        "last_ok": "2026-07-28T19:39:48+10:00"
+      },
+      "confluence": {
+        "ok": true,
+        "items": 6,
+        "last_ok": "2026-07-28T19:39:55+10:00"
+      },
+      "hubspot": {
+        "ok": false,
+        "error": "token expired, requires re-authorisation",
+        "last_ok": null
+      }
+    }
+  },
+  "headline": {
+    "text": "Five standups, then a flight to Sydney. The 2 to 4 block is the only real room you get, so spend it on the feature-flag call that has Renner stopped.",
+    "anchor_item_id": "granola:synth0001#decide-1"
+  },
+  "day": {
+    "load": "HEAVY",
+    "booked_minutes": 290,
+    "standup_count": 5,
+    "free_minutes": 180,
+    "window": {
+      "start": "09:00",
+      "end": "20:30"
+    },
+    "events": [
+      {
+        "id": "cal:bepoz-standup",
+        "start": "09:00",
+        "end": "09:30",
+        "title": "Bepoz Daily Standup",
+        "domain": "core-pos",
+        "kind": "standup",
+        "attending": "tentative",
+        "organiser": false
+      },
+      {
+        "id": "cal:focus-1",
+        "start": "10:00",
+        "end": "11:00",
+        "title": "Focus time",
+        "domain": null,
+        "kind": "focus",
+        "attending": "accepted",
+        "organiser": true
+      },
+      {
+        "id": "cal:insights-standup",
+        "start": "11:30",
+        "end": "12:00",
+        "title": "Insights Daily Stand-up",
+        "domain": "insights",
+        "kind": "standup",
+        "attending": "accepted",
+        "organiser": true
+      },
+      {
+        "id": "cal:ce-standup",
+        "start": "12:00",
+        "end": "12:30",
+        "title": "[Standup] Customer Engagement",
+        "domain": "customer-engagement",
+        "kind": "standup",
+        "attending": "accepted",
+        "organiser": false
+      },
+      {
+        "id": "cal:menu-standup",
+        "start": "12:30",
+        "end": "13:00",
+        "title": "Universal Menu & Location Consolidation Standup",
+        "domain": "products-app",
+        "kind": "standup",
+        "attending": "accepted",
+        "organiser": false
+      },
+      {
+        "id": "cal:giftcard-kickoff",
+        "start": "13:00",
+        "end": "13:30",
+        "title": "[Insight] GiftCard Report Kick-off",
+        "domain": "insights",
+        "kind": "meeting",
+        "attending": "tentative",
+        "organiser": false
+      },
+      {
+        "id": "cal:inv-standup",
+        "start": "13:30",
+        "end": "14:00",
+        "title": "Inventory Daily Standup",
+        "domain": "inventory",
+        "kind": "standup",
+        "attending": "accepted",
+        "organiser": false
+      },
+      {
+        "id": "cal:focus-2",
+        "start": "14:00",
+        "end": "16:00",
+        "title": "Focus time",
+        "domain": null,
+        "kind": "focus",
+        "attending": "accepted",
+        "organiser": true
+      },
+      {
+        "id": "cal:discovery",
+        "start": "16:00",
+        "end": "16:50",
+        "title": "Product Discovery & Planning",
+        "domain": "insights",
+        "kind": "meeting",
+        "attending": "accepted",
+        "organiser": true
+      },
+      {
+        "id": "cal:uk-pub",
+        "start": "17:30",
+        "end": "18:30",
+        "title": "UK Pub strategy session, Swiftpos",
+        "domain": "leadership",
+        "kind": "meeting",
+        "attending": "accepted",
+        "organiser": false
+      },
+      {
+        "id": "cal:va883",
+        "start": "19:00",
+        "end": "20:25",
+        "title": "VA883 Melbourne to Sydney",
+        "domain": null,
+        "kind": "travel",
+        "attending": "accepted",
+        "organiser": true
+      }
+    ],
+    "acts": [
+      {
+        "range": "9 AM – 2 PM",
+        "text": "Five standups back to back from 11:30, with the GiftCard Report kick-off wedged in at 1. You are the organiser of the Insights one only."
+      },
+      {
+        "range": "2 – 4 PM",
+        "text": "Two hours of protected focus, the only unbroken stretch this week. Three of the five Decide items fit here."
+      },
+      {
+        "range": "4 PM ONWARD",
+        "text": "Product Discovery, then UK pub strategy with Adrian and Callum's group, then VA883 at 7. Nothing lands after 5:30."
+      }
+    ]
+  },
+  "panels": {
+    "decide": {
+      "cap": 5,
+      "considered": 9,
+      "items": [
+        {
+          "id": "granola:synth0002#decide-1",
+          "source": "granola",
+          "kind": "decision",
+          "title": "Feature flag logic for the inventory V2 screen",
+          "question": "Show the old product view when inventory is disabled, and the new V2 screen when enabled?",
+          "why": "Old product view when inventory is off, new V2 screen when on. Raised in the Inventory standup, 27 Jul, and Renner has been stopped on it since.",
+          "who_waits": [
+            "Renner"
+          ],
+          "asked_at": "2026-07-27T03:12:00Z",
+          "due": null,
+          "domain": "inventory",
+          "evidence": "Granola, Inventory Standup, 27 Jul",
+          "evidence_url": "granola:synth0003-b551-4a86-b720-0133d071240c",
+          "status": {
+            "level": "critical",
+            "label": "Blocking Renner"
+          },
+          "signals": {
+            "blocks_a_named_person": true,
+            "window_closes_48h": false,
+            "direct_to_niel": true,
+            "mission_weight": 0.8,
+            "unanswered_over_48h": true,
+            "recurrence": false
+          },
+          "score": 9.3
+        },
+        {
+          "id": "slack:satadru-personas-20260728",
+          "source": "slack",
+          "kind": "decision",
+          "title": "Guest versus Customer: are the persona definitions right",
+          "question": "Confirm the Guest and Customer definitions, and whether a unique cross-org profile is in scope for September.",
+          "why": "Marlow asked in a DM at 18:02 yesterday and flagged that a unique cross-org profile cannot land by end of September. The answer sets September scope, not just naming.",
+          "who_waits": [
+            "Marlow Raha"
+          ],
+          "asked_at": "2026-07-28T08:02:00Z",
+          "due": null,
+          "domain": "customer-engagement",
+          "evidence": "Slack DM, 28 Jul 18:02",
+          "evidence_url": null,
+          "status": {
+            "level": "serious",
+            "label": "Scope decision"
+          },
+          "signals": {
+            "blocks_a_named_person": true,
+            "window_closes_48h": false,
+            "direct_to_niel": true,
+            "mission_weight": 0.8,
+            "unanswered_over_48h": false,
+            "recurrence": false
+          },
+          "score": 7.8
+        },
+        {
+          "id": "jira:PAPP-903#design",
+          "source": "granola",
+          "kind": "decision",
+          "title": "PAPP-903 variant selection modal redesign",
+          "question": "What is the modal design that fixes child variant display without breaking layout assignment?",
+          "why": "You own the rethink. Assigned in the Products App standup, 28 Jul. Still To Do, and it was due 6 July.",
+          "who_waits": [],
+          "asked_at": "2026-07-28T02:29:00Z",
+          "due": "2026-07-06",
+          "domain": "products-app",
+          "evidence": "Granola, Products App Standup, 28 Jul",
+          "evidence_url": "https://oolio.atlassian.net/browse/PAPP-903",
+          "status": {
+            "level": "warning",
+            "label": "Yours, 23 days late"
+          },
+          "signals": {
+            "blocks_a_named_person": false,
+            "window_closes_48h": false,
+            "direct_to_niel": true,
+            "mission_weight": 0.6,
+            "unanswered_over_48h": true,
+            "recurrence": true
+          },
+          "score": 5.7
+        },
+        {
+          "id": "granola:synth0004#decide-2",
+          "source": "granola",
+          "kind": "decision",
+          "title": "When to slot the Northwind mapping endpoint",
+          "question": "Does the two-day mapping endpoint go in now, or does the manual store ID workaround hold?",
+          "why": "Roughly two days of work, and the manual store ID workaround holds until then. Left open in the Northwind Warehouse session, 28 Jul as capacity dependent, which means it waits on you.",
+          "who_waits": [],
+          "asked_at": "2026-07-28T04:02:00Z",
+          "due": null,
+          "domain": "insights",
+          "evidence": "Granola, Northwind data ingestion session, 28 Jul",
+          "evidence_url": "granola:synth0005-1f1f-4400-9a3e-c03bcd7b173a",
+          "status": null,
+          "signals": {
+            "blocks_a_named_person": false,
+            "window_closes_48h": false,
+            "direct_to_niel": true,
+            "mission_weight": 1.0,
+            "unanswered_over_48h": false,
+            "recurrence": false
+          },
+          "score": 5.2
+        },
+        {
+          "id": "granola:synth0006#decide-3",
+          "source": "granola",
+          "kind": "decision",
+          "title": "Online store name overrides breaking Insights reporting",
+          "question": "Do name overrides get removed, mapped, or excluded from reporting before the settings migration?",
+          "why": "Overrides are corrupting product-level reporting. Flagged as needing a Products team discussion before the settings migration starts in the second week of August.",
+          "who_waits": [],
+          "asked_at": "2026-07-27T05:00:00Z",
+          "due": "2026-08-14",
+          "domain": "insights",
+          "evidence": "Granola, Products App settings UI session, 27 Jul",
+          "evidence_url": "granola:synth0007-4343-4619-8305-03440eda75ac",
+          "status": {
+            "level": "warning",
+            "label": "Gates Aug migration"
+          },
+          "signals": {
+            "blocks_a_named_person": false,
+            "window_closes_48h": false,
+            "direct_to_niel": true,
+            "mission_weight": 1.0,
+            "unanswered_over_48h": true,
+            "recurrence": false
+          },
+          "score": 5.0
+        }
+      ]
+    },
+    "blocked": {
+      "cap": 5,
+      "considered": 6,
+      "items": [
+        {
+          "id": "outlook:yha-demo-kieran",
+          "source": "outlook",
+          "kind": "ask",
+          "title": "Adrian: should Bram be in the Baymont demo",
+          "question": "Niel, should we have someone like Bram in the meeting too?",
+          "why": "Delcourt proposed the slot, Adrian locked it in and put the question straight to you by email at 11:39 yesterday. The demo cannot be finalised until you answer.",
+          "who_waits": [
+            "Adrian Vale"
+          ],
+          "asked_at": "2026-07-28T11:39:29Z",
+          "due": null,
+          "domain": null,
+          "evidence": "Email, Re: Baymont Demo request, 28 Jul",
+          "evidence_url": null,
+          "status": {
+            "level": "serious",
+            "label": "Group CEO waiting"
+          },
+          "signals": {
+            "blocks_a_named_person": true,
+            "window_closes_48h": false,
+            "direct_to_niel": true,
+            "mission_weight": 0.6,
+            "unanswered_over_48h": false,
+            "recurrence": false
+          },
+          "score": 7.2
+        },
+        {
+          "id": "figma:oolio-office-rename",
+          "source": "outlook",
+          "kind": "ask",
+          "title": "Petra's rename on the Oolio Office board",
+          "question": "Rename the field to something that encompasses both Purchase and the other case.",
+          "why": "\"This should be renamed to something which encompasses both Purchase or…\" He @-mentioned you in Figma yesterday, then added five more comments on the same board.",
+          "who_waits": [
+            "Petra Nolan"
+          ],
+          "asked_at": "2026-07-28T13:17:26Z",
+          "due": null,
+          "domain": "inventory",
+          "evidence": "Figma comment notification, 28 Jul",
+          "evidence_url": null,
+          "status": null,
+          "signals": {
+            "blocks_a_named_person": true,
+            "window_closes_48h": false,
+            "direct_to_niel": true,
+            "mission_weight": 0.6,
+            "unanswered_over_48h": false,
+            "recurrence": true
+          },
+          "score": 6.4
+        },
+        {
+          "id": "granola:trello-asana-gap",
+          "source": "granola",
+          "kind": "ask",
+          "title": "Trello versus Asana gap analysis",
+          "question": "Did the gap analysis land, or did it slip?",
+          "why": "Was due midday Monday. No confirmation in any source since, so either it landed silently or it slipped. Worth thirty seconds to close.",
+          "who_waits": [],
+          "asked_at": "2026-07-27T02:00:00Z",
+          "due": "2026-07-27",
+          "domain": null,
+          "evidence": "Granola, flagged as outstanding",
+          "evidence_url": null,
+          "status": {
+            "level": "warning",
+            "label": "2 days past"
+          },
+          "signals": {
+            "blocks_a_named_person": false,
+            "window_closes_48h": true,
+            "direct_to_niel": true,
+            "mission_weight": 0.3,
+            "unanswered_over_48h": true,
+            "recurrence": false
+          },
+          "score": 6.1
+        },
+        {
+          "id": "slack:nga-payable-20260728",
+          "source": "slack",
+          "kind": "ask",
+          "title": "Wren's payable and net receivable question",
+          "question": "Store A need to pay for which store?",
+          "why": "\"Store A need to pay for which store?\" Asked in a DM yesterday afternoon against Ivo's Figma, and the thread stops there.",
+          "who_waits": [
+            "Wren Thuy Nguyen"
+          ],
+          "asked_at": "2026-07-28T06:53:14Z",
+          "due": null,
+          "domain": "insights",
+          "evidence": "Slack DM, 28 Jul 16:53",
+          "evidence_url": null,
+          "status": null,
+          "signals": {
+            "blocks_a_named_person": true,
+            "window_closes_48h": false,
+            "direct_to_niel": true,
+            "mission_weight": 1.0,
+            "unanswered_over_48h": false,
+            "recurrence": false
+          },
+          "score": 5.9
+        }
+      ]
+    },
+    "at_risk": {
+      "cap": 5,
+      "considered": 5,
+      "items": [
+        {
+          "id": "granola:synth0008#menus-release",
+          "source": "granola",
+          "kind": "deadline",
+          "title": "Menus release goes out tonight",
+          "why": "Targeted for today after the pots release yesterday. Confirmed in the menus and mPOS testing session, and it carries a combos DB migration where in-flight menu edits are lost.",
+          "who_waits": [],
+          "asked_at": "2026-07-27T02:30:00Z",
+          "due": "2026-07-29",
+          "domain": "products-app",
+          "gate_clause": "spoken_commitment",
+          "evidence": "Granola, Menus and mPOS testing, 27 Jul",
+          "evidence_url": "granola:synth0009-1482-412c-97ea-044b4e26651a",
+          "status": {
+            "level": "critical",
+            "label": "Today"
+          },
+          "score": 8.6
+        },
+        {
+          "id": "jira:OR-4101",
+          "source": "jira",
+          "kind": "deadline",
+          "title": "OR-4101 Table Service Operational Insights",
+          "why": "Epic, still in Scoping, due Friday, priority Highest. Jira, updated 27 Jul. Three days to move it out of Scoping or move the date.",
+          "who_waits": [],
+          "asked_at": null,
+          "due": "2026-07-31",
+          "domain": "insights",
+          "gate_clause": "imminent",
+          "jira": {
+            "key": "OR-4101",
+            "type": "Epic",
+            "status": "Scoping",
+            "priority": "Highest",
+            "updated": "2026-07-27"
+          },
+          "evidence": "Jira, updated 27 Jul",
+          "evidence_url": "https://oolio.atlassian.net/browse/OR-4101",
+          "status": {
+            "level": "serious",
+            "label": "Due in 2 days"
+          },
+          "score": 7.4
+        },
+        {
+          "id": "jira:INC-518",
+          "source": "jira",
+          "kind": "deadline",
+          "title": "INC-518 Grainhouse products not reaching Oolio Orders or QuickDash",
+          "why": "Trade Degraded, sitting in Test-in Testing. Jira, updated 27 Jul. A live customer is affected while it waits for a test pass.",
+          "who_waits": [],
+          "asked_at": null,
+          "due": null,
+          "domain": "core-pos",
+          "gate_clause": "incident",
+          "jira": {
+            "key": "INC-518",
+            "type": "Incident",
+            "status": "Test-in Testing",
+            "priority": "P3 - Trade Degraded",
+            "updated": "2026-07-27"
+          },
+          "evidence": "Jira, updated 27 Jul",
+          "evidence_url": "https://oolio.atlassian.net/browse/INC-518",
+          "status": {
+            "level": "critical",
+            "label": "Trade degraded"
+          },
+          "score": 7.1
+        },
+        {
+          "id": "jira:OR-4102",
+          "source": "jira",
+          "kind": "deadline",
+          "title": "OR-4102 Repeat Guest Insights",
+          "why": "Due 30 June, still Scoping, priority High, but updated yesterday, so it is live work with a dead date rather than an abandoned ticket. Re-date it or drop it.",
+          "who_waits": [],
+          "asked_at": null,
+          "due": "2026-06-30",
+          "domain": "insights",
+          "gate_clause": "live_slip",
+          "jira": {
+            "key": "OR-4102",
+            "type": "Epic",
+            "status": "Scoping",
+            "priority": "High",
+            "updated": "2026-07-28"
+          },
+          "evidence": "Jira, updated yesterday",
+          "evidence_url": "https://oolio.atlassian.net/browse/OR-4102",
+          "status": {
+            "level": "warning",
+            "label": "29 days over, still moving"
+          },
+          "score": 5.5
+        },
+        {
+          "id": "jira:PAPP-903",
+          "source": "jira",
+          "kind": "deadline",
+          "title": "PAPP-903 variant layout bug",
+          "why": "Due 6 July, still To Do, and it is the same ticket as Decide #3. Jira, updated yesterday. It is late because it is waiting on your design call.",
+          "who_waits": [],
+          "asked_at": null,
+          "due": "2026-07-06",
+          "domain": "products-app",
+          "gate_clause": "live_slip",
+          "related_item_id": "jira:PAPP-903#design",
+          "jira": {
+            "key": "PAPP-903",
+            "type": "Bug",
+            "status": "To Do",
+            "priority": "Medium",
+            "updated": "2026-07-28"
+          },
+          "evidence": "Jira, updated yesterday",
+          "evidence_url": "https://oolio.atlassian.net/browse/PAPP-903",
+          "status": {
+            "level": "warning",
+            "label": "23 days over"
+          },
+          "score": 5.3
+        }
+      ]
+    },
+    "shipped": {
+      "cap": 7,
+      "considered": 47,
+      "window_days": 3,
+      "groups": [
+        {
+          "domain": "core-pos",
+          "label": "Incidents",
+          "count": 11,
+          "count_label": "11 resolved",
+          "text": "Fernway twice, The Yard price list sync, Grainhouse meal deal printing, Calvetti product deletion, Attic Bar discounts, KDS duplicates, Aurora Group Tablebird. The heaviest incident week since June."
+        },
+        {
+          "domain": "products-app",
+          "label": "Products App",
+          "count": 7,
+          "count_label": "7 to GA",
+          "text": "Advanced product export, modifier attribute alignment, misc option group pricing, allergens now syncing into OOM. PAPP-900, the dependencies and defects epic, closed."
+        },
+        {
+          "domain": "kiosk",
+          "label": "Kiosk",
+          "count": 2,
+          "count_label": "2 to GA",
+          "text": "Modifiers integrated on price lists, and the combo upgrade prompt is live in the self-service flow."
+        },
+        {
+          "domain": "insights",
+          "label": "Insights",
+          "count": 1,
+          "count_label": "1 to GA",
+          "text": "Filter by venue and store shipped. Quiet week on delivery while the Warehouse ingestion work runs upstream."
+        },
+        {
+          "domain": null,
+          "label": "Cancelled",
+          "count": 4,
+          "count_label": "4",
+          "text": "Four Products App stories cancelled including the CDS combo upgrade display and the required-options auto-advance. Worth a glance in case any were load-bearing."
+        },
+        {
+          "domain": "inventory",
+          "label": "Inventory",
+          "count": 0,
+          "count_label": "0",
+          "text": "Nothing closed in three days. Consistent with the team waiting on the feature flag decision above."
+        }
+      ]
+    },
+    "signals": {
+      "cap": 4,
+      "considered": 11,
+      "items": [
+        {
+          "id": "granola:synth000a#signal-1",
+          "source": "granola",
+          "kind": "signal",
+          "title": "Reporting philosophy settled: product name at time of transaction",
+          "why": "The team chose to fix Uber-side naming rather than move to ID-based reporting. Decided in the Northwind Warehouse session. This is a durable call and belongs in 41 Decisions.",
+          "domain": "insights",
+          "evidence": "Granola, Northwind data ingestion session, 28 Jul",
+          "evidence_url": "granola:synth000b-1f1f-4400-9a3e-c03bcd7b173a",
+          "promote_to": "41 Decisions",
+          "score": 4.2
+        },
+        {
+          "id": "granola:synth000c#signal-2",
+          "source": "granola",
+          "kind": "signal",
+          "title": "Historical data routes to its own S3 bucket",
+          "why": "Anything older than a month leaves the live transaction queue, and enrichment data is embedded directly in the payload rather than inheriting Ledger's gaps. Same session.",
+          "domain": "insights",
+          "evidence": "Granola, Northwind data ingestion session, 28 Jul",
+          "evidence_url": "granola:synth000d-1f1f-4400-9a3e-c03bcd7b173a",
+          "promote_to": "41 Decisions",
+          "score": 3.8
+        },
+        {
+          "id": "granola:synth000e#signal-1",
+          "source": "granola",
+          "kind": "signal",
+          "title": "Action log retention priced as an enterprise lever",
+          "why": "30 days live, archive to 12 months, extended retention chargeable. Settled in the Salt & Anchor rollout session. That is a commercial decision made inside a delivery meeting.",
+          "domain": null,
+          "evidence": "Granola, Salt & Anchor rollout session, 26 Jul",
+          "evidence_url": "granola:synth000f-23c3-49a6-b61c-e2676a6fdd33",
+          "promote_to": "41 Decisions",
+          "score": 3.6
+        },
+        {
+          "id": "slack:dev-accounts-release-rule",
+          "source": "slack",
+          "kind": "signal",
+          "title": "Accounts releases now land by Wednesday",
+          "why": "The accounts team set a standing rule because so many applications depend on Accounts, Locations and Business. Posted in #dev on Friday, and it affects every downstream release plan you hold.",
+          "domain": "core-pos",
+          "evidence": "Slack, #dev, 24 Jul",
+          "evidence_url": null,
+          "promote_to": "30 Knowledge",
+          "score": 3.1
+        }
+      ]
+    }
+  },
+  "trajectory": [
+    {
+      "id": "w31-the-three",
+      "horizon": "week",
+      "period": "2026-W31",
+      "statement": "The three things that actually matter this week",
+      "measure": "manual",
+      "target": 3,
+      "current": null,
+      "progress": null,
+      "state": "unmeasured",
+      "note": "Weekly review not yet scheduled"
+    },
+    {
+      "id": "aug-settings-migration",
+      "horizon": "month",
+      "period": "2026-08",
+      "statement": "Settings migration starts in the second week of August",
+      "measure": "manual",
+      "target": null,
+      "current": null,
+      "progress": null,
+      "state": "unmeasured",
+      "note": "Verbal commitment, 27 Jul. No ticket yet."
+    },
+    {
+      "id": "q3-shipping-initiatives",
+      "horizon": "quarter",
+      "period": "2026-Q3",
+      "statement": "Three shipping initiatives in Delivery: Reservations Phase 1, Guest Waitlist, Feedback App",
+      "measure": "jira",
+      "target": 5,
+      "current": 3,
+      "progress": 0.52,
+      "state": "on-track",
+      "note": "3 of 5 initiatives in Delivery, 2 still Proposed"
+    },
+    {
+      "id": "q3-insights-adoption",
+      "horizon": "quarter",
+      "period": "2026-Q3",
+      "statement": "Insights reaches weekly active use across venues",
+      "measure": "posthog",
+      "target": null,
+      "current": null,
+      "progress": null,
+      "state": "unmeasured",
+      "note": "No target set. PostHog project 24110 ready to wire."
+    },
+    {
+      "id": "fy26-platform-and-bet",
+      "horizon": "year",
+      "period": "FY26",
+      "statement": "Oolio One is a platform, and the data and AI advantage is undeniable",
+      "measure": "derived",
+      "target": null,
+      "current": null,
+      "progress": null,
+      "state": "unmeasured",
+      "note": "Mission is set. No measurable end state yet."
+    }
+  ],
+  "debt": [
+    {
+      "id": "debt:stale-duedates",
+      "count": 66,
+      "text": "carry a Jira due date that has passed but have not moved in more than 14 days, the oldest due 8 December 2024. They are not on this page and they are not real. One purge session clears them.",
+      "query": "(assignee = currentUser() OR reporter = currentUser()) AND duedate < -14d AND updated < -14d AND statusCategory != Done"
+    },
+    {
+      "id": "debt:jpd-ideas",
+      "count": 430,
+      "text": "JPD ideas in OHSI are assigned to you. Excluded by default. They surface only when one enters a decision-required status.",
+      "query": "assignee = currentUser() AND project = OHSI AND statusCategory != Done"
+    },
+    {
+      "id": "debt:inbox-noise",
+      "count": 82,
+      "text": "of 90 emails in the last two days were newsletters, Figma digests or scanner alerts. Eight carried an ask, four made this page.",
+      "query": null
+    }
+  ],
+  "gaps": [
+    {
+      "level": "critical",
+      "source": "hubspot",
+      "text": "token expired. Customer and deal signal is unavailable until it is re-authorised."
+    },
+    {
+      "level": "warning",
+      "source": "slack",
+      "text": "scope covers #product-mgmt and #core-pos only. Yesterday's release signal came from #ordering, #team-core-pos and #dev."
+    },
+    {
+      "level": "warning",
+      "source": "goals",
+      "text": "ledger is a seed. Four of five Trajectory rows cannot compute."
+    }
+  ],
+  "_synthetic": "Invented data. Names, venues and ticket keys are fictional and any resemblance to real records is coincidental. Real snapshots never enter this repository. See the V1 scope doc, section 2.2."
+}

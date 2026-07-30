@@ -1,0 +1,227 @@
+/* ============================================================================
+   Flightdeck styling.
+
+   Every colour here resolves to a Product OS site token. Flightdeck is a surface of the
+   same product, not a second one, so it inherits the site's palette, typefaces and card
+   treatment rather than carrying its own. The --fd-* names below are aliases, not new
+   values: they exist only so this file reads in dashboard vocabulary (surface, hair, rule)
+   while the actual colours stay owned by globals.css. Change the site palette and
+   Flightdeck follows automatically.
+
+   The site is dark-only by design, so this file is too. The only genuinely new values are
+   the domain hues, which encode data rather than chrome: they are a legend the reader
+   decodes, so they have to stay distinguishable from each other.
+   ========================================================================== */
+
+.fd {
+  --fd-surface: var(--panel);
+  --fd-plane: var(--bg);
+  --fd-ink: var(--ink);
+  --fd-ink-2: #a5b1c4;
+  --fd-ink-3: var(--muted-ink);
+  --fd-hair: var(--line);
+  --fd-rule: var(--ring);
+  --fd-ring: var(--line);
+
+  --fd-good: var(--output);
+  --fd-warn: var(--loop);
+  --fd-serious: #f0883e;
+  --fd-critical: var(--destructive);
+
+  /* Domain hues, tuned for the site's #0A0E14 ground. */
+  --fd-d-insights: #4a9eff;
+  --fd-d-products-app: #ff7a45;
+  --fd-d-inventory: #2dd4a0;
+  --fd-d-customer-engagement: #f5b942;
+  --fd-d-core-pos: #f07eaa;
+  --fd-d-kiosk: #4ade80;
+  --fd-d-payments: #a78bfa;
+  --fd-d-leadership: #f87171;
+  --fd-d-none: var(--muted-ink);
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.fd-wrap {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+}
+@media (min-width: 640px) {
+  .fd-wrap { padding: 28px 24px 64px; }
+}
+
+/* ---------- shared furniture ---------- */
+.fd-card {
+  background: var(--fd-surface);
+  border: 1px solid var(--fd-hair);
+  border-radius: 10px;
+}
+.fd-cap {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  color: var(--fd-ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.fd-h2 {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 500;
+  color: var(--fd-ink-3);
+}
+.fd-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; display: inline-block; }
+
+.fd-tag {
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--fd-ring);
+  color: var(--fd-ink-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.fd-tag .fd-dot { width: 6px; height: 6px; }
+
+.fd-stat {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  border: 1px solid currentColor;
+}
+.fd-stat[data-level="critical"] { color: var(--fd-critical); }
+.fd-stat[data-level="serious"] { color: var(--fd-serious); }
+.fd-stat[data-level="warning"] { color: var(--fd-warn); }
+.fd-stat[data-level="good"] { color: var(--fd-good); }
+.fd-stat[data-level="none"] { color: var(--fd-ink-3); }
+
+/* ---------- day bar ---------- */
+.fd-track {
+  position: relative;
+  height: 34px;
+  background: var(--fd-surface);
+  border: 1px solid var(--fd-hair);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.fd-blk {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px var(--fd-surface);
+}
+.fd-blk[data-free="true"] {
+  background: transparent;
+  border: 1px dashed var(--fd-rule);
+  box-shadow: none;
+}
+/* Where you are in the day. The prototype had no such marker, and without one the bar
+   tells you the shape of the day but not how much of it is already gone. */
+.fd-now { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--fd-critical); z-index: 2; }
+.fd-now::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fd-critical);
+}
+.fd-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--fd-ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- item lists ---------- */
+.fd-items { list-style: none; margin: 0; padding: 0; counter-reset: fditem; }
+.fd-items > li {
+  counter-increment: fditem;
+  padding: 11px 0 12px 26px;
+  border-top: 1px solid var(--fd-hair);
+  position: relative;
+}
+.fd-items > li:first-child { border-top: none; }
+.fd-items > li::before {
+  content: counter(fditem);
+  position: absolute;
+  left: 0;
+  top: 12px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--fd-ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.fd-ttl { font-weight: 600; font-size: 13.5px; display: block; line-height: 1.35; color: var(--fd-ink); }
+.fd-ttl a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--fd-rule); }
+.fd-ttl a:hover { border-bottom-color: var(--primary); color: var(--primary); }
+.fd-why { margin: 3px 0 0; font-size: 12.5px; color: var(--fd-ink-2); }
+.fd-src { border-bottom: 1px solid var(--fd-rule); }
+.fd-meta { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+
+/* ---------- trajectory ---------- */
+.fd-tj { width: 100%; border-collapse: collapse; }
+.fd-tj th {
+  text-align: left;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fd-ink-3);
+  font-weight: 500;
+  padding: 0 0 8px;
+}
+.fd-tj td { padding: 10px 0; border-top: 1px solid var(--fd-hair); vertical-align: middle; font-size: 13px; }
+.fd-meter { height: 8px; border-radius: 4px; background: var(--secondary); overflow: hidden; }
+.fd-meter > i { display: block; height: 100%; border-radius: 4px; }
+.fd-meter[data-none="true"] {
+  background: repeating-linear-gradient(135deg, var(--secondary) 0 5px, transparent 5px 10px);
+}
+.fd-mnote { font-size: 11px; color: var(--fd-ink-3); margin-top: 4px; }
+
+/* On a phone the four-column table stops being a table and becomes stacked records. */
+@media (max-width: 720px) {
+  .fd-tj, .fd-tj tbody, .fd-tj tr, .fd-tj td { display: block; width: 100%; }
+  .fd-tj thead { display: none; }
+  .fd-tj tr { border-top: 1px solid var(--fd-hair); padding: 12px 0; }
+  .fd-tj tr:first-child { border-top: none; }
+  .fd-tj td { border-top: none; padding: 2px 0; }
+}
+
+/* ---------- diagnostics ---------- */
+.fd-why-ranked { margin-top: 7px; font-size: 11px; color: var(--fd-ink-3); }
+.fd-why-ranked summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-bottom: 1px dotted var(--fd-rule);
+}
+.fd-why-ranked summary::-webkit-details-marker { display: none; }
+.fd-why-ranked summary:hover { color: var(--fd-ink-2); }
+.fd-why-ranked ul {
+  margin: 6px 0 0;
+  padding: 0 0 0 14px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+.fd-why-ranked li::before { content: "· "; color: var(--fd-rule); }
