@@ -43,6 +43,18 @@ const REVEALED = new Set([
   "metrics-review",
 ]);
 
+// The named stars take hand-placed vertical positions. Their source rows all sit near the
+// top of the lifecycle grid, which clustered every label in the sky's first quarter and
+// left the rest looking anonymous. Spreading them is editorial, not data.
+// Chosen to keep every label out of the centre band, where the title card sits.
+const REVEAL_Y: Record<string, number> = {
+  "pm-compass": 0.55,
+  "storm-research": 0.16,
+  "write-prd": 0.82,
+  "steering-pack": 0.72,
+  "metrics-review": 0.24,
+};
+
 /** Deterministic 0..1 from a string. Stable across server and client renders. */
 function hash01(s: string, salt: number): number {
   let h = 2166136261 ^ salt;
@@ -64,7 +76,9 @@ export function getSky(): Sky {
   const stars: Star[] = nodes.map((n) => ({
     id: n.id,
     x: Math.min(0.99, Math.max(0.01, (n.col + 0.5) / cols + (hash01(n.id, 11) - 0.5) * 0.05)),
-    y: Math.min(0.94, Math.max(0.08, (n.row + 0.5) / (maxRow + 1) + (hash01(n.id, 17) - 0.5) * 0.14)),
+    y:
+      REVEAL_Y[n.id] ??
+      Math.min(0.94, Math.max(0.08, (n.row + 0.5) / (maxRow + 1) + (hash01(n.id, 17) - 0.5) * 0.14)),
     type: n.type,
     label: REVEALED.has(n.id) ? n.label : null,
   }));

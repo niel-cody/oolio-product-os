@@ -2,6 +2,19 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-31 — The sky comes alive, and the door follows you down (32 skills)
+
+Niel's read on the first cinematic pass was right: tying the animation to the scroll wheel meant the universe froze whenever the visitor did, and six flows of pinned scrolling was a slog. Inverted.
+
+- **The sky animates itself now.** The six flows trace as constellations on a loop, forever — draw for a few seconds, hold, release, next — whether or not anyone touches the wheel. Scroll just carries you past it. The pinned 340vh scrub is gone, so the page is a fraction of its former length.
+- **Stars light as the line reaches them.** Each star on the traced flow flares at the exact moment the line arrives, timed by its measured distance along the path, and a named star's label rises with it. The five named stars are also spread across the sky rather than clustered along the top, and kept out of the centre band where the title sits.
+- **The flow name is a headline now**, sitting in the title stack under "Signal to shipped." and swapping as the sky traces, rather than a caption in the corner.
+- **The call to action never leaves the screen.** When the hero button scrolls away, a sign-in button fades into the header ribbon; scroll back up and it hands back. One visible at a time, always one visible.
+- **Signal · Decide · Learn sit side by side** with the loop drawn beneath them — marching dashes running out along the top and home along the bottom — because a cycle is what they are, not a pipeline.
+- **Traces move at one speed, not one duration.** A fixed draw time made the seventeen-step flow race and the five-step one crawl; each flow's time now comes from its measured path length over a constant speed, clamped at both ends. Caught by Niel watching it.
+- Legibility: a soft vignette behind the title, and a dark halo painted behind every star label so text never fights the line running under it. The "Tracing 5 of 6" counter is gone — it is not a progress bar, so it now just says what it is tracing.
+- All guarantees re-verified: no flow-step prose, no skill descriptions, no unrevealed labels, no repo path on the public page.
+
 ## 2026-07-31 — The landing goes cinematic, and the essay moves indoors (32 skills)
 
 The star chart stops being a boxed figure on a wordy page and becomes the page. One scroll, four acts.

@@ -8,12 +8,15 @@ import type { Sky } from "@/lib/landing-sky";
 import "./landing.css";
 
 /**
- * The whole signed-out front door, as one scroll.
+ * The signed-out front door.
  *
- * Act 1 — the sky. A full-viewport star chart pinned while you scroll through it; the six
- *         flows draw themselves as constellations, one at a time, driven by scroll position
- *         rather than a timer, so the visitor assembles the system by moving through it.
- * Act 2 — three beats: Signal, Decide, Learn. One line each.
+ * Act 1 — the sky. Full-viewport, alive on its own: the six flows trace themselves as
+ *         constellations on a loop, forever, with the flow's name as a sub-headline and
+ *         stars lighting as the line reaches them. Scroll is not involved; an earlier
+ *         version scrubbed the drawing with the wheel, and the page felt like it locked
+ *         whenever the visitor stopped.
+ * Act 2 — Signal · Decide · Learn, side by side, with the loop drawn under them, because
+ *         a cycle is what they actually are.
  * Act 3 — the numbers, counted up. All real.
  * Act 4 — "Learn it once." and the door.
  *
@@ -30,6 +33,14 @@ const PAD_Y = 90;
 const px = (x: number) => PAD_X + x * (W - PAD_X * 2);
 const py = (y: number) => PAD_Y + y * (H - PAD_Y * 2);
 
+// Constant SPEED, not constant duration: a fixed draw time made the seventeen-step flow
+// race and the five-step one crawl. Duration is each path's measured length over this
+// speed, clamped so no flow is a blink or an age. Hold the finished shape, then move on.
+const SPEED_PX_PER_S = 620;
+const HOLD_MS = 1700;
+const MIN_DRAW_MS = 2400;
+const MAX_DRAW_MS = 6500;
+
 function hash01(s: string, salt: number): number {
   let h = 2166136261 ^ salt;
   for (let i = 0; i < s.length; i++) {
@@ -38,8 +49,6 @@ function hash01(s: string, salt: number): number {
   }
   return ((h >>> 0) % 100000) / 100000;
 }
-
-const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
 /** One-shot in-view flag for the reveal sections. */
 function useInView<T extends HTMLElement>(threshold = 0.3) {
@@ -90,8 +99,7 @@ function Counter({ to, label, reduced }: { to: number; label: string; reduced: b
     const start = performance.now();
     const dur = 1200;
     const tick = (now: number) => {
-      const t = clamp01((now - start) / dur);
-      // Ease out, so the last few digits land gently instead of snapping.
+      const t = Math.min(1, (now - start) / dur);
       setValue(Math.round(to * (1 - Math.pow(1 - t, 3))));
       if (t < 1) raf = requestAnimationFrame(tick);
     };
@@ -137,29 +145,10 @@ export function LandingExperience({
   counts: { skills: number; stages: number; flows: number; changes: number };
 }) {
   const reduced = useReducedMotion();
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const [p, setP] = useState(0);
+  const [flowIdx, setFlowIdx] = useState(0);
+  const n = sky.constellations.length;
 
-  // Scroll drives everything in Act 1. No rAF wrapper on purpose: browsers already fire
-  // scroll at most once per frame, React batches the setState, and rAF callbacks stop
-  // entirely in a hidden tab, which made the scrub untestable headless for zero gain.
-  useEffect(() => {
-    if (reduced) return;
-    const onScroll = () => {
-      const el = wrapRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const total = el.offsetHeight - window.innerHeight;
-      setP(total > 0 ? clamp01(-rect.top / total) : 1);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [reduced]);
+
 
   const byId = useMemo(() => new Map(sky.stars.map((s) => [s.id, s])), [sky.stars]);
 
@@ -174,32 +163,51 @@ export function LandingExperience({
     [sky.constellations, byId],
   );
 
-  // Path lengths for the draw effect, measured from the idle (always-rendered) paths.
+  // Path lengths for the draw animation, measured from the always-rendered idle paths.
   const idleRefs = useRef<(SVGPathElement | null)[]>([]);
   const [lens, setLens] = useState<number[]>([]);
   useEffect(() => {
     setLens(idleRefs.current.map((el) => (el ? el.getTotalLength() : 0)));
   }, [paths]);
 
-  // The scroll script. Title holds the first stretch, then each flow gets an equal slice.
-  const TITLE_END = 0.14;
-  const FLOWS_END = 0.97;
-  const slice = (FLOWS_END - TITLE_END) / sky.constellations.length;
+  const drawMs = useMemo(
+    () =>
+      lens.map((l) =>
+        Math.round(Math.min(MAX_DRAW_MS, Math.max(MIN_DRAW_MS, (l / SPEED_PX_PER_S) * 1000))),
+      ),
+    [lens],
+  );
 
-  const flowProgress = (i: number) =>
-    reduced ? 1 : clamp01((p - TITLE_END - i * slice) / slice);
+  // The heartbeat. A self-scheduling timeout rather than an interval, because each flow now
+  // holds the stage for its own draw time plus the hold. Plain timers, deliberately not
+  // rAF: rAF stops in hidden tabs, which pauses the loop and makes it untestable headless.
+  useEffect(() => {
+    if (reduced || n < 2 || drawMs.length < n) return;
+    const t = setTimeout(() => setFlowIdx((i) => (i + 1) % n), (drawMs[flowIdx] ?? 3600) + HOLD_MS);
+    return () => clearTimeout(t);
+  }, [reduced, n, flowIdx, drawMs]);
 
-  const currentFlow = reduced
-    ? -1
-    : Math.min(sky.constellations.length - 1, Math.max(0, Math.floor((p - TITLE_END) / slice)));
-  const inFlows = !reduced && p > TITLE_END;
+  // When does the trace reach each star on the current flow? Distance along the polyline
+  // as a fraction of its total, so a star's flare lands exactly as the line arrives.
+  const hits = useMemo(() => {
+    const c = sky.constellations[flowIdx];
+    const map = new Map<string, number>();
+    if (!c) return map;
+    const pts = c.ids.map((id) => byId.get(id)).filter((s): s is NonNullable<typeof s> => Boolean(s));
+    let total = 0;
+    const cum = [0];
+    for (let i = 1; i < pts.length; i++) {
+      total += Math.hypot(px(pts[i].x) - px(pts[i - 1].x), py(pts[i].y) - py(pts[i - 1].y));
+      cum.push(total);
+    }
+    pts.forEach((pt, i) => {
+      if (!map.has(pt.id)) map.set(pt.id, total > 0 ? cum[i] / total : 0);
+    });
+    return map;
+  }, [flowIdx, sky.constellations, byId]);
 
-  const lit = useMemo(() => {
-    if (!inFlows) return new Set<string>();
-    return new Set(sky.constellations[currentFlow]?.ids ?? []);
-  }, [inFlows, currentFlow, sky.constellations]);
-
-  const titleOpacity = reduced ? 1 : 1 - clamp01((p - 0.05) / 0.09);
+  const current = sky.constellations[flowIdx];
+  const prevIdx = (flowIdx + n - 1) % n;
 
   const dust = useMemo(
     () =>
@@ -219,182 +227,233 @@ export function LandingExperience({
   return (
     <main className="lx-sky flex-1">
       {/* ============================== ACT 1 — THE SKY ============================== */}
-      <div ref={wrapRef} className={reduced ? "relative" : "relative h-[340vh]"}>
-        <div className={`${reduced ? "relative" : "sticky top-0"} h-[100svh] overflow-hidden`}>
-          <svg
-            className="absolute inset-0 h-full w-full"
-            viewBox={`0 0 ${W} ${H}`}
-            preserveAspectRatio="xMidYMid slice"
-            role="img"
-            aria-label={`A star chart of the Oolio Product OS: ${counts.skills} skills and the artifacts they produce, arranged from signal to shipped, with ${counts.flows} end-to-end flows drawn between them as constellations.`}
-          >
-            <defs>
-              <radialGradient id="lx-halo">
-                <stop offset="0%" stopColor="#fff" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#fff" stopOpacity="0" />
-              </radialGradient>
-            </defs>
+      <section className="relative h-[100svh] overflow-hidden">
+        <svg
+          className="absolute inset-0 h-full w-full"
+          viewBox={`0 0 ${W} ${H}`}
+          preserveAspectRatio="xMidYMid slice"
+          role="img"
+          aria-label={`A star chart of the Oolio Product OS: ${counts.skills} skills and the artifacts they produce, with ${counts.flows} end-to-end flows tracing themselves between the stars on a loop.`}
+        >
+          <defs>
+            <radialGradient id="lx-halo">
+              <stop offset="0%" stopColor="#fff" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+            </radialGradient>
+          </defs>
 
-            <g aria-hidden>
-              {dust.map((d, i) => (
-                <circle
-                  key={i}
-                  className="lx-dust"
-                  cx={d.x}
-                  cy={d.y}
-                  r={d.r}
-                  fill="#8fa3c0"
-                  style={{ animationDelay: `${d.d}s` }}
-                />
-              ))}
-            </g>
+          <g aria-hidden>
+            {dust.map((d, i) => (
+              <circle
+                key={i}
+                className="lx-dust"
+                cx={d.x}
+                cy={d.y}
+                r={d.r}
+                fill="#8fa3c0"
+                style={{ animationDelay: `${d.d}s` }}
+              />
+            ))}
+          </g>
 
-            {/* Idle constellation lines: always present and faint, so the sky reads as
-                charted from the first frame. These are also what we measure lengths from. */}
+          {/* Idle constellation lines: always present and faint, so the sky reads as
+              charted from the first frame. Also what path lengths are measured from. */}
+          <g aria-hidden>
+            {paths.map((d, i) => (
+              <path
+                key={i}
+                ref={(el) => {
+                  idleRefs.current[i] = el;
+                }}
+                d={d}
+                fill="none"
+                stroke="#9fb0c9"
+                strokeWidth={1.2}
+                opacity={reduced ? 0.3 : 0.09}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            ))}
+          </g>
+
+          {reduced ? (
+            // Reduced motion: every constellation drawn, nothing moving.
             <g aria-hidden>
-              {paths.map((d, i) => (
+              {sky.constellations.map((c, i) => (
                 <path
-                  key={i}
-                  ref={(el) => {
-                    idleRefs.current[i] = el;
-                  }}
-                  d={d}
+                  key={c.name}
+                  d={paths[i]}
                   fill="none"
-                  stroke="#9fb0c9"
-                  strokeWidth={1.2}
-                  opacity={reduced ? 0.3 : 0.09}
+                  stroke={`var(${c.accent})`}
+                  strokeWidth={1.6}
+                  opacity={0.55}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
               ))}
             </g>
-
-            {/* The bright lines, drawn by scroll. Completed flows stay lit but recede. */}
-            {!reduced && (
+          ) : (
+            current &&
+            lens[flowIdx] > 0 && (
               <g aria-hidden>
-                {sky.constellations.map((c, i) => {
-                  const fp = flowProgress(i);
-                  if (fp <= 0 || !lens[i]) return null;
-                  return (
-                    <path
-                      key={c.name}
-                      d={paths[i]}
-                      fill="none"
-                      stroke={`var(${c.accent})`}
-                      strokeWidth={i === currentFlow ? 2.6 : 1.6}
-                      opacity={i === currentFlow ? 0.95 : 0.35}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeDasharray={lens[i]}
-                      strokeDashoffset={lens[i] * (1 - fp)}
-                    />
-                  );
-                })}
-              </g>
-            )}
-            {reduced && (
-              <g aria-hidden>
-                {sky.constellations.map((c, i) => (
-                  <path
-                    key={c.name}
-                    d={paths[i]}
-                    fill="none"
-                    stroke={`var(${c.accent})`}
-                    strokeWidth={1.6}
-                    opacity={0.55}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                {/* The flow that just finished, letting go. */}
+                <path
+                  key={`prev-${flowIdx}`}
+                  className="lx-trace-prev"
+                  d={paths[prevIdx]}
+                  fill="none"
+                  stroke={`var(${sky.constellations[prevIdx].accent})`}
+                  strokeWidth={1.8}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                {/* The trace. Keyed so the draw restarts each cycle. */}
+                <path
+                  key={`trace-${flowIdx}`}
+                  className="lx-trace"
+                  d={paths[flowIdx]}
+                  fill="none"
+                  stroke={`var(${current.accent})`}
+                  strokeWidth={2.4}
+                  opacity={0.95}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ ["--len" as string]: lens[flowIdx], ["--dur" as string]: `${drawMs[flowIdx]}ms` }}
+                />
+                {/* The pulse riding the draw front. */}
+                <circle
+                  key={`pulse-${flowIdx}`}
+                  className="lx-pulse"
+                  r={4.5}
+                  fill={`var(${current.accent})`}
+                  style={{ ["--dur" as string]: `${drawMs[flowIdx]}ms` }}
+                >
+                  <animateMotion
+                    dur={`${drawMs[flowIdx]}ms`}
+                    repeatCount="1"
+                    fill="freeze"
+                    keyPoints="0;1"
+                    keyTimes="0;1"
+                    calcMode="spline"
+                    keySplines="0.35 0.55 0.25 1"
+                    path={paths[flowIdx]}
                   />
-                ))}
+                </circle>
               </g>
-            )}
+            )
+          )}
 
-            <g>
-              {sky.stars.map((s) => {
-                const on = lit.has(s.id);
-                const colour = sky.typeColour[s.type] ?? "#9fb0c9";
-                return (
-                  <g key={s.id}>
+          <g>
+            {sky.stars.map((s) => {
+              const hit = hits.get(s.id);
+              const onFlow = !reduced && hit !== undefined;
+              const colour = sky.typeColour[s.type] ?? "#9fb0c9";
+              const hitDelay = `${Math.round((hit ?? 0) * (drawMs[flowIdx] ?? 3600))}ms`;
+              return (
+                <g key={s.id}>
+                  <circle
+                    className="lx-star-glow"
+                    cx={px(s.x)}
+                    cy={py(s.y)}
+                    r={s.label ? 20 : 14}
+                    fill="url(#lx-halo)"
+                    style={{ animationDelay: `${(hash01(s.id, 3) * 6).toFixed(2)}s` }}
+                  />
+                  {onFlow ? (
+                    // On the flow being traced: flare exactly as the line arrives.
                     <circle
-                      className="lx-star-glow"
+                      key={`hit-${flowIdx}`}
+                      className="lx-starhit"
                       cx={px(s.x)}
                       cy={py(s.y)}
-                      r={s.label ? 20 : 14}
-                      fill="url(#lx-halo)"
-                      style={{ animationDelay: `${(hash01(s.id, 3) * 6).toFixed(2)}s` }}
-                    />
-                    <circle
-                      cx={px(s.x)}
-                      cy={py(s.y)}
-                      r={s.label ? 5 : on ? 4.6 : 3.2}
+                      r={s.label ? 5 : 3.4}
                       fill={colour}
-                      opacity={s.label || on ? 1 : 0.6}
+                      style={{ ["--hit" as string]: hitDelay }}
                     />
-                    {s.label &&
-                      (s.x > 0.8 ? (
-                        <text className="lx-label" x={px(s.x) - 13} y={py(s.y) + 6} textAnchor="end">
-                          {s.label}
-                        </text>
-                      ) : (
-                        <text className="lx-label" x={px(s.x) + 13} y={py(s.y) + 6}>
-                          {s.label}
-                        </text>
-                      ))}
-                  </g>
-                );
-              })}
-            </g>
-          </svg>
+                  ) : (
+                    <circle cx={px(s.x)} cy={py(s.y)} r={s.label ? 5 : 3.2} fill={colour} opacity={s.label ? 0.95 : 0.6} />
+                  )}
+                  {s.label &&
+                    (onFlow ? (
+                      <text
+                        key={`lhit-${flowIdx}`}
+                        className="lx-label lx-label-hit"
+                        style={{ ["--hit" as string]: hitDelay }}
+                        {...(s.x > 0.8
+                          ? { x: px(s.x) - 13, y: py(s.y) + 6, textAnchor: "end" as const }
+                          : { x: px(s.x) + 13, y: py(s.y) + 6 })}
+                      >
+                        {s.label}
+                      </text>
+                    ) : (
+                      <text
+                        className="lx-label"
+                        {...(s.x > 0.8
+                          ? { x: px(s.x) - 13, y: py(s.y) + 6, textAnchor: "end" as const }
+                          : { x: px(s.x) + 13, y: py(s.y) + 6 })}
+                      >
+                        {s.label}
+                      </text>
+                    ))}
+                </g>
+              );
+            })}
+          </g>
+        </svg>
 
-          {/* The title card. Fades as the scrub begins so the sky gets the stage. */}
-          <div
-            className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center"
-            style={{ opacity: titleOpacity, pointerEvents: titleOpacity < 0.15 ? "none" : undefined }}
-          >
-            <div className="eyebrow">Oolio Product OS</div>
-            <h1 className="mt-4 max-w-[900px] text-[42px] font-bold leading-[1.06] tracking-tight sm:text-[72px]">
-              Signal to shipped.
-            </h1>
-            <p className="mt-5 max-w-[560px] text-[15px] leading-relaxed text-[var(--muted-ink)] sm:text-[17px]">
-              The product team, written down and running: {counts.skills} real skills against our
-              real tools.
-            </p>
-            <Button asChild size="lg" className="mt-8 h-11 px-6 text-[14px]">
-              <Link href={cta.href}>
-                {cta.label} <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Link>
-            </Button>
-            {!reduced && (
-              <div className="lx-hint absolute bottom-7 flex flex-col items-center gap-1 text-[var(--muted-ink)]">
-                <span className="mono text-[9px] uppercase tracking-[0.16em]">Scroll to chart it</span>
-                <ChevronDown className="h-4 w-4" />
-              </div>
-            )}
+        {/* A soft vignette behind the title, so the type stays legible while the traces
+            pass behind it rather than through it. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(46% 42% at 50% 47%, rgba(7,11,17,0.78), rgba(7,11,17,0.4) 58%, transparent 78%)",
+          }}
+        />
+
+        {/* The title card. Persistent: the sky animates behind it, and scrolling simply
+            carries the visitor onward. */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
+          <div className="eyebrow">Oolio Product OS</div>
+          <h1 className="mt-4 max-w-[900px] text-[42px] font-bold leading-[1.06] tracking-tight sm:text-[72px]">
+            Signal to shipped.
+          </h1>
+          <p className="mt-5 max-w-[560px] text-[15px] leading-relaxed text-[var(--muted-ink)] sm:text-[17px]">
+            The product team, written down and running: {counts.skills} real skills against our
+            real tools.
+          </p>
+
+          {/* What the sky is tracing right now, as a headline element rather than a
+              corner caption. */}
+          <div className="mt-7 flex h-[52px] flex-col items-center justify-center" aria-live="off">
+            <div className="mono text-[9px] uppercase tracking-[0.16em] text-[var(--muted-ink)]">
+              {reduced ? "End-to-end flows" : "Now tracing"}
+            </div>
+            <div
+              key={flowIdx}
+              className="lx-flowname mt-1 text-[17px] font-semibold sm:text-[21px]"
+              style={{ color: current ? `var(${current.accent})` : undefined }}
+            >
+              {reduced ? `${counts.flows} paths through the map` : current?.name}
+            </div>
           </div>
 
-          {/* The name of the flow being traced. */}
-          {inFlows && sky.constellations[currentFlow] && (
-            <div key={currentFlow} className="lx-flowname absolute bottom-8 left-5 sm:bottom-10 sm:left-8">
-              <div className="mono text-[9px] uppercase tracking-[0.16em] text-[var(--muted-ink)]">
-                Tracing · {currentFlow + 1} of {sky.constellations.length}
-              </div>
-              <div
-                className="mt-1 text-[16px] font-semibold sm:text-[20px]"
-                style={{ color: `var(${sky.constellations[currentFlow].accent})` }}
-              >
-                {sky.constellations[currentFlow].name}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+          <Button asChild size="lg" className="mt-6 h-11 px-6 text-[14px]">
+            <Link href={cta.href}>
+              {cta.label} <ArrowRight className="ml-1.5 h-4 w-4" />
+            </Link>
+          </Button>
 
-      {/* ============================== ACT 2 — THE BEATS ============================== */}
-      <section className="mx-auto max-w-3xl px-5 py-10 sm:py-16">
-        {BEATS.map((b) => {
-          return <Beat key={b.word} {...b} />;
-        })}
+          <div className="lx-hint absolute bottom-7 flex flex-col items-center gap-1 text-[var(--muted-ink)]">
+            <span className="mono text-[9px] uppercase tracking-[0.16em]">Scroll</span>
+            <ChevronDown className="h-4 w-4" />
+          </div>
+        </div>
       </section>
+
+      {/* ==================== ACT 2 — THE LOOP: SIGNAL · DECIDE · LEARN ==================== */}
+      <LoopBeats />
 
       {/* ============================== ACT 3 — THE NUMBERS ============================== */}
       <section className="border-y border-[var(--line)] bg-[var(--panel)]/60">
@@ -412,20 +471,39 @@ export function LandingExperience({
   );
 }
 
-function Beat({ word, colour, line }: (typeof BEATS)[number]) {
-  const { ref, inView } = useInView<HTMLDivElement>(0.45);
+function LoopBeats() {
+  const { ref, inView } = useInView<HTMLDivElement>(0.35);
   return (
-    <div
-      ref={ref}
-      className={`lx-reveal ${inView ? "is-in" : ""} flex min-h-[38svh] flex-col justify-center py-10`}
-    >
-      <div className="text-[40px] font-bold leading-none tracking-tight sm:text-[64px]" style={{ color: colour }}>
-        {word}
+    <section className="mx-auto max-w-5xl px-5 py-16 sm:py-24">
+      <div ref={ref} className={`lx-reveal ${inView ? "is-in" : ""}`}>
+        <div className="grid gap-10 sm:grid-cols-3 sm:gap-8">
+          {BEATS.map((b) => (
+            <div key={b.word}>
+              <div className="text-[34px] font-bold leading-none tracking-tight sm:text-[44px]" style={{ color: b.colour }}>
+                {b.word}
+              </div>
+              <p className="mt-3 max-w-[340px] text-[14px] leading-relaxed text-[var(--muted-ink)] sm:text-[15px]">
+                {b.line}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* The loop itself, drawn: out along the top, back along the bottom, forever.
+            Marching dashes carry the direction; it is a cycle, not a pipeline. */}
+        <svg
+          className="mt-10 hidden w-full sm:block"
+          viewBox="0 0 600 64"
+          preserveAspectRatio="none"
+          aria-hidden
+        >
+          <path className="lx-loop" d="M 30 14 H 570 A 18 18 0 0 1 570 50 H 30 A 18 18 0 0 1 30 14 Z" />
+        </svg>
+        <p className="eyebrow mt-4 text-center sm:mt-3">
+          A loop, not a pipeline · findings land in the Brain, so every pass starts ahead of the last
+        </p>
       </div>
-      <p className="mt-4 max-w-[520px] text-[15px] leading-relaxed text-[var(--muted-ink)] sm:text-[17px]">
-        {line}
-      </p>
-    </div>
+    </section>
   );
 }
 

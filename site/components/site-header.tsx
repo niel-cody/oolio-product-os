@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, LogOut } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -36,6 +36,18 @@ export function SiteHeader({
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  // Signed out on the landing page, the call to action must never leave the screen: the
+  // hero carries it above the fold, and once that scrolls away this one fades into the
+  // ribbon to take over. Always mounted so the handoff is a fade, not a pop.
+  const [ctaInRibbon, setCtaInRibbon] = useState(false);
+  useEffect(() => {
+    if (signedIn || pathname !== "/") return;
+    const onScroll = () => setCtaInRibbon(window.scrollY > window.innerHeight * 0.55);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [signedIn, pathname]);
 
   // Flightdeck lives at /app/today but its dated pages are /app/d/…, so match the section
   // rather than the exact path or the tab goes dark as soon as you land on a real day.
@@ -105,10 +117,22 @@ export function SiteHeader({
                 </Button>
               </form>
             </>
-          ) : // Signed out, the header is just the wordmark. The landing page carries the
-          // sign-in call to action in its hero and its finale; a third button up here was
-          // one of the three Niel counted, and the header one earns its place least.
-          null}
+          ) : (
+            <Button
+              asChild
+              size="sm"
+              className={cn(
+                "h-8 text-[12px] transition-all duration-300",
+                ctaInRibbon
+                  ? "translate-y-0 opacity-100"
+                  : "pointer-events-none -translate-y-1 opacity-0",
+              )}
+              tabIndex={ctaInRibbon ? undefined : -1}
+              aria-hidden={!ctaInRibbon}
+            >
+              <Link href="/login">Sign in</Link>
+            </Button>
+          )}
 
           {signedIn && (
             <Sheet open={open} onOpenChange={setOpen}>

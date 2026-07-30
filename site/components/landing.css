@@ -1,10 +1,13 @@
 /* ============================================================================
    The cinematic landing experience.
 
-   The hero is scroll-driven, which makes motion the centrepiece and therefore the
-   accessibility risk. Everything animated here has a reduced-motion path: the scrub
-   collapses to a still chart with every constellation drawn, reveals render in place,
-   and counters print their final value. See the media query at the foot.
+   The sky animates itself: flows trace on a timer, forever, and scrolling simply moves
+   past it. Nothing on this page is driven by scroll position any more — that version
+   felt like the universe locked whenever the wheel stopped.
+
+   Motion is the centrepiece, so it is the accessibility risk: every animation has a
+   reduced-motion path at the foot of this file, where the sky becomes a still chart with
+   all constellations drawn and labels lit.
    ========================================================================== */
 
 .lx-sky {
@@ -32,22 +35,70 @@
   50% { opacity: 0.32; transform: scale(1.2); }
 }
 
-/* ---------- labels ---------- */
+/* ---------- the trace ---------- */
+/* --len is the measured path length, --dur the draw time. Set inline per flow. */
+.lx-trace {
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  animation: lx-draw var(--dur) cubic-bezier(0.35, 0.55, 0.25, 1) forwards;
+}
+@keyframes lx-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* The flow that just finished, letting go while the next one draws. */
+.lx-trace-prev { animation: lx-release 2.2s ease-out forwards; }
+@keyframes lx-release {
+  from { opacity: 0.45; }
+  to { opacity: 0; }
+}
+
+/* The pulse riding the draw front, fading once it arrives. */
+.lx-pulse { animation: lx-arrive 0.8s ease-out var(--dur) forwards; }
+@keyframes lx-arrive {
+  to { opacity: 0; }
+}
+
+/* ---------- stars and labels lighting as the line reaches them ---------- */
+/* --hit is each star's arrival time: its distance along the path × the draw time. */
+.lx-starhit {
+  animation: lx-flare 0.9s ease-out var(--hit) both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes lx-flare {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.9); }
+  100% { transform: scale(1.35); }
+}
+
 .lx-label {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 21px;
   fill: #c3ccdb;
   letter-spacing: 0.02em;
+  opacity: 0.38;
+  /* A dark halo painted behind the glyphs, so a label stays legible whatever line or
+     star the sky happens to run underneath it. */
+  paint-order: stroke;
+  stroke: #070b11;
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.lx-label-hit { animation: lx-labelup 0.7s ease-out var(--hit) both; }
+@keyframes lx-labelup {
+  from { opacity: 0.38; }
+  to { opacity: 1; }
 }
 @media (max-width: 639px) {
   .lx-label { display: none; }
 }
 
 /* ---------- overlays ---------- */
-.lx-flowname { animation: lx-fadein 0.6s ease-out both; }
-@keyframes lx-fadein {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.lx-flowname { animation: lx-swap 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes lx-swap {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
 }
 
 .lx-hint { animation: lx-bob 2.2s ease-in-out infinite; }
@@ -56,7 +107,20 @@
   50% { transform: translateY(6px); opacity: 1; }
 }
 
-/* ---------- scroll reveals (beats, counters, finale) ---------- */
+/* ---------- the Signal → Decide → Learn loop ---------- */
+.lx-loop {
+  fill: none;
+  stroke: var(--muted-ink);
+  opacity: 0.5;
+  stroke-width: 1.4;
+  stroke-dasharray: 5 9;
+  animation: lx-march 1.1s linear infinite;
+}
+@keyframes lx-march {
+  to { stroke-dashoffset: -14; }
+}
+
+/* ---------- scroll reveals ---------- */
 .lx-reveal {
   opacity: 0;
   transform: translateY(22px);
@@ -67,10 +131,20 @@
 @media (prefers-reduced-motion: reduce) {
   .lx-dust,
   .lx-star-glow,
+  .lx-pulse,
+  .lx-starhit,
   .lx-flowname,
-  .lx-hint {
+  .lx-hint,
+  .lx-loop {
     animation: none;
   }
+  .lx-trace {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .lx-trace-prev { animation: none; opacity: 0; }
+  .lx-label { opacity: 0.85; }
+  .lx-label-hit { animation: none; opacity: 1; }
   .lx-reveal {
     transition: none;
     transform: none;
