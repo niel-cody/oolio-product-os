@@ -2,6 +2,17 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-31 — A public front door, and everything else behind it (32 skills)
+
+The site stops being a public wiki with a private dashboard bolted on, and becomes one app with a front door. Signed out you get a landing page; signed in you get the whole thing.
+
+- **The map, the skills library, the systems diagram and the changelog now require sign-in.** They were on the open web. The systems diagram in particular published Oolio's entire internal tool estate (Granola, Slack, Microsoft 365, HubSpot, Apify, PostHog, Figma, Jira, Confluence, GitHub) and the data flows between them, which is a target list for anyone phishing Oolio; the skills library published all 32 playbooks in full. None of it is catastrophic alone, all of it is Oolio-internal by CLAUDE.md's own description, and none of it needs to be readable by strangers. The gated set is one list in `lib/routes.ts` with the reasoning attached, so reversing any of it is a one-line change.
+- **A new public landing page** explains what this is, in cut-down copy, with an outline of the map: the real stage names and shape, five ordinary skills named, and the other thirty-four as redacted cards. It is a server component that computes the subset at render time, deliberately not the real map component — that one ships all 39 nodes and every skill name to the browser to drive its SVG engine, which would have quietly undone the gate it sits next to.
+- **Navigation follows sign-in.** Signed out it is the wordmark and a sign-in button, because five links that all bounce to `/login` read as a broken site rather than a private one. Signed in it is Flightdeck, the map, skills, changelog, systems, the version stamp, install and sign out.
+- **One cached helper decides signed-in state** for both the header and the page under it. They resolved it separately at first and disagreed, rendering the full nav above a "sign in" call to action.
+- **A near miss worth recording.** The gated list was first passed to `config.matcher` as a computed value. Next.js statically analyses that field and, when it cannot, drops the constraint silently rather than failing: the middleware then ran on every request including `/login`, which redirects to `/login`. An infinite loop on every route, caught before deploy. The matcher is now literal strings, and `middleware()` also returns early for any path outside the gated set, so a matcher mistake can never loop again.
+- Every route is now server-rendered rather than statically generated, since the layout reads auth state per request. That is the cost of a nav that tells the truth about where you can go.
+
 ## 2026-07-30 — Flightdeck: sign-in, and the dashboard behind it (32 skills)
 
 The site gets its first private surface. `/app/*` is gated; everything public is untouched. This is M0 and M1 of the Flightdeck build order, against the committed synthetic fixture. There is no collector yet, and no real data has been anywhere near the repo.

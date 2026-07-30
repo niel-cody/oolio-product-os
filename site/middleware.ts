@@ -1,14 +1,14 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { isAllowed } from "@/lib/auth-allowlist";
+import { isGated } from "@/lib/routes";
 
 /**
  * The gate.
  *
- * Everything under /app/* requires a signed-in, allow-listed account. Every public route
- * (the map, the skills browser, the changelog, the landing page) is untouched, which is a
- * V1 scope requirement, not a nicety: the public site is the front door for the whole team
- * and must keep working exactly as it did.
+ * Everything in `GATED` (see lib/routes.ts, which explains why each route is on the list)
+ * requires a signed-in, allow-listed account. The landing page and the sign-in page stay
+ * public, and they are the only two that are.
  *
  * Two distinct failures, deliberately handled differently:
  *   - no session at all  -> /login, with ?next= so you land where you were headed
@@ -17,6 +17,12 @@ import { isAllowed } from "@/lib/auth-allowlist";
  * in; leaving the session alive would loop them straight back through the gate.
  */
 export async function middleware(request: NextRequest) {
+  // Belt and braces. The matcher below should mean this never runs on a public path, but a
+  // matcher that fails to constrain does not fail loudly: it runs the middleware everywhere,
+  // and /login redirecting to /login is an infinite loop that takes the whole site down.
+  // This check makes that outcome impossible regardless of what the matcher does.
+  if (!isGated(request.nextUrl.pathname)) return NextResponse.next({ request });
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -67,7 +73,23 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Only /app/*. Scoping the matcher this tightly is what keeps the public site out of the
-  // auth path entirely: no Supabase call, no cookie work, no latency on the marketing pages.
-  matcher: ["/app/:path*"],
+  // These MUST be string literals. Next.js statically analyses `matcher` at build time, and
+  // a computed value (an imported constant, a .map(), a template string) is not ignored with
+  // a warning — the constraint is silently dropped and the middleware runs on every request,
+  // including /login, which loops. Learned the hard way on 2026-07-31.
+  //
+  // Keep this list in step with GATED in lib/routes.ts, which is the one that documents why
+  // each route is on it. The isGated() guard above is what actually enforces the boundary.
+  matcher: [
+    "/app",
+    "/app/:path*",
+    "/map",
+    "/map/:path*",
+    "/skills",
+    "/skills/:path*",
+    "/systems",
+    "/systems/:path*",
+    "/changelog",
+    "/changelog/:path*",
+  ],
 };
