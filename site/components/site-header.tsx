@@ -22,6 +22,7 @@ const NAV = [
   { href: "/skills", label: "Skills" },
   { href: "/changelog", label: "Changelog" },
   { href: "/systems", label: "Systems" },
+  { href: "/about", label: "About" },
 ];
 
 export function SiteHeader({
@@ -104,11 +105,10 @@ export function SiteHeader({
                 </Button>
               </form>
             </>
-          ) : (
-            <Button asChild size="sm" className="h-8 text-[12px]">
-              <Link href="/login">Sign in</Link>
-            </Button>
-          )}
+          ) : // Signed out, the header is just the wordmark. The landing page carries the
+          // sign-in call to action in its hero and its finale; a third button up here was
+          // one of the three Niel counted, and the header one earns its place least.
+          null}
 
           {signedIn && (
             <Sheet open={open} onOpenChange={setOpen}>

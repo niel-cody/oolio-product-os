@@ -2,6 +2,17 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-31 — The landing goes cinematic, and the essay moves indoors (32 skills)
+
+The star chart stops being a boxed figure on a wordy page and becomes the page. One scroll, four acts.
+
+- **The sky is scroll-driven now.** Full-viewport, pinned while you move through it: the title holds the first stretch, then the six flows draw themselves as constellations one at a time, named as they draw, each receding as the next lights. The visitor assembles the system by scrolling through it, which lands the point better than any of the paragraphs it replaced.
+- **Then three beats and the numbers.** Signal, Decide, Learn, one line each; counters for skills, stages, flows and changes logged, counted up on entry. Every figure is generated, none is marketing.
+- **The essay moved to /about, behind the gate**, where a signed-in reader has the context to want it. Nice side effect: the install instructions moved with it, so the public page no longer names the GitHub repo at all.
+- **Sign-in buttons went from three to two** (hero and finale, never both on screen), and the signed-out header is now just the wordmark.
+- All the leak guarantees re-verified against the new payload: no flow-step prose, no skill descriptions, no systems topology, no unrevealed labels. Reduced motion collapses the scrub to a still chart with every constellation drawn and prints counter values directly.
+- One small self-correction: the scroll handler originally wrapped its work in requestAnimationFrame, which browsers already do for scroll events, and which stops firing entirely in hidden tabs. Removed, which is both simpler and testable.
+
 ## 2026-07-31 — The landing page becomes a star chart (32 skills)
 
 The front door earns its name. The outline grid is replaced by a star map: every skill a point of light, the six end-to-end flows drawn as constellations that light one at a time, with a pulse travelling the path.

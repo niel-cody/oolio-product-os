@@ -91,5 +91,7 @@ export const config = {
     "/systems/:path*",
     "/changelog",
     "/changelog/:path*",
+    "/about",
+    "/about/:path*",
   ],
 };

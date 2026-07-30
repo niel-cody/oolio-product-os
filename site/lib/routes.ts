@@ -18,7 +18,7 @@
  * To put a route back on the public side, remove it from GATED. To let a teammate in, add
  * their address to FLIGHTDECK_ALLOWED_EMAILS in Vercel; no code change either way.
  */
-export const GATED = ["/app", "/map", "/skills", "/systems", "/changelog"] as const;
+export const GATED = ["/app", "/map", "/skills", "/systems", "/changelog", "/about"] as const;
 
 // Note: middleware.ts repeats this list as string literals in its `config.matcher`, and has
 // to. Next.js statically analyses that field at build time and silently drops the constraint

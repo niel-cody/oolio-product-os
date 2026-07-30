@@ -1,0 +1,79 @@
+/* ============================================================================
+   The cinematic landing experience.
+
+   The hero is scroll-driven, which makes motion the centrepiece and therefore the
+   accessibility risk. Everything animated here has a reduced-motion path: the scrub
+   collapses to a still chart with every constellation drawn, reveals render in place,
+   and counters print their final value. See the media query at the foot.
+   ========================================================================== */
+
+.lx-sky {
+  background:
+    radial-gradient(120% 90% at 18% 12%, rgba(45, 212, 191, 0.08), transparent 62%),
+    radial-gradient(110% 80% at 82% 78%, rgba(167, 139, 250, 0.1), transparent 58%),
+    radial-gradient(90% 70% at 50% 45%, rgba(147, 163, 189, 0.05), transparent 70%),
+    #070b11;
+}
+
+/* ---------- the deep field ---------- */
+.lx-dust { animation: lx-twinkle 5.5s ease-in-out infinite; }
+@keyframes lx-twinkle {
+  0%, 100% { opacity: 0.16; }
+  50% { opacity: 0.48; }
+}
+
+.lx-star-glow {
+  animation: lx-breathe 6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes lx-breathe {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.32; transform: scale(1.2); }
+}
+
+/* ---------- labels ---------- */
+.lx-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 21px;
+  fill: #c3ccdb;
+  letter-spacing: 0.02em;
+}
+@media (max-width: 639px) {
+  .lx-label { display: none; }
+}
+
+/* ---------- overlays ---------- */
+.lx-flowname { animation: lx-fadein 0.6s ease-out both; }
+@keyframes lx-fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lx-hint { animation: lx-bob 2.2s ease-in-out infinite; }
+@keyframes lx-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+/* ---------- scroll reveals (beats, counters, finale) ---------- */
+.lx-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.85s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.85s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.lx-reveal.is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-dust,
+  .lx-star-glow,
+  .lx-flowname,
+  .lx-hint {
+    animation: none;
+  }
+  .lx-reveal {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
