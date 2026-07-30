@@ -2,6 +2,17 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-07-30 — The repo moved to `niel-cody/oolio-product-os` (32 skills)
+
+The repo left the `oolio-group` org for Niel's personal account. Combined with going private on 2026-07-29, that changed how everyone installs, so the install URL and the access story are updated everywhere.
+
+- **The install URL is now `niel-cody/oolio-product-os`.** Updated in README, PUBLISHING.md, CLAUDE.md, and the site's install snippet and header link. GitHub redirects the old URL, but a redirect still registers as a *separate* marketplace, so remove the old entry before adding the new one rather than running both.
+- **Access is now per-person, and nothing else grants it.** Decision 19 made the repo private on the reasoning that oolio-pm users "are in the GitHub org or can be added". That reasoning died with the move: in a personal account, org membership grants nothing at all. Until Niel adds someone as a collaborator, they cannot install, cannot update, and cannot download a release zip. PUBLISHING.md section A1 is now the invite procedure instead of "nothing to do here".
+- **Release assets are no longer anonymously downloadable**, so the zip has to be handed over directly to anyone without repo access.
+- **Corrected a stale claim while in the file.** PUBLISHING.md section D and the README both still said Cowork's marketplace sync was permanently broken. The bisect on 2026-07-28 disproved that: the cause was our own plugin-root `bin/`, and sync worked once it moved. Section D now carries the history so the wrong theories are not rediscovered, and marks the real open question, which is whether Cowork can reach a *private* repo. That is untested, not known-broken.
+- **The Vercel workflow comment was wrong in a useful direction.** It said only an `oolio-group` owner could grant the Vercel GitHub App access, which was the reason the deploy runs as a workflow. Niel now owns the repo, so he can grant it himself and delete the workflow. Noted in the file, along with the trap that an installation scoped to "public repositories only" cannot see this repo.
+- **LICENSE updated**: it described a publicly readable repo. Copyright stays with Oolio Group; personal-account hosting transfers no ownership, and the file now says so explicitly.
+
 ## 2026-07-28 — A plugin-root `bin/` directory broke Cowork's sync (32 skills)
 
 Found by bisect, after Niel repeatedly said the breakage started with the insights change and was repeatedly right. The helper has moved from `oolio-pm/bin/jpd-insight.mjs` to `oolio-pm/skills/jpd-loop/scripts/jpd-insight.mjs`. Nothing else changed.

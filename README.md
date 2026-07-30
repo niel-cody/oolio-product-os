@@ -10,24 +10,26 @@ The Product team's operating system for Cowork and Claude Code: the plugin colle
 
 ## Install (for Oolio teammates)
 
-The plugin is versioned by commit, so there are no version numbers to chase. Use exactly one URL: **`oolio-group/oolio-product-os`**. The repo's earlier names (`oolio-pm-plugin`, `oolio-pm-plugins`) redirect here, but each name registers as a *separate* marketplace, so do not mix them: remove any old entry before adding this one.
+The plugin is versioned by commit, so there are no version numbers to chase. Use exactly one URL: **`niel-cody/oolio-product-os`**. The repo's earlier locations and names (`oolio-group/oolio-product-os`, `oolio-pm-plugin`, `oolio-pm-plugins`) redirect here, but each registers as a *separate* marketplace, so do not mix them: remove any old entry before adding this one.
 
-**In Claude Code you install once and updates arrive on their own. In Cowork they do not** — its marketplace sync freezes and does not recover, so Cowork runs on zip uploads instead. See [PUBLISHING.md](PUBLISHING.md) section D.
+**The repo is private, so you need access before any of this works.** Ask Niel to add you as a collaborator on `niel-cody/oolio-product-os`, accept the GitHub invitation, and make sure the `gh` CLI or your Git credentials are signed in as that same GitHub account. Being in the `oolio-group` org no longer grants anything, because the repo no longer lives there.
+
+**In Claude Code you install once and updates arrive on their own.** In Cowork, try the marketplace first and keep the zip as the fallback: its sync was broken by a packaging mistake on our side until 2026-07-28, and whether it can reach a private personal repo is untested. See [PUBLISHING.md](PUBLISHING.md) section D.
 
 **Claude Code (CLI):**
 
 ```
-/plugin marketplace add oolio-group/oolio-product-os
+/plugin marketplace add niel-cody/oolio-product-os
 /plugin install oolio-pm@oolio-product-os
 ```
 
-**Team auto-install (settings.json).** Add this to your Claude Code settings and the plugin registers, enables, and **auto-updates** with no further steps:
+**Team auto-install (settings.json).** Add this to your Claude Code settings and the plugin registers, enables, and **auto-updates** with no further steps. `"autoUpdate": true` is not optional here: for a private marketplace it is off unless you switch it on.
 
 ```json
 {
   "extraKnownMarketplaces": {
     "oolio-product-os": {
-      "source": { "source": "github", "repo": "oolio-group/oolio-product-os" },
+      "source": { "source": "github", "repo": "niel-cody/oolio-product-os" },
       "autoUpdate": true
     }
   },
@@ -35,21 +37,21 @@ The plugin is versioned by commit, so there are no version numbers to chase. Use
 }
 ```
 
-**Cowork and Claude Desktop:** **Customize** in the left sidebar → **Plugins**. Ask Niel for the current `oolio-pm.zip` and upload it there. The GitHub marketplace path exists in this UI but its sync is frozen for this plugin, so the zip is what actually stays current. Plugins you upload are stored locally on your own machine.
+**Cowork and Claude Desktop:** **Customize** in the left sidebar → **Plugins**. The GitHub marketplace path is worth trying; if it fails to sync, ask Niel for the current `oolio-pm.zip` and upload it there instead. The zip has no auto-update, so you re-upload on each change. Plugins you upload are stored locally on your own machine.
 
 The skills then appear in your skill list (for example, ask "convene the VPC"). The current content is always whatever is on `main`; [CHANGELOG.md](CHANGELOG.md) records what changed.
 
 ## Layout
 
 ```
-oolio-pm-plugins/           local folder name (historical); the GitHub repo is oolio-group/oolio-product-os
+oolio-pm-plugins/           local folder name (historical); the GitHub repo is niel-cody/oolio-product-os
 ├── .claude-plugin/
 │   └── marketplace.json    the marketplace manifest Cowork reads (must live here)
 ├── README.md
 ├── CHANGELOG.md            what changed in each version
 ├── CLAUDE.md               maintenance rules (commit-based versioning, log changes, archive)
 ├── PUBLISHING.md           how to edit, version, and publish (read this)
-├── LICENSE                 usage terms (public repo, internal material)
+├── LICENSE                 usage terms (private repo, Oolio-internal material)
 ├── site/                   the Product OS site: Next.js, generated from the skills, on Vercel
 └── oolio-pm/               the plugin
     ├── .claude-plugin/plugin.json
@@ -66,5 +68,6 @@ See **PUBLISHING.md** for the full step-by-step. In short: edit the skill under 
 
 ## Notes
 
-- This repository is intentionally **public** so teammates can install it without GitHub org access. It bundles Oolio-internal material (personas, context, strategy), so keep anything genuinely sensitive out of it.
+- This repository is **private** (made private 2026-07-29, moved to `niel-cody` 2026-07-30). Access is per-person: Niel adds collaborators. It bundles Oolio-internal material (personas, context, strategy), so keep anything genuinely sensitive out of it even so.
+- The repo is private but the site is not: Vercel serves a private repo to a public URL, so treat anything the site renders as published.
 - Must be hosted on github.com for Cowork to sync from it.

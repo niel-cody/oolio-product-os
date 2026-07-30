@@ -1,6 +1,6 @@
 # Maintaining oolio-product-os
 
-Rules for anyone (human or AI) changing this repo. This is the **Oolio Product OS** (GitHub: `oolio-group/oolio-product-os`), the Product team's plugin collection for Cowork; its first plugin is **oolio-pm**. The plugin keeps its name through the repo rename on purpose: renaming it would break every installed `oolio-pm@…` reference and skill namespace for no user benefit. Read [README.md](README.md) for what it is and [PUBLISHING.md](PUBLISHING.md) for how it ships. House style everywhere: British English, no em dashes, no buzzwords.
+Rules for anyone (human or AI) changing this repo. This is the **Oolio Product OS** (GitHub: `niel-cody/oolio-product-os`, private; moved there from `oolio-group` on 2026-07-30), the Product team's plugin collection for Cowork; its first plugin is **oolio-pm**. The plugin keeps its name through the repo rename on purpose: renaming it would break every installed `oolio-pm@…` reference and skill namespace for no user benefit. Read [README.md](README.md) for what it is and [PUBLISHING.md](PUBLISHING.md) for how it ships. House style everywhere: British English, no em dashes, no buzzwords.
 
 ## This repo is the single source of truth
 

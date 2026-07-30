@@ -50,7 +50,7 @@ export function SiteHeader({ stamp, skills }: { stamp: string; skills: number })
             {skills} skills · {stamp}
           </span>
           <Button asChild size="sm" variant="outline" className="hidden sm:inline-flex h-8 text-[12px]">
-            <a href="https://github.com/oolio-group/oolio-product-os" target="_blank" rel="noreferrer">
+            <a href="https://github.com/niel-cody/oolio-product-os" target="_blank" rel="noreferrer">
               Install
             </a>
           </Button>

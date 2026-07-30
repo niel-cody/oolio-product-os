@@ -62,12 +62,14 @@ export default function HomePage() {
           because it is versioned by commit rather than by a number someone has to remember to bump.
         </p>
         <pre className="mono mt-4 overflow-x-auto rounded-lg border border-[var(--line)] bg-[var(--panel)] p-4 text-[12px] leading-relaxed text-[#c3ccdb]">
-{`/plugin marketplace add oolio-group/oolio-product-os
+{`/plugin marketplace add niel-cody/oolio-product-os
 /plugin install oolio-pm@oolio-product-os`}
         </pre>
         <p className="mt-4 text-[14px] leading-relaxed text-[var(--muted-ink)]">
-          In Cowork: Settings → Plugins → Add plugin → GitHub, then{" "}
-          <span className="mono text-[12px] text-[#c3ccdb]">oolio-group/oolio-product-os</span>.
+          The repo is private, so ask Niel for collaborator access first. In Cowork, try the same
+          marketplace path under Customize → Plugins; if it fails to sync, ask Niel for the current{" "}
+          <span className="mono text-[12px] text-[#c3ccdb]">oolio-pm.zip</span> and upload that
+          instead.
         </p>
       </section>
     </main>

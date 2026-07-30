@@ -1,9 +1,12 @@
 Copyright (c) 2026 Oolio Group. All rights reserved.
 
-This repository is made publicly readable solely so that Oolio teammates can
-install the bundled plugin in Cowork without GitHub organisation access.
+This repository is private, and is hosted in a personal GitHub account
+(niel-cody) purely for convenience of maintenance. That hosting arrangement
+transfers no ownership: the contents remain the property of Oolio Group.
+Access is granted per person, by collaborator invitation, so that Oolio
+teammates can install the bundled plugin.
 
-Public visibility is not a licence. No permission is granted to copy, modify,
+Access is not a licence. No permission is granted to copy, modify,
 distribute, or reuse any part of this repository (including the skills,
 personas, templates, and Oolio business context) outside Oolio Group, except
 as required to install and use the plugin within Oolio.
