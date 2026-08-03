@@ -2,6 +2,18 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-08-03 — The calendar gets a store, and something that keeps it fresh (32 skills)
+
+The week view worked but had nothing feeding it. It now has a store, a collector, and a stated order of preference between sources, so that swapping in live Graph access later is an environment change rather than a rewrite.
+
+- **The store is Supabase, not Vercel Blob.** It already exists and already holds the auth, so this is one system rather than two; a calendar is a range query rather than a blob to download and filter; row-level security scopes rows to the signed-in person for free; and keeping the runs lets the page say how old the diary is. This amends prerequisite 3 of the V1 scope doc, which was written before Supabase was chosen for auth.
+- **Three sources, tried in order: Graph, then the store, then a local file.** That order is the whole switching mechanism. Today Graph is unconfigured so the site runs on the store; the day the four `GRAPH_*` variables are set it reads Outlook directly on the next request, with nothing to redeploy but the environment. The page badges which one answered — LIVE, SYNCED or CACHED — because the difference between them is exactly how much to trust the gaps.
+- **A source that has never been written to is skipped, not shown.** "The collector has not run yet" and "this week is genuinely empty" look identical on the page, and only one of them is a reason to trust it, so the first falls through to the next source instead of rendering a confidently blank week.
+- **The collector is a scheduled task on the Mac**, running three times a weekday. Until the Entra registration exists, a Claude session with the Microsoft connector is the only thing that can see the diary at all, so the collector is one. It reads a fortnight ahead and pipes it into a sync script.
+- **The sync deletes as well as writes.** It upserts by Outlook occurrence id, then removes anything in the queried window it did not see this run. Upsert alone never removes, so without that a cancelled meeting would sit on the page forever with the freed-up time still hidden underneath it.
+- **Neither Supabase's `pg_cron` nor Vercel Cron can do the collecting**, because neither can reach the Microsoft connector. They become useful only once Graph credentials exist. Recorded so nobody spends an afternoon trying.
+- The service-role key lives in `~/.flightdeck-collector.env` at mode 600, never in the repo, the same handling as the JPD Insights token. Without it the collector still refreshes the local cache and says it skipped Supabase, which is a working local tool but not a working deployed one.
+
 ## 2026-08-03 — Flightdeck stops being one frozen day (32 skills)
 
 The dashboard could only ever show the day it was built for, and the only day it had been built for was 29 July. Niel wanted a calendar he could actually look at: live, and honest about where the room is. That is now `/app/week`, a second Flightdeck surface sitting beside the dashboard.

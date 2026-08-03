@@ -118,35 +118,54 @@ Leave Vercel's **Sensitive** toggle **off** on the Supabase and allowlist variab
 variables cannot be used in the Development environment, and none of those is a secret. The four
 `GRAPH_*` values **are** secrets and should be marked Sensitive.
 
-### The live calendar
+### Where the calendar comes from
 
-`/app/week` reads Outlook on every request and computes availability from it. Two ways to feed it,
-and the page always states which one it used and how old the read is.
+`/app/week` recomputes availability on every request. It takes the diary from the first of
+three sources that answers, and the page badge always says which one did:
 
-**Live, via Microsoft Graph.** Needs one Entra app registration in the Oolio tenant:
+| Badge | Source | Freshness | Needs |
+|---|---|---|---|
+| **LIVE** | Microsoft Graph, read per request | seconds | the Entra registration |
+| **SYNCED** | the Supabase store | as good as the collector's last run | a Mac running the scheduled task |
+| **CACHED** | `.calendar/events.json` | whenever it was last written | nothing |
 
-- Delegated permissions `Calendars.Read` and `offline_access`. Nothing else — no directory read,
-  no application permissions, so no Exchange access policy to configure.
-- This is the *same* registration the V1 scope doc already asks IT for (prerequisite 2, for
-  sign-in). Add the two calendar scopes to that ask rather than raising a second one.
-- `GRAPH_REFRESH_TOKEN` is minted once by hand with the auth-code flow and then reused; the server
-  exchanges it for an access token per request and caches that in memory for its hour.
+That order **is** the switching mechanism. Today Graph is unconfigured, so the site runs on
+the store; the day the four `GRAPH_*` variables are set it starts reading Outlook directly on
+the next request, with no code change and nothing to redeploy but the environment. A source
+that errors, or that nothing has ever written to, is skipped rather than allowed to render a
+confidently empty week.
 
-**Interim, via the cache.** Until the registration lands, refresh the cache from any session that
-has the Microsoft connector authorised:
+**The store is Supabase**, not Vercel Blob. It already exists and already holds the auth, so
+this is one system rather than two; a calendar is a range query (`what overlaps Tuesday`)
+rather than a blob to download and filter; row-level security scopes rows to the signed-in
+person for free; and keeping the runs means the page can say how old the diary is. This
+amends prerequisite 3 of the V1 scope doc, which predates the choice of Supabase for auth.
+
+Two tables, `calendar_events` and `calendar_syncs`. Reads go through RLS on the signed-in
+address; there are no write policies at all, so only the collector's service-role key can
+change the calendar and a leaked publishable key cannot.
+
+### The collector
+
+Until Graph access exists, the only thing that can see the diary is a Claude session with the
+Microsoft connector. So the collector is one: a scheduled task at
+`~/.claude/scheduled-tasks/flightdeck-calendar-sync/`, running 07:12, 12:12 and 16:12 on
+weekdays, which reads the next fortnight and pipes it into the sync script.
 
 ```
-node scripts/calendar-cache.mjs < events.json
+node scripts/calendar-sync.mjs --from 2026-08-03 --to 2026-08-17 --owner niel.cody@oolio.com < events.json
 ```
 
-where `events.json` is what the Outlook calendar search returned. It writes `.calendar/events.json`,
-which is gitignored and covered by `npm run check` — a calendar read carries real meeting titles,
-colleagues and customers, and is the same class of secret as a snapshot.
+The script writes the local cache always, and Supabase when
+`~/.flightdeck-collector.env` holds a service-role key. It upserts by Outlook occurrence id,
+then deletes anything in the queried window it did not see this run — otherwise a cancelled
+meeting stays on the page forever and the availability underneath it stays hidden.
 
-Supabase must also know where to send people back to: **Authentication → URL Configuration**, Site
-URL `https://oolio-product-os.vercel.app` plus that origin's `/auth/callback` in Redirect URLs. A new
-Supabase project defaults its Site URL to localhost, so magic links from production go nowhere until
-this is changed.
+Scheduled tasks run while the app is open, so on a laptop the diary is as fresh as the last
+time you had it running; a Mac mini would make that continuous. Neither Supabase's `pg_cron`
+nor Vercel Cron can do this job, because neither can reach the Microsoft connector — they
+become useful only once Graph credentials exist, at which point a Vercel Cron hitting a
+refresh route is the natural replacement for the Mac.
 
 ## House rules
 

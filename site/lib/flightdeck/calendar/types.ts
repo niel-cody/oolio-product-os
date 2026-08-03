@@ -30,9 +30,16 @@ export interface CalEvent {
   webLink: string | null;
 }
 
-/** Where a calendar read came from, and when. Shown, never hidden. */
+/**
+ * Where a calendar read came from, and when. Shown on the page, never hidden.
+ *
+ * `fetchedAtMs` is when the data left Outlook, not when this process read it. For `graph`
+ * those are the same instant; for `supabase` they are not, and the one that matters is the
+ * collector's run. Reporting the read of a six-hour-old row as "just now" would be the exact
+ * lie this field exists to prevent.
+ */
 export interface CalendarProvenance {
-  source: "graph" | "cache";
+  source: "graph" | "supabase" | "cache";
   fetchedAtMs: number;
   /** Set when the source could not be reached, so the page can say so rather than show nothing. */
   error?: string;

@@ -3,19 +3,26 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { CalEvent, CalendarFetch, CalendarSource } from "./types";
 import { graphConfigFromEnv, graphSource } from "./graph";
+import { supabaseSource } from "./supabase";
 
 /**
  * Choosing where the calendar comes from.
  *
- * Graph when it is configured, and a local cache file when it is not. The cache exists so
- * the availability view is real and useful before the Entra registration lands, rather than
- * an empty shell waiting on IT. It is a bridge with a visible expiry date: every page that
- * renders from it says so, and says how old it is, because a stale diary that looks live is
- * worse than no diary.
+ * Three sources, tried in order, each a strictly better answer than the next:
  *
- * The cache file holds real meeting titles, colleagues and customers, so it is gitignored
- * and covered by the leak check. Same rule as snapshots, same reason: git history is
- * permanent and repository ownership can change.
+ *   1. graph     — Outlook read live, per request. Needs the Entra registration.
+ *   2. supabase  — what a collector last landed in the store. Needs a Mac to have run.
+ *   3. cache     — a local JSON file. Development, and offline reproduction of a bad day.
+ *
+ * The order is the whole switching mechanism. Today nothing is configured for Graph, so the
+ * site runs on the store; the day the four GRAPH_* variables are set it starts reading
+ * Outlook directly, on the next request, with no code change and no redeploy of anything but
+ * the environment. Nothing downstream knows or cares which one answered, except the page
+ * footer, which says so.
+ *
+ * "Better" here means fresher, and freshness is the only axis that matters for availability.
+ * A source that errors or has never been written to is skipped rather than allowed to render
+ * a confidently empty week.
  */
 
 export const CACHE_PATH = path.join(process.cwd(), ".calendar", "events.json");
@@ -57,9 +64,31 @@ function cacheSource(): CalendarSource {
   };
 }
 
-export function calendarSource(): CalendarSource {
+function availableSources(): CalendarSource[] {
   const cfg = graphConfigFromEnv();
-  return cfg ? graphSource(cfg) : cacheSource();
+  return [...(cfg ? [graphSource(cfg)] : []), supabaseSource(), cacheSource()];
+}
+
+/**
+ * The first source that answers, or the last one's failure if none do.
+ *
+ * Returning the final error rather than a synthetic one keeps the page honest: it names the
+ * source it fell all the way through to and why that failed, which is what tells you whether
+ * the collector has stopped running or the store is unreachable.
+ */
+export async function fetchCalendar(fromMs: number, toMs: number): Promise<CalendarFetch> {
+  let last: CalendarFetch | null = null;
+  for (const source of availableSources()) {
+    const result = await source.fetchRange(fromMs, toMs);
+    if (!result.provenance.error) return result;
+    last = result;
+  }
+  return (
+    last ?? {
+      events: [],
+      provenance: { source: "cache", fetchedAtMs: 0, error: "no calendar source is configured" },
+    }
+  );
 }
 
 export function isGraphConfigured(): boolean {

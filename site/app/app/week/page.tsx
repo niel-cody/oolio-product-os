@@ -6,7 +6,7 @@ import {
   nextFree,
   planRange,
 } from "@/lib/flightdeck/calendar/availability";
-import { calendarSource, isGraphConfigured } from "@/lib/flightdeck/calendar/source";
+import { fetchCalendar, isGraphConfigured } from "@/lib/flightdeck/calendar/source";
 import { DEFAULT_WORKING_HOURS } from "@/lib/flightdeck/calendar/types";
 import { atLocalTime, clock12, dateKey, duration, startOfDay } from "@/lib/flightdeck/calendar/zone";
 
@@ -26,6 +26,17 @@ export const revalidate = 0;
 const TIMEZONE = process.env.FLIGHTDECK_TIMEZONE || "Australia/Melbourne";
 const DAYS = 7;
 
+/**
+ * How each source is badged. Three words, because the difference between them is the only
+ * thing that tells you how much to trust the gaps: LIVE was read this second, SYNCED is as
+ * good as the collector's last run, CACHED is a local file that nothing refreshes.
+ */
+const SOURCE = {
+  graph: { label: "LIVE", level: "good" as const },
+  supabase: { label: "SYNCED", level: "good" as const },
+  cache: { label: "CACHED", level: "warning" as const },
+};
+
 function relativeDay(date: string, todayKey: string, timeZone: string): string {
   if (date === todayKey) return "today";
   const at = atLocalTime(date, 12, 0, timeZone);
@@ -42,8 +53,7 @@ export default async function WeekPage() {
   const dates = dateRange(fromMs, DAYS, TIMEZONE);
   const toMs = atLocalTime(dates[dates.length - 1], 0, 0, TIMEZONE) + 24 * 60 * 60_000;
 
-  const source = calendarSource();
-  const { events, provenance } = await source.fetchRange(fromMs, toMs);
+  const { events, provenance } = await fetchCalendar(fromMs, toMs);
   const plans = planRange(dates, events, TIMEZONE, DEFAULT_WORKING_HOURS);
 
   const now = currentEvent(plans, nowMs);
@@ -92,8 +102,8 @@ export default async function WeekPage() {
         </div>
 
         <div className="flex shrink-0 flex-col items-start gap-2 sm:items-end">
-          <span className="fd-stat" data-level={failed ? "critical" : "good"}>
-            {provenance.source === "graph" ? "LIVE" : "CACHED"}
+          <span className="fd-stat" data-level={failed ? "critical" : SOURCE[provenance.source].level}>
+            {SOURCE[provenance.source].label}
           </span>
           <span className="fd-cap">
             {failed
@@ -109,15 +119,17 @@ export default async function WeekPage() {
 
       {failed && !isGraphConfigured() && (
         <div className="fd-card mt-5 p-4">
-          <h2 className="fd-h2">Not connected yet</h2>
+          <h2 className="fd-h2">Nothing has collected your diary yet</h2>
           <p className="mt-2 text-[13.5px] leading-relaxed text-[var(--fd-ink-2)]">
-            No live calendar source is configured, and there is no cached read to fall back
-            on. Set <code className="mono">GRAPH_TENANT_ID</code>,{" "}
-            <code className="mono">GRAPH_CLIENT_ID</code>,{" "}
-            <code className="mono">GRAPH_CLIENT_SECRET</code> and{" "}
-            <code className="mono">GRAPH_REFRESH_TOKEN</code> to read Outlook directly, or
-            write a cache file to <code className="mono">.calendar/events.json</code> as an
-            interim. See <code className="mono">site/README.md</code>.
+            Every source was tried and none answered. The collector is the one expected to be
+            running today: a scheduled task on a Mac that reads Outlook through the Microsoft
+            connector and writes to Supabase. Run it once by hand to fill the store, or check
+            that the scheduled task is still enabled.
+          </p>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-[var(--fd-ink-2)]">
+            Setting the four <code className="mono">GRAPH_*</code> variables takes precedence
+            over all of it and reads Outlook directly, per request. See{" "}
+            <code className="mono">site/README.md</code>.
           </p>
         </div>
       )}
