@@ -1,5 +1,5 @@
 {
-  "stamp": "612a6d1",
+  "stamp": "3cad5c3",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "oolio-pm",
-      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding. Thirty-two skills.",
+      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, an end-of-day sweep that drains Granola meeting notes into the Brain and into proposed Jira, JPD and Confluence work, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding. Thirty-three skills.",
       "skills": [
         {
           "id": "add-insight",
@@ -105,6 +105,11 @@
           "description": "Test a decision against the Oolio Leadership Subcommittee, the executive and commercial lenses. Use when the user says \"run the Leadership Subcommittee\", \"commercial review\", \"should we invest in this\", \"can we sell, support, and deliver this\", \"what is the risk\", or wants the executive and go-to-market view of a product direction. Convenes the default nine lenses plus any conditional lenses the decision touches, and runs each seat's challenge questions and review output. Can run standalone or as part of a full council review."
         },
         {
+          "id": "meeting-sweep",
+          "plugin": "oolio-pm",
+          "description": "Sweep a day's Granola meeting notes and turn them into filed knowledge and proposed work: meeting, decision and action records in the my_brain vault, then cited comments, tasks, ideas and Insights in Jira and JPD, and additive notes or comments on the Confluence pages the meetings touched. Trigger when the user says \"run my meeting sweep\", \"end of day sweep\", \"process today's Granola notes\", \"ingest my meetings\", \"file today's meetings\", \"what came out of my meetings today\", or names a date or range of meetings to work through. Files to the Brain freely, proposes everything outward and acts only on one batch approval, and never deletes or rewrites anything it did not author. Do NOT trigger to answer a question about a meeting (query Granola directly), to ingest a document into the Brain (use wiki-ingest), to attach one piece of evidence to the backlog (use add-insight), or to log one piece of customer feedback (use feedback-to-idea)."
+        },
+        {
           "id": "metrics-review",
           "plugin": "oolio-pm",
           "description": "Run a product metrics review against real data — post-launch validation of a PRD's success metrics, or a recurring weekly/monthly product review — producing a scorecard with targets, actuals, trends, verdicts, and actions. Trigger PROACTIVELY when the user says \"metrics review\", \"how is [feature] performing\", \"did [launch] work\", \"check the success metrics\", \"weekly product review\", \"validate the launch\", or names a shipped PRD/feature and asks whether it met its numbers. Uses the connected PostHog MCP where available, and PRD success metrics as the target source. Do NOT trigger for ad-hoc SQL help or building a dashboard (use the data skills), or for market research (storm-research)."
@@ -171,14 +176,14 @@
         }
       ],
       "counts": {
-        "skills": 32,
+        "skills": 33,
         "inProgress": 0,
         "archived": 0
       }
     }
   ],
   "totals": {
-    "skills": 32,
+    "skills": 33,
     "plugins": 1,
     "inProgress": 0,
     "archived": 0,
@@ -366,6 +371,16 @@
         "col": 1,
         "row": 3,
         "desc": "Attach a single piece of evidence to the JPD backlog as native Insights, on one idea or several. Trigger when the user hands over one finding — a URL, an article, a HubSpot ticket or deal, a quote, a stat, a screenshot description, something spotted mid-session — and says \"attach this as an insight\", \"add this to OHSI-X (and OHSI-Y)\", \"this supports that idea about X\", \"where does this belong on the backlog\", \"file this against the relevant ideas\", or \"make this an insight\". Works evidence-first: given targets it attaches after a fit check; given none it sweeps the backlog for every idea the evidence genuinely supports and proposes the mapping. Do NOT trigger for gathering evidence about an idea or scanning for gaps (use `signal-radar`), for raw customer feedback that may need a new idea (use `feedback-to-idea`), or for the full grooming loop (use `jpd-loop`)."
+      },
+      {
+        "id": "meeting-sweep",
+        "label": "Meeting Sweep",
+        "note": "a day of meetings → filed work",
+        "badge": "CLAUDE·GRANOLA",
+        "type": "signal",
+        "col": 1,
+        "row": 4,
+        "desc": "Sweep a day's Granola meeting notes and turn them into filed knowledge and proposed work: meeting, decision and action records in the my_brain vault, then cited comments, tasks, ideas and Insights in Jira and JPD, and additive notes or comments on the Confluence pages the meetings touched. Trigger when the user says \"run my meeting sweep\", \"end of day sweep\", \"process today's Granola notes\", \"ingest my meetings\", \"file today's meetings\", \"what came out of my meetings today\", or names a date or range of meetings to work through. Files to the Brain freely, proposes everything outward and acts only on one batch approval, and never deletes or rewrites anything it did not author. Do NOT trigger to answer a question about a meeting (query Granola directly), to ingest a document into the Brain (use wiki-ingest), to attach one piece of evidence to the backlog (use add-insight), or to log one piece of customer feedback (use feedback-to-idea)."
       },
       {
         "id": "wiki-ingest",
@@ -728,6 +743,18 @@
       {
         "f": "add-insight",
         "t": "feedback-to-idea"
+      },
+      {
+        "f": "meeting-sweep",
+        "t": "feedback-to-idea"
+      },
+      {
+        "f": "meeting-sweep",
+        "t": "add-insight"
+      },
+      {
+        "f": "meeting-sweep",
+        "t": "wiki-ingest"
       },
       {
         "f": "wiki-ingest",
@@ -1270,15 +1297,17 @@
         "band": "source",
         "row": 0,
         "cadence": "NIGHTLY",
-        "driver": "ingest",
+        "driver": "both",
         "access": "read",
         "reads": [
           "Every meeting transcript, all folders"
         ],
         "writes": [],
-        "detail": "A meeting earns a page in the vault only if it produced a decision, a material action, or a knowledge signal. Everything else becomes one line in that month's log, carrying its Granola id. Granola stays the full record; the vault keeps the distillate.",
-        "skills": [],
-        "skillCount": 0
+        "detail": "A meeting earns a page in the vault only if it produced a decision, a material action, or a knowledge signal. Everything else becomes one line in that month's log, carrying its Granola id. Granola stays the full record; the vault keeps the distillate. The end-of-day sweep reads the same source and carries the consequences out to Jira, JPD and Confluence, one batch approval at a time.",
+        "skills": [
+          "meeting-sweep"
+        ],
+        "skillCount": 1
       },
       {
         "id": "slack",
@@ -1508,13 +1537,14 @@
           "jpd-idea-groomer",
           "jpd-loop",
           "jpd-title-standard",
+          "meeting-sweep",
           "metrics-review",
           "pm-compass",
           "signal-radar",
           "steering-pack",
           "write-prd"
         ],
-        "skillCount": 17
+        "skillCount": 18
       },
       {
         "id": "jira",
@@ -1549,12 +1579,13 @@
           "jpd-idea-groomer",
           "jpd-loop",
           "jpd-title-standard",
+          "meeting-sweep",
           "pm-compass",
           "signal-radar",
           "win-loss",
           "write-prd"
         ],
-        "skillCount": 18
+        "skillCount": 19
       },
       {
         "id": "confluence",
@@ -1590,6 +1621,7 @@
           "jpd-idea-groomer",
           "jpd-loop",
           "leadership-subcommittee-review",
+          "meeting-sweep",
           "metrics-review",
           "operator-council-review",
           "pm-compass",
@@ -1599,7 +1631,7 @@
           "win-loss",
           "write-prd"
         ],
-        "skillCount": 22
+        "skillCount": 23
       },
       {
         "id": "github",
@@ -1642,6 +1674,7 @@
         "skills": [
           "competitor-watch",
           "jpd-loop",
+          "meeting-sweep",
           "pm-compass",
           "signal-radar",
           "storm-research",
@@ -1651,7 +1684,7 @@
           "wiki-query",
           "wiki-status"
         ],
-        "skillCount": 10
+        "skillCount": 11
       }
     ],
     "wires": [
@@ -1953,6 +1986,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-08-03",
+      "title": "`meeting-sweep`: the day's meetings stop dying in Granola (33 skills)",
+      "heading": "2026-08-03 — `meeting-sweep`: the day's meetings stop dying in Granola (33 skills)",
+      "body": "Granola has been the biggest unread source in the stack. Every decision made out loud, every action someone committed to, every customer quote worth putting on the backlog, all of it recorded perfectly and then read by nobody. The systems map has drawn this flow as a route since July (\"Someone says something that matters in a call nobody wrote up\") without a skill behind it. Now there is one.\n\n- **One pass, two halves.** The Brain half runs without asking: a meeting page per meeting in `40 Meetings/`, decisions in `41 Decisions/`, actions as checkboxes rolled up in `42 Actions/`. Filing is reversible and nobody sees it, so gating it would only mean losing the record on the nights the batch is never approved. The outward half is proposed as one table and executed on one approval.\n- **Additive only, and the Confluence rule is the sharp one.** `updateConfluencePage` replaces the whole body, so sending an appended section on its own deletes the page. The skill fetches the body first, rebuilds it as original-plus-new, and verifies the original is still a substring before sending. Default is a footer comment, which cannot damage anything. Never a delete, never an edit to a paragraph someone else wrote.\n- **Every write carries a citation stamp**, `Source: Granola meeting \"<title>\", <date> (meeting <id>)`, in fixed wording. It is what makes the sweep re-runnable: before commenting on an issue it searches that issue's comments for the meeting id, and a re-run of an already-swept day writes nothing at all. Without it a nightly schedule would post the same comment every night.\n- **It hands off rather than reimplementing.** Product signal goes to `feedback-to-idea`, evidence to `add-insight`, durable knowledge to `wiki-ingest`, epic descriptions to `jira-epic-groomer`. Those own the de-dupe sweeps this skill would otherwise get subtly wrong, and a duplicate idea costs more than a missed one.\n- **The extraction bar is written down**, because it is where this goes wrong: \"we should probably\" is not a decision, an intention with no owner is not an action, and a status call where nothing was decided gets a page and no items. Over-extracting fills Jira with work nobody agreed to, which is how a tool like this gets switched off in week two.\n- **The work/personal wall is enforced at the filter, before extraction.** Personal meetings are skipped and never summarised; a work meeting with a personal passage keeps the work items and drops the passage without a placeholder. The close-out counts what was skipped and names nothing.\n- **Confidence bands come from the operating model** (§3) rather than being invented here, so the thresholds can be loosened later against real evidence. Today every band still stops at the same gate: nothing outward without the batch approval, including on an unattended scheduled run.\n- Granola now reads \"1 skill\" on the systems map instead of \"INGEST\", which is the point of deriving that number from what the skills actually say."
+    },
     {
       "date": "2026-08-03",
       "title": "The calendar gets a store, and something that keeps it fresh (32 skills)",

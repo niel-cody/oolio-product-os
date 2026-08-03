@@ -38,10 +38,10 @@
   "systems": {
     "granola": {
       "label": "Granola", "note": "every meeting, transcribed", "band": "source", "row": 0,
-      "cadence": "NIGHTLY", "driver": "ingest", "access": "read",
+      "cadence": "NIGHTLY", "driver": "both", "access": "read",
       "reads": ["Every meeting transcript, all folders"],
       "writes": [],
-      "detail": "A meeting earns a page in the vault only if it produced a decision, a material action, or a knowledge signal. Everything else becomes one line in that month's log, carrying its Granola id. Granola stays the full record; the vault keeps the distillate.",
+      "detail": "A meeting earns a page in the vault only if it produced a decision, a material action, or a knowledge signal. Everything else becomes one line in that month's log, carrying its Granola id. Granola stays the full record; the vault keeps the distillate. The end-of-day sweep reads the same source and carries the consequences out to Jira, JPD and Confluence, one batch approval at a time.",
       "match": ["Granola"]
     },
     "slack": {

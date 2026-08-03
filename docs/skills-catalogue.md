@@ -1,6 +1,6 @@
 # Oolio PM — Skills Catalogue
 
-The plugin ships **32 skills**, organised here by where they sit in the product lifecycle,
+The plugin ships **33 skills**, organised here by where they sit in the product lifecycle,
 signal to shipped. The folders under `oolio-pm/skills/` stay flat (that is what the Claude
 Code plugin loader expects). This document is the map; the categories are a reading aid, not
 a folder structure.
@@ -21,7 +21,7 @@ per-skill version numbers, by design — the plugin versions by commit.
 | # | Stage | What it is for | Skills |
 |---|-------|----------------|--------|
 | 0 | Start here | Find the right skill, or drive any task to done | 2 |
-| 1 | Intake & Discovery | Turn raw signal into shaped, groomed ideas | 10 |
+| 1 | Intake & Discovery | Turn raw signal into shaped, groomed ideas | 11 |
 | 2 | Specs & PRDs | Shape ideas into written, pressure-tested specs | 3 |
 | 3 | Validation & Councils | Test decisions against the Virtual Product Council | 5 |
 | 4 | Delivery & Steering | Jira hygiene and executive-facing packs | 3 |
@@ -40,6 +40,7 @@ per-skill version numbers, by design — the plugin versions by commit.
 
 Turn customer, support, and sales signal into groomed Jira Product Discovery ideas.
 
+- **meeting-sweep** *(New, August 2026)* — The end-of-day pass over Granola: file every meeting, decision and action into the Brain, then propose the work that follows as Jira comments and tasks, JPD ideas and Insights, and additive notes on the Confluence pages the meetings touched. Additive only, one batch approval, never deletes.
 - **feedback-to-idea** — Turn raw customer, support, or sales signal into a JPD idea, or attach it to an existing one, de-duped against the backlog.
 - **jpd-idea-groomer** — Groom a JPD idea end to end against Oolio's JPD Field Standards (2026+).
 - **jpd-title-standard** — Groom JPD idea titles to the Title Standard: max 65 characters, sentence case, capability-led.

@@ -109,6 +109,8 @@
       "feeds": ["feedback-to-idea", "jpd-loop", "wiki-ingest"] },
     "add-insight": { "label": "Add Insight", "note": "one finding → Insight", "badge": "CLAUDE·JIRA", "type": "signal", "stage": "Signals", "row": 3,
       "feeds": ["feedback-to-idea"] },
+    "meeting-sweep": { "label": "Meeting Sweep", "note": "a day of meetings → filed work", "badge": "CLAUDE·GRANOLA", "type": "signal", "stage": "Signals", "row": 4,
+      "feeds": ["feedback-to-idea", "add-insight", "wiki-ingest"] },
 
     "wiki-ingest": { "label": "Wiki Ingest", "note": "source → distilled pages", "badge": "CLAUDE·BRAIN", "type": "ai", "stage": "Brain", "row": 0,
       "feeds": ["art-brain"] },

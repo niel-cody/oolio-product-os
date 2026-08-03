@@ -14,7 +14,7 @@ description: >-
 
 # PM compass
 
-The router. Thirty-two skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.
+The router. Thirty-three skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.
 
 ## How to route
 
@@ -22,6 +22,7 @@ Ask at most one clarifying question, then name the skill. Match on the **situati
 
 | You have / you want | Skill |
 |---|---|
+| A day of meetings to drain: file the notes, chase the actions, update the tickets | `meeting-sweep` |
 | Raw feedback, a support trend, a churn note, "log this" | `feedback-to-idea` |
 | A JPD idea that needs cleaning up to standard | `jpd-idea-groomer` (titles only: `jpd-title-standard`) |
 | "Is this idea actually worth doing?" — the full treatment | `jpd-loop` |

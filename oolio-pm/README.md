@@ -11,6 +11,7 @@ A single Cowork plugin bundling Oolio's product-management skills. Install it on
 
 **Discovery and grooming**
 
+- `meeting-sweep` — the end-of-day pass over Granola: files every meeting, decision and action into the Brain, then proposes the work that follows from them as Jira comments and tasks, JPD ideas and Insights, and additive notes on the Confluence pages the meetings touched. Additive only, never deletes.
 - `feedback-to-idea` — turns raw customer, support, or sales signal into a JPD idea (or attaches it to an existing one), de-duped against the whole backlog.
 - `jpd-loop` — runs the full Virtual Product Council grooming loop over one JPD idea, end to end, and writes the result back to Jira. Depends on the council skills and `jpd-idea-groomer`, both bundled here.
 - `jpd-idea-groomer` — brings a JPD idea up to Oolio's JPD Field Standards.

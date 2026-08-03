@@ -2,6 +2,19 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-08-03 — `meeting-sweep`: the day's meetings stop dying in Granola (33 skills)
+
+Granola has been the biggest unread source in the stack. Every decision made out loud, every action someone committed to, every customer quote worth putting on the backlog, all of it recorded perfectly and then read by nobody. The systems map has drawn this flow as a route since July ("Someone says something that matters in a call nobody wrote up") without a skill behind it. Now there is one.
+
+- **One pass, two halves.** The Brain half runs without asking: a meeting page per meeting in `40 Meetings/`, decisions in `41 Decisions/`, actions as checkboxes rolled up in `42 Actions/`. Filing is reversible and nobody sees it, so gating it would only mean losing the record on the nights the batch is never approved. The outward half is proposed as one table and executed on one approval.
+- **Additive only, and the Confluence rule is the sharp one.** `updateConfluencePage` replaces the whole body, so sending an appended section on its own deletes the page. The skill fetches the body first, rebuilds it as original-plus-new, and verifies the original is still a substring before sending. Default is a footer comment, which cannot damage anything. Never a delete, never an edit to a paragraph someone else wrote.
+- **Every write carries a citation stamp**, `Source: Granola meeting "<title>", <date> (meeting <id>)`, in fixed wording. It is what makes the sweep re-runnable: before commenting on an issue it searches that issue's comments for the meeting id, and a re-run of an already-swept day writes nothing at all. Without it a nightly schedule would post the same comment every night.
+- **It hands off rather than reimplementing.** Product signal goes to `feedback-to-idea`, evidence to `add-insight`, durable knowledge to `wiki-ingest`, epic descriptions to `jira-epic-groomer`. Those own the de-dupe sweeps this skill would otherwise get subtly wrong, and a duplicate idea costs more than a missed one.
+- **The extraction bar is written down**, because it is where this goes wrong: "we should probably" is not a decision, an intention with no owner is not an action, and a status call where nothing was decided gets a page and no items. Over-extracting fills Jira with work nobody agreed to, which is how a tool like this gets switched off in week two.
+- **The work/personal wall is enforced at the filter, before extraction.** Personal meetings are skipped and never summarised; a work meeting with a personal passage keeps the work items and drops the passage without a placeholder. The close-out counts what was skipped and names nothing.
+- **Confidence bands come from the operating model** (§3) rather than being invented here, so the thresholds can be loosened later against real evidence. Today every band still stops at the same gate: nothing outward without the batch approval, including on an unattended scheduled run.
+- Granola now reads "1 skill" on the systems map instead of "INGEST", which is the point of deriving that number from what the skills actually say.
+
 ## 2026-08-03 — The calendar gets a store, and something that keeps it fresh (32 skills)
 
 The week view worked but had nothing feeding it. It now has a store, a collector, and a stated order of preference between sources, so that swapping in live Graph access later is an environment change rather than a rewrite.
