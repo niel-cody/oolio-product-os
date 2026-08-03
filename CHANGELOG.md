@@ -2,6 +2,19 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-08-03 — Flightdeck stops being one frozen day (32 skills)
+
+The dashboard could only ever show the day it was built for, and the only day it had been built for was 29 July. Niel wanted a calendar he could actually look at: live, and honest about where the room is. That is now `/app/week`, a second Flightdeck surface sitting beside the dashboard.
+
+- **The week reads Outlook on every request** and works out availability from it. Not a snapshot: a page that answers "when am I free" is worthless the moment it is cached, because the meeting just booked into your only free afternoon is exactly the one it needs to know about. The dashboard stays a once-a-day ranked snapshot; the two are deliberately different pipelines, because merging them would force the slower one's freshness onto the faster one.
+- **It says where the room is, in words first.** The headline is "next free Wednesday at 10:30am, for an hour", then the week drawn to scale, then a per-day list of usable gaps. Anything under 25 minutes is not offered at all — a gap that short holds a coffee, not a task, and listing it is how a calendar becomes a machine for shredding the day.
+- **Availability is honest in three specific ways.** Gaps already gone are not listed as room (today says how many it has spent). Weekends are not offered as eight free hours, which reads as an invitation. And a declined meeting takes no time, which falls out of reading Outlook's `showAs` rather than the attendance flag.
+- **Meeting domains come from the Outlook categories** already maintained by hand ("8. Domain – Insights"), so the colour coding stays under the diary owner's control rather than being guessed from meeting titles.
+- **Overlapping meetings sit side by side**, because two standups starting at noon is a normal Tuesday here, and drawn full width the one underneath simply vanishes.
+- **The live source needs one Entra app registration**, delegated `Calendars.Read` and `offline_access` — the same registration the V1 scope doc already asks IT for, with two scopes added rather than a second ask raised. Until it lands the view runs off a local cache refreshed from a Cowork session, and every page says which source it used and how old the read is.
+- Timezone arithmetic is done on instants rather than hours-since-midnight, so the two days a year Melbourne shifts do not silently move every meeting by an hour.
+- The leak guard now covers calendar reads as well as snapshots: same class of secret, same permanent git history, and `.calendar/` is gitignored.
+
 ## 2026-07-31 — The sky comes alive, and the door follows you down (32 skills)
 
 Niel's read on the first cinematic pass was right: tying the animation to the scroll wheel meant the universe froze whenever the visitor did, and six flows of pinned scrolling was a slog. Inverted.

@@ -225,3 +225,219 @@
   gap: 4px 10px;
 }
 .fd-why-ranked li::before { content: "· "; color: var(--fd-rule); }
+
+/* ---------- the live week ----------
+   A shared vertical time axis with one lane per day. Meetings are drawn to scale rather
+   than listed, because the question the view answers is spatial: not "what is on Tuesday"
+   but "where is the room". Free windows are drawn as objects in their own right, not as
+   the gaps between blocks, for the same reason. */
+.fdw-grid {
+  display: flex;
+  gap: 1px;
+  overflow-x: auto;
+  background: var(--fd-hair);
+  border: 1px solid var(--fd-hair);
+  border-radius: 10px;
+  padding: 0;
+}
+.fdw-gutter, .fdw-col {
+  display: flex;
+  flex-direction: column;
+  background: var(--fd-plane);
+}
+.fdw-gutter { flex: 0 0 52px; }
+.fdw-col { flex: 1 1 0; min-width: 132px; }
+.fdw-col[data-off="true"] { background: color-mix(in srgb, var(--fd-plane) 88%, var(--fd-ink-3)); }
+.fdw-col[data-today="true"] .fdw-dow { color: var(--fd-ink); }
+
+.fdw-head {
+  height: 62px;
+  padding: 9px 10px 0;
+  border-bottom: 1px solid var(--fd-hair);
+  overflow: hidden;
+}
+.fdw-dow {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fd-ink-2);
+  letter-spacing: 0.03em;
+}
+.fdw-col[data-today="true"] .fdw-dow::after {
+  content: "";
+  display: inline-block;
+  width: 5px; height: 5px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background: var(--fd-critical);
+  vertical-align: middle;
+}
+.fdw-num {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  color: var(--fd-ink-3);
+  margin-top: 1px;
+}
+.fdw-sum {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--fd-ink-3);
+  margin-top: 4px;
+  white-space: nowrap;
+}
+.fdw-clear { color: var(--fd-good); }
+
+.fdw-axis, .fdw-lane { position: relative; height: var(--fdw-h); }
+.fdw-tick {
+  position: absolute;
+  right: 8px;
+  transform: translateY(-50%);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--fd-ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.fdw-rule {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--fd-hair);
+  opacity: 0.55;
+}
+/* Working hours, lit. Anything drawn outside this band is out of hours, and looks it. */
+.fdw-work {
+  position: absolute;
+  left: 0; right: 0;
+  background: color-mix(in srgb, var(--fd-surface) 70%, transparent);
+}
+
+.fdw-free {
+  position: absolute;
+  left: 3px; right: 3px;
+  border: 1px dashed color-mix(in srgb, var(--fd-good) 45%, transparent);
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--fd-good) 7%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.fdw-free[data-grade="deep"] {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--fd-good) 60%, transparent);
+  background: color-mix(in srgb, var(--fd-good) 13%, transparent);
+}
+.fdw-free[data-grade="short"] { opacity: 0.6; }
+.fdw-free-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--fd-good);
+  font-variant-numeric: tabular-nums;
+}
+
+.fdw-ev {
+  position: absolute;
+  left: 3px; right: 3px;
+  box-sizing: border-box;
+  padding: 2px 6px 2px 7px;
+  border-radius: 4px;
+  border-left: 3px solid var(--fd-d-none);
+  background: color-mix(in srgb, var(--fd-surface) 92%, var(--fd-ink));
+  box-shadow: 0 0 0 1px var(--fd-hair);
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 1.25;
+  color: var(--fd-ink);
+}
+.fdw-ev[data-tentative="true"] {
+  opacity: 0.66;
+  border-left-style: dashed;
+}
+.fdw-ev-time {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 9.5px;
+  color: var(--fd-ink-3);
+}
+.fdw-ev-title { font-weight: 500; }
+/* A half-hour block is two lines tall at this scale, and a wrapped title clips mid-word.
+   Below that, one line with an ellipsis reads; the full text stays in the tooltip. */
+.fdw-ev[data-compact="true"] {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-top: 1px;
+}
+.fdw-now {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: var(--fd-critical);
+  z-index: 3;
+}
+.fdw-now::before {
+  content: "";
+  position: absolute;
+  left: -3px; top: -3px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--fd-critical);
+}
+
+/* ---------- the availability list ---------- */
+.fdw-list { list-style: none; margin: 0; padding: 0; }
+.fdw-list > li { padding: 11px 0; border-top: 1px solid var(--fd-hair); }
+.fdw-list > li:first-child { border-top: none; }
+.fdw-list-day {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.fdw-list-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.fdw-chips { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.fdw-chip {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--fd-ring);
+  color: var(--fd-ink-2);
+  display: inline-flex;
+  gap: 7px;
+  font-variant-numeric: tabular-nums;
+}
+.fdw-chip b { color: var(--fd-ink-3); font-weight: 500; }
+.fdw-chip[data-grade="deep"] {
+  border-color: color-mix(in srgb, var(--fd-good) 55%, transparent);
+  color: var(--fd-good);
+}
+.fdw-chip[data-grade="deep"] b { color: color-mix(in srgb, var(--fd-good) 75%, var(--fd-ink-3)); }
+
+/* ---------- the view switch ---------- */
+.fd-tabs {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 16px 20px 0;
+  display: flex;
+  gap: 4px;
+}
+@media (min-width: 640px) {
+  .fd-tabs { padding: 20px 24px 0; }
+}
+.fd-tabs a {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fd-ink-3);
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+}
+.fd-tabs a:hover {
+  color: var(--fd-ink);
+  border-color: var(--fd-hair);
+}

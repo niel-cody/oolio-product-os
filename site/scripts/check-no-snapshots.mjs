@@ -57,6 +57,33 @@ async function snapshotsIn(dir) {
 
 const problems = [];
 
+/**
+ * A calendar read is the same class of secret as a snapshot: meeting subjects, the people in
+ * the room, customer names, office locations. It arrives by a different route (the live
+ * source writes `.calendar/events.json`, which is gitignored) so it needs its own shape
+ * check, or a copy saved into a committed directory would sail past the rule above.
+ */
+async function calendarsIn(dir) {
+  const found = [];
+  for (const file of await jsonFilesIn(dir)) {
+    let parsed;
+    try {
+      parsed = JSON.parse(await readFile(file, "utf8"));
+    } catch {
+      continue;
+    }
+    const events = parsed?.events;
+    if (
+      Array.isArray(events) &&
+      events.length > 0 &&
+      events.every((e) => e && typeof e === "object" && "startMs" in e && "title" in e)
+    ) {
+      found.push(path.relative(process.cwd(), file));
+    }
+  }
+  return found;
+}
+
 for (const s of await snapshotsIn(path.join(process.cwd(), "data"))) {
   problems.push(`${s.file} — a snapshot must never live in data/, which is published`);
 }
@@ -67,15 +94,21 @@ for (const s of await snapshotsIn(path.join(process.cwd(), "fixtures"))) {
   }
 }
 
+for (const dir of ["data", "fixtures"]) {
+  for (const file of await calendarsIn(path.join(process.cwd(), dir))) {
+    problems.push(`${file} — calendar-shaped; a calendar read belongs in .calendar/ only`);
+  }
+}
+
 if (problems.length > 0) {
   console.error("\n  Snapshot leak check failed:\n");
   for (const p of problems) console.error(`    ${p}`);
   console.error(
-    "\n  Real snapshots carry names, email subjects, Slack messages and customer venues.\n" +
-      "  Move the file out of the repo, or replace it with invented data carrying a\n" +
-      '  "_synthetic" field. See the V1 scope doc, section 2.2.\n',
+    "\n  Real snapshots and calendar reads carry names, email subjects, Slack messages,\n" +
+      "  meeting titles and customer venues. Move the file out of the repo, or replace it\n" +
+      '  with invented data carrying a "_synthetic" field. See the V1 scope doc, §2.2.\n',
   );
   process.exit(1);
 }
 
-console.log("  No real snapshots in data/ or fixtures/.");
+console.log("  No real snapshots or calendar reads in data/ or fixtures/.");

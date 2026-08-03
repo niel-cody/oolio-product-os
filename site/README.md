@@ -24,6 +24,8 @@ npm --prefix site run build
 | `/skills` | Every skill, grouped by lifecycle stage, searchable | the skills themselves |
 | `/changelog` | What changed, newest first | `CHANGELOG.md` at the repo root |
 | `/systems` | How the tools connect. Not built yet | placeholder |
+| `/app/today` | Flightdeck: the ranked day, one snapshot | `fixtures/<date>.json` |
+| `/app/week` | Flightdeck: the live calendar and where the room is | Outlook, read on every request |
 
 ## The two inputs
 
@@ -68,6 +70,8 @@ It fails, rather than quietly producing a site that looks fine but lies:
 - a per-skill `version` field, which the skill standard forbids
 - the hand-written skill count drifting in `marketplace.json`, `plugin.json`, either README,
   the catalogue, or `pm-compass`, in digits or in words
+- a Flightdeck snapshot or a calendar read sitting anywhere it could be committed. Both carry
+  real names, meeting titles, email subjects and customer venues; git history is permanent
 
 Worth wiring into a pre-push hook or CI.
 
@@ -107,9 +111,37 @@ environments. Template in [`.env.example`](.env.example).
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Public by design; **not** the service-role key, which this app never uses |
 | `FLIGHTDECK_ALLOWED_EMAILS` | Who may sign in. Empty denies everyone, deliberately |
 | `FLIGHTDECK_ALLOWED_DOMAINS` | Optional; defaults to `oolio.com` |
+| `GRAPH_TENANT_ID`, `GRAPH_CLIENT_ID`, `GRAPH_CLIENT_SECRET`, `GRAPH_REFRESH_TOKEN` | The live calendar. Absent, `/app/week` falls back to the cache and says so |
+| `FLIGHTDECK_TIMEZONE` | Optional; defaults to `Australia/Melbourne` |
 
-Leave Vercel's **Sensitive** toggle **off** on these. Sensitive variables cannot be used in the
-Development environment, and none of these is a secret.
+Leave Vercel's **Sensitive** toggle **off** on the Supabase and allowlist variables. Sensitive
+variables cannot be used in the Development environment, and none of those is a secret. The four
+`GRAPH_*` values **are** secrets and should be marked Sensitive.
+
+### The live calendar
+
+`/app/week` reads Outlook on every request and computes availability from it. Two ways to feed it,
+and the page always states which one it used and how old the read is.
+
+**Live, via Microsoft Graph.** Needs one Entra app registration in the Oolio tenant:
+
+- Delegated permissions `Calendars.Read` and `offline_access`. Nothing else — no directory read,
+  no application permissions, so no Exchange access policy to configure.
+- This is the *same* registration the V1 scope doc already asks IT for (prerequisite 2, for
+  sign-in). Add the two calendar scopes to that ask rather than raising a second one.
+- `GRAPH_REFRESH_TOKEN` is minted once by hand with the auth-code flow and then reused; the server
+  exchanges it for an access token per request and caches that in memory for its hour.
+
+**Interim, via the cache.** Until the registration lands, refresh the cache from any session that
+has the Microsoft connector authorised:
+
+```
+node scripts/calendar-cache.mjs < events.json
+```
+
+where `events.json` is what the Outlook calendar search returned. It writes `.calendar/events.json`,
+which is gitignored and covered by `npm run check` — a calendar read carries real meeting titles,
+colleagues and customers, and is the same class of secret as a snapshot.
 
 Supabase must also know where to send people back to: **Authentication → URL Configuration**, Site
 URL `https://oolio-product-os.vercel.app` plus that origin's `/auth/callback` in Redirect URLs. A new

@@ -46,3 +46,7 @@ next-env.d.ts
 /.snapshots/
 /fixtures/20*.json
 !/fixtures/2026-07-29.json
+
+# Live calendar cache. Real meeting titles, colleagues, customers and locations. Same rule
+# as snapshots above, same reason. Written by scripts/calendar-cache.mjs, never committed.
+/.calendar/
