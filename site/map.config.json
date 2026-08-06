@@ -64,6 +64,97 @@
     "Orchestration", "Council", "Steering", "Delivery", "GTM", "Measure"
   ],
 
+  "_stageNotes_note": [
+    "One purpose sentence and one entry point per column, written for someone deciding whether",
+    "they are in this stage at all. A heading with only a count under it answers nothing.",
+    "Every column needs an entry, and `start` must name a skill that actually sits in it; the",
+    "generator fails on both. Nothing here may name a count or a date."
+  ],
+  "stageNotes": {
+    "Front Door": {
+      "purpose": "You know you want help and not which kind. Say what you are facing and get pointed at the right skill, or hand over the whole muddle and let it be driven to something finished.",
+      "start": "pm-compass"
+    },
+    "Signals": {
+      "purpose": "What the market, our lost deals and our own customers are telling us, gathered before anyone forms an opinion about it. Everything here ends up as cited evidence on the backlog rather than as a view.",
+      "start": "signal-radar"
+    },
+    "Brain": {
+      "purpose": "The vault where findings accumulate, so what the team learns compounds instead of restarting every quarter. Read from it before researching something we may already know.",
+      "start": "wiki-query"
+    },
+    "Intake": {
+      "purpose": "The gate between raw signal and the backlog. Most signal belongs on an idea that already exists, so the first job here is not creating one.",
+      "start": "feedback-to-idea"
+    },
+    "Discovery": {
+      "purpose": "The question is genuinely open. Research it properly with sources you can cite, or chart it as a map of decisions when it is too big to settle in one session.",
+      "start": "storm-research"
+    },
+    "Grooming": {
+      "purpose": "The idea exists but is not yet fit to be read, prioritised or decided. Bring it up to Oolio's standard so the next person does not have to ask what it means.",
+      "start": "jpd-idea-groomer"
+    },
+    "Definition": {
+      "purpose": "Write down what we are actually doing, then attack it until it holds. The document is the deliverable; the argument is how it earns its place.",
+      "start": "write-prd"
+    },
+    "Orchestration": {
+      "purpose": "Run a whole chain rather than a single step, with a human sign-off at every point that counts. Reach for these when you want the loop, not one move in it.",
+      "start": "jpd-loop"
+    },
+    "Council": {
+      "purpose": "Four panels chosen to disagree with each other: the operators who have to live with it, the designers who judge whether it is any good, the leadership who fund it, and Roy.",
+      "start": "operator-council-review"
+    },
+    "Steering": {
+      "purpose": "Everything a roadmap review needs in order to decide, rather than to spend the hour asking for context.",
+      "start": "steering-pack"
+    },
+    "Delivery": {
+      "purpose": "The work is committed and now lives in Jira. Keep it readable for everyone who was not in the room when it was decided.",
+      "start": "jira-epic-groomer"
+    },
+    "GTM": {
+      "purpose": "The product is real. Give the teams who sell it, support it and onboard customers onto it something they can use on Monday morning.",
+      "start": "gtm-handover"
+    },
+    "Measure": {
+      "purpose": "Close the loop the PRD opened. Find out whether we were right, and say so plainly on the occasions we were not.",
+      "start": "metrics-review"
+    }
+  },
+
+  "_overrides_note": [
+    "The site derives each skill's summary and opening paragraph from the skill itself, so this",
+    "block is an exception list, not a copy of them. Only two fields may be overridden:",
+    "  blurb = the one-line summary, when the description opens with a trigger clause instead",
+    "  lede  = the opening paragraph, when SKILL.md opens in the second person ('You are acting",
+    "          as the Product Council Chair'), which is instruction to the model, not a",
+    "          description of the skill for a reader",
+    "Fix the skill and the override becomes unnecessary; the generator warns when one is."
+  ],
+  "overrides": {
+    "storm-research": {
+      "blurb": "Turn one topic into a multi-perspective, citation-verified research briefing, delivered as a self-contained report."
+    },
+    "convene-vpc": {
+      "lede": "The full council loop, chaired. It runs the subcommittees in turn, sends the argument back round when the panels have not converged, and stops at a recorded decision that a human has signed, rather than at a one-pass opinion."
+    },
+    "operator-council-review": {
+      "lede": "The hospitality personas sitting as a UAT panel. They hold the floor of operational reality: whether a real venue would accept and adopt this, and whether it survives a Friday night service."
+    },
+    "design-council-review": {
+      "lede": "Fourteen expert design and research lenses, chosen because they disagree with each other. The panel exists to raise the ceiling on design quality by answering one question honestly: is what we built any good, and how would we know? They are lenses to test against, never invented quotes from the practitioners who inspired them."
+    },
+    "leadership-subcommittee-review": {
+      "lede": "The executive and commercial lenses: CPO, CEO, CFO, CRO and the functional leads. This panel holds the money question. Should Oolio invest in this, what risk are we accepting, and can we sell, support and deliver it once it exists?"
+    },
+    "behavioural-alchemist": {
+      "lede": "Roy reads a decision, a price, a feature or a piece of positioning through behavioural economics and consumer psychology, in the tradition of Rory Sutherland. He hunts for the value conventional analysis misses, and for the cheaper change in behaviour that needs no engineering at all."
+    }
+  },
+
   "types": {
     "ai":     { "colour": "#a78bfa", "label": "AI skill" },
     "orch":   { "colour": "#2dd4bf", "label": "Orchestrator" },

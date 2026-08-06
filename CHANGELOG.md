@@ -2,6 +2,19 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-08-07 — The skills page starts explaining itself (32 skills)
+
+The Skills page listed thirty-two things and told you almost nothing about any of them. What it showed under each name was the first two sentences of the frontmatter `description`, and a description is a routing spec written for the model, so the page read as "Trigger when the user hands over one finding" rather than as an answer to "should I open this". It never once said how to run a skill. Niel's read, comparing it against Matt Pocock's, was four out of ten, and the gap was content rather than styling.
+
+- **Every skill has its own page now**, at `/skills/<id>`: what it does, when to reach for it, when to reach for something else instead, where it sits, what it hands on to and what it touches, with previous and next walking the lifecycle rather than the alphabet.
+- **The prose is derived from the skills, not written beside them.** The one-liner is the part of the description before its trigger clause; the fuller "what it does" is the opening paragraph of SKILL.md, which was already written for a human and was simply never read. Nothing here is a second copy to keep in step.
+- **"When to reach for something else" is the anti-trigger clause, split into a list and linked.** That clause is the most useful sentence a skill carries — it is almost entirely "not this, use that" — and truncation used to eat it first. Each exclusion now links to the skill it names.
+- **The trigger clause is converted from the model's third person into the reader's own.** "When the user pastes a JPD URL" becomes "You paste a JPD URL", using a fixed table of the verbs that actually follow, so a verb it does not know leaves the sentence alone rather than inventing agreement. The quoted phrases come out as chips: things you can literally type.
+- **Six skills carry a hand-written override** because their own opening paragraph is written at the model ("You are acting as the Product Council Chair") rather than about the skill. They live in one `overrides` block in `map.config.json`, the generator warns when one is no longer needed, and everything else derives.
+- **Each stage says what it is for**, with an entry point, rather than being a heading with a count under it. A stage without a purpose sentence, or one whose entry point does not sit in it, now fails the build.
+- **Connections follow the artifact.** Most skills hand on through something rather than to someone: `write-prd` feeds "PRD" and "PRD" feeds the grilling. Reading only the direct wires made the best-connected skills look like dead ends, so the page follows one hop and labels the wire with what travels along it.
+- Skill names, `code` and **emphasis** inside the derived prose render as links, code and bold, because a reader should never see the source markup.
+
 ## 2026-08-03 — The calendar gets a store, and something that keeps it fresh (32 skills)
 
 The week view worked but had nothing feeding it. It now has a store, a collector, and a stated order of preference between sources, so that swapping in live Graph access later is an environment change rather than a rewrite.
