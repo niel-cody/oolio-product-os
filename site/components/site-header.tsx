@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Menu, LogOut } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,14 @@ import { cn } from "@/lib/utils";
  * Signed out there is nowhere to go but the landing page, because everything else is gated
  * (lib/routes.ts). Showing the full nav to a signed-out visitor would be five links that all
  * bounce to /login, which reads as a broken site rather than a private one. So signed out is
- * the wordmark and a sign-in button, and the nav appears once it can actually be used.
+ * the wordmark and the two doors, and the nav appears once it can actually be used.
+ *
+ * Signed out, Install is the primary and Sign in the secondary, which is the reverse of what
+ * this header used to do. Signing in gets a visitor the catalogue; installing gets them the
+ * thing. An earlier version faded a lone Sign in button into the ribbon once the hero
+ * scrolled away, because the hero was the only place a call to action existed; the rebuilt
+ * landing page carries one in the hero, at the setup steps and at the foot, so the scroll
+ * listener that drove it is gone.
  */
 const NAV = [
   { href: "/app/today", label: "Flightdeck" },
@@ -36,18 +43,6 @@ export function SiteHeader({
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  // Signed out on the landing page, the call to action must never leave the screen: the
-  // hero carries it above the fold, and once that scrolls away this one fades into the
-  // ribbon to take over. Always mounted so the handoff is a fade, not a pop.
-  const [ctaInRibbon, setCtaInRibbon] = useState(false);
-  useEffect(() => {
-    if (signedIn || pathname !== "/") return;
-    const onScroll = () => setCtaInRibbon(window.scrollY > window.innerHeight * 0.55);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [signedIn, pathname]);
 
   // Flightdeck lives at /app/today but its dated pages are /app/d/…, so match the section
   // rather than the exact path or the tab goes dark as soon as you land on a real day.
@@ -118,20 +113,14 @@ export function SiteHeader({
               </form>
             </>
           ) : (
-            <Button
-              asChild
-              size="sm"
-              className={cn(
-                "h-8 text-[12px] transition-all duration-300",
-                ctaInRibbon
-                  ? "translate-y-0 opacity-100"
-                  : "pointer-events-none -translate-y-1 opacity-0",
-              )}
-              tabIndex={ctaInRibbon ? undefined : -1}
-              aria-hidden={!ctaInRibbon}
-            >
-              <Link href="/login">Sign in</Link>
-            </Button>
+            <>
+              <Button asChild size="sm" variant="ghost" className="h-8 text-[12px]">
+                <Link href="/login">Sign in</Link>
+              </Button>
+              <Button asChild size="sm" className="h-8 text-[12px]">
+                <Link href="/#install">Install</Link>
+              </Button>
+            </>
           )}
 
           {signedIn && (

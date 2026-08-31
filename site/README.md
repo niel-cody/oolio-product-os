@@ -11,6 +11,7 @@ npm --prefix site install
 npm --prefix site run dev      # http://localhost:3000
 npm --prefix site run check    # validate only; non-zero exit if the site has drifted
 npm --prefix site run build
+npm --prefix site run check:public -- http://127.0.0.1:3000   # needs a running server
 ```
 
 `dev` and `build` regenerate the data first, so the site cannot render a stale view of the repo.
@@ -74,6 +75,27 @@ It fails, rather than quietly producing a site that looks fine but lies:
   real names, meeting titles, email subjects and customer venues; git history is permanent
 
 Worth wiring into a pre-push hook or CI.
+
+## What `check:public` catches
+
+A separate check, because it needs a running server rather than just the files. It fetches the
+public landing page and fails if anything gated appears in it: a skill name or command outside the
+five the boundary reveals, a trigger phrase, an exclusion, a system from the tools map, or a flow
+step's label or description.
+
+It exists because [`lib/landing-sky.ts`](lib/landing-sky.ts) leaked in a way no amount of reading
+the page would have shown. Star nodes carried `node.id` to the browser purely as a React key, and a
+node id is the skill's name with hyphens in it, so all thirty-two shipped in the page source while
+the rendered page displayed none of them. Reviewing the component would not have caught it; grepping
+the rendered HTML did. So the test is the rendered HTML.
+
+```bash
+npm --prefix site run build
+npx --prefix site next start -p 3111 &
+npm --prefix site run check:public -- http://127.0.0.1:3111
+```
+
+Run it after any change to what `lib/landing-sky.ts` returns, or to what the landing page renders.
 
 ## Deploying
 
