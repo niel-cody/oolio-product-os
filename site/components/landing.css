@@ -1,13 +1,21 @@
 /* ============================================================================
-   The cinematic landing experience.
+   The public landing page.
 
-   The sky animates itself: flows trace on a timer, forever, and scrolling simply moves
-   past it. Nothing on this page is driven by scroll position any more — that version
-   felt like the universe locked whenever the wheel stopped.
+   Rebuilt 2026-08-31. The previous version gave the whole first screen to an animated
+   star chart and said almost nothing: beautiful, and impossible to tell apart from any
+   other generated landing page. The drawing is still here, but demoted to atmosphere
+   behind the type, and the page now argues with real stages, real flows and five named
+   skills.
 
-   Motion is the centrepiece, so it is the accessibility risk: every animation has a
-   reduced-motion path at the foot of this file, where the sky becomes a still chart with
-   all constellations drawn and labels lit.
+   Motion rules this file holds itself to (Emil Kowalski's animation standards):
+     - transform and opacity only. Nothing here animates a layout property.
+     - strong custom curves from --ease-out / --ease-in-out in globals.css, never ease-in,
+       which delays the first frame and reads as sluggish at an identical duration.
+     - asymmetric timing: a deliberate reveal staggers in, a reset snaps back.
+     - transitions rather than keyframes wherever the thing can be re-triggered, so a
+       second click retargets from where the first one got to instead of restarting.
+     - hover motion gated behind a real pointer.
+     - every animation has a reduced-motion path at the foot of this file.
    ========================================================================== */
 
 .lx-sky {
@@ -18,11 +26,11 @@
     #070b11;
 }
 
-/* ---------- the deep field ---------- */
+/* ---------- the deep field: texture, not the argument ---------- */
 .lx-dust { animation: lx-twinkle 5.5s ease-in-out infinite; }
 @keyframes lx-twinkle {
-  0%, 100% { opacity: 0.16; }
-  50% { opacity: 0.48; }
+  0%, 100% { opacity: 0.14; }
+  50% { opacity: 0.4; }
 }
 
 .lx-star-glow {
@@ -31,12 +39,13 @@
   transform-origin: center;
 }
 @keyframes lx-breathe {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.32; transform: scale(1.2); }
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.2; transform: scale(1.15); }
 }
 
-/* ---------- the trace ---------- */
-/* --len is the measured path length, --dur the draw time. Set inline per flow. */
+/* The single slow trace behind the headline. Deliberately faint and unhurried: it is
+   ambient life, not a thing to read, and at full contrast it stole the sentence it sits
+   behind. --len is the measured path length, --dur the draw time, both set inline. */
 .lx-trace {
   stroke-dasharray: var(--len);
   stroke-dashoffset: var(--len);
@@ -46,108 +55,206 @@
   to { stroke-dashoffset: 0; }
 }
 
-/* The flow that just finished, letting go while the next one draws. */
-.lx-trace-prev { animation: lx-release 2.2s ease-out forwards; }
+.lx-trace-prev { animation: lx-release 2.4s ease-out forwards; }
 @keyframes lx-release {
-  from { opacity: 0.45; }
+  from { opacity: 0.3; }
   to { opacity: 0; }
-}
-
-/* The pulse riding the draw front, fading once it arrives. */
-.lx-pulse { animation: lx-arrive 0.8s ease-out var(--dur) forwards; }
-@keyframes lx-arrive {
-  to { opacity: 0; }
-}
-
-/* ---------- stars and labels lighting as the line reaches them ---------- */
-/* --hit is each star's arrival time: its distance along the path × the draw time. */
-.lx-starhit {
-  animation: lx-flare 0.9s ease-out var(--hit) both;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-@keyframes lx-flare {
-  0% { transform: scale(1); }
-  35% { transform: scale(1.9); }
-  100% { transform: scale(1.35); }
-}
-
-.lx-label {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 21px;
-  fill: #c3ccdb;
-  letter-spacing: 0.02em;
-  opacity: 0.38;
-  /* A dark halo painted behind the glyphs, so a label stays legible whatever line or
-     star the sky happens to run underneath it. */
-  paint-order: stroke;
-  stroke: #070b11;
-  stroke-width: 5px;
-  stroke-linejoin: round;
-}
-.lx-label-hit { animation: lx-labelup 0.7s ease-out var(--hit) both; }
-@keyframes lx-labelup {
-  from { opacity: 0.38; }
-  to { opacity: 1; }
-}
-@media (max-width: 639px) {
-  .lx-label { display: none; }
-}
-
-/* ---------- overlays ---------- */
-.lx-flowname { animation: lx-swap 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-@keyframes lx-swap {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
-}
-
-.lx-hint { animation: lx-bob 2.2s ease-in-out infinite; }
-@keyframes lx-bob {
-  0%, 100% { transform: translateY(0); opacity: 0.7; }
-  50% { transform: translateY(6px); opacity: 1; }
-}
-
-/* ---------- the Signal → Decide → Learn loop ---------- */
-.lx-loop {
-  fill: none;
-  stroke: var(--muted-ink);
-  opacity: 0.5;
-  stroke-width: 1.4;
-  stroke-dasharray: 5 9;
-  animation: lx-march 1.1s linear infinite;
-}
-@keyframes lx-march {
-  to { stroke-dashoffset: -14; }
 }
 
 /* ---------- scroll reveals ---------- */
+/* --d staggers a group. Kept to 60ms a step and no more than a handful of steps, because
+   a long cascade stops reading as craft and starts reading as a wait. */
 .lx-reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.85s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.85s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 520ms var(--ease-out) var(--d, 0ms),
+    transform 520ms var(--ease-out) var(--d, 0ms);
 }
-.lx-reveal.is-in { opacity: 1; transform: none; }
+.lx-reveal.is-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
 
+/* ---------- the lifecycle chips ---------- */
+/* Named properties, never `all`: this element also has a box-shadow and a border radius,
+   and `all` would animate whatever gets added to it next by accident. */
+.lx-stage {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 11px;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #0c111a;
+  color: var(--muted-ink);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color 180ms var(--ease-out),
+    background-color 180ms var(--ease-out),
+    color 180ms var(--ease-out),
+    opacity 180ms var(--ease-out),
+    transform 160ms var(--ease-out);
+}
+
+/* Lit because the selected flow passes through here. The delay is the trace: each stage
+   lights in the order the flow reaches it. It lives on the lit state only, so switching
+   flows clears the old one instantly and stages the new one — deliberate in, snap out. */
+.lx-stage[data-on="true"] {
+  border-color: var(--sc);
+  background: #131c2a;
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--sc) inset;
+  transition-delay: var(--d, 0ms);
+}
+
+/* Off the selected flow. Dimmed rather than hidden: the lifecycle is still thirteen
+   stages whichever path you are looking at. */
+.lx-stage[data-on="false"] { opacity: 0.42; }
+
+.lx-stage[data-selected="true"] { border-color: var(--sc); color: var(--ink); }
+
+.lx-stage:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lx-stage:hover { opacity: 1; color: var(--ink); border-color: #33415a; }
+}
+
+/* Press feedback. Instant, and it fires on pointer-down rather than on release, which is
+   the difference between an interface that is listening and one that is thinking. */
+.lx-stage:active { transform: scale(0.98); }
+
+.lx-stage .lx-ord {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--sc);
+  opacity: 0;
+  transition: opacity 180ms var(--ease-out);
+}
+.lx-stage[data-on="true"] .lx-ord {
+  opacity: 1;
+  transition-delay: var(--d, 0ms);
+}
+
+/* ---------- the flow buttons ---------- */
+.lx-flow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #0c111a;
+  color: var(--muted-ink);
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    border-color 180ms var(--ease-out),
+    background-color 180ms var(--ease-out),
+    color 180ms var(--ease-out),
+    transform 160ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lx-flow:hover { border-color: #33415a; background: #111a27; color: var(--ink); }
+}
+.lx-flow:active { transform: scale(0.98); }
+.lx-flow:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.lx-flow[aria-selected="true"] {
+  border-color: var(--sc);
+  background: #131c2a;
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--sc) inset;
+}
+.lx-flow .lx-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sc);
+  flex: none;
+  opacity: 0.45;
+  transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out);
+}
+.lx-flow[aria-selected="true"] .lx-dot { opacity: 1; transform: scale(1.15); }
+
+/* ---------- the path line under the chips ---------- */
+/* Re-keyed on flow change so each step fades up in order. Short, and purely explanatory:
+   this is the one place the page says out loud that a flow can go backwards. */
+.lx-step {
+  opacity: 0;
+  animation: lx-stepin 320ms var(--ease-out) var(--d, 0ms) forwards;
+}
+@keyframes lx-stepin {
+  from { opacity: 0; transform: translate3d(0, 4px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- the stage purpose panel ---------- */
+/* Crossfading two paragraphs shows two overlapping blocks of text for a beat, which reads
+   as a glitch. A little blur bridges them into one thing changing. */
+.lx-purpose {
+  animation: lx-purposein 260ms var(--ease-out) both;
+}
+@keyframes lx-purposein {
+  from { opacity: 0; filter: blur(3px); transform: translate3d(0, 4px, 0); }
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+
+.lx-card {
+  transition:
+    border-color 200ms var(--ease-out),
+    background-color 200ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lx-card:hover {
+    border-color: #33415a;
+    background: #101723;
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+/* ---------- reduced motion ---------- */
+/* Fewer and gentler, not zero. Opacity changes that aid comprehension stay; everything
+   that moves, draws or waits is removed, including the stagger delays, which are a form
+   of motion even though nothing translates. */
 @media (prefers-reduced-motion: reduce) {
   .lx-dust,
   .lx-star-glow,
-  .lx-pulse,
-  .lx-starhit,
-  .lx-flowname,
-  .lx-hint,
-  .lx-loop {
+  .lx-step,
+  .lx-purpose {
     animation: none;
+    opacity: 1;
   }
   .lx-trace {
     animation: none;
     stroke-dashoffset: 0;
   }
   .lx-trace-prev { animation: none; opacity: 0; }
-  .lx-label { opacity: 0.85; }
-  .lx-label-hit { animation: none; opacity: 1; }
   .lx-reveal {
-    transition: none;
+    transition: opacity 200ms linear;
     transform: none;
-    opacity: 1;
   }
+  .lx-stage,
+  .lx-stage[data-on="true"],
+  .lx-stage .lx-ord,
+  .lx-flow,
+  .lx-card {
+    transition: none;
+    transition-delay: 0ms;
+  }
+  .lx-stage:active,
+  .lx-flow:active,
+  .lx-card:hover { transform: none; }
 }

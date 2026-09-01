@@ -59,9 +59,13 @@ export function SignInForm() {
 
   return (
     <form onSubmit={onSubmit} className="mt-8">
+      {/* Not a dead end. Someone who gets here has an Oolio address and wanted in, which
+          makes them exactly the person the plugin is for — and the plugin needs no
+          allowlist. Saying only "ask Niel" was losing them at the last step. */}
       {denied && (
         <p className="mb-4 rounded-md border border-[var(--destructive)]/40 bg-[var(--destructive)]/10 px-3 py-2 text-[12.5px] leading-relaxed text-[var(--ink)]">
-          That account is not on the access list. Ask Niel to add you.
+          That account is not on the access list. Ask Niel to add you — or skip it, because
+          the skills themselves do not need one.
         </p>
       )}
       {signedOut && (

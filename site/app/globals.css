@@ -121,6 +121,14 @@
   * {
     @apply border-border outline-ring/50;
   }
+  /* In-page anchors glide rather than teleport. Behind the no-preference query, because a
+     forced smooth scroll is one of the motions people who set that preference are asking
+     to be spared. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
   body {
     @apply bg-background text-foreground;
   }
@@ -157,6 +165,28 @@
   --input: #1c2534;
   --ring: #33415a;
   --radius: 0.625rem;
+
+  /* Motion. The built-in CSS easings are too weak to read as deliberate: `ease-out` at
+     200ms still looks like nothing decided it. These are the strong variants, and they are
+     app-level so the landing page and the Flightdeck move the same way.
+       --ease-out    entering and exiting, where the user is watching the first frame
+       --ease-in-out on-screen movement, which needs to accelerate and decelerate
+     There is deliberately no --ease-in: it delays the moment being watched most, which is
+     what makes an interface feel sluggish at an identical duration. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Press feedback for anything pressable that is not a <Button>: a link acting as a call to
+   action, a copy button, a card you can click. Instant and slight, because the point is to
+   confirm the interface heard you rather than to be noticed. App-level rather than living
+   with the landing page, because the sign-in page uses it too and importing the landing
+   stylesheet to get one rule would drag the whole page's styles onto every route. */
+.lx-press { transition: transform 160ms var(--ease-out); }
+.lx-press:active { transform: scale(0.985); }
+@media (prefers-reduced-motion: reduce) {
+  .lx-press { transition: none; }
+  .lx-press:active { transform: none; }
 }
 
 .mono { font-family: var(--font-mono), ui-monospace, monospace; }
