@@ -25,6 +25,7 @@ npm --prefix site run check:public -- http://127.0.0.1:3000   # needs a running 
 | `/skills` | Every skill, grouped by lifecycle stage, searchable | the skills themselves |
 | `/changelog` | What changed, newest first | `CHANGELOG.md` at the repo root |
 | `/systems` | How the tools connect. Not built yet | placeholder |
+| `/admin` | Who may use the site, and as what. Admins only | the `members` table |
 | `/app/today` | Flightdeck: the ranked day, one snapshot | `fixtures/<date>.json` |
 | `/app/week` | Flightdeck: the live calendar and where the room is | Outlook, read on every request |
 
@@ -131,14 +132,46 @@ environments. Template in [`.env.example`](.env.example).
 |---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | Public by design |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Public by design; **not** the service-role key, which this app never uses |
-| `FLIGHTDECK_ALLOWED_EMAILS` | Who may sign in. Empty denies everyone, deliberately |
-| `FLIGHTDECK_ALLOWED_DOMAINS` | Optional; defaults to `oolio.com` |
 | `GRAPH_TENANT_ID`, `GRAPH_CLIENT_ID`, `GRAPH_CLIENT_SECRET`, `GRAPH_REFRESH_TOKEN` | The live calendar. Absent, `/app/week` falls back to the cache and says so |
 | `FLIGHTDECK_TIMEZONE` | Optional; defaults to `Australia/Melbourne` |
 
 Leave Vercel's **Sensitive** toggle **off** on the Supabase and allowlist variables. Sensitive
 variables cannot be used in the Development environment, and none of those is a secret. The four
 `GRAPH_*` values **are** secrets and should be marked Sensitive.
+
+### Who may sign in, and as what
+
+Access moved out of the environment on 2026-09-01. It used to be `FLIGHTDECK_ALLOWED_EMAILS`,
+which meant granting somebody access was a Vercel edit and a redeploy, and there was nowhere to
+record what they were allowed to do beyond in or out. It is now the `members` table in Supabase,
+managed at [`/admin`](app/admin/page.tsx).
+
+**Access is the presence of a row.** No row is no access, an empty table locks everybody out
+rather than letting everybody in, and a failed lookup is treated as "no" rather than "yes". That
+was the one property of the env allowlist worth keeping, and it is the one most easily lost.
+
+| Role | Can reach |
+|---|---|
+| `viewer` | `/map`, `/skills`, `/changelog`, `/systems`, `/about` |
+| `user` | the above, plus `/app/*` — Flightdeck and, later, their own integrations |
+| `admin` | the above, plus `/admin` |
+
+Roles are a Postgres enum declared weakest-first, so `role >= 'user'` is the ladder and cannot
+be got backwards. [`lib/routes.ts`](lib/routes.ts) is the only table mapping paths to roles; the
+gate, the navigation and the pages all read it, so a link can never appear that bounces.
+
+Three things the database enforces, rather than the app:
+
+- **RLS** lets you read your own row and admins read everyone. Only admins may write.
+- **At least one admin must remain.** A deferred constraint trigger refuses the update or
+  delete that would leave none, because demoting the last admin is one click with no undo from
+  inside the app.
+- **`last_seen_at` is written by a definer function**, not a plain update. RLS cannot restrict
+  which columns a policy covers, so an "update your own row" policy would let anybody set their
+  own role.
+
+Add people before they first sign in: rows are keyed by email, and the Supabase account only
+exists once they follow their first magic link, at which point a trigger links the two.
 
 ### Where the calendar comes from
 

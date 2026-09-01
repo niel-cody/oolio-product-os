@@ -16,6 +16,12 @@ export function SignInForm() {
   const signedOut = params.get("out") === "1";
   const next = params.get("next") ?? "/app/today";
   const linkError = params.get("error");
+  // Sent by the gate when a member opens a door above their role. Distinct from `denied`,
+  // which means not a member at all: this person is signed in and belongs here, they have
+  // just asked for a page their role does not cover, and telling them to "ask Niel to add
+  // you" would be nonsense.
+  const forbidden = params.get("forbidden");
+  const forbiddenAs = params.get("as");
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -66,6 +72,14 @@ export function SignInForm() {
         <p className="mb-4 rounded-md border border-[var(--destructive)]/40 bg-[var(--destructive)]/10 px-3 py-2 text-[12.5px] leading-relaxed text-[var(--ink)]">
           That account is not on the access list. Ask Niel to add you — or skip it, because
           the skills themselves do not need one.
+        </p>
+      )}
+      {forbidden && !denied && (
+        <p className="mb-4 rounded-md border border-[var(--line)] bg-[var(--panel)] px-3 py-2 text-[12.5px] leading-relaxed text-[var(--ink)]">
+          That page needs the <span className="font-semibold">{forbidden}</span> role
+          {forbiddenAs ? <> and you have <span className="font-semibold">{forbiddenAs}</span></> : null}.
+          You are still signed in — everything else is where you left it. Ask Niel if you need
+          the extra access.
         </p>
       )}
       {signedOut && (
