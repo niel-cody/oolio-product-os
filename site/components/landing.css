@@ -211,10 +211,6 @@
   to { opacity: 1; filter: blur(0); transform: none; }
 }
 
-/* ---------- pressable surfaces elsewhere on the page ---------- */
-.lx-press { transition: transform 160ms var(--ease-out); }
-.lx-press:active { transform: scale(0.985); }
-
 .lx-card {
   transition:
     border-color 200ms var(--ease-out),
@@ -254,13 +250,11 @@
   .lx-stage[data-on="true"],
   .lx-stage .lx-ord,
   .lx-flow,
-  .lx-card,
-  .lx-press {
+  .lx-card {
     transition: none;
     transition-delay: 0ms;
   }
   .lx-stage:active,
   .lx-flow:active,
-  .lx-press:active,
   .lx-card:hover { transform: none; }
 }

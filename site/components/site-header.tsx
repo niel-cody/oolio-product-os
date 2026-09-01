@@ -114,9 +114,13 @@ export function SiteHeader({
             </>
           ) : (
             <>
-              <Button asChild size="sm" variant="ghost" className="h-8 text-[12px]">
-                <Link href="/login">Sign in</Link>
-              </Button>
+              {/* Not on the sign-in page itself, where it is a link to where you already
+                  are. Install stays, because it is the thing to do next from here. */}
+              {pathname !== "/login" && (
+                <Button asChild size="sm" variant="ghost" className="h-8 text-[12px]">
+                  <Link href="/login">Sign in</Link>
+                </Button>
+              )}
               <Button asChild size="sm" className="h-8 text-[12px]">
                 <Link href="/#install">Install</Link>
               </Button>
