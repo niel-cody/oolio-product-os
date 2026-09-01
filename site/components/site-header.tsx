@@ -7,6 +7,8 @@ import { Menu, LogOut } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { canReach } from "@/lib/routes";
+import { ROLE_LABEL, type Role } from "@/lib/roles";
 
 /**
  * Navigation is a function of whether you are signed in.
@@ -30,19 +32,27 @@ const NAV = [
   { href: "/changelog", label: "Changelog" },
   { href: "/systems", label: "Systems" },
   { href: "/about", label: "About" },
+  { href: "/admin", label: "Members" },
 ];
 
 export function SiteHeader({
   stamp,
   skills,
   signedIn,
+  role,
 }: {
   stamp: string;
   skills: number;
   signedIn: boolean;
+  role: Role | null;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  // Filtered by what this role can actually open, from the same table the gate reads
+  // (lib/routes.ts). A link a viewer cannot follow is worse than a missing one: it looks
+  // like the site is broken rather than like a door that is not theirs.
+  const nav = NAV.filter((n) => canReach(role, n.href));
 
   // Flightdeck lives at /app/today but its dated pages are /app/d/…, so match the section
   // rather than the exact path or the tab goes dark as soon as you land on a real day.
@@ -61,7 +71,7 @@ export function SiteHeader({
 
         {signedIn && (
           <nav className="ml-4 hidden md:flex items-center gap-1">
-            {NAV.map((n) => (
+            {nav.map((n) => (
               <Link
                 key={n.href}
                 href={n.href}
@@ -82,7 +92,7 @@ export function SiteHeader({
           {signedIn ? (
             <>
               <span className="mono hidden lg:inline text-[9.5px] tracking-[0.14em] uppercase text-[var(--muted-ink)]">
-                {skills} skills · {stamp}
+                {role ? `${ROLE_LABEL[role]} · ` : ""}{skills} skills · {stamp}
               </span>
               <Button
                 asChild
@@ -137,7 +147,7 @@ export function SiteHeader({
               <SheetContent side="right" className="w-[16rem] bg-[var(--panel)] border-[var(--line)]">
                 <SheetTitle className="px-4 pt-4 text-[13px]">Oolio Product OS</SheetTitle>
                 <nav className="mt-4 flex flex-col gap-1 px-2">
-                  {NAV.map((n) => (
+                  {nav.map((n) => (
                     <Link
                       key={n.href}
                       href={n.href}
@@ -172,7 +182,7 @@ export function SiteHeader({
                   </form>
                 </div>
                 <div className="mono mt-6 px-4 text-[9.5px] tracking-[0.14em] uppercase text-[var(--muted-ink)]">
-                  {skills} skills · {stamp}
+                  {role ? `${ROLE_LABEL[role]} · ` : ""}{skills} skills · {stamp}
                 </div>
               </SheetContent>
             </Sheet>
