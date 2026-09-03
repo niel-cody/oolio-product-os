@@ -1,5 +1,5 @@
 {
-  "stamp": "02a705f",
+  "stamp": "946c97b",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -4531,11 +4531,11 @@
       }
     ],
     "typeColour": {
-      "ai": "#b296fd",
-      "orch": "#44d0de",
-      "human": "#fcbd30",
-      "signal": "#95acc5",
-      "output": "#5ddd89"
+      "ai": "#3D185E",
+      "orch": "#3D5588",
+      "human": "#FFE800",
+      "signal": "#65606A",
+      "output": "#3D4D00"
     },
     "typeLabel": {
       "ai": "AI skill",
@@ -4558,19 +4558,19 @@
     },
     "kinds": {
       "source": {
-        "colour": "#95acc5",
+        "colour": "#65606A",
         "label": "Signal in"
       },
       "core": {
-        "colour": "#44d0de",
+        "colour": "#3D5588",
         "label": "The Product OS"
       },
       "record": {
-        "colour": "#b296fd",
+        "colour": "#3D185E",
         "label": "System of record"
       },
       "vault": {
-        "colour": "#f07eb3",
+        "colour": "#FF48B0",
         "label": "The vault"
       }
     },
@@ -5265,6 +5265,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-09-03",
+      "title": "The press: Pixie Dust Industries, three drums, and the site goes light (32 skills)",
+      "heading": "2026-09-03 — The press: Pixie Dust Industries, three drums, and the site goes light (32 skills)",
+      "body": "The morning's rebrand was the wrong answer to the right diagnosis. It found the real fault — every accent on the site was an unmodified Tailwind default, and Space Grotesk is the face that signals \"designed\" without doing any designing — and then answered it with another dark palette, which is a look you can generate. That is the one thing a product about doing the work properly should not be. This replaces it with the direction Niel had been developing with his designers: **Risograph**.\n\n- **The house is Pixie Dust Industries and the product is the Product OS.** The name on the door and the thing it ships. \"Industries\" rather than \"Services\" because it buys the whole print-shop vocabulary — drums, passes, plates, press checks — and because a service does not have drums. Nothing addressable moved: the plugin is still `oolio-pm`, the repository is still `niel-cody/oolio-product-os`, and every install keeps working.\n- **Three ink drums plus a black drum, on uncoated stock.** Fluorescent Pink `#FF48B0`, Blue `#3D5588`, Sun Yellow `#FFE800`, Riso Black `#231F20`, printed on `#E4E2DB`. Three is the practical ceiling before the paper buckles, and that ceiling is the reason the look holds together rather than a restriction to work around. The overprints are the rest of the palette and the press produces them, not us.\n- **The site is light, and that is physics rather than preference.** Riso ink is translucent and needs a pale sheet to sit under it; the process cannot print on dark stock. Everything went with it: the landing page, the map, the skills, the changelog, the systems map and the Flightdeck.\n- **The third drum is the argument.** Sun Yellow is reserved for the human sign-off gates and nothing else. It is the smallest ink budget on the sheet and the only warm thing on it, so \"a person signs off anything that counts\" becomes the loudest mark on the map — which is what the page has claimed in words all along. At 1.04:1 on the stock it can never be a line or a letter, so a gate is a yellow ground with black type on it, which measures 13:1, the highest contrast anywhere on the site.\n- **The four moves, and the rules that stop them becoming a filter.** Grain is one fixed multiply pass at 19% over the whole page, so the sheet stays still while the ink moves. Overprint is `mix-blend-mode: multiply` with an isolated parent. Halftone is one screen angle per drum, 15°, 75° and 45°, because two drums at the same angle produce moiré. Misregistration is two ghost plates behind the solid, **once per screen, display type only**. Texture never touches anything functional: a command block gets a hard pink shadow and nothing else, because a shifted plate over a URL is a command somebody mistypes.\n- **The star field is gone.** A 1600×900 animated constellation canvas was the most generated-looking thing on the page, and it was the same code that had leaked all thirty-two skill names into the public payload as React keys. The hero now carries a three-drum halftone plate: drawn rather than data, so there is nothing in it that can leak, and `getSky()` is no longer called at all.\n- **Syne, Archivo and DM Mono.** Display, interface, machine. Syne was drawn for a French art centre rather than a startup and reads as an art press; Archivo does nothing interesting on purpose so Syne can; DM Mono is a typewriter rather than a terminal and carries every ink code, screen angle, count and slash command.\n- **The map is a printed diagram now.** Squared keylined plates instead of rounded cards with a glow, an ink spine per node type, Sun Yellow gate discs with black ticks, and a screened ground. A press does not glow, so every glow filter came out.\n- **The link preview screens for real.** Satori resolves no CSS masks, blend modes or repeating backgrounds, so the halftone is laid out there as individual dots on a fixed pitch, falling off from the top right. It is the one part of the press language that renderer can reproduce honestly.\n- **The drift guard now knows two retired palettes**: the dark one from this morning and the Tailwind defaults that caused all of this. `npm --prefix site run check` still fails on either, or on a hand-edited `brand.css`.\n- **What this costs, written down before anyone rediscovers it:** the site can never go dark while it is Riso; fluorescent pink can never carry a word at any size; misregistration is capped at one per screen. All three are in [brand/README.md](brand/README.md) under \"Where Riso stops\"."
+    },
     {
       "date": "2026-09-03",
       "title": "A brand, written down and generated (32 skills)",

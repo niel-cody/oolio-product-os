@@ -6,8 +6,8 @@
 .mapstage svg#map { display: block; width: 100%; height: 100%; touch-action: none; }
 
 #legend {
-  position: absolute; top: 12px; right: 14px; z-index: 5; background: rgba(13, 18, 27, .82);
-  border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; backdrop-filter: blur(4px);
+  position: absolute; top: 12px; right: 14px; z-index: 5; background: rgba(239, 237, 231, 0.92);
+  border: var(--keyline); padding: 9px 12px; backdrop-filter: blur(2px);
 }
 #legend .lt {
   font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: .14em;
@@ -16,9 +16,9 @@
 #legend .row { display: flex; gap: 14px; flex-wrap: wrap; }
 #legend .k {
   display: flex; align-items: center; gap: 5px;
-  font-family: var(--font-mono), monospace; font-size: 9.5px; color: #c3ccda;
+  font-family: var(--font-mono), monospace; font-size: 9.5px; color: var(--ink);
 }
-#legend .dot { width: 9px; height: 9px; border-radius: 3px; }
+#legend .dot { width: 10px; height: 10px; border: 1px solid var(--k); }
 
 /* The path list and its step rows are shared with the systems map, so they live in
    globals.css. Only the container is the map's own. */
@@ -30,7 +30,7 @@
   font-family: var(--font-mono), monospace; font-size: 10px; color: var(--muted-ink);
   letter-spacing: .05em; gap: 16px; flex-wrap: wrap;
 }
-#foot b { color: #adb9cb; font-weight: 600; }
+#foot b { color: #433e3e; font-weight: 600; }
 
 /* svg element classes */
 .colhead {
@@ -41,13 +41,13 @@
    longest label on the map ("Behavioural Alchemist") already sat close to the right edge of a
    176px node. Half a pixel is invisible and the overflow is not. */
 .node-label { font-family: var(--font-sans), sans-serif; font-weight: 600; font-size: 13.5px; letter-spacing: -0.006em; fill: var(--ink); }
-.node-note { font-family: var(--font-mono), monospace; font-size: 9px; fill: #8593a8; }
+.node-note { font-family: var(--font-mono), monospace; font-size: 9px; fill: #5e5857; }
 .badge-txt { font-family: var(--font-mono), monospace; font-size: 8.5px; font-weight: 500; }
 /* A gate is amber and a loop is rose, and until the rebrand both were the same gold: the old
    --human and --loop were 11 degrees apart in OKLCH, so the map told a reader two different
    things in one colour. brand/colour.md. */
 .gate-txt { font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: .1em; fill: var(--gate); }
-.gate-who { font-family: var(--font-mono), monospace; font-size: 9px; fill: #b78a2c; }
+.gate-who { font-family: var(--font-mono), monospace; font-size: 9px; fill: #3D4D00; }
 .loop-txt { font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: .12em; fill: var(--loop); }
 
 .wire {

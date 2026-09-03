@@ -54,7 +54,7 @@ export type Sky = {
   typeColour: Record<string, string>;
 };
 
-export type Stage = { name: string; purpose: string };
+export type Stage = { name: string; purpose: string; gate: boolean };
 
 /** A flow, reduced to the lifecycle stages it crosses. Consecutive repeats collapsed. */
 export type FlowRail = {
@@ -132,10 +132,28 @@ export function getSky(): Sky {
   return { stars, constellations, typeColour };
 }
 
-/** The 13 lifecycle stages, in order, each with the one-paragraph purpose it carries. */
+/**
+ * The 13 lifecycle stages, in order, each with the one-paragraph purpose it carries, and
+ * whether a review gate closes behind it.
+ *
+ * The gate flag is the one piece of the map's meaning the landing page cannot do without:
+ * "a person signs off anything that counts" is the page's central claim in words, and the
+ * third ink drum exists to say it in colour. Derived from map.config.json's gates rather
+ * than listed here, so a gate that moves moves on this page too.
+ *
+ * It reveals nothing gated. The stage names are already public, and which of them a human
+ * signs off is the argument the page is making out loud.
+ */
 export function getStages(): Stage[] {
   const byName = new Map(os.stages.map((s) => [s.name, s.purpose]));
-  return os.map.columns.map((name) => ({ name, purpose: byName.get(name) ?? "" }));
+  // `after` is the column index the gate closes behind, not the column's name: the
+  // generator resolves the name in map.config.json to a position before it lands here.
+  const gated = new Set(os.map.gates.map((g) => g.after));
+  return os.map.columns.map((name, i) => ({
+    name,
+    purpose: byName.get(name) ?? "",
+    gate: gated.has(i),
+  }));
 }
 
 /**

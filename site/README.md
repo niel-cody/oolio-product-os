@@ -31,14 +31,24 @@ npm --prefix site run check:public -- http://127.0.0.1:3000   # needs a running 
 
 ## The brand
 
-Colour, type and the mark are not decided here. They live in [`brand/`](../brand/README.md) and
+Ink, type and the mark are not decided here. They live in [`brand/`](../brand/README.md) and
 arrive as [`app/brand.css`](app/brand.css), which is **generated** from
-`brand/tokens/brand.tokens.json`. `globals.css` holds no colours at all now: it maps the brand's
-vocabulary onto the one shadcn's components expect, so a component gets the brand without being
+`brand/tokens/brand.tokens.json`. `globals.css` holds no colours at all: it maps the ink set
+onto the vocabulary shadcn's components expect, so a component gets the brand without being
 rewritten and the brand can move without touching a component.
 
+The direction is Risograph, so the site is **light**, and that is the process rather than a
+preference: Riso ink is translucent and cannot print on dark stock. There is no dark mode to
+switch to, and the two default shadcn palettes that used to sit in `globals.css` are gone
+because they were two dead palettes sitting exactly where somebody would look for the real one.
+
+`brand.css` also generates the four techniques as classes — `.sheet` (grain), `.ink` +
+`.plate` (overprint), `.halftone-*`, and `.misreg` — so a component reaches for the press
+rather than reimplementing it.
+
 Editing `app/brand.css` by hand is caught by `npm run check`, as is leaving a retired colour
-anywhere in this folder.
+anywhere in this folder. The guard knows both retired palettes: the dark one and the Tailwind
+defaults before it.
 
 ## The two inputs
 

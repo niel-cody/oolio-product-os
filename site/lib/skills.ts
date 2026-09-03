@@ -57,7 +57,7 @@ export const skill = (id: string) => BY_ID.get(id);
 
 const colour = os.map.typeColour as Record<string, string>;
 /** Unplaced skills have no type of their own and get the alarm colour, same as on the map. */
-export const colourOf = (type: string) => colour[type] ?? "#fd6560";
+export const colourOf = (type: string) => colour[type] ?? "#FF4100";
 export const typeLabel = (type: string) =>
   (os.map.typeLabel as Record<string, string>)[type] ?? "Unplaced";
 

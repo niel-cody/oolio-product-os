@@ -50,74 +50,10 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
+/* shadcn ships a default light :root and a .dark block here. Both are gone: the palette is
+   the ink set, mapped further down this file, and there is no dark mode to switch to —
+   Riso cannot print on dark stock. Leaving them in place left two dead palettes sitting
+   exactly where somebody would look for the real one. */
 
 @layer base {
   * {
@@ -139,45 +75,45 @@
   }
 }
 /* ============================================================================
-   The palette, wired to shadcn.
+   The press, wired to shadcn.
 
    Every value here comes from brand.css, which is generated from
    brand/tokens/brand.tokens.json. Nothing in this block is a colour; it is a mapping from
-   the brand's vocabulary to the one shadcn's components expect, so a component gets the
-   brand without being rewritten and the brand can move without touching a component.
+   the ink set to the vocabulary shadcn's components expect, so a component gets the brand
+   without being rewritten and the brand can move without touching a component.
 
-   Dark only, by design. Paper mode exists for documents, not for a theme toggle: see
-   brand/colour.md.
+   Light, and not as a preference. Riso ink is translucent and needs a pale sheet to sit on:
+   the process physically cannot print on dark stock. See brand/colour.md.
    ========================================================================== */
-:root, .dark {
-  --background: var(--bg);
+:root {
+  --background: var(--stock);
   --foreground: var(--ink);
-  --card: var(--panel);
+  --card: var(--stock-2);
   --card-foreground: var(--ink);
-  --popover: var(--panel);
+  --popover: var(--stock-2);
   --popover-foreground: var(--ink);
 
-  /* The primary is gate amber, and that is the rebrand's loudest single decision. It used to
-     be teal, which is what every other developer tool is. Amber means a person decides here,
-     so spending it on the one control that asks the reader to decide something is the only
-     place it can go without diluting the map's own legend. brand/colour.md argues it. */
-  --primary: var(--gate);
-  --primary-foreground: var(--bg);
+  /* The primary is the first drum. Fluorescent pink is out of gamut, unmixable in CMYK and
+     the ink people recognise as Riso on sight, so it is the moment that matters on a page
+     and never a whole surface. It cannot carry a word — 2.38:1 on the stock — so it is a
+     ground with black type on it, which measures 5.28:1. brand/colour.md argues it. */
+  --primary: var(--pink);
+  --primary-foreground: var(--k);
 
-  --secondary: var(--raise);
+  --secondary: var(--stock-3);
   --secondary-foreground: var(--ink);
-  --muted: var(--raise);
+  --muted: var(--stock-3);
   --muted-foreground: var(--muted-ink);
-  --accent: var(--raise);
+  --accent: var(--stock-3);
   --accent-foreground: var(--ink);
   --destructive: var(--alarm);
-  --border: var(--line);
-  --input: var(--line);
-  --ring: var(--edge);
-  --radius: 0.625rem;
+  --border: var(--rule);
+  --input: var(--k);
+  --ring: var(--pink);
 
-  /* Motion lives in brand.css now (--ease-out, --ease-in-out, --dur-*). It is brand rather
-     than app: the landing page, the Flightdeck and the mark all move on the same curves. */
+  /* Print has keylines, not rounded cards. Everything shadcn would round is squared, and
+     the one exception is a pill, which is a real shape rather than a soft corner. */
+  --radius: 0;
 }
 
 /* Press feedback for anything pressable that is not a <Button>: a link acting as a call to
@@ -192,10 +128,21 @@
   .lx-press:active { transform: none; }
 }
 
-.mono { font-family: var(--font-mono), ui-monospace, monospace; }
+.mono { font-family: var(--font-system-stack); }
+
+/* The pass marker: the brand's most repeated piece of furniture, and it does not vary.
+   Named for what a Riso does — one ink per pass — rather than for where it sits. */
 .eyebrow {
   font-family: var(--font-system-stack);
-  font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted-ink);
+  font-size: 0.7rem; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 500; color: var(--muted-ink);
+}
+
+/* A section opens on a black keyline with its pass marker sitting on it. This is the
+   scaffold the whole site is built from, in place of the card-with-a-radius. */
+.sechead {
+  display: flex; gap: 20px; align-items: baseline; flex-wrap: wrap;
+  border-top: var(--keyline); padding-top: 12px; margin-bottom: 34px;
 }
 
 /* ----------------------------------------------------------------------------
@@ -204,14 +151,14 @@
    than living in either map's own stylesheet.
    -------------------------------------------------------------------------- */
 .flowbtn {
-  text-align: left; background: #0e1521; border: 1px solid var(--line); border-radius: 8px;
+  text-align: left; background: #EFEDE7; border: var(--keyline); border-radius: 0;
   padding: 8px 11px; color: var(--ink); cursor: pointer; font-family: inherit; transition: .18s;
   display: flex; align-items: center; gap: 9px; width: 100%;
 }
-.flowbtn:hover { border-color: #37465d; background: #121a27; }
+.flowbtn:hover { border-color: #231F20; background: #c4c1bb; }
 .flowbtn.on {
-  border-color: var(--accent-line, #b296fd); background: #151f2c;
-  box-shadow: 0 0 0 1px var(--accent-line, #b296fd) inset;
+  border-color: var(--accent-line, #3D185E); background: #D6D3CA;
+  box-shadow: 0 0 0 1px var(--accent-line, #3D185E) inset;
 }
 .flowbtn .idx { font-family: var(--font-mono), monospace; font-size: 10px; color: var(--muted-ink); width: 14px; }
 .flowbtn .nm { font-size: 12.5px; font-weight: 500; }
@@ -221,11 +168,11 @@
   font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: .14em;
   color: var(--muted-ink); text-transform: uppercase; margin-bottom: 10px;
 }
-.step { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px dashed #182130; }
+.step { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px dashed #bdb9b3; }
 .step:last-child { border-bottom: none; }
 .step .n {
-  font-family: var(--font-mono), monospace; font-size: 10px; color: #070d17;
-  background: var(--sc, #b296fd); min-width: 19px; height: 19px; border-radius: 5px;
+  font-family: var(--font-mono), monospace; font-size: 10px; color: #E4E2DB;
+  background: var(--sc, #3D185E); min-width: 19px; height: 19px; border-radius: 0;
   display: flex; align-items: center; justify-content: center; font-weight: 600; margin-top: 1px;
 }
 .step .b { font-size: 12.5px; font-weight: 600; line-height: 1.25; }
@@ -238,13 +185,13 @@
 .changelog-body li { position: relative; margin-bottom: 0.6em; padding-left: 0.35em; }
 .changelog-body li::before {
   content: ""; position: absolute; left: -0.75em; top: 0.62em;
-  width: 4px; height: 4px; border-radius: 1px; background: var(--orch); opacity: .75;
+  width: 4px; height: 4px; border-radius: 0; background: var(--orch); opacity: .75;
 }
 .changelog-body strong { color: var(--ink); font-weight: 600; }
 .changelog-body code {
   font-family: var(--font-mono), monospace; font-size: 0.86em;
-  background: var(--secondary); border: 1px solid var(--line);
-  border-radius: 4px; padding: 0.1em 0.34em; color: #c3ccda;
+  background: var(--secondary); border: var(--keyline);
+  border-radius: 0; padding: 0.1em 0.34em; color: #373232;
 }
 .changelog-body a { color: var(--orch); text-decoration: none; }
 .changelog-body a:hover { text-decoration: underline; }

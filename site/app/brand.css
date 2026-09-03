@@ -1,129 +1,183 @@
 /* ============================================================================
-   THE OOLIO PRODUCT OS BRAND
+   PIXIE DUST INDUSTRIES — the press
 
    GENERATED FILE. Do not edit.
    Source: brand/tokens/brand.tokens.json. Rebuild: node brand/tokens/build.mjs
-   Why it is generated: brand/README.md
+   Why it is generated, and what each ink means: brand/README.md
 
-   Ink mode is the screen. Paper mode is a document, and is exported as a separate
-   token set rather than a media query, because a light Confluence page and a dark
-   product surface are two audiences, not one preference.
+   Risograph: three ink drums plus a black drum, printed on uncoated stock. The whole
+   argument is physical constraint — a fixed number of drums, translucent ink, paper
+   showing through, registration that never quite lands. Constraints are the thing a
+   generator cannot fake, which is the point.
+
+   The site is LIGHT, and that is not a preference. Riso ink is translucent and needs a
+   pale sheet to sit on; the process physically cannot print on dark stock.
    ========================================================================== */
 
 :root {
-  /* The screen ground. One hue, h=258, held from the deepest sky to the brightest type, so nothing on a surface is a different kind of grey from anything else. Token names are the site's existing vocabulary: --bg is what you write on, --ink is what you write with. */
-  --void: #03070f; /* the sky behind the landing page, and nothing else */
-  --bg: #070d17; /* page background */
-  --panel: #0e1521; /* cards, the header, any surface that sits on the page */
-  --raise: #151f2c; /* a surface on a surface: a selected row, a hover, an input */
-  --line: #1f2a3a; /* borders and dividers */
-  --edge: #37465d; /* a border that has to be seen: a focus ring, a secondary button */
-  --muted-ink: #808fa4; /* secondary text, captions, the mono furniture. 5.9:1 on ink */
-  --soft-ink: #b0bcce; /* body text set at length. 10.1:1 on ink */
-  --ink: #ecf0f7; /* headings and anything that must be read first. 17.0:1 on ink */
+  color-scheme: light;
 
-  /* The six lifecycle hues, plus alarm. Evenly spaced around the wheel so no two
-     can be confused, and every one clears 6.5:1 on ink. */
-  --gate: #fcbd30; /* a person decides here. The signature colour, and the primary call to action · 11.55:1 on ink */
-  --output: #5ddd89; /* an artefact the OS produced · 11.28:1 on ink */
-  --orch: #44d0de; /* orchestration: a skill driving a tool · 10.49:1 on ink */
-  --signal: #95acc5; /* raw input, before anyone has shaped it · 8.33:1 on ink */
-  --ai: #b296fd; /* the assistant runs this step · 8.04:1 on ink */
-  --loop: #f07eb3; /* learning returning to an earlier stage · 7.73:1 on ink */
-  --alarm: #fd6560; /* destructive, failed, or unplaced · 6.68:1 on ink */
+  /* ---- STOCK ---- Uncoated cool grey. Riso ink is translucent, so it needs a pale sheet to sit on; the process physically cannot print on dark stock. This is why the site is light. */
+  --stock: #E4E2DB; /* the sheet: every page ground */
+  --stock-2: #EFEDE7; /* a second sheet, lifted: cards, plates, panels */
+  --stock-3: #D6D3CA; /* recessed, a gutter or a well */
+  --rule: #C4C0B7; /* a hairline division inside a plate. Never a keyline */
+
+  /* ---- THE DRUMS ---- one ink per pass, in order */
+  --pink: #FF48B0; /* 01 · Fluorescent Pink 806U · 2.38:1 on stock · FILL ONLY, never a word */
+  --blue: #3D5588; /* 02 · Blue · 5.68:1 on stock · may set copy */
+  --yellow: #FFE800; /* 03 · Sun Yellow · 1.04:1 on stock · FILL ONLY, never a word */
+  --k: #231F20; /* K · Black drum · 12.57:1 on stock · may set copy */
+
+  /* ---- OVERPRINTS ---- Translucent ink multiplies where two passes cross. These are not chosen; the press produces them. That is why they are worth more than a fourth drum. */
+  --pink-blue: #3D185E; /* pink × blue · 10.87:1 on stock */
+  --pink-yellow: #FF4100; /* pink × yellow · 2.7:1 on stock */
+  --blue-yellow: #3D4D00; /* blue × yellow · 7.17:1 on stock */
+
+  /* ---- TYPE COLOUR ---- every figure measured on the stock */
+  --ink: #231F20; /* headings and body · 12.57:1 */
+  --soft-ink: #45414A; /* a secondary paragraph, or long copy that should sit back · 7.68:1 */
+  --muted-ink: #65606A; /* captions, eyebrows and the mono furniture. The last step that clears AA · 4.72:1 */
+  --faint-ink: #7A757F; /* decoration only. Never a word a person has to read · 3.46:1 */
+
+  /* ---- THE SIX MEANINGS ---- drawn from the ink set, not from a colour wheel */
+  --gate: #FFE800; /* yellow · a person decides here. The third drum, and the whole argument */
+  --orch: #3D5588; /* blue · orchestration: a skill driving a tool. Blue carries structure */
+  --ai: #3D185E; /* pink-blue · the assistant runs this step */
+  --output: #3D4D00; /* blue-yellow · an artefact the OS produced */
+  --loop: #FF48B0; /* pink · learning returning upstream. The reason this is a system and not a pipeline, so it gets the signature ink */
+  --signal: #65606A; /* ink-mid · raw input, before anyone has shaped it. Uncoloured on purpose: colouring it would be a claim about it */
+  --alarm: #FF4100; /* pink-yellow · destructive, failed, or unplaced */
+
+  /* Kept alive so nothing had to be rewritten to be reprinted. */
+  --human: var(--gate);
+
+  /* The names the site spoke when it was dark, now pointing at stock and ink. A
+     component written against them prints without being touched. */
+  --bg: var(--stock);
+  --panel: var(--stock-2);
+  --raise: var(--stock-3);
+  --line: var(--rule);
+  --edge: var(--k); /* a border that has to be seen is a keyline, and a keyline is black */
+  --void: var(--stock-3);
 
   /* Type. Loaded by next/font in app/layout.tsx, which sets these three variables. */
-  --font-display-stack: var(--font-display), Iowan Old Style, Palatino, Georgia, serif;
-  --font-text-stack: var(--font-text), system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-display-stack: var(--font-display), Archivo, Helvetica Neue, Arial, sans-serif;
+  --font-text-stack: var(--font-text), Helvetica Neue, Arial, sans-serif;
   --font-system-stack: var(--font-system), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Shape */
-  --r-sm: 6px;
-  --r-md: 9px;
-  --r-lg: 12px;
-  --r-xl: 18px;
+  /* Shape. Print has keylines, not rounded cards. */
+  --keyline: 1.5px solid #231F20;
+  --hairline: 1px solid #C4C0B7;
+  --press-shadow: 3px 3px 0 #FF48B0;
+  --r-none: 0;
+  --r-sm: 0;
+  --r-md: 0;
+  --r-lg: 0;
+  --r-xl: 0;
   --r-pill: 999px;
 
   /* Motion */
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* entering and exiting, where the first frame is watched */
+  --ease-out: cubic-bezier(0.2, 0.9, 0.3, 1); /* a plate settling: entering and exiting */
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* movement across the screen */
   --dur-press: 160ms;
   --dur-state: 180ms;
+  --dur-plate: 600ms;
   --dur-reveal: 520ms;
-  --dur-trace: 2400ms;
-  --dur-loop: 1600ms;
 
-  /* Categorical, for the Flightdeck's product domains. A domain colour says which product
-     a piece of work belongs to; it never says what kind of step it is. */
-  --domain-leadership: #fe9296; /* h=18 */
-  --domain-products-app: #fb9a5c; /* h=52 */
-  --domain-customer-engagement: #dbb038; /* h=88 */
-  --domain-kiosk: #79cd7c; /* h=145 */
-  --domain-inventory: #17d2b9; /* h=180 */
-  --domain-insights: #7abbfe; /* h=250 */
-  --domain-payments: #bda4fe; /* h=296 */
-  --domain-core-pos: #f091d2; /* h=340 */
-
-  /* Kept alive so nothing had to be rewritten to be re-coloured. */
-  --human: var(--gate);
+  /* Screen angles. Two drums at the same angle produce moiré, which is why these are
+     fixed rather than picked per component. */
+  --angle-pink: 15deg;
+  --angle-blue: 75deg;
+  --angle-yellow: 45deg;
 }
 
-/* Opt in with class="paper" on any container that is a document rather than a screen:
-   a print stylesheet, an export, a light embed. Same tokens, different values, so a
-   component written against them works in both without knowing which it is in. */
-.paper {
-  --bg: #ffffff; /* the page */
-  --void: #f9fafc; /* a tinted page, where white is too stark */
-  --panel: #f2f5f8; /* callouts and table headers */
-  --raise: #e9edf2; /* a selected or highlighted row */
-  --line: #dce0e6; /* borders and dividers */
-  --edge: #b7beca; /* a border that has to be seen */
-  --muted-ink: #657182; /* captions and secondary text. 5.0:1 on white */
-  --soft-ink: #3c485b; /* body text. 9.3:1 on white */
-  --ink: #131e2f; /* headings. 16.7:1 on white */
-  --gate: #966e12; /* a person decides here · 4.63:1 on white */
-  --output: #158747; /* an artefact the OS produced · 4.58:1 on white */
-  --orch: #15828c; /* orchestration · 4.56:1 on white */
-  --signal: #566b83; /* raw input · 5.49:1 on white */
-  --ai: #855dd7; /* the assistant runs this step · 4.62:1 on white */
-  --loop: #c64287; /* learning returning · 4.64:1 on white */
-  --alarm: #d14241; /* destructive or failed · 4.6:1 on white */
-  --human: var(--gate);
-  color-scheme: light;
+/* ============================================================================
+   THE FOUR MOVES
+
+   Riso on the web is four techniques. Get these right and everything else is ordinary
+   layout; get them wrong and it is a filter over a SaaS site.
+   ========================================================================== */
+
+/* 01 GRAIN. Fixed, so it never scrolls with the content: the sheet stays still while the ink moves. Around 18 to 20 per cent is the line between paper and dirty screen.
+   Applied once, on the page, by <body class="sheet">. Never per component: two grain
+   layers over one another read as dirt rather than paper. */
+.sheet::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.19;
 }
+
+/* 02 OVERPRINT. Ink is translucent, so shapes darken where they cross instead of hiding each other. Without the isolation the blend escapes its container. */
+.ink { mix-blend-mode: multiply; }
+.plate { isolation: isolate; position: relative; }
+
+/* 03 HALFTONE. A Riso cannot do continuous tone; it screens everything into dots. Two drums at the same angle produce moiré, which is why the angles are fixed.
+   --dot sets the ink, --dot-size the screen ruling, --dot-angle the drum. */
+.halftone {
+  background-image: radial-gradient(var(--dot, var(--blue)) 44%, transparent 47%);
+  background-size: var(--dot-size, 8px) var(--dot-size, 8px);
+  transform: rotate(var(--dot-angle, var(--angle-blue)));
+  mix-blend-mode: multiply;
+}
+.halftone-pink { --dot: var(--pink); --dot-angle: 15deg; --dot-size: 7px; }
+.halftone-blue { --dot: var(--blue); --dot-angle: 75deg; --dot-size: 9px; }
+.halftone-yellow { --dot: var(--yellow); --dot-angle: 45deg; --dot-size: 6px; }
+
+/* 04 MISREGISTRATION. The paper shifts between passes so the plates never quite line up. It is a signature, not a texture: overdone it stops reading as a press and starts reading as a filter.
+   Budget: once per screen, display type only. The ghosts are aria-hidden duplicates of the
+   text, sitting behind it; a screen reader hears the word once. */
+.misreg { position: relative; display: inline-block; isolation: isolate; }
+.misreg .ghost,
+.misreg .ghost2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  mix-blend-mode: multiply;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+.misreg .ghost { color: var(--pink); transform: translate(3px, -3px); z-index: -1; }
+.misreg .ghost2 { color: var(--blue); transform: translate(-2px, 2px); z-index: -2; opacity: 0.85; }
+
+/* Texture never touches anything functional. A slash command is there to be copied, so
+   it gets no grain, no halftone and no misregistration — a hard pink shadow is as far as
+   it goes. */
+.press-edge { border: var(--keyline); box-shadow: var(--press-shadow); }
 
 /* The scale. Eight steps and no more: a ninth is always somebody avoiding a decision. */
-.t-display-xl { font-family: var(--font-display-stack); font-size: clamp(44px, 6.4vw, 76px); line-height: 1.06; letter-spacing: -0.022em; font-weight: 400; }
-.t-display-l { font-family: var(--font-display-stack); font-size: clamp(32px, 4vw, 46px); line-height: 1.12; letter-spacing: -0.018em; font-weight: 400; }
-.t-display-m { font-family: var(--font-display-stack); font-size: 28px; line-height: 1.2; letter-spacing: -0.014em; font-weight: 400; }
-.t-lede { font-family: var(--font-text-stack); font-size: 20px; line-height: 1.5; letter-spacing: -0.004em; }
-.t-body { font-family: var(--font-text-stack); font-size: 15px; line-height: 1.62; letter-spacing: 0; }
-.t-ui { font-family: var(--font-text-stack); font-size: 13px; line-height: 1.4; letter-spacing: 0; }
-.t-fine { font-family: var(--font-system-stack); font-size: 11.5px; line-height: 1.45; letter-spacing: 0.01em; }
-.t-eyebrow { font-family: var(--font-system-stack); font-size: 9.5px; line-height: 1.2; letter-spacing: 0.16em; text-transform: uppercase; }
+.t-display-xl { font-family: var(--font-display-stack); font-size: clamp(2.9rem, 7.4vw, 5.6rem); line-height: 0.92; letter-spacing: -0.028em; font-weight: 800; }
+.t-display-l { font-family: var(--font-display-stack); font-size: clamp(1.85rem, 3.6vw, 2.9rem); line-height: 1.02; letter-spacing: -0.02em; font-weight: 800; }
+.t-display-m { font-family: var(--font-display-stack); font-size: 1.16rem; line-height: 1.24; letter-spacing: -0.01em; font-weight: 700; }
+.t-lede { font-family: var(--font-text-stack); font-size: 1.12rem; line-height: 1.55; letter-spacing: 0; }
+.t-body { font-family: var(--font-text-stack); font-size: 1rem; line-height: 1.6; letter-spacing: 0; }
+.t-ui { font-family: var(--font-text-stack); font-size: 0.9rem; line-height: 1.45; letter-spacing: 0; }
+.t-spec { font-family: var(--font-system-stack); font-size: 0.76rem; line-height: 1.5; letter-spacing: 0.01em; }
+.t-pass { font-family: var(--font-system-stack); font-size: 0.7rem; line-height: 1.2; letter-spacing: 0.14em; text-transform: uppercase; }
 
-/* The wordmark. Never bold: Instrument Serif has one weight, and faux-bolding it is the
-   single fastest way to make the brand look counterfeit. */
 /* Display type: the argument, and only the argument. A heading that is really a label
-   belongs in Inter, whatever size it is set at.
-
-   text-rendering: geometricPrecision is load-bearing, not a flourish. Chrome rounds glyph
-   advances to whole pixels while hinting, and against this face's negative tracking the
-   rounding accumulates unevenly: "Oolio Product OS" rendered as "Prod uct OS", with a hole
-   mid-word and the word space squeezed shut. It was there at 17, 18, 20, 22 and 24px, and
-   it is gone at all five with fractional advances. Removing this line brings it back. */
+   belongs in Archivo, whatever size it is set at. */
 .display {
   font-family: var(--font-display-stack);
-  font-weight: 400;
-  font-synthesis-weight: none;
-  text-rendering: geometricPrecision;
+  font-weight: 800;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
 }
 
+/* The wordmark. Syne 800, uppercase, tight. It is set in the black drum; the pink and
+   blue arrive as misregistration ghosts rather than as a colour choice. */
 .wordmark {
   font-family: var(--font-display-stack);
-  font-weight: 400;
-  letter-spacing: -0.012em;
-  font-synthesis-weight: none;
-  text-rendering: geometricPrecision; /* see .display above; the wordmark is where it showed */
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.94;
+  text-transform: uppercase;
+  color: var(--ink);
 }
 

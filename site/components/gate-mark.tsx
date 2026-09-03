@@ -10,6 +10,10 @@
  * bead r=3 sitting on the ring's own path at -45. The round caps eat about 8 degrees at each
  * end, which is why the break is specified wider than it looks.
  *
+ * Re-inked for the press: the ring is the black drum, the bead is Sun Yellow. The bead keeps
+ * its meaning through the change of palette because Sun Yellow is the human-gate drum — the
+ * third and smallest ink, reserved for "a person decides here".
+ *
  * Inline rather than an <img> so the ring can take currentColor and the bead can be dimmed
  * with the rest of a disabled control. The file at brand/assets/mark.svg is the same drawing
  * for everywhere that is not React.
@@ -31,7 +35,7 @@ export function GateMark({ size = 20, className }: { size?: number; className?: 
         strokeWidth={3}
         strokeLinecap="round"
       />
-      <circle cx={23.778} cy={8.222} r={3} fill="var(--gate)" />
+      <circle cx={23.778} cy={8.222} r={3} fill="var(--yellow)" />
     </svg>
   );
 }

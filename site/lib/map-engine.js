@@ -41,7 +41,7 @@ export function renderMap(root, MAP, opts = {}) {
   /* ---- defs ---- */
   const defs = el("defs", {});
   const pat = el("pattern", { id: "dots", width: 26, height: 26, patternUnits: "userSpaceOnUse" });
-  pat.appendChild(el("circle", { cx: 1.2, cy: 1.2, r: 1.2, fill: "#131b28" }));
+  pat.appendChild(el("circle", { cx: 1.2, cy: 1.2, r: 1.2, fill: "#C4C0B7" }));
   defs.appendChild(pat);
   const f = el("filter", { id: "glow", x: "-40%", y: "-40%", width: "180%", height: "180%" });
   f.appendChild(el("feGaussianBlur", { stdDeviation: "2.4", result: "b" }));
@@ -49,7 +49,7 @@ export function renderMap(root, MAP, opts = {}) {
   fm.appendChild(el("feMergeNode", { in: "b" }));
   fm.appendChild(el("feMergeNode", { in: "SourceGraphic" }));
   f.appendChild(fm); defs.appendChild(f);
-  Object.entries(TYPE_COLOR).concat([["loop", "#f07eb3"]]).forEach(([k, c]) => {
+  Object.entries(TYPE_COLOR).concat([["loop", "#FF48B0"]]).forEach(([k, c]) => {
     const m = el("marker", { id: "arw-" + k, markerWidth: 8, markerHeight: 8, refX: 6.5, refY: 3, orient: "auto", markerUnits: "userSpaceOnUse" });
     m.appendChild(el("path", { d: "M0,0 L7,3 L0,6 Z", fill: c }));
     defs.appendChild(m);
@@ -107,8 +107,8 @@ export function renderMap(root, MAP, opts = {}) {
       const mid = midpoint(d);
       const tg = el("g", {});
       const tw = e.lbl.length * 5.4 + 10;
-      tg.appendChild(el("rect", { x: mid.x - tw / 2, y: mid.y - 14, width: tw, height: 13, rx: 3, fill: "#0e1521", stroke: col, "stroke-opacity": 0.5 }));
-      const tt = el("text", { x: mid.x, y: mid.y - 4.5, "text-anchor": "middle", "font-family": "var(--font-mono),monospace", "font-size": 8, fill: "#b8c3d3" });
+      tg.appendChild(el("rect", { x: mid.x - tw / 2, y: mid.y - 14, width: tw, height: 13, fill: "#EFEDE7", stroke: col, "stroke-width": 1 }));
+      const tt = el("text", { x: mid.x, y: mid.y - 4.5, "text-anchor": "middle", "font-family": "var(--font-mono),monospace", "font-size": 8, fill: "#231F20" });
       tt.textContent = e.lbl; tg.appendChild(tt);
       g.appendChild(tg);
     }
@@ -125,10 +125,10 @@ export function renderMap(root, MAP, opts = {}) {
     const d = `M${x1},${y1} C${x1},${depth} ${x2},${depth} ${x2},${y2}`;
     const g = el("g", { class: "loop", "data-f": lp.f, "data-t": lp.t });
     g.appendChild(el("path", { d, class: "loopwire", "marker-end": "url(#arw-loop)" }));
-    g._path = d; g._color = "#f07eb3";
+    g._path = d; g._color = "#FF48B0";
     const midx = (x1 + x2) / 2;
     const lw = lp.label.length * 6.0 + 14;
-    g.appendChild(el("rect", { x: midx - lw / 2, y: depth - 9, width: lw, height: 16, rx: 4, fill: "#0e1521", stroke: "#f07eb3", "stroke-opacity": 0.45 }));
+    g.appendChild(el("rect", { x: midx - lw / 2, y: depth - 9, width: lw, height: 16, fill: "#EFEDE7", stroke: "#FF48B0", "stroke-width": 1.2 }));
     const tt = el("text", { x: midx, y: depth + 2.5, "text-anchor": "middle", class: "loop-txt" });
     tt.textContent = lp.label; g.appendChild(tt);
     gLoops.appendChild(g);
@@ -139,9 +139,9 @@ export function renderMap(root, MAP, opts = {}) {
   GATES.forEach((gt) => {
     const x = LEFT + (gt.after + 0.5) * COLGAP;
     const g = el("g", {});
-    g.appendChild(el("line", { x1: x, y1: 190, x2: x, y2: ROWS_BOTTOM + 20, stroke: "#fcbd30", "stroke-width": 1.4, "stroke-dasharray": "3 6", "stroke-opacity": 0.55 }));
-    g.appendChild(el("circle", { cx: x, cy: 204, r: 9, fill: "#0e1521", stroke: "#fcbd30", "stroke-width": 1.4 }));
-    g.appendChild(el("path", { d: `M${x - 4},${204} l3,3 l5,-6`, fill: "none", stroke: "#fcbd30", "stroke-width": 1.6, "stroke-linecap": "round", "stroke-linejoin": "round" }));
+    g.appendChild(el("line", { x1: x, y1: 190, x2: x, y2: ROWS_BOTTOM + 20, stroke: "#231F20", "stroke-width": 1.2, "stroke-dasharray": "3 6", "stroke-opacity": 0.5 }));
+    g.appendChild(el("circle", { cx: x, cy: 204, r: 10, fill: "#FFE800", stroke: "#231F20", "stroke-width": 1.5 }));
+    g.appendChild(el("path", { d: `M${x - 4},${204} l3,3 l5,-6`, fill: "none", stroke: "#231F20", "stroke-width": 1.8, "stroke-linecap": "round", "stroke-linejoin": "round" }));
     const t1 = el("text", { x, y: 232, "text-anchor": "middle", class: "gate-txt" }); t1.textContent = "⟡ " + gt.label;
     const t2 = el("text", { x, y: 246, "text-anchor": "middle", class: "gate-who" }); t2.textContent = gt.who;
     g.appendChild(t1); g.appendChild(t2);
@@ -155,13 +155,13 @@ export function renderMap(root, MAP, opts = {}) {
     const g = el("g", { class: "node", "data-id": n.id });
     if (n.desc) { const tip = el("title", {}); tip.textContent = n.desc; g.appendChild(tip); }
     const box = el("g", { class: "nbox" });
-    box.appendChild(el("rect", { x, y, width: NODE_W, height: NODE_H, rx: 11, fill: "#0d1420", stroke: c, "stroke-opacity": 0.55, "stroke-width": 1.4 }));
-    box.appendChild(el("rect", { x, y, width: 4, height: NODE_H, rx: 2, fill: c }));
+    box.appendChild(el("rect", { x, y, width: NODE_W, height: NODE_H, fill: "#EFEDE7", stroke: "#231F20", "stroke-width": 1.5 }));
+    box.appendChild(el("rect", { x, y, width: 5, height: NODE_H, fill: c }));
     const lab = el("text", { x: x + 15, y: y + 22, class: "node-label" }); lab.textContent = n.label; box.appendChild(lab);
     const nt = el("text", { x: x + 15, y: y + 37, class: "node-note" }); nt.textContent = n.note; box.appendChild(nt);
     const bw = n.badge.length * 5.1 + 14;
     const bg = el("g", {});
-    bg.appendChild(el("rect", { x: x + 15, y: y + 43, width: bw, height: 13, rx: 6.5, fill: c, "fill-opacity": 0.15, stroke: c, "stroke-opacity": 0.6 }));
+    bg.appendChild(el("rect", { x: x + 15, y: y + 43, width: bw, height: 13, fill: "#E4E2DB", stroke: c, "stroke-width": 1 }));
     const bt = el("text", { x: x + 15 + bw / 2, y: y + 52.5, "text-anchor": "middle", class: "badge-txt", fill: c });
     bt.textContent = n.badge; bg.appendChild(bt);
     box.appendChild(bg);
@@ -196,7 +196,7 @@ export function renderMap(root, MAP, opts = {}) {
     foot.innerHTML =
       `<span><b>${opts.skills ?? NODES.length}</b> skills</span><span><b>${EDGES.length}</b> connections</span>` +
       `<span><b>${GATES.length}</b> gates</span><span><b>${LOOPS.length}</b> loops</span>` +
-      (opts.unplaced ? `<span style="color:#fd6560"><b>${opts.unplaced}</b> unplaced</span>` : "") +
+      (opts.unplaced ? `<span style="color:#FF4100"><b>${opts.unplaced}</b> unplaced</span>` : "") +
       (opts.stamp ? `<span>GENERATED ${opts.stamp}</span>` : "");
   }
 
@@ -230,7 +230,7 @@ export function renderMap(root, MAP, opts = {}) {
   }
   function addParticle(d, color) {
     const parts = svg.querySelector("#parts");
-    const c = el("circle", { r: 3.2, fill: color, class: "particle", filter: "url(#glow)" });
+    const c = el("circle", { r: 3.2, fill: color, class: "particle" });
     const am = el("animateMotion", { dur: (1.6 + Math.random() * 0.8) + "s", repeatCount: "indefinite", path: d, rotate: "0" });
     c.appendChild(am); parts.appendChild(c);
     const c2 = el("circle", { r: 1.8, fill: color, class: "particle", "fill-opacity": 0.6 });

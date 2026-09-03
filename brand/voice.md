@@ -38,6 +38,8 @@ Existing copy, all of it already load-bearing. Reuse rather than rewrite.
 
 > The car does not win the race. But nobody wins it in the wrong car.
 
+> Fluorescent pink is a colour a screen cannot honestly show and CMYK cannot mix.
+
 > Discipline is the first thing to go when the quarter gets loud.
 
 ## Naming
@@ -47,6 +49,10 @@ Existing copy, all of it already load-bearing. Reuse rather than rewrite.
 - **The map's stages** are nouns: Signal, Grooming, Definition.
 - **The Brain** is the Brain. It is the one internal proper noun this team has earned, and it is
   clearer than "knowledge base".
+- **The press vocabulary is real, not decorative.** A drum is an ink, a pass is one run
+  through the machine, a plate is a printed surface, a press check is a proof read before the
+  run. Use them where they are true and nowhere else; a heading called "Impression" over a
+  list of skills is a joke that stops being funny on the second read.
 - **Flightdeck** is one word, capital F.
 - Do not invent a second proper noun without a reason. Every one is something a new starter has
   to be taught.

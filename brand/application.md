@@ -10,11 +10,11 @@ cannot drift from this folder.
 
 | Element | What it is |
 |---|---|
-| Header | Standard lockup, 20px mark, 18px wordmark, on `--panel` with a `--rule` underline |
-| Landing hero | `t-display-xl` in Instrument Serif on `--void`, one `--gate` call to action |
-| Body copy | `t-body`, `--soft`, never wider than about 70 characters |
-| Furniture | `t-eyebrow` and `t-fine` in JetBrains Mono, `--mute` |
-| The map | The six hues, one per node type, plus a badge so colour is never the only carrier |
+| Header | Standard lockup on the stock, under a black keyline |
+| Landing hero | Syne 800, misregistered once, beside a three-drum halftone plate. One pink call to action |
+| Body copy | `t-body` in Archivo, never wider than about 56 characters |
+| Furniture | The pass marker in DM Mono, sitting on the keyline that opens each section |
+| The map | Squared keylined plates, an ink spine per node type, Sun Yellow gates with black ticks |
 | Favicon | [`assets/favicon.svg`](assets/favicon.svg) |
 
 ## Link previews
@@ -28,24 +28,26 @@ already show a signed-out visitor.
 
 ## Confluence
 
-The Product Operating System page is the human-readable front door. Confluence is light, so this
-is paper mode:
+The Product Operating System page is the human-readable front door. Confluence is already light, which for once
+costs nothing:
 
-- Headings in the page's own font. Confluence will not load Instrument Serif and fighting it
-  produces a worse page than accepting it.
-- Panel colours from paper mode: `#f2f5f8` for a callout, `#966e12` for anything gate-related.
+- Headings in the page's own font. Confluence will not load Syne and fighting it produces a
+  worse page than accepting it.
+- Panel colours from the stock: `#EFEDE7` for a callout, `#FFE800` behind black type for
+  anything gate-related.
 - The lockup goes at the top as `lockup-paper.svg`, exported with outlined text.
 - British English, sentence case, and no file paths or field ids. That page is written for a
   reader, not a maintainer.
 
 ## Decks
 
-- Title slide: the large lockup on `--void`, one line of Instrument Serif, nothing else.
-- Content slides: Inter throughout. Instrument Serif only for a section break or a pull quote.
-- One accent per slide. If two things are shouting, one of them is wrong.
+- Title slide: the large lockup on the stock, one line of Syne, nothing else. One
+  misregistration, here and nowhere else in the deck.
+- Content slides: Archivo throughout. Syne only for a section break or a pull quote.
+- One ink per slide beyond the black. If two things are shouting, one of them is wrong.
 - The map is the argument. Screenshot it rather than redrawing it, so the deck cannot show a
   lifecycle the OS is not running.
-- Slide numbers and dates in JetBrains Mono at `t-fine`.
+- Slide numbers and dates in DM Mono at `t-spec`.
 
 ## Terminal and plugin surfaces
 
@@ -58,9 +60,9 @@ Skill output is read in a terminal whose colours belong to the reader, not to us
 
 ## Alongside Oolio's own brand
 
-This is the Product team's operating system, not the company. Where both appear, Oolio's brand
-leads and this one sits beside it as a product signature: Oolio's logo first, a `--rule`
-divider, then the standard lockup at the same optical weight.
+Pixie Dust Industries is the house that makes the Product OS; it does not speak for Oolio.
+Where both appear, Oolio's brand leads and this one sits beside it: Oolio's logo first, a
+keyline divider, then the standard lockup at the same optical weight.
 
 Never combine the two marks into one. Never put the Gate on something that speaks for Oolio
 rather than for Product.
@@ -68,7 +70,9 @@ rather than for Product.
 ## Before you ship a surface
 
 - Does every number on it come from the thing it describes, or was one typed?
-- Is the only warm thing on the page the thing that matters on it?
+- Is Sun Yellow on this page? If so, is it a gate?
+- Is there exactly one misregistration on each screen?
+- Does any texture touch something a person has to copy or click?
 - Does it read at the smallest size it will actually be seen at?
 - Would deleting the adjectives improve it?
 - Is anything claimed that has not been measured?

@@ -47,7 +47,7 @@ export default async function AdminPage() {
         <h2 className="text-[15px] font-semibold tracking-tight">What each role can do</h2>
         <ul className="mt-3 grid gap-px overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--line)] sm:grid-cols-3">
           {ROLES.map((role) => (
-            <li key={role} className="bg-[#09101a] p-4">
+            <li key={role} className="bg-[#cfccc6] p-4">
               <div className="text-[13.5px] font-semibold text-[var(--ink)]">
                 {ROLE_LABEL[role]}
               </div>

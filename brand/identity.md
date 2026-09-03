@@ -4,7 +4,7 @@
 
 ## The Gate
 
-A ring with a break in it, and a bead of gate amber standing in the break.
+A ring with a break in it, and a bead of Sun Yellow standing in the break.
 
 The ring is the loop: signal, shaped idea, decision, ship, learn, back to signal. It is the
 reason the OS is a system rather than a pipeline. The break is where the loop does not close on
@@ -14,6 +14,11 @@ That is the entire idea, and it is the same sentence as the thesis in
 [positioning.md](positioning.md): **the loop closes on a person.** The mark says it before a
 word is read, at sixteen pixels, in one stroke and one dot.
 
+The mark survived the move to the press unchanged in geometry and changed in ink: the ring is
+the black drum and the bead is Sun Yellow. The meaning survives with it, because Sun Yellow is
+the human-gate drum. Had the bead landed on any other ink the mark would have kept its shape
+and lost its argument.
+
 It is also, unavoidably and usefully, an **O**.
 
 ## Construction
@@ -22,6 +27,8 @@ Drawn on a 32 unit grid. Every value here is exact; nothing is eyeballed.
 
 | | |
 |---|---|
+| Ring ink | Black drum `#231F20` |
+| Bead ink | Sun Yellow `#FFE800` |
 | Centre | 16, 16 |
 | Ring radius | 11 |
 | Ring stroke | 3, round cap |
@@ -47,7 +54,7 @@ becomes a dot in a circle, which means nothing.
 
 | File | For |
 |---|---|
-| [`assets/mark.svg`](assets/mark.svg) | The mark on any dark surface. Paper ring, amber bead |
+| [`assets/mark.svg`](assets/mark.svg) | The mark on the stock. Black ring, Sun Yellow bead |
 | [`assets/mark-mono.svg`](assets/mark-mono.svg) | One colour, inherited from `currentColor`. Single-ink print, embossing, a mask |
 | [`assets/favicon.svg`](assets/favicon.svg) | The tile: ink ground, rounded square, mark drawn at r=9.5 so the break keeps its clear space |
 | [`assets/lockup.svg`](assets/lockup.svg) | Horizontal lockup, ink |
@@ -56,24 +63,30 @@ becomes a dot in a circle, which means nothing.
 
 ## The lockup
 
-Mark, then a gap of one bead diameter, then **Oolio Product OS** in Instrument Serif at
-`-0.012em` tracking. The wordmark's cap height sits on the mark's centre line.
+Mark, then a gap of one bead diameter, then **PIXIE DUST INDUSTRIES** in Syne 800, uppercase,
+at `-0.03em` tracking. The wordmark's cap height sits on the mark's centre line.
+
+The house is Pixie Dust Industries and the product is the Product OS. The lockup carries the
+house; the page says which product it is about. On the site that is the tag beside the
+headline, and in the link preview it is the line under it.
 
 Three sizes, and only three:
 
 | | Mark | Wordmark | Where |
 |---|---|---|---|
-| Large | 34px | 30px | A title slide, the top of a one-pager |
-| Standard | 20px | 18px | The site header, a document header |
-| Small | 15px | 14px | A footer, a signature, a slide corner |
+| Large | 30px | 26px | A title slide, the top of a one-pager |
+| Standard | 19px | 14px | The site header, a document header |
+| Small | 15px | 11px | A footer, a signature, a slide corner |
+
+Syne is a wide face and the house name is three words, so the wordmark runs smaller against
+the mark than a serif would. Measure the lockup, do not scale it from the large size.
 
 The mark stands alone wherever the name is already on the surface: a favicon, an avatar, a
 slide corner on slide four, a loading state.
 
-**Never set the wordmark bold.** Instrument Serif has one weight. A browser asked for 700 will
-synthesise it by smearing the outline, and a smeared wordmark is the fastest way to look
-counterfeit. The `.wordmark` class in the generated stylesheet sets
-`font-synthesis-weight: none` so the mistake fails visibly rather than quietly.
+**The wordmark is not misregistered.** The budget is one misregistration per screen and the
+headline spends it, so the lockup in the header is always the clean plate. A misregistered
+wordmark beside a misregistered headline is two signatures on one sheet.
 
 ## Outlining before it leaves Oolio
 
@@ -91,13 +104,15 @@ Every one of these has been considered and rejected, so they do not need relitig
 
 - **Do not close the ring.** A closed ring is a loop that runs without anybody in it, which is
   the opposite of what this team believes.
-- **Do not recolour the bead.** It is gate amber because it is a person. Making it match a
-  deck's accent colour deletes the meaning and leaves a dot.
+- **Do not recolour the bead.** It is Sun Yellow because Sun Yellow is the drum that means a
+  person. Making it match a deck's accent colour deletes the meaning and leaves a dot.
 - **Do not put the bead inside the ring.** It sits on the ring's path, in the break.
 - **Do not add a gradient, a glow, a bevel, or an outer ring.**
 - **Do not rotate it.** The break is at one o'clock. It is not a dial.
 - **Do not stretch it.** Scale both axes together, always.
 - **Do not stack the lockup vertically.** The horizontal lockup is the only lockup.
-- **Do not set the mark on a mid-tone.** Ink, paper, or a photograph dark enough to read as ink.
+- **Do not set the mark on a mid-tone, and never on a dark one.** It is drawn in the black
+  drum: on anything but the stock it disappears. There is no dark version, because there is
+  no dark stock.
 - **Do not animate it as decoration.** The bead runs the ring when work is running, and at no
   other time. See [motion.md](motion.md).

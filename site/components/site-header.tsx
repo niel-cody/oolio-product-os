@@ -64,15 +64,14 @@ export function SiteHeader({
   };
 
   return (
-    <header className="sticky top-0 z-30 border-b border-[var(--line)] bg-[var(--bg)]/85 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b-[1.5px] border-[var(--k)] bg-[var(--stock)]/92 backdrop-blur">
       <div className="mx-auto flex h-14 w-full max-w-7xl items-center gap-3 px-4 sm:px-6">
-        {/* The standard lockup: 20px mark, 18px wordmark, one bead diameter between them.
-            Never bold. Instrument Serif has one weight, and asking for a second gets a
-            synthesised smear, which is the fastest way for a wordmark to look counterfeit.
-            `.wordmark` blocks the synthesis so the mistake shows rather than shipping. */}
-        <Link href="/" className="flex items-center gap-[6px] shrink-0 lx-press" aria-label="Oolio Product OS">
-          <GateMark size={20} className="text-[var(--ink)]" />
-          <span className="wordmark text-[18px] leading-none text-[var(--ink)]">Oolio Product OS</span>
+        {/* The house lockup: the Gate, then Pixie Dust Industries in Syne 800 uppercase.
+            Not misregistered — the budget is one misregistration per screen and the hero
+            spends it, so the header carries the clean plate. */}
+        <Link href="/" className="flex items-center gap-[7px] shrink-0 lx-press" aria-label="Pixie Dust Industries">
+          <GateMark size={19} className="text-[var(--k)]" />
+          <span className="wordmark text-[14px] leading-none">Pixie Dust Industries</span>
         </Link>
 
         {signedIn && (
@@ -151,7 +150,7 @@ export function SiteHeader({
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[16rem] bg-[var(--panel)] border-[var(--line)]">
-                <SheetTitle className="wordmark px-4 pt-4 text-[17px]">Oolio Product OS</SheetTitle>
+                <SheetTitle className="wordmark px-4 pt-4 text-[15px]">Pixie Dust Industries</SheetTitle>
                 <nav className="mt-4 flex flex-col gap-1 px-2">
                   {nav.map((n) => (
                     <Link

@@ -6,8 +6,9 @@ brand adds is one signature animation and the rule that it is the only one with 
 ## The rules
 
 - **Transform and opacity only.** Nothing animates a layout property.
-- **Two curves, both strong.** `--ease-out` `cubic-bezier(0.23, 1, 0.32, 1)` for entering and
-  exiting, where the first frame is the one being watched. `--ease-in-out`
+- **Two curves, both strong.** `--ease-out` `cubic-bezier(0.2, 0.9, 0.3, 1)` for entering and
+  exiting, where the first frame is the one being watched. It is the curve of a plate
+  settling rather than a panel sliding. `--ease-in-out`
   `cubic-bezier(0.77, 0, 0.175, 1)` for movement across the screen. The built-in easings are
   too weak to read as deliberate: `ease-out` at 200ms still looks like nothing decided it.
 - **There is no `ease-in`.** It delays the moment being watched most, which is what makes an
@@ -25,11 +26,17 @@ brand adds is one signature animation and the rule that it is the only one with 
 | `--dur-press` | 160ms | The press confirmation on anything pressable |
 | `--dur-state` | 180ms | A colour or border changing state |
 | `--dur-reveal` | 520ms | Something entering on scroll |
-| `--dur-trace` | 2400ms | The slow trace behind the headline |
-| `--dur-loop` | 1600ms | One turn of the bead around the ring |
+| `--dur-plate` | 600ms | An ink layer shifting under the drum |
 
 Stagger is 60ms a step and no more than a handful of steps. A long cascade stops reading as
 craft and starts reading as a wait.
+
+## A press does not glow
+
+Every glow, twinkle and pulse is gone. They were the dark site's atmosphere and there is no
+honest equivalent on paper: ink does not emit light. What replaces them is the ink layers of
+the hero plate shifting a few pixels on hover, behind a real pointer only, the way a sheet
+moves under a drum. It is small on purpose.
 
 ## The signature: the bead runs the ring
 

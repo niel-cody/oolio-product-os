@@ -16,11 +16,12 @@ All edits to the `oolio-pm` plugin — skills, personas, lenses, templates — a
 
 ## The brand is in `brand/`, and it is generated
 
-Anything about how this looks or sounds is settled in [brand/](brand/README.md), not in the site. The mark, the palette, the three typefaces, the voice, and the tokens that produce `site/app/brand.css`.
+Anything about how this looks or sounds is settled in [brand/](brand/README.md), not in the site. The house is **Pixie Dust Industries**; the product it ships is the **Product OS**. The direction is Risograph: three ink drums plus a black drum, printed on uncoated stock.
 
 - **Never edit `site/app/brand.css`.** Edit `brand/tokens/brand.tokens.json` and run `node brand/tokens/build.mjs`.
 - `npm --prefix site run check` fails if the stylesheet has drifted from the tokens, **or if a retired colour is still in the site**. A stray old hex does not look broken, which is why it is a test rather than a habit.
-- The palette has one rule worth knowing before you touch it: **gate amber means a person decides here.** It is for the review gates, the skills a person runs, and the primary call to action. Spending it on decoration spends the one thing the identity says.
+- Four rules are load-bearing, and all four are the kind somebody breaks without noticing. **The site is light and cannot go dark**: Riso ink is translucent and the process cannot print on dark stock. **Sun Yellow means a person decides here**, so it is for the review gates and nothing else. **Fluorescent pink never carries a word** at any size: 2.38:1 on the stock, so it is a fill or a ground with black type on it. **Misregistration is once per screen**, display type only, and never on anything functional.
+- The names in the addresses do not move. The plugin stays `oolio-pm` and the repo stays `niel-cody/oolio-product-os`: those are package ids and URLs, not the brand.
 
 ## Archive, never delete
 

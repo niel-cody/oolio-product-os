@@ -1,110 +1,114 @@
 # Colour
 
-Values are in [`tokens/brand.tokens.json`](tokens/brand.tokens.json). This page is why they are
-what they are. Do not copy a hex out of here; read the token.
+Values are in [`tokens/brand.tokens.json`](tokens/brand.tokens.json). This page is why they
+are what they are. Do not copy a hex out of here; read the token.
 
-## What was wrong with the old palette
+## The stock
 
-Worth recording, because it is the reason the rebrand had a functional job and not just a
-cosmetic one. Measured in OKLCH, the palette the site shipped until now was:
+Riso ink is translucent. It has no opacity of its own, so it needs a pale sheet to sit under
+it, and the process physically cannot print on dark stock. **The site is light because of the
+process, not because somebody preferred light.** That is the single most consequential line in
+this folder.
 
-| Token | Hex | Hue | Problem |
+| Token | Hex | What it is |
+|---|---|---|
+| `--stock` | `#E4E2DB` | The sheet. Every page ground |
+| `--stock-2` | `#EFEDE7` | A second sheet, lifted: plates, panels, cells |
+| `--stock-3` | `#D6D3CA` | Recessed. A gutter, a well, a selected row |
+| `--rule` | `#C4C0B7` | A hairline division inside a plate. Never a keyline |
+
+A keyline is `1.5px solid #231F20` and it is the black drum, not a grey border. The difference
+between a keyline and a rule is the difference between a printed sheet and a web page.
+
+## The drums
+
+One ink per pass, and the drum is reloaded between them. Three is the practical ceiling before
+the paper starts to buckle, so three is the palette — not a restriction to work around, the
+reason the look holds together.
+
+| Pass | Ink | Hex | On stock | May set copy? |
+|---|---|---|---|---|
+| 01 | **Fluorescent Pink** 806U | `#FF48B0` | 2.38:1 | **No** |
+| 02 | **Blue** | `#3D5588` | 5.68:1 | Yes |
+| 03 | **Sun Yellow** | `#FFE800` | 1.04:1 | **No** |
+| K | **Black drum** | `#231F20` | 12.57:1 | Yes |
+
+**Pink is the dust.** Out of gamut, unmixable in CMYK, and the ink people recognise as Riso on
+sight. It is the moment that matters on a page and never a whole surface: a fill, a rule, a
+ghost layer, or a button ground with black type on it, which measures 5.28:1.
+
+**Blue is the industry.** A dusty federal navy that carries structure, rules and diagrams. It
+is the only drum besides black that may set a word.
+
+**Yellow is the spark**, and it is the whole argument. Third drum, smallest budget, reserved
+for the human sign-off gates. As the only warm thing on the sheet it makes "a person decides
+here" the loudest mark on the map, which is what the page claims in words already. At 1.04:1
+it can never be a line or a letter: a gate is a yellow ground with black type on it, and that
+measures **13:1** — the highest contrast anywhere on the site.
+
+**Black is never `#000`.** A Riso black drum lays down a soft warm neutral that sits on the
+paper rather than punching a hole in it. All body copy runs here.
+
+## The overprints are the palette
+
+Translucent ink multiplies where two passes cross. You do not choose these; the press produces
+them. That is why they are worth more than a fourth drum.
+
+| | Hex | On stock | Text |
 |---|---|---|---|
-| human | `#f59e0b` | 70° | |
-| loop | `#f5b942` | 81° | **11° from human.** Two different meanings, one colour |
-| output | `#34d399` | 163° | |
-| orch | `#2dd4bf` | 182° | **19° from output.** Same again |
-
-Six meanings, four distinguishable colours. On the map, an amber gate and an amber loop label
-were telling a reader two different things in the same voice. Every value was also a Tailwind
-default, which is the tell that a palette was picked rather than designed.
-
-## The ground: Ink
-
-One hue, **258°**, held from the deepest sky to the brightest type. Nine steps, each one a
-deliberate lightness in OKLCH so the gaps are perceptually even rather than evenly spaced in
-hex, which is not the same thing.
-
-| Token | Hex | On ink | What it is for |
-|---|---|---|---|
-| `--void` | `#03070f` | | The sky behind the landing page. Nowhere else |
-| `--ink` | `#070d17` | | The page |
-| `--panel` | `#0e1521` | 1.1:1 | A surface on the page: a card, the header |
-| `--raise` | `#151f2c` | 1.2:1 | A surface on a surface: a hover, an input, a selected row |
-| `--rule` | `#1f2a3a` | 1.3:1 | Borders and dividers |
-| `--edge` | `#37465d` | 2.0:1 | A border that has to be seen: a focus ring, a secondary button |
-| `--mute` | `#808fa4` | **5.9:1** | Captions, the mono furniture, secondary text |
-| `--soft` | `#b0bcce` | **10.1:1** | Body text set at length |
-| `--paper` | `#ecf0f7` | **17.0:1** | Headings, and anything that must be read first |
-
-Body text is `--soft`, not `--paper`. Pure white text on near-black at paragraph length is
-uncomfortable to read, and holding `--paper` back for the things that matter is what lets the
-hierarchy work without a second typeface.
+| Pink × Blue | `#3D185E` | 10.87:1 | Yes |
+| Pink × Yellow | `#FF4100` | 2.70:1 | No |
+| Blue × Yellow | `#3D4D00` | 7.17:1 | Yes |
 
 ## The six meanings
 
-Six hues, spread around the wheel so that no two can be mistaken for each other, and matched in
-perceived lightness so none of them shouts louder than its meaning deserves.
+Seven inks exist once the overprints are counted, and the lifecycle map has seven things to
+say, so nothing had to be invented.
 
-| Token | Hex | Hue | Means |
+| Token | Ink | Hex | Means |
 |---|---|---|---|
-| `--gate` | `#fcbd30` | 82° | **A person decides here** |
-| `--output` | `#5ddd89` | 152° | An artefact the OS produced |
-| `--orch` | `#44d0de` | 205° | Orchestration: a skill driving a tool |
-| `--signal` | `#95acc5` | 252° | Raw input, before anyone has shaped it |
-| `--ai` | `#b296fd` | 295° | The assistant runs this step |
-| `--loop` | `#f07eb3` | 352° | Learning returning to an earlier stage |
+| `--gate` | Sun Yellow | `#FFE800` | **A person decides here** |
+| `--orch` | Blue | `#3D5588` | Orchestration: a skill driving a tool |
+| `--ai` | Pink × Blue | `#3D185E` | The assistant runs this step |
+| `--output` | Blue × Yellow | `#3D4D00` | An artefact the OS produced |
+| `--loop` | Pink | `#FF48B0` | Learning returning upstream |
+| `--signal` | Ink mid | `#65606A` | Raw input, before anyone has shaped it |
+| `--alarm` | Pink × Yellow | `#FF4100` | Destructive, failed, or unplaced |
 
-Smallest gap between any two: **43°**, ai to signal. Largest: 90°, from loop round to gate, and
-that gap is deliberate. It holds `--alarm` (`#fd6560`, 25°) far enough from both that a failure
-is never read as a gate and a gate is never read as a failure.
+`--loop` gets the signature ink because the returns are the reason this is a system and not a
+pipeline, which is the map's most-earned claim. `--signal` is nearly colourless on purpose:
+raw signal has not been interpreted yet, and colouring it would be a claim about it.
 
-`--signal` is the one with almost no chroma, on purpose. Raw signal has not been interpreted
-yet, and colouring it strongly would be a claim about it.
+## What may carry a word
 
-`--loop` moved from gold to rose. It is the largest visible change in the rebrand and the one
-with the clearest reason: it is the only way to stop the learning loop and the human gate
-looking like the same thing.
+This is the rule that gets broken first, so it is stated on its own.
 
-## Gate amber, and the rule about it
+**Every word on the site is set in the black drum**, at one of four steps, each measured on
+the stock:
 
-Gate amber is the signature. It means one thing, and it is spent on one thing:
+| Token | Hex | On stock | For |
+|---|---|---|---|
+| `--ink` | `#231F20` | 12.57:1 | Headings and body |
+| `--soft-ink` | `#45414A` | 7.68:1 | A secondary paragraph |
+| `--muted-ink` | `#65606A` | 4.72:1 | Captions, eyebrows, the mono furniture. The last step that clears AA |
+| `--faint-ink` | `#7A757F` | 3.46:1 | **Decoration only.** Never a word a person has to read |
 
-1. A review gate on the map, and the skill nodes a person runs.
-2. The primary call to action, because installing is the reader's own decision.
-
-That is the whole list. Not headings, not hovers, not a chart series, not a border because a
-card looked plain. **The amber is a person** is the second of the five principles in
-[positioning.md](positioning.md), and it survives only if it is never spent anywhere else.
-
-Warm on near-black is also the plainest way this brand is not another developer tool. Almost
-every one of them is violet or teal on black. If the palette ever drifts back that way, this is
-the paragraph that was ignored.
+Blue at 5.68:1 may carry copy where a second voice is genuinely needed. Pink, yellow and the
+pink × yellow overprint may not, at any size, ever.
 
 ## Accessibility
 
-Every accent clears **6.5:1** on `--ink` and **6.2:1** on `--panel`, which is AA for normal
-text and AAA for large. Every text token clears AA on every ground it is used on. These are
-recorded per token in [`tokens/brand.tokens.json`](tokens/brand.tokens.json) and were computed,
-not estimated.
-
 Two rules that contrast ratios do not cover:
 
-- **Colour is never the only carrier.** The map's node types are a colour *and* a badge; the
-  gates are amber *and* a labelled tick; the loops are rose *and* dashed. Roughly one man in
-  twelve cannot separate the rose from the amber, and the map has to work for him.
-- **Nothing on a mid-tone.** The accents are tuned for `--ink` and `--panel`. On `--edge` or
-  above, use paper mode instead of hoping.
+- **Colour is never the only carrier.** The map's node types are an ink *and* a badge; the
+  gates are yellow *and* a labelled tick; the loops are pink *and* dashed. Roughly one man in
+  twelve cannot separate the pink from the orange overprint, and the map has to work for him.
+- **Texture never touches anything functional.** A slash command is there to be copied, and a
+  shifted plate over a URL is a command somebody mistypes.
 
-## Paper mode
+## The Flightdeck's domains, and the one exception
 
-The same identity on a document: Confluence, a printed one-pager, a light deck. Add `class="paper"`
-to a container and every token flips.
-
-The accents are darkened until each clears 4.5:1 on white, because on paper they carry text
-rather than glow on black. Gate amber becomes `#966e12`, which is a dark gold and reads as
-deliberate rather than as a lighter amber that failed.
-
-Paper mode is a separate token set, not a `prefers-color-scheme` query. A light Confluence page
-and a dark product surface are two audiences, not one reader's preference, and the site is dark
-by design.
+The Flightdeck encodes eight product domains, and there are seven inks. Seven take an ink each
+and the eighth takes `--muted-ink`. Sun Yellow appears in that set, which is the only place it
+appears outside a gate: the Flightdeck has no gates, and the rule binds where gates exist. It
+is a bounded exception, written down here so it stays bounded.

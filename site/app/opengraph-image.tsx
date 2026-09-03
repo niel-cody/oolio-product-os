@@ -15,17 +15,18 @@ import os from "@/data/os.json";
  * the wordmark, the headline and three numbers. No skill names, no stages, nothing that
  * lib/landing-sky.ts would not already hand the page.
  */
-export const alt = "Oolio Product OS — the product process, written down and running";
+export const alt = "Pixie Dust Industries, Product OS: the product process, written down and running";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/* Brand tokens, restated as literals because Satori resolves no CSS variables. If these ever
+/* The ink set, restated as literals because Satori resolves no CSS variables. If these ever
    disagree with brand/tokens/brand.tokens.json, the tokens are right and this is stale. */
-const VOID = "#03070f";
-const INK = "#ecf0f7";
-const MUTED = "#808fa4";
-const GATE = "#fcbd30";
-const LINE = "#1f2a3a";
+const STOCK = "#E4E2DB";
+const INK = "#231F20";
+const MUTED = "#65606A";
+const PINK = "#FF48B0";
+const YELLOW = "#FFE800";
+const RULE = "#C4C0B7";
 
 /**
  * The Gate, as a data URI. Satori renders no <path>, so the mark cannot be drawn as elements
@@ -37,7 +38,7 @@ const MARK =
   encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">' +
       `<path d="M26.76 13.713A11 11 0 1 1 18.287 5.24" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>` +
-      `<circle cx="23.778" cy="8.222" r="3" fill="${GATE}"/>` +
+      `<circle cx="23.778" cy="8.222" r="3" fill="${YELLOW}"/>` +
     "</svg>",
   );
 
@@ -57,16 +58,6 @@ const MARK =
  * before adding it here.
  */
 const unligature = (s: string) => s.replaceAll("tt", "t\u200Ct");
-
-/** Deterministic 0..1, so the star field is identical on every build. */
-function hash01(s: string, salt: number): number {
-  let h = 2166136261 ^ salt;
-  for (let i = 0; i < s.length; i++) {
-    h ^= s.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return ((h >>> 0) % 100000) / 100000;
-}
 
 /**
  * A Google font, if Google will hand it over at build time. The card is worth the requests,
@@ -89,26 +80,42 @@ async function googleFont(family: string, weight: number): Promise<ArrayBuffer |
 
 export default async function Image() {
   // Two families, because the card is the brand in miniature: the headline is the argument
-  // and is set in the serif, the numbers along the foot are machine output and are set in the
-  // mono. Instrument Serif has one weight, so there is nothing to request but 400.
-  const [serif, mono] = await Promise.all([
-    googleFont("Instrument Serif", 400),
-    googleFont("JetBrains Mono", 500),
+  // and is set in Syne, the numbers along the foot are machine output and are set in DM Mono.
+  const [display, mono] = await Promise.all([
+    googleFont("Syne", 800),
+    googleFont("DM Mono", 500),
   ]);
 
   const fonts = [
-    serif && { name: "Instrument Serif", data: serif, weight: 400 as const, style: "normal" as const },
-    mono && { name: "JetBrains Mono", data: mono, weight: 500 as const, style: "normal" as const },
+    display && { name: "Syne", data: display, weight: 800 as const, style: "normal" as const },
+    mono && { name: "DM Mono", data: mono, weight: 500 as const, style: "normal" as const },
   ].filter((f): f is NonNullable<typeof f> => Boolean(f));
 
-  const MONO = fonts.length > 1 ? "JetBrains Mono" : "monospace";
+  const MONO = fonts.length > 1 ? "DM Mono" : "monospace";
 
-  const stars = Array.from({ length: 46 }, (_, i) => ({
-    left: hash01(`x${i}`, 11) * 1200,
-    top: hash01(`y${i}`, 17) * 630,
-    size: 2 + hash01(`r${i}`, 29) * 2.5,
-    dim: 0.22 + hash01(`o${i}`, 31) * 0.34,
-  }));
+  /**
+   * A halftone screen, drawn dot by dot.
+   *
+   * Satori resolves no CSS masks, blend modes or repeating background images, so the screen
+   * the site draws in three lines of CSS has to be laid out here as individual elements.
+   * A regular grid at a fixed pitch with the dot radius falling off from the top right is
+   * exactly what a Riso does to a gradient, and it is the one part of the press language
+   * this renderer can honestly reproduce.
+   *
+   * It replaces a random star field, which was the dark card's atmosphere and reads on a
+   * printed sheet as dirt rather than ink.
+   */
+  const PITCH = 22;
+  const dots: { left: number; top: number; r: number }[] = [];
+  for (let x = 0; x <= 1200 + PITCH; x += PITCH) {
+    for (let y = 0; y <= 630 + PITCH; y += PITCH) {
+      // Distance from the top-right corner, normalised, then eased so the screen opens up
+      // rather than fading linearly — a dot either prints or it does not.
+      const d = Math.hypot((1200 - x) / 1200, y / 630) / 1.35;
+      const r = (1 - Math.min(1, d)) ** 1.7 * (PITCH * 0.44);
+      if (r > 0.55) dots.push({ left: x, top: y, r });
+    }
+  }
 
   const facts = [
     [String(os.totals.skills), "skills"],
@@ -125,39 +132,38 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: VOID,
-          // One warm wash from the top left, where the mark is, and one cool one opposite to
-          // stop the card going flat. Amber leads because on this brand it is the thing that
-          // matters; the old card led with teal and violet, which is every other card.
+          background: STOCK,
+          // Two ink washes standing in for the halftone plate the page carries. Satori draws
+          // no CSS masks or blend modes, so the screen itself cannot be reproduced here; a
+          // soft pass of each drum is the honest approximation rather than a fake screen.
           backgroundImage:
-            "radial-gradient(900px 620px at 12% 8%, rgba(252,189,48,0.13), transparent 60%), " +
-            "radial-gradient(820px 560px at 88% 92%, rgba(68,208,222,0.10), transparent 58%)",
-          padding: "72px 76px",
-          fontFamily: fonts.length ? "Instrument Serif" : "serif",
+            "radial-gradient(700px 520px at 97% 88%, rgba(61,85,136,0.24), transparent 62%)",
+          padding: "70px 74px",
+          fontFamily: fonts.length ? "Syne" : "sans-serif",
         }}
       >
-        {stars.map((s, i) => (
+        {dots.map((d, i) => (
           <div
             key={i}
             style={{
               position: "absolute",
-              left: s.left,
-              top: s.top,
-              width: s.size,
-              height: s.size,
-              borderRadius: s.size,
-              background: "#a3b0c2",
-              opacity: s.dim,
+              left: d.left - d.r,
+              top: d.top - d.r,
+              width: d.r * 2,
+              height: d.r * 2,
+              borderRadius: d.r * 2,
+              background: PINK,
+              opacity: 0.55,
             }}
           />
         ))}
 
         {/* The lockup. Satori draws no <path>, so the mark arrives as an inline SVG data URI
             rather than as elements: same geometry as brand/assets/mark.svg, nothing else. */}
-        <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
-          <img width={30} height={30} src={MARK} alt="" />
-          <div style={{ fontSize: 27, color: INK, letterSpacing: "-0.012em" }}>
-            Oolio Product OS
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <img width={28} height={28} src={MARK} alt="" />
+          <div style={{ fontSize: 23, color: INK, letterSpacing: "-0.03em", textTransform: "uppercase" }}>
+            Pixie Dust Industries
           </div>
         </div>
 
@@ -168,10 +174,10 @@ export default async function Image() {
             <div
               key={line}
               style={{
-                fontSize: 82,
+                fontSize: 72,
                 color: INK,
-                lineHeight: 1.08,
-                letterSpacing: "-0.022em",
+                lineHeight: 0.98,
+                letterSpacing: "-0.028em",
               }}
             >
               {unligature(line)}
@@ -185,14 +191,14 @@ export default async function Image() {
         <div style={{ display: "flex", alignItems: "center", gap: 26 }}>
           {facts.map(([n, label], i) => (
             <div key={label} style={{ display: "flex", alignItems: "center", gap: 26 }}>
-              {i > 0 && <div style={{ width: 1, height: 22, background: LINE }} />}
+              {i > 0 && <div style={{ width: 1, height: 22, background: RULE }} />}
               <div style={{ display: "flex", alignItems: "baseline", gap: 9 }}>
                 <div style={{ fontFamily: MONO, fontSize: 23, color: INK }}>{n}</div>
                 <div style={{ fontFamily: MONO, fontSize: 17, color: MUTED }}>{label}</div>
               </div>
             </div>
           ))}
-          <div style={{ marginLeft: "auto", fontFamily: MONO, fontSize: 17, color: GATE }}>
+          <div style={{ marginLeft: "auto", fontFamily: MONO, fontSize: 16, color: INK, background: PINK, padding: "5px 10px" }}>
             oolio-product-os.vercel.app
           </div>
         </div>

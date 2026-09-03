@@ -62,7 +62,7 @@ export function SkillsBrowser({ skills, stages }: { skills: Skill[]; stages: Sta
           return (
             <section key={g.name} id={slug(g.name)} className="scroll-mt-20">
               <div className="flex items-baseline gap-3">
-                <span className="mono text-[10px] text-[#4b5a71]">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mono text-[10px] text-[#8a8481]">{String(i + 1).padStart(2, "0")}</span>
                 <h2 className="text-[19px] font-semibold tracking-tight">{g.name}</h2>
                 <span className="mono text-[10px] text-[var(--muted-ink)]">{g.rows.length}</span>
               </div>
@@ -100,7 +100,7 @@ function SkillCard({ skill: s }: { skill: Skill }) {
   return (
     <Link
       href={`/skills/${s.id}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 transition-colors hover:border-[#37465d] hover:bg-[#111926]"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 transition-colors hover:border-[#231F20] hover:bg-[#c5c2bc]"
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-[14.5px] font-semibold leading-tight">{s.title}</h3>
@@ -116,10 +116,10 @@ function SkillCard({ skill: s }: { skill: Skill }) {
       </p>
 
       <div className="mt-3.5 flex items-center gap-2 border-t border-[var(--line)] pt-2.5">
-        <code className="mono text-[10.5px] text-[#8593a8] transition-colors group-hover:text-[var(--orch)]">
+        <code className="mono text-[10.5px] text-[#5e5857] transition-colors group-hover:text-[var(--orch)]">
           {s.command}
         </code>
-        <ArrowRight className="ml-auto h-3 w-3 shrink-0 text-[#4b5a71] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--orch)]" />
+        <ArrowRight className="ml-auto h-3 w-3 shrink-0 text-[#8a8481] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--orch)]" />
       </div>
     </Link>
   );

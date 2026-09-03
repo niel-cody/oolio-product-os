@@ -1,27 +1,29 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
+import { Syne, Archivo, DM_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import os from "@/data/os.json";
 import { getMember } from "@/lib/members";
 
 /**
- * The brand's three voices, and each says a different kind of thing (brand/typography.md).
+ * Three faces, one job each (brand/typography.md).
  *
- *   display  the argument. What a person believes
- *   text     the interface. What a person reads and clicks
- *   system   the machine. What was counted, stamped or run
+ *   display  Syne. Drawn for a French art centre, not a startup: wide, slightly wrong
+ *            proportions. Reads as an art press rather than a design system, which is
+ *            the point of the whole direction.
+ *   text     Archivo. A grotesque built for small sizes and dense text. Does nothing
+ *            interesting on purpose, so Syne can.
+ *   system   DM Mono. Typewriter rather than terminal. Carries every label, ink code,
+ *            screen angle, count and slash command.
  *
- * That split is the positioning set in type: the OS is a written argument a machine executes,
- * so the argument is a serif and the execution is a mono. Instrument Serif has one weight and
- * no bold to fall back on, which is deliberate; `.wordmark` blocks synthesis so a stray
- * font-weight fails visibly rather than smearing the outline.
+ * Space Grotesk is gone. It is the face that signals "designed" without doing any designing,
+ * and it was one of five unmodified defaults that made the old site read as generated.
  *
  * The variables are consumed by app/brand.css, which builds the fallback stacks around them.
  */
-const display = Instrument_Serif({ variable: "--font-display", subsets: ["latin"], weight: ["400"], style: ["normal", "italic"], display: "swap" });
-const text = Inter({ variable: "--font-text", subsets: ["latin"], display: "swap" });
-const system = JetBrains_Mono({ variable: "--font-system", subsets: ["latin"], weight: ["400", "500", "600"], display: "swap" });
+const display = Syne({ variable: "--font-display", subsets: ["latin"], weight: ["600", "700", "800"], display: "swap" });
+const text = Archivo({ variable: "--font-text", subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap" });
+const system = DM_Mono({ variable: "--font-system", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://oolio-product-os.vercel.app";
 
@@ -42,11 +44,11 @@ const DESCRIPTION =
  */
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Oolio Product OS", template: "%s · Oolio Product OS" },
+  title: { default: "Pixie Dust Industries — Product OS", template: "%s · Product OS" },
   description: DESCRIPTION,
   openGraph: {
     type: "website",
-    siteName: "Oolio Product OS",
+    siteName: "Pixie Dust Industries",
     title: "The product process, written down and running.",
     description: DESCRIPTION,
     url: SITE_URL,
@@ -73,8 +75,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const member = await getMember();
 
   return (
-    <html lang="en-AU" className={`dark ${display.variable} ${text.variable} ${system.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+    <html lang="en-AU" className={`${display.variable} ${text.variable} ${system.variable} h-full antialiased`}>
+      {/* `sheet` carries the grain: one fixed pass over the whole page, so it never scrolls
+          with the content. The sheet stays still while the ink moves. Applied here and
+          nowhere else — two grain layers over one another read as dirt, not paper. */}
+      <body className="sheet min-h-full flex flex-col bg-background text-foreground">
         <SiteHeader
           stamp={os.stamp}
           skills={os.totals.skills}
