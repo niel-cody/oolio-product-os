@@ -29,10 +29,10 @@
   },
 
   "kinds": {
-    "source": { "colour": "#93a3bd", "label": "Signal in" },
-    "core":   { "colour": "#2dd4bf", "label": "The Product OS" },
-    "record": { "colour": "#a78bfa", "label": "System of record" },
-    "vault":  { "colour": "#f5b942", "label": "The vault" }
+    "source": { "colour": "#95acc5", "label": "Signal in" },
+    "core":   { "colour": "#44d0de", "label": "The Product OS" },
+    "record": { "colour": "#b296fd", "label": "System of record" },
+    "vault":  { "colour": "#f07eb3", "label": "The vault" }
   },
 
   "systems": {

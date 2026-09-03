@@ -29,7 +29,7 @@ export default function LoginPage() {
     <main className="flex flex-1 items-center justify-center px-5 py-16">
       <div className="w-full max-w-[420px]">
         <div className="eyebrow">Oolio Product OS</div>
-        <h1 className="mt-3 text-[26px] font-semibold leading-tight tracking-tight">
+        <h1 className="display mt-3 text-[29px] leading-[1.16] tracking-[-0.016em]">
           Sign in
         </h1>
         <p className="mt-2.5 text-[14px] leading-relaxed text-[var(--muted-ink)]">

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Oolio Product OS">
+  <title>Oolio Product OS</title>
+  <!-- The tile. The mark is drawn at r=9.5 rather than 11 so the ring keeps its clear space
+       inside the rounded square; at 16px a tighter margin closes the break up. -->
+  <rect width="32" height="32" rx="7" fill="#070d17"/>
+  <path d="M25.292 14.025A9.5 9.5 0 1 1 17.975 6.708" fill="none" stroke="#ecf0f7"
+        stroke-width="3" stroke-linecap="round"/>
+  <circle cx="22.718" cy="9.283" r="2.7" fill="#fcbd30"/>
+</svg>

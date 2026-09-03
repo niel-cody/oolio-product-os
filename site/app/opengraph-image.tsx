@@ -19,13 +19,30 @@ export const alt = "Oolio Product OS — the product process, written down and r
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const BG = "#070b11";
-const INK = "#e6ecf5";
-const MUTED = "#7d8aa0";
-const ORCH = "#2dd4bf";
+/* Brand tokens, restated as literals because Satori resolves no CSS variables. If these ever
+   disagree with brand/tokens/brand.tokens.json, the tokens are right and this is stale. */
+const VOID = "#03070f";
+const INK = "#ecf0f7";
+const MUTED = "#808fa4";
+const GATE = "#fcbd30";
+const LINE = "#1f2a3a";
 
 /**
- * Blocks Space Grotesk's `tt` ligature.
+ * The Gate, as a data URI. Satori renders no <path>, so the mark cannot be drawn as elements
+ * here; an inline SVG in an <img> is the one form it accepts. Geometry identical to
+ * brand/assets/mark.svg, and if the two ever disagree that file is right and this is stale.
+ */
+const MARK =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">' +
+      `<path d="M26.76 13.713A11 11 0 1 1 18.287 5.24" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>` +
+      `<circle cx="23.778" cy="8.222" r="3" fill="${GATE}"/>` +
+    "</svg>",
+  );
+
+/**
+ * Blocks the `tt` ligature.
  *
  * The image renderer mis-measures that ligature and leaves the surplus as trailing advance,
  * so "written down" came out with a visible hole in it while the identical string was
@@ -34,9 +51,10 @@ const ORCH = "#2dd4bf";
  * card size. Confirmed against `written`, `kitten`, `button` and `letter`, all of which had
  * it and none of which do now.
  *
- * Only `tt`. The font's other ligatures measure correctly, and inserting joiners into pairs
- * that are not broken would disable typography that is doing its job. If a new headline
- * word looks wrongly spaced, measure it before adding it here.
+ * It was found on Space Grotesk and is kept through the move to Instrument Serif, which has
+ * its own `tt`. Only `tt`: inserting joiners into pairs that are not broken would disable
+ * typography that is doing its job. If a new headline word looks wrongly spaced, measure it
+ * before adding it here.
  */
 const unligature = (s: string) => s.replaceAll("tt", "t\u200Ct");
 
@@ -51,14 +69,14 @@ function hash01(s: string, salt: number): number {
 }
 
 /**
- * Space Grotesk, if Google will hand it over at build time. The card is worth the two
- * requests — the headline is the whole card — but it is not worth failing a deploy over, so
- * a refusal falls back to the default sans and the build carries on.
+ * A Google font, if Google will hand it over at build time. The card is worth the requests,
+ * the headline being the whole card, but it is not worth failing a deploy over, so a refusal
+ * falls back to the renderer's default and the build carries on.
  */
-async function spaceGrotesk(weight: number): Promise<ArrayBuffer | null> {
+async function googleFont(family: string, weight: number): Promise<ArrayBuffer | null> {
   try {
     const css = await fetch(
-      `https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@${weight}`,
+      `https://fonts.googleapis.com/css2?family=${family.replaceAll(" ", "+")}:wght@${weight}`,
       { headers: { "User-Agent": "Mozilla/5.0" } },
     ).then((r) => r.text());
     const url = css.match(/src: url\((.+?)\) format\('(opentype|truetype)'\)/)?.[1];
@@ -70,12 +88,20 @@ async function spaceGrotesk(weight: number): Promise<ArrayBuffer | null> {
 }
 
 export default async function Image() {
-  const [bold, regular] = await Promise.all([spaceGrotesk(700), spaceGrotesk(400)]);
+  // Two families, because the card is the brand in miniature: the headline is the argument
+  // and is set in the serif, the numbers along the foot are machine output and are set in the
+  // mono. Instrument Serif has one weight, so there is nothing to request but 400.
+  const [serif, mono] = await Promise.all([
+    googleFont("Instrument Serif", 400),
+    googleFont("JetBrains Mono", 500),
+  ]);
 
   const fonts = [
-    bold && { name: "Space Grotesk", data: bold, weight: 700 as const, style: "normal" as const },
-    regular && { name: "Space Grotesk", data: regular, weight: 400 as const, style: "normal" as const },
+    serif && { name: "Instrument Serif", data: serif, weight: 400 as const, style: "normal" as const },
+    mono && { name: "JetBrains Mono", data: mono, weight: 500 as const, style: "normal" as const },
   ].filter((f): f is NonNullable<typeof f> => Boolean(f));
+
+  const MONO = fonts.length > 1 ? "JetBrains Mono" : "monospace";
 
   const stars = Array.from({ length: 46 }, (_, i) => ({
     left: hash01(`x${i}`, 11) * 1200,
@@ -99,12 +125,15 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: BG,
+          background: VOID,
+          // One warm wash from the top left, where the mark is, and one cool one opposite to
+          // stop the card going flat. Amber leads because on this brand it is the thing that
+          // matters; the old card led with teal and violet, which is every other card.
           backgroundImage:
-            "radial-gradient(900px 620px at 12% 8%, rgba(45,212,191,0.14), transparent 60%), " +
-            "radial-gradient(820px 560px at 88% 92%, rgba(167,139,250,0.16), transparent 58%)",
+            "radial-gradient(900px 620px at 12% 8%, rgba(252,189,48,0.13), transparent 60%), " +
+            "radial-gradient(820px 560px at 88% 92%, rgba(68,208,222,0.10), transparent 58%)",
           padding: "72px 76px",
-          fontFamily: fonts.length ? "Space Grotesk" : "sans-serif",
+          fontFamily: fonts.length ? "Instrument Serif" : "serif",
         }}
       >
         {stars.map((s, i) => (
@@ -117,15 +146,17 @@ export default async function Image() {
               width: s.size,
               height: s.size,
               borderRadius: s.size,
-              background: "#9fb0c9",
+              background: "#a3b0c2",
               opacity: s.dim,
             }}
           />
         ))}
 
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ width: 10, height: 10, borderRadius: 10, background: ORCH }} />
-          <div style={{ fontSize: 21, fontWeight: 700, color: INK, letterSpacing: "-0.01em" }}>
+        {/* The lockup. Satori draws no <path>, so the mark arrives as an inline SVG data URI
+            rather than as elements: same geometry as brand/assets/mark.svg, nothing else. */}
+        <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
+          <img width={30} height={30} src={MARK} alt="" />
+          <div style={{ fontSize: 27, color: INK, letterSpacing: "-0.012em" }}>
             Oolio Product OS
           </div>
         </div>
@@ -137,17 +168,16 @@ export default async function Image() {
             <div
               key={line}
               style={{
-                fontSize: 74,
-                fontWeight: 700,
+                fontSize: 82,
                 color: INK,
-                lineHeight: 1.14,
-                letterSpacing: "-0.03em",
+                lineHeight: 1.08,
+                letterSpacing: "-0.022em",
               }}
             >
               {unligature(line)}
             </div>
           ))}
-          <div style={{ fontSize: 27, color: MUTED, marginTop: 26, maxWidth: 800, lineHeight: 1.4 }}>
+          <div style={{ fontSize: 28, color: MUTED, marginTop: 28, maxWidth: 820, lineHeight: 1.4 }}>
             Not a diagram of how we intend to work. The thing itself.
           </div>
         </div>
@@ -155,14 +185,14 @@ export default async function Image() {
         <div style={{ display: "flex", alignItems: "center", gap: 26 }}>
           {facts.map(([n, label], i) => (
             <div key={label} style={{ display: "flex", alignItems: "center", gap: 26 }}>
-              {i > 0 && <div style={{ width: 1, height: 22, background: "#1c2534" }} />}
+              {i > 0 && <div style={{ width: 1, height: 22, background: LINE }} />}
               <div style={{ display: "flex", alignItems: "baseline", gap: 9 }}>
-                <div style={{ fontSize: 25, fontWeight: 700, color: INK }}>{n}</div>
-                <div style={{ fontSize: 19, color: MUTED }}>{label}</div>
+                <div style={{ fontFamily: MONO, fontSize: 23, color: INK }}>{n}</div>
+                <div style={{ fontFamily: MONO, fontSize: 17, color: MUTED }}>{label}</div>
               </div>
             </div>
           ))}
-          <div style={{ marginLeft: "auto", fontSize: 19, color: ORCH }}>
+          <div style={{ marginLeft: "auto", fontFamily: MONO, fontSize: 17, color: GATE }}>
             oolio-product-os.vercel.app
           </div>
         </div>

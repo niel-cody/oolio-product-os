@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 40" width="264" height="40" role="img" aria-label="Oolio Product OS">
+  <title>Oolio Product OS</title>
+  <!-- Paper mode: for Confluence, a printed one-pager, a light deck. The ring takes Paper Ink
+       rather than Paper, because a white ring on white is nothing; the bead keeps its amber but
+       drops to the Paper value, which clears AA against white as a fill. -->
+  <g transform="translate(4 4)">
+    <path d="M26.76 13.713A11 11 0 1 1 18.287 5.24" fill="none" stroke="#131e2f"
+          stroke-width="3" stroke-linecap="round"/>
+    <circle cx="23.778" cy="8.222" r="3" fill="#966e12"/>
+  </g>
+  <text x="46" y="27.5" font-family="Instrument Serif, Iowan Old Style, Palatino, Georgia, serif"
+        font-size="26" letter-spacing="-0.26" fill="#131e2f">Oolio Product OS</text>
+</svg>

@@ -15,7 +15,7 @@ export default async function ChangelogPage() {
   return (
     <main className="mx-auto w-full max-w-3xl px-5 py-14 sm:px-6 sm:py-20">
       <div className="eyebrow">Changelog</div>
-      <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">What changed</h1>
+      <h1 className="display mt-3 text-[34px] tracking-[-0.018em] sm:text-[44px]">What changed</h1>
       <p className="mt-5 text-[15px] leading-relaxed text-[var(--muted-ink)]">
         Newest first, rendered straight from the repo. The plugin is versioned by commit rather
         than by a number, so entries are dated. Shipping a skill updates this page.

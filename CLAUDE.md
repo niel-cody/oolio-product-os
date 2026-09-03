@@ -14,6 +14,14 @@ All edits to the `oolio-pm` plugin — skills, personas, lenses, templates — a
 4. **Mirror team-visible changes to the Product Operating System Confluence page.** The page (Niel's space, id `1175420929`, formerly titled "PM Skills") is the human-readable front door: it carries the skill count, the per-skill tables, and a plain-English "Skills changelog" section at the foot. When a change is team-visible — a new skill, a removed or renamed skill, a new capability, changed behaviour a user would notice — update the tables and add a dated entry to that section, written for a reader, not a maintainer (no file paths, no field IDs). Internal refactors, reference-file edits, and doc fixes do not need mirroring.
 5. **Commit and push.** Both steps, so GitHub (and teammates' Cowork) actually get it.
 
+## The brand is in `brand/`, and it is generated
+
+Anything about how this looks or sounds is settled in [brand/](brand/README.md), not in the site. The mark, the palette, the three typefaces, the voice, and the tokens that produce `site/app/brand.css`.
+
+- **Never edit `site/app/brand.css`.** Edit `brand/tokens/brand.tokens.json` and run `node brand/tokens/build.mjs`.
+- `npm --prefix site run check` fails if the stylesheet has drifted from the tokens, **or if a retired colour is still in the site**. A stray old hex does not look broken, which is why it is a test rather than a habit.
+- The palette has one rule worth knowing before you touch it: **gate amber means a person decides here.** It is for the review gates, the skills a person runs, and the primary call to action. Spending it on decoration spends the one thing the identity says.
+
 ## Archive, never delete
 
 - When a skill, persona, lens, or template is superseded, **move it to `oolio-pm/_archive/`** rather than deleting it. Personas may also use the persona library's own `_archive/` per its `CLAUDE.md`.

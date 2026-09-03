@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 40" width="264" height="40" role="img" aria-label="Oolio Product OS">
+  <title>Oolio Product OS</title>
+  <!-- Horizontal lockup, ink ground. LIVE TEXT: correct wherever Instrument Serif is loaded,
+       a generic serif everywhere else. Outline it before the file leaves Oolio (brand/identity.md).
+       Clear space is one bead diameter, 6px at this size, on every side. -->
+  <g transform="translate(4 4)">
+    <path d="M26.76 13.713A11 11 0 1 1 18.287 5.24" fill="none" stroke="#ecf0f7"
+          stroke-width="3" stroke-linecap="round"/>
+    <circle cx="23.778" cy="8.222" r="3" fill="#fcbd30"/>
+  </g>
+  <text x="46" y="27.5" font-family="Instrument Serif, Iowan Old Style, Palatino, Georgia, serif"
+        font-size="26" letter-spacing="-0.26" fill="#ecf0f7">Oolio Product OS</text>
+</svg>

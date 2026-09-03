@@ -29,6 +29,17 @@ npm --prefix site run check:public -- http://127.0.0.1:3000   # needs a running 
 | `/app/today` | Flightdeck: the ranked day, one snapshot | `fixtures/<date>.json` |
 | `/app/week` | Flightdeck: the live calendar and where the room is | Outlook, read on every request |
 
+## The brand
+
+Colour, type and the mark are not decided here. They live in [`brand/`](../brand/README.md) and
+arrive as [`app/brand.css`](app/brand.css), which is **generated** from
+`brand/tokens/brand.tokens.json`. `globals.css` holds no colours at all now: it maps the brand's
+vocabulary onto the one shadcn's components expect, so a component gets the brand without being
+rewritten and the brand can move without touching a component.
+
+Editing `app/brand.css` by hand is caught by `npm run check`, as is leaving a retired colour
+anywhere in this folder.
+
 ## The two inputs
 
 **The marketplace and its plugins** are the source of truth for everything derivable: which plugins
@@ -70,6 +81,7 @@ It fails, rather than quietly producing a site that looks fine but lies:
 - a flow whose consecutive steps have no connection to draw, so the path would render with
   invisible gaps
 - a per-skill `version` field, which the skill standard forbids
+- `app/brand.css` drifting from the brand tokens, or a retired palette value still in the site
 - the hand-written skill count drifting in `marketplace.json`, `plugin.json`, either README,
   the catalogue, or `pm-compass`, in digits or in words
 - a Flightdeck snapshot or a calendar read sitting anywhere it could be committed. Both carry

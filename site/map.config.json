@@ -156,11 +156,11 @@
   },
 
   "types": {
-    "ai":     { "colour": "#a78bfa", "label": "AI skill" },
-    "orch":   { "colour": "#2dd4bf", "label": "Orchestrator" },
-    "human":  { "colour": "#f59e0b", "label": "Human-gated" },
-    "signal": { "colour": "#93a3bd", "label": "Signal intake" },
-    "output": { "colour": "#34d399", "label": "Output / artifact" }
+    "ai":     { "colour": "#b296fd", "label": "AI skill" },
+    "orch":   { "colour": "#44d0de", "label": "Orchestrator" },
+    "human":  { "colour": "#fcbd30", "label": "Human-gated" },
+    "signal": { "colour": "#95acc5", "label": "Signal intake" },
+    "output": { "colour": "#5ddd89", "label": "Output / artifact" }
   },
 
   "gates": [

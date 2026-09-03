@@ -1,0 +1,372 @@
+{
+  "$schema": "./tokens.schema.json",
+  "_": "The Oolio Product OS brand tokens. This file is the source. site/app/brand.css is generated from it by build.mjs; never edit that file by hand. Every colour was designed in OKLCH and converted, so the ramps are perceptually even rather than eyeballed; the oklch note on each entry is the design intent, the hex is what ships.",
+  "mode": {
+    "ink": {
+      "_": "The screen ground. One hue, h=258, held from the deepest sky to the brightest type, so nothing on a surface is a different kind of grey from anything else. Token names are the site's existing vocabulary: --bg is what you write on, --ink is what you write with.",
+      "hue": 258,
+      "ground": {
+        "void": {
+          "hex": "#03070f",
+          "oklch": "0.128 0.020 258",
+          "use": "the sky behind the landing page, and nothing else"
+        },
+        "bg": {
+          "hex": "#070d17",
+          "oklch": "0.160 0.022 258",
+          "use": "page background"
+        },
+        "panel": {
+          "hex": "#0e1521",
+          "oklch": "0.196 0.026 258",
+          "use": "cards, the header, any surface that sits on the page"
+        },
+        "raise": {
+          "hex": "#151f2c",
+          "oklch": "0.236 0.030 258",
+          "use": "a surface on a surface: a selected row, a hover, an input"
+        },
+        "line": {
+          "hex": "#1f2a3a",
+          "oklch": "0.282 0.034 258",
+          "use": "borders and dividers"
+        },
+        "edge": {
+          "hex": "#37465d",
+          "oklch": "0.392 0.044 258",
+          "use": "a border that has to be seen: a focus ring, a secondary button"
+        },
+        "muted-ink": {
+          "hex": "#808fa4",
+          "oklch": "0.645 0.036 258",
+          "use": "secondary text, captions, the mono furniture. 5.9:1 on ink"
+        },
+        "soft-ink": {
+          "hex": "#b0bcce",
+          "oklch": "0.792 0.028 258",
+          "use": "body text set at length. 10.1:1 on ink"
+        },
+        "ink": {
+          "hex": "#ecf0f7",
+          "oklch": "0.955 0.010 258",
+          "use": "headings and anything that must be read first. 17.0:1 on ink"
+        }
+      },
+      "accent": {
+        "gate": {
+          "hex": "#fcbd30",
+          "oklch": "0.835 0.160 82",
+          "contrastOnInk": 11.55,
+          "means": "a person decides here. The signature colour, and the primary call to action"
+        },
+        "output": {
+          "hex": "#5ddd89",
+          "oklch": "0.805 0.165 152",
+          "contrastOnInk": 11.28,
+          "means": "an artefact the OS produced"
+        },
+        "orch": {
+          "hex": "#44d0de",
+          "oklch": "0.790 0.118 205",
+          "contrastOnInk": 10.49,
+          "means": "orchestration: a skill driving a tool"
+        },
+        "signal": {
+          "hex": "#95acc5",
+          "oklch": "0.735 0.045 252",
+          "contrastOnInk": 8.33,
+          "means": "raw input, before anyone has shaped it"
+        },
+        "ai": {
+          "hex": "#b296fd",
+          "oklch": "0.740 0.150 295",
+          "contrastOnInk": 8.04,
+          "means": "the assistant runs this step"
+        },
+        "loop": {
+          "hex": "#f07eb3",
+          "oklch": "0.735 0.152 352",
+          "contrastOnInk": 7.73,
+          "means": "learning returning to an earlier stage"
+        },
+        "alarm": {
+          "hex": "#fd6560",
+          "oklch": "0.700 0.190 25",
+          "contrastOnInk": 6.68,
+          "means": "destructive, failed, or unplaced"
+        }
+      },
+      "domain": {
+        "_": "Categorical, for the Flightdeck's product domains. Not semantic: these encode which product a piece of work belongs to, not what kind of step it is. Redistributed to a minimum 34 degree separation and one lightness register, so the legend is decodable.",
+        "leadership": {
+          "hex": "#fe9296",
+          "hue": 18
+        },
+        "products-app": {
+          "hex": "#fb9a5c",
+          "hue": 52
+        },
+        "customer-engagement": {
+          "hex": "#dbb038",
+          "hue": 88
+        },
+        "kiosk": {
+          "hex": "#79cd7c",
+          "hue": 145
+        },
+        "inventory": {
+          "hex": "#17d2b9",
+          "hue": 180
+        },
+        "insights": {
+          "hex": "#7abbfe",
+          "hue": 250
+        },
+        "payments": {
+          "hex": "#bda4fe",
+          "hue": 296
+        },
+        "core-pos": {
+          "hex": "#f091d2",
+          "hue": 340
+        }
+      }
+    },
+    "paper": {
+      "_": "The same identity on a document: Confluence, a printed one-pager, a light deck. The same nine names, different values, so a component written against them works in both without knowing which it is in. Accents are darkened until each clears 4.5:1 on white.",
+      "hue": 258,
+      "ground": {
+        "bg": {
+          "hex": "#ffffff",
+          "oklch": "1.000 0.000 258",
+          "use": "the page"
+        },
+        "void": {
+          "hex": "#f9fafc",
+          "oklch": "0.985 0.003 258",
+          "use": "a tinted page, where white is too stark"
+        },
+        "panel": {
+          "hex": "#f2f5f8",
+          "oklch": "0.968 0.005 258",
+          "use": "callouts and table headers"
+        },
+        "raise": {
+          "hex": "#e9edf2",
+          "oklch": "0.945 0.008 258",
+          "use": "a selected or highlighted row"
+        },
+        "line": {
+          "hex": "#dce0e6",
+          "oklch": "0.905 0.010 258",
+          "use": "borders and dividers"
+        },
+        "edge": {
+          "hex": "#b7beca",
+          "oklch": "0.800 0.018 258",
+          "use": "a border that has to be seen"
+        },
+        "muted-ink": {
+          "hex": "#657182",
+          "oklch": "0.545 0.030 258",
+          "use": "captions and secondary text. 5.0:1 on white"
+        },
+        "soft-ink": {
+          "hex": "#3c485b",
+          "oklch": "0.400 0.036 258",
+          "use": "body text. 9.3:1 on white"
+        },
+        "ink": {
+          "hex": "#131e2f",
+          "oklch": "0.235 0.036 258",
+          "use": "headings. 16.7:1 on white"
+        }
+      },
+      "accent": {
+        "gate": {
+          "hex": "#966e12",
+          "contrastOnPaper": 4.63,
+          "means": "a person decides here"
+        },
+        "output": {
+          "hex": "#158747",
+          "contrastOnPaper": 4.58,
+          "means": "an artefact the OS produced"
+        },
+        "orch": {
+          "hex": "#15828c",
+          "contrastOnPaper": 4.56,
+          "means": "orchestration"
+        },
+        "signal": {
+          "hex": "#566b83",
+          "contrastOnPaper": 5.49,
+          "means": "raw input"
+        },
+        "ai": {
+          "hex": "#855dd7",
+          "contrastOnPaper": 4.62,
+          "means": "the assistant runs this step"
+        },
+        "loop": {
+          "hex": "#c64287",
+          "contrastOnPaper": 4.64,
+          "means": "learning returning"
+        },
+        "alarm": {
+          "hex": "#d14241",
+          "contrastOnPaper": 4.6,
+          "means": "destructive or failed"
+        }
+      }
+    }
+  },
+  "type": {
+    "display": {
+      "family": "Instrument Serif",
+      "weights": [
+        400
+      ],
+      "styles": [
+        "normal",
+        "italic"
+      ],
+      "fallback": "Iowan Old Style, Palatino, Georgia, serif",
+      "use": "the wordmark, page titles, and pull quotes. The argument, never the interface"
+    },
+    "text": {
+      "family": "Inter",
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ],
+      "fallback": "system-ui, -apple-system, Segoe UI, sans-serif",
+      "use": "everything a person reads or clicks"
+    },
+    "system": {
+      "family": "JetBrains Mono",
+      "weights": [
+        400,
+        500,
+        600
+      ],
+      "fallback": "ui-monospace, SFMono-Regular, Menlo, monospace",
+      "use": "counts, stamps, ids, commands, eyebrows, and every label the machine wrote"
+    },
+    "scale": {
+      "display-xl": {
+        "size": "clamp(44px, 6.4vw, 76px)",
+        "line": 1.06,
+        "track": "-0.022em",
+        "family": "display"
+      },
+      "display-l": {
+        "size": "clamp(32px, 4vw, 46px)",
+        "line": 1.12,
+        "track": "-0.018em",
+        "family": "display"
+      },
+      "display-m": {
+        "size": "28px",
+        "line": 1.2,
+        "track": "-0.014em",
+        "family": "display"
+      },
+      "lede": {
+        "size": "20px",
+        "line": 1.5,
+        "track": "-0.004em",
+        "family": "text"
+      },
+      "body": {
+        "size": "15px",
+        "line": 1.62,
+        "track": "0",
+        "family": "text"
+      },
+      "ui": {
+        "size": "13px",
+        "line": 1.4,
+        "track": "0",
+        "family": "text"
+      },
+      "fine": {
+        "size": "11.5px",
+        "line": 1.45,
+        "track": "0.01em",
+        "family": "system"
+      },
+      "eyebrow": {
+        "size": "9.5px",
+        "line": 1.2,
+        "track": "0.16em",
+        "family": "system",
+        "transform": "uppercase"
+      }
+    }
+  },
+  "shape": {
+    "radius": {
+      "sm": "6px",
+      "md": "9px",
+      "lg": "12px",
+      "xl": "18px",
+      "pill": "999px"
+    },
+    "stroke": {
+      "hair": "1px",
+      "rule": "1.4px",
+      "mark": "0.09375em"
+    }
+  },
+  "motion": {
+    "ease": {
+      "out": {
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "use": "entering and exiting, where the first frame is watched"
+      },
+      "inOut": {
+        "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "use": "movement across the screen"
+      }
+    },
+    "duration": {
+      "press": "160ms",
+      "state": "180ms",
+      "reveal": "520ms",
+      "trace": "2400ms",
+      "loop": "1600ms"
+    },
+    "_noEaseIn": "There is deliberately no ease-in. It delays the moment being watched most, which is what makes an interface feel sluggish at an identical duration."
+  },
+  "mark": {
+    "grid": 32,
+    "ring": {
+      "radius": 11,
+      "stroke": 3,
+      "cap": "round",
+      "startDeg": -12,
+      "sweepDeg": 294
+    },
+    "break": {
+      "centreDeg": -45,
+      "widthDeg": 66
+    },
+    "bead": {
+      "radius": 3,
+      "atDeg": -45,
+      "fill": "gate"
+    },
+    "clearSpace": "one bead diameter (6 units on the 32 grid) on every side",
+    "minimumSize": {
+      "screen": "16px",
+      "print": "6mm"
+    }
+  },
+  "aliases": {
+    "_": "Legacy names kept alive. --human is what --gate was called when the palette had a human colour and a loop colour that were 11 degrees apart.",
+    "human": "gate"
+  }
+}

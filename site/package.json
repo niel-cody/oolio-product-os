@@ -9,7 +9,7 @@
     "lint": "eslint",
     "predev": "node scripts/generate.mjs",
     "prebuild": "node scripts/generate.mjs",
-    "check": "node scripts/generate.mjs --check && node scripts/check-no-snapshots.mjs",
+    "check": "node scripts/generate.mjs --check && node scripts/check-no-snapshots.mjs && node ../brand/tokens/build.mjs --check",
     "check:public": "node scripts/check-public-leaks.mjs"
   },
   "dependencies": {

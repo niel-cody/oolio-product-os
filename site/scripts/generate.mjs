@@ -584,7 +584,9 @@ console.log(
 /* ---------------------------------------------------------------------- emit */
 const typeColour = Object.fromEntries(Object.entries(cfg.types).map(([k, v]) => [k, v.colour]));
 const typeLabel = Object.fromEntries(Object.entries(cfg.types).map(([k, v]) => [k, v.label]));
-if (unplaced.length) { typeColour.unplaced = "#f87171"; typeLabel.unplaced = "Unplaced"; }
+// --alarm from brand/tokens/brand.tokens.json. Not a type anybody chose: it is the colour a
+// skill gets when nobody has placed it on the map yet, so it has to read as wrong.
+if (unplaced.length) { typeColour.unplaced = "#fd6560"; typeLabel.unplaced = "Unplaced"; }
 
 const sha = process.env.VERCEL_GIT_COMMIT_SHA
   || (() => { try { return execSync("git rev-parse --short HEAD", { cwd: ROOT }).toString().trim(); }

@@ -36,7 +36,7 @@ export function MembersTable({ members, meEmail }: { members: Member[]; meEmail:
 
   if (members.length === 0) {
     return (
-      <p className="rounded-xl border border-[var(--line)] bg-[#0b1017] p-5 text-[13.5px] text-[var(--muted-ink)]">
+      <p className="rounded-xl border border-[var(--line)] bg-[#09101a] p-5 text-[13.5px] text-[var(--muted-ink)]">
         Nobody is on the list, which means nobody can sign in. Add yourself first.
       </p>
     );
@@ -60,7 +60,7 @@ export function MembersTable({ members, meEmail }: { members: Member[]; meEmail:
           return (
             <li
               key={m.email}
-              className="flex flex-wrap items-center gap-x-4 gap-y-2 bg-[#0b1017] px-4 py-3"
+              className="flex flex-wrap items-center gap-x-4 gap-y-2 bg-[#09101a] px-4 py-3"
               style={rowBusy ? { opacity: 0.55 } : undefined}
             >
               <div className="min-w-0 flex-1">

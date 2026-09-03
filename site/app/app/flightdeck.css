@@ -25,18 +25,18 @@
 
   --fd-good: var(--output);
   --fd-warn: var(--loop);
-  --fd-serious: #f0883e;
+  --fd-serious: #fb864d;
   --fd-critical: var(--destructive);
 
-  /* Domain hues, tuned for the site's #0A0E14 ground. */
-  --fd-d-insights: #4a9eff;
+  /* Domain hues, tuned for the site's #070d17 ground. */
+  --fd-d-insights: #7abbfe;
   --fd-d-products-app: #ff7a45;
-  --fd-d-inventory: #2dd4a0;
-  --fd-d-customer-engagement: #f5b942;
-  --fd-d-core-pos: #f07eaa;
-  --fd-d-kiosk: #4ade80;
-  --fd-d-payments: #a78bfa;
-  --fd-d-leadership: #f87171;
+  --fd-d-inventory: #17d2b9;
+  --fd-d-customer-engagement: #f07eb3;
+  --fd-d-core-pos: #f091d2;
+  --fd-d-kiosk: #79cd7c;
+  --fd-d-payments: #b296fd;
+  --fd-d-leadership: #fd6560;
   --fd-d-none: var(--muted-ink);
 
   font-size: 14px;

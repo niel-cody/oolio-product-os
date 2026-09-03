@@ -161,7 +161,7 @@ function Command({ value, label }: { value: string; label?: string }) {
   return (
     <div>
       {label && <div className="eyebrow mb-1.5">{label}</div>}
-      <div className="flex items-stretch overflow-hidden rounded-lg border border-[var(--line)] bg-[#0b1017]">
+      <div className="flex items-stretch overflow-hidden rounded-lg border border-[var(--line)] bg-[#09101a]">
         {/* Wraps at the spaces rather than scrolling out of sight. In a narrow column the
             nowrap version cut the URL off mid-word, which asks someone to paste a command
             into their shell that they were never shown the end of. */}
@@ -251,7 +251,7 @@ function Hero({
           </Reveal>
 
           <Reveal delay={60}>
-            <h1 className="mt-5 text-[40px] font-bold leading-[1.03] tracking-[-0.02em] text-[var(--ink)] sm:text-[68px]">
+            <h1 className="display mt-5 text-[44px] leading-[1.04] tracking-[-0.02em] text-[var(--ink)] sm:text-[74px]">
               The product process,{" "}
               <br className="hidden sm:inline" />
               written down and running.
@@ -421,7 +421,7 @@ function StarField({
             cx={d.x}
             cy={d.y}
             r={d.r}
-            fill="#8fa3c0"
+            fill="#95a3b6"
             style={{ animationDelay: `${d.d}s` }}
           />
         ))}
@@ -438,7 +438,7 @@ function StarField({
             }}
             d={d}
             fill="none"
-            stroke="#9fb0c9"
+            stroke="#a3b0c2"
             strokeWidth={1.1}
             opacity={reduced ? 0.22 : 0.07}
             strokeLinecap="round"
@@ -492,7 +492,7 @@ function StarField({
               cx={px(s.x)}
               cy={py(s.y)}
               r={3}
-              fill={sky.typeColour[s.type] ?? "#9fb0c9"}
+              fill={sky.typeColour[s.type] ?? "#a3b0c2"}
               opacity={0.55}
             />
           </g>
@@ -509,7 +509,7 @@ function Problem() {
     <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
       <div className="max-w-[820px]">
         <Reveal>
-          <p className="text-[26px] font-semibold leading-[1.25] tracking-[-0.015em] text-[var(--ink)] sm:text-[38px]">
+          <p className="display text-[29px] leading-[1.22] tracking-[-0.016em] text-[var(--ink)] sm:text-[42px]">
             Every product team has written down how it works. In forty Confluence pages,
             three stale Notion docs, and one person&rsquo;s head.
           </p>
@@ -585,7 +585,7 @@ function Lifecycle({
     <section className="border-y border-[var(--line)] bg-[var(--panel)]/50">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
         <Reveal>
-          <h2 className="max-w-[640px] text-[28px] font-bold leading-[1.15] tracking-[-0.015em] text-[var(--ink)] sm:text-[40px]">
+          <h2 className="display max-w-[660px] text-[31px] leading-[1.12] tracking-[-0.016em] text-[var(--ink)] sm:text-[44px]">
             {counts.stages} stages. {counts.flows} paths through them.
           </h2>
           <p className="mt-4 max-w-[560px] text-[15px] leading-[1.65] text-[var(--muted-ink)] sm:text-[16px]">
@@ -685,7 +685,7 @@ function Lifecycle({
 
               {/* What the stage you tapped is for. */}
               <div
-                className="mt-6 rounded-xl border border-[var(--line)] bg-[#0b1017] p-5"
+                className="mt-6 rounded-xl border border-[var(--line)] bg-[#09101a] p-5"
                 aria-live="polite"
               >
                 <div key={stageIdx} className="lx-purpose">
@@ -717,7 +717,7 @@ function Skills({
   return (
     <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
       <Reveal>
-        <h2 className="max-w-[640px] text-[28px] font-bold leading-[1.15] tracking-[-0.015em] text-[var(--ink)] sm:text-[40px]">
+        <h2 className="display max-w-[660px] text-[31px] leading-[1.12] tracking-[-0.016em] text-[var(--ink)] sm:text-[44px]">
           Five of the {counts.skills}.
         </h2>
         <p className="mt-4 max-w-[560px] text-[15px] leading-[1.65] text-[var(--muted-ink)] sm:text-[16px]">
@@ -730,7 +730,7 @@ function Skills({
       <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {showcase.map((s, i) => (
           <Reveal as="li" key={s.id} delay={Math.min(i, 3) * 60}>
-            <div className="lx-card h-full rounded-xl border border-[var(--line)] bg-[#0b1017] p-5">
+            <div className="lx-card h-full rounded-xl border border-[var(--line)] bg-[#09101a] p-5">
               <div className="flex items-baseline justify-between gap-3">
                 <span className="mono truncate text-[11.5px] text-[var(--orch)]">{s.command}</span>
                 <span className="eyebrow shrink-0">{s.stage}</span>
@@ -794,7 +794,7 @@ function Honesty() {
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
         <div className="grid gap-10 lg:grid-cols-[380px_1fr] lg:gap-16">
           <Reveal>
-            <h2 className="text-[28px] font-bold leading-[1.15] tracking-[-0.015em] text-[var(--ink)] sm:text-[40px]">
+            <h2 className="display text-[31px] leading-[1.12] tracking-[-0.016em] text-[var(--ink)] sm:text-[44px]">
               What keeps it honest.
             </h2>
             <p className="mt-5 text-[15px] leading-[1.65] text-[var(--muted-ink)] sm:text-[16px]">
@@ -809,7 +809,7 @@ function Honesty() {
 
           <ul className="grid gap-px overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--line)] sm:grid-cols-2">
             {HONEST.map((h, i) => (
-              <Reveal as="li" key={h.head} delay={Math.min(i, 3) * 60} className="bg-[#0b1017] p-5">
+              <Reveal as="li" key={h.head} delay={Math.min(i, 3) * 60} className="bg-[#09101a] p-5">
                 <div className="text-[15px] font-semibold leading-snug tracking-tight text-[var(--ink)]">
                   {h.head}
                 </div>
@@ -833,7 +833,7 @@ function SetUp() {
     <section id="install" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20 sm:px-8 sm:py-28">
       <Reveal>
         <div className="eyebrow">Get set up</div>
-        <h2 className="mt-4 max-w-[640px] text-[28px] font-bold leading-[1.15] tracking-[-0.015em] text-[var(--ink)] sm:text-[40px]">
+        <h2 className="display mt-4 max-w-[660px] text-[31px] leading-[1.12] tracking-[-0.016em] text-[var(--ink)] sm:text-[44px]">
           Two lines, then ask.
         </h2>
         <p className="mt-4 max-w-[560px] text-[15px] leading-[1.65] text-[var(--muted-ink)] sm:text-[16px]">
@@ -883,7 +883,7 @@ function SetUp() {
       </ol>
 
       <Reveal delay={180}>
-        <div className="mt-6 rounded-xl border border-[var(--line)] bg-[#0b1017] p-5 sm:p-6">
+        <div className="mt-6 rounded-xl border border-[var(--line)] bg-[#09101a] p-5 sm:p-6">
           <div className="eyebrow">Then just ask</div>
           <div className="mono mt-3 flex items-start gap-2.5 text-[13px] leading-relaxed text-[var(--ink)] sm:text-[14px]">
             <CornerDownRight className="mt-1 h-3.5 w-3.5 shrink-0 text-[var(--orch)]" aria-hidden />
@@ -926,7 +926,7 @@ function Door({ signedIn }: { signedIn: boolean }) {
     <section className="border-t border-[var(--line)] bg-[var(--panel)]/50">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
         <Reveal>
-          <p className="text-[40px] font-bold leading-[1.05] tracking-[-0.02em] text-[var(--ink)] sm:text-[64px]">
+          <p className="display text-[44px] leading-[1.06] tracking-[-0.02em] text-[var(--ink)] sm:text-[70px]">
             Learn it once.
           </p>
           <p className="mt-6 max-w-[520px] text-[15px] leading-[1.65] text-[var(--muted-ink)] sm:text-[17px]">

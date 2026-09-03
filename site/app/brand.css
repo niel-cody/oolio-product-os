@@ -1,0 +1,129 @@
+/* ============================================================================
+   THE OOLIO PRODUCT OS BRAND
+
+   GENERATED FILE. Do not edit.
+   Source: brand/tokens/brand.tokens.json. Rebuild: node brand/tokens/build.mjs
+   Why it is generated: brand/README.md
+
+   Ink mode is the screen. Paper mode is a document, and is exported as a separate
+   token set rather than a media query, because a light Confluence page and a dark
+   product surface are two audiences, not one preference.
+   ========================================================================== */
+
+:root {
+  /* The screen ground. One hue, h=258, held from the deepest sky to the brightest type, so nothing on a surface is a different kind of grey from anything else. Token names are the site's existing vocabulary: --bg is what you write on, --ink is what you write with. */
+  --void: #03070f; /* the sky behind the landing page, and nothing else */
+  --bg: #070d17; /* page background */
+  --panel: #0e1521; /* cards, the header, any surface that sits on the page */
+  --raise: #151f2c; /* a surface on a surface: a selected row, a hover, an input */
+  --line: #1f2a3a; /* borders and dividers */
+  --edge: #37465d; /* a border that has to be seen: a focus ring, a secondary button */
+  --muted-ink: #808fa4; /* secondary text, captions, the mono furniture. 5.9:1 on ink */
+  --soft-ink: #b0bcce; /* body text set at length. 10.1:1 on ink */
+  --ink: #ecf0f7; /* headings and anything that must be read first. 17.0:1 on ink */
+
+  /* The six lifecycle hues, plus alarm. Evenly spaced around the wheel so no two
+     can be confused, and every one clears 6.5:1 on ink. */
+  --gate: #fcbd30; /* a person decides here. The signature colour, and the primary call to action · 11.55:1 on ink */
+  --output: #5ddd89; /* an artefact the OS produced · 11.28:1 on ink */
+  --orch: #44d0de; /* orchestration: a skill driving a tool · 10.49:1 on ink */
+  --signal: #95acc5; /* raw input, before anyone has shaped it · 8.33:1 on ink */
+  --ai: #b296fd; /* the assistant runs this step · 8.04:1 on ink */
+  --loop: #f07eb3; /* learning returning to an earlier stage · 7.73:1 on ink */
+  --alarm: #fd6560; /* destructive, failed, or unplaced · 6.68:1 on ink */
+
+  /* Type. Loaded by next/font in app/layout.tsx, which sets these three variables. */
+  --font-display-stack: var(--font-display), Iowan Old Style, Palatino, Georgia, serif;
+  --font-text-stack: var(--font-text), system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-system-stack: var(--font-system), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Shape */
+  --r-sm: 6px;
+  --r-md: 9px;
+  --r-lg: 12px;
+  --r-xl: 18px;
+  --r-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* entering and exiting, where the first frame is watched */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* movement across the screen */
+  --dur-press: 160ms;
+  --dur-state: 180ms;
+  --dur-reveal: 520ms;
+  --dur-trace: 2400ms;
+  --dur-loop: 1600ms;
+
+  /* Categorical, for the Flightdeck's product domains. A domain colour says which product
+     a piece of work belongs to; it never says what kind of step it is. */
+  --domain-leadership: #fe9296; /* h=18 */
+  --domain-products-app: #fb9a5c; /* h=52 */
+  --domain-customer-engagement: #dbb038; /* h=88 */
+  --domain-kiosk: #79cd7c; /* h=145 */
+  --domain-inventory: #17d2b9; /* h=180 */
+  --domain-insights: #7abbfe; /* h=250 */
+  --domain-payments: #bda4fe; /* h=296 */
+  --domain-core-pos: #f091d2; /* h=340 */
+
+  /* Kept alive so nothing had to be rewritten to be re-coloured. */
+  --human: var(--gate);
+}
+
+/* Opt in with class="paper" on any container that is a document rather than a screen:
+   a print stylesheet, an export, a light embed. Same tokens, different values, so a
+   component written against them works in both without knowing which it is in. */
+.paper {
+  --bg: #ffffff; /* the page */
+  --void: #f9fafc; /* a tinted page, where white is too stark */
+  --panel: #f2f5f8; /* callouts and table headers */
+  --raise: #e9edf2; /* a selected or highlighted row */
+  --line: #dce0e6; /* borders and dividers */
+  --edge: #b7beca; /* a border that has to be seen */
+  --muted-ink: #657182; /* captions and secondary text. 5.0:1 on white */
+  --soft-ink: #3c485b; /* body text. 9.3:1 on white */
+  --ink: #131e2f; /* headings. 16.7:1 on white */
+  --gate: #966e12; /* a person decides here · 4.63:1 on white */
+  --output: #158747; /* an artefact the OS produced · 4.58:1 on white */
+  --orch: #15828c; /* orchestration · 4.56:1 on white */
+  --signal: #566b83; /* raw input · 5.49:1 on white */
+  --ai: #855dd7; /* the assistant runs this step · 4.62:1 on white */
+  --loop: #c64287; /* learning returning · 4.64:1 on white */
+  --alarm: #d14241; /* destructive or failed · 4.6:1 on white */
+  --human: var(--gate);
+  color-scheme: light;
+}
+
+/* The scale. Eight steps and no more: a ninth is always somebody avoiding a decision. */
+.t-display-xl { font-family: var(--font-display-stack); font-size: clamp(44px, 6.4vw, 76px); line-height: 1.06; letter-spacing: -0.022em; font-weight: 400; }
+.t-display-l { font-family: var(--font-display-stack); font-size: clamp(32px, 4vw, 46px); line-height: 1.12; letter-spacing: -0.018em; font-weight: 400; }
+.t-display-m { font-family: var(--font-display-stack); font-size: 28px; line-height: 1.2; letter-spacing: -0.014em; font-weight: 400; }
+.t-lede { font-family: var(--font-text-stack); font-size: 20px; line-height: 1.5; letter-spacing: -0.004em; }
+.t-body { font-family: var(--font-text-stack); font-size: 15px; line-height: 1.62; letter-spacing: 0; }
+.t-ui { font-family: var(--font-text-stack); font-size: 13px; line-height: 1.4; letter-spacing: 0; }
+.t-fine { font-family: var(--font-system-stack); font-size: 11.5px; line-height: 1.45; letter-spacing: 0.01em; }
+.t-eyebrow { font-family: var(--font-system-stack); font-size: 9.5px; line-height: 1.2; letter-spacing: 0.16em; text-transform: uppercase; }
+
+/* The wordmark. Never bold: Instrument Serif has one weight, and faux-bolding it is the
+   single fastest way to make the brand look counterfeit. */
+/* Display type: the argument, and only the argument. A heading that is really a label
+   belongs in Inter, whatever size it is set at.
+
+   text-rendering: geometricPrecision is load-bearing, not a flourish. Chrome rounds glyph
+   advances to whole pixels while hinting, and against this face's negative tracking the
+   rounding accumulates unevenly: "Oolio Product OS" rendered as "Prod uct OS", with a hole
+   mid-word and the word space squeezed shut. It was there at 17, 18, 20, 22 and 24px, and
+   it is gone at all five with fractional advances. Removing this line brings it back. */
+.display {
+  font-family: var(--font-display-stack);
+  font-weight: 400;
+  font-synthesis-weight: none;
+  text-rendering: geometricPrecision;
+}
+
+.wordmark {
+  font-family: var(--font-display-stack);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  font-synthesis-weight: none;
+  text-rendering: geometricPrecision; /* see .display above; the wordmark is where it showed */
+}
+

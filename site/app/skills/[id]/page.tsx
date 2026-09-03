@@ -72,11 +72,11 @@ export default async function SkillPage({ params }: Params) {
           >
             {s.stage}
           </Link>
-          <span className="mono text-[9px] tracking-[0.14em] uppercase text-[#4d5a70]">{s.badge}</span>
+          <span className="mono text-[9px] tracking-[0.14em] uppercase text-[#4b5a71]">{s.badge}</span>
         </div>
 
-        <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-[2.35rem]">{s.title}</h1>
-        <p className="mt-4 text-[17px] leading-relaxed text-[#b3c0d2]">{s.blurb}</p>
+        <h1 className="display mt-4 text-[32px] leading-[1.14] tracking-[-0.018em] sm:text-[42px]">{s.title}</h1>
+        <p className="mt-4 text-[17px] leading-relaxed text-[#b4c0d0]">{s.blurb}</p>
       </header>
 
       <div className="mt-8 rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4">
@@ -102,12 +102,12 @@ export default async function SkillPage({ params }: Params) {
           )}
           {s.phrases.length > 0 && (
             <>
-              <p className="!mt-5 !mb-2.5 text-[13px] text-[#8493aa]">Phrases that route to it:</p>
+              <p className="!mt-5 !mb-2.5 text-[13px] text-[#8593a8]">Phrases that route to it:</p>
               <ul className="flex flex-wrap gap-1.5">
                 {s.phrases.map((p) => (
                   <li
                     key={p}
-                    className="mono rounded border border-[var(--line)] bg-[#0f1521] px-2 py-1 text-[11px] text-[#b3c0d2]"
+                    className="mono rounded border border-[var(--line)] bg-[#0e1521] px-2 py-1 text-[11px] text-[#b4c0d0]"
                   >
                     {p}
                   </li>
@@ -123,7 +123,7 @@ export default async function SkillPage({ params }: Params) {
           <ul className="space-y-2.5">
             {s.excludes.map((e, i) => (
               <li key={i} className="flex gap-2.5">
-                <span className="mt-[0.55em] h-1 w-1 shrink-0 rounded-[1px] bg-[#f59e0b]" />
+                <span className="mt-[0.55em] h-1 w-1 shrink-0 rounded-[1px] bg-[#fcbd30]" />
                 <span>
                   <Linked fragments={withSkillLinks(e, s.id)} />
                 </span>
@@ -161,7 +161,7 @@ export default async function SkillPage({ params }: Params) {
             {s.systems.map((sys) => (
               <li
                 key={sys.id}
-                className="flex items-center gap-2 rounded-lg border border-[var(--line)] bg-[#0f1521] px-2.5 py-1.5 text-[12.5px]"
+                className="flex items-center gap-2 rounded-lg border border-[var(--line)] bg-[#0e1521] px-2.5 py-1.5 text-[12.5px]"
               >
                 <span className="text-[var(--ink)]">{sys.label}</span>
                 {sys.access && (
@@ -199,11 +199,11 @@ function Chain({ label, links, empty }: { label: string; links: SkillLink[]; emp
   if (links.length === 0 && !empty) return null;
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:gap-4">
-      <span className="mono w-28 shrink-0 text-[9px] tracking-[0.14em] uppercase text-[#4d5a70]">
+      <span className="mono w-28 shrink-0 text-[9px] tracking-[0.14em] uppercase text-[#4b5a71]">
         {label}
       </span>
       {links.length === 0 ? (
-        <span className="text-[13.5px] text-[#5d6a80]">{empty}</span>
+        <span className="text-[13.5px] text-[#5b6a81]">{empty}</span>
       ) : (
         <ul className="flex flex-wrap gap-1.5">
           {links.map((l) => (
@@ -211,7 +211,7 @@ function Chain({ label, links, empty }: { label: string; links: SkillLink[]; emp
               {l.kind !== "artifact" ? (
                 <Link
                   href={`/skills/${l.id}`}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--line)] bg-[#0f1521] px-2.5 py-1.5 text-[12.5px] text-[var(--ink)] transition-colors hover:border-[#33415a] hover:text-[var(--orch)]"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--line)] bg-[#0e1521] px-2.5 py-1.5 text-[12.5px] text-[var(--ink)] transition-colors hover:border-[#37465d] hover:text-[var(--orch)]"
                 >
                   {l.label}
                   {l.via && (
@@ -221,7 +221,7 @@ function Chain({ label, links, empty }: { label: string; links: SkillLink[]; emp
                   )}
                 </Link>
               ) : (
-                <span className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-[#2a5c4a] bg-[#0f1521] px-2.5 py-1.5 text-[12.5px] text-[var(--output)]">
+                <span className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-[#265937] bg-[#0e1521] px-2.5 py-1.5 text-[12.5px] text-[var(--output)]">
                   {l.label}
                 </span>
               )}
@@ -242,7 +242,7 @@ function Linked({ fragments }: { fragments: Fragment[] }) {
             {f.text}
           </Link>
         ) : f.code ? (
-          <code key={i} className="mono text-[0.9em] text-[#b3c0d2]">
+          <code key={i} className="mono text-[0.9em] text-[#b4c0d0]">
             {f.text}
           </code>
         ) : f.bold ? (
@@ -261,7 +261,7 @@ function Neighbour({ skill: s, dir }: { skill: { id: string; title: string; comm
   return (
     <Link
       href={`/skills/${s.id}`}
-      className={`group rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 transition-colors hover:border-[#33415a] ${
+      className={`group rounded-xl border border-[var(--line)] bg-[var(--panel)] p-4 transition-colors hover:border-[#37465d] ${
         dir === "next" ? "sm:text-right" : ""
       }`}
     >
@@ -273,7 +273,7 @@ function Neighbour({ skill: s, dir }: { skill: { id: string; title: string; comm
       <div className="mt-1.5 text-[14px] font-semibold transition-colors group-hover:text-[var(--orch)]">
         {s.title}
       </div>
-      <code className="mono mt-0.5 block text-[10.5px] text-[#8493aa]">{s.command}</code>
+      <code className="mono mt-0.5 block text-[10.5px] text-[#8593a8]">{s.command}</code>
     </Link>
   );
 }

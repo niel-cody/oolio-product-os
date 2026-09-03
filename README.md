@@ -4,6 +4,8 @@ The Product team's operating system for Cowork and Claude Code: the plugin colle
 
 **The site:** [oolio-product-os.vercel.app](https://oolio-product-os.vercel.app) is the front door: what the OS is, every skill, the lifecycle map, and the changelog. Generated from the skills themselves, so it cannot fall behind. See [site/](site/README.md).
 
+**The brand:** [brand/](brand/README.md) holds the mark, the palette, the typography and the voice. It is the source rather than a description of one: `brand/tokens/brand.tokens.json` generates the site's stylesheet, and a build fails if the two disagree.
+
 ## Plugins
 
 - **oolio-pm** — the PM toolkit, signal to shipped: feedback intake into JPD, idea grooming, research and competitive intelligence, the Virtual Product Council, PRD writing and grilling, Jira hygiene, Steering packs, the GTM suite, and metrics review. Skill list and count in [oolio-pm/README.md](oolio-pm/README.md); the catalogue with stages in [docs/skills-catalogue.md](docs/skills-catalogue.md). Self-contained.
@@ -52,6 +54,7 @@ oolio-pm-plugins/           local folder name (historical); the GitHub repo is n
 ├── CLAUDE.md               maintenance rules (commit-based versioning, log changes, archive)
 ├── PUBLISHING.md           how to edit, version, and publish (read this)
 ├── LICENSE                 usage terms (private repo, Oolio-internal material)
+├── brand/                  the brand: the mark, the palette, the voice, and the tokens both are built from
 ├── site/                   the Product OS site: Next.js, generated from the skills, on Vercel
 └── oolio-pm/               the plugin
     ├── .claude-plugin/plugin.json

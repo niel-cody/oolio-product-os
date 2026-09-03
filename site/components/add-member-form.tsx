@@ -32,7 +32,7 @@ export function AddMemberForm() {
           }
         })
       }
-      className="rounded-xl border border-[var(--line)] bg-[#0b1017] p-4 sm:p-5"
+      className="rounded-xl border border-[var(--line)] bg-[#09101a] p-4 sm:p-5"
     >
       <div className="grid gap-3 sm:grid-cols-[1fr_180px_150px_auto] sm:items-end">
         <label className="block">

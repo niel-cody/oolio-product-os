@@ -1,5 +1,5 @@
 {
-  "stamp": "a384b3f",
+  "stamp": "02a705f",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -4531,11 +4531,11 @@
       }
     ],
     "typeColour": {
-      "ai": "#a78bfa",
-      "orch": "#2dd4bf",
-      "human": "#f59e0b",
-      "signal": "#93a3bd",
-      "output": "#34d399"
+      "ai": "#b296fd",
+      "orch": "#44d0de",
+      "human": "#fcbd30",
+      "signal": "#95acc5",
+      "output": "#5ddd89"
     },
     "typeLabel": {
       "ai": "AI skill",
@@ -4558,19 +4558,19 @@
     },
     "kinds": {
       "source": {
-        "colour": "#93a3bd",
+        "colour": "#95acc5",
         "label": "Signal in"
       },
       "core": {
-        "colour": "#2dd4bf",
+        "colour": "#44d0de",
         "label": "The Product OS"
       },
       "record": {
-        "colour": "#a78bfa",
+        "colour": "#b296fd",
         "label": "System of record"
       },
       "vault": {
-        "colour": "#f5b942",
+        "colour": "#f07eb3",
         "label": "The vault"
       }
     },
@@ -5265,6 +5265,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-09-03",
+      "title": "A brand, written down and generated (32 skills)",
+      "heading": "2026-09-03 — A brand, written down and generated (32 skills)",
+      "body": "The Product OS had a visual design and no brand. That is not the same thing. There was no mark, no favicon beyond Next's default, nothing that said what the identity meant, and the palette was Tailwind's defaults: `teal-400`, `violet-400`, `amber-500`, `emerald-400`. It looked like every other developer tool because, measured in OKLCH, it was every other developer tool. The whole system now lives in [`brand/`](brand/), and the site is generated from it.\n\n- **The mark is the Gate.** A ring with a break in it, and a bead of amber standing in the break. The ring is the loop, the break is where the loop does not close on its own, and the bead is the person who closes it. It is the team's own belief drawn in one stroke and one dot, it works at sixteen pixels, and it is also an O. Construction is exact and recorded: r=11 on a 32 grid, the ring swept 294° from −12°, the break 66° wide centred on −45°.\n- **The palette had two collisions, and they were not cosmetic.** `--human` and `--loop` were 11° apart in hue, and `--orch` and `--output` were 19°. Six meanings, four distinguishable colours, so a gate on the map and a learning loop were telling a reader two different things in the same gold. The six are now spread 43° to 90° apart, matched in perceived lightness, and every one clears 6.5:1 on the ground. The loop moved from gold to rose, which is the largest visible change and the one with the clearest reason.\n- **The signature colour is the amber of a review gate.** It used to be teal. Amber means a person decides here, so it is spent on the gates, on the skills a person runs, and on the primary call to action, and on nothing else. That rule is the brand: the product's argument is that the loop closes on a person, and the identity says so before a word is read.\n- **Three typefaces, each allowed to say a different kind of thing.** Instrument Serif for the argument, Inter for the interface, JetBrains Mono for what the machine counted. That division is the positioning set in type: a written argument that a machine executes. Space Grotesk is retired; it was doing the job of looking distinctive without being distinctive, and it was the weaker face at the 12 and 13px where most of this interface lives.\n- **The tokens are the source and the stylesheet is generated from them**, the same rule the site already follows for the skills. `brand/tokens/brand.tokens.json` builds `site/app/brand.css`, and `npm --prefix site run check` fails if the two have drifted **or if any retired colour is still sitting in the site**. A stray old value never looks broken, which is exactly why it needs a test: it looks like a slightly different grey, and it survives for quarters.\n- **Paper mode, for documents.** Confluence, a printed one-pager, a light deck. The same nine ground names and seven accents at document values, each darkened until it clears 4.5:1 on white. A separate token set rather than a `prefers-color-scheme` query, because a light Confluence page and a dark product surface are two audiences, not one reader's preference.\n- **The systems map stops contradicting itself.** A badge reading `AMBER GATE` was drawn in violet, because it took its band's colour. It is amber now.\n- **A real favicon and a real link preview.** The tab icon is the Gate rather than Next's default triangle, and the Open Graph card carries the mark, the line in Instrument Serif and the counts in mono. The card is the single most-seen surface the brand has, because the way an internal tool spreads is somebody pasting the URL into Slack.\n- **The Flightdeck's eight domain hues were two pairs of near-duplicates**, 14° and 19° apart. Redistributed to a minimum 34° separation and one lightness register, so the legend is decodable rather than nearly decodable.\n- **Found while proving it in a browser, not by reading the CSS:** Chrome rounds glyph advances to whole pixels while hinting, and against Instrument Serif's negative tracking the rounding accumulated unevenly, so \"Oolio Product OS\" rendered as \"Prod uct OS\" with a hole mid-word and the word space squeezed shut. It was there at 17, 18, 20, 22 and 24px. `text-rendering: geometricPrecision` on `.display` and `.wordmark` fixes it at all five, and removing the line brings it back."
+    },
     {
       "date": "2026-09-01",
       "title": "Three roles, and access stops living in an environment variable (32 skills)",

@@ -25,7 +25,7 @@ export default function AboutPage() {
   return (
     <main className="mx-auto w-full max-w-3xl px-5 py-14 sm:px-6 sm:py-20">
       <div className="eyebrow">What this is</div>
-      <h1 className="mt-3 text-[26px] font-bold leading-[1.3] tracking-tight sm:text-[34px] sm:leading-[1.28]">
+      <h1 className="display mt-3 text-[29px] leading-[1.26] tracking-[-0.016em] sm:text-[38px] sm:leading-[1.22]">
         {fill(a.kicker)}
       </h1>
 
@@ -66,7 +66,7 @@ export default function AboutPage() {
       ))}
 
       <section className="mt-16 border-t border-[var(--line)] pt-9">
-        <p className="text-[28px] font-bold tracking-tight sm:text-[34px]">{a.line}</p>
+        <p className="display text-[31px] tracking-[-0.016em] sm:text-[38px]">{a.line}</p>
         <p className="mono mt-3 text-[10px] leading-relaxed text-[var(--muted-ink)]">{fill(a.footnote)}</p>
       </section>
 
@@ -76,14 +76,14 @@ export default function AboutPage() {
           In Claude Code, add the marketplace and install the plugin. You get updates automatically,
           because it is versioned by commit rather than by a number someone has to remember to bump.
         </p>
-        <pre className="mono mt-4 overflow-x-auto rounded-lg border border-[var(--line)] bg-[var(--panel)] p-4 text-[12px] leading-relaxed text-[#c3ccdb]">
+        <pre className="mono mt-4 overflow-x-auto rounded-lg border border-[var(--line)] bg-[var(--panel)] p-4 text-[12px] leading-relaxed text-[#c3ccda]">
 {`/plugin marketplace add niel-cody/oolio-product-os
 /plugin install oolio-pm@oolio-product-os`}
         </pre>
         <p className="mt-4 text-[14px] leading-relaxed text-[var(--muted-ink)]">
           The repo is private, so ask Niel for collaborator access first. In Cowork, try the same
           marketplace path under Customize → Plugins; if it fails to sync, ask Niel for the current{" "}
-          <span className="mono text-[12px] text-[#c3ccdb]">oolio-pm.zip</span> and upload that
+          <span className="mono text-[12px] text-[#c3ccda]">oolio-pm.zip</span> and upload that
           instead.
         </p>
       </section>

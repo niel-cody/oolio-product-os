@@ -1,13 +1,27 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import os from "@/data/os.json";
 import { getMember } from "@/lib/members";
 
-// The map's typefaces, so the app and the map read as one design rather than two.
-const sans = Space_Grotesk({ variable: "--font-sans", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"], weight: ["400", "500", "600"] });
+/**
+ * The brand's three voices, and each says a different kind of thing (brand/typography.md).
+ *
+ *   display  the argument. What a person believes
+ *   text     the interface. What a person reads and clicks
+ *   system   the machine. What was counted, stamped or run
+ *
+ * That split is the positioning set in type: the OS is a written argument a machine executes,
+ * so the argument is a serif and the execution is a mono. Instrument Serif has one weight and
+ * no bold to fall back on, which is deliberate; `.wordmark` blocks synthesis so a stray
+ * font-weight fails visibly rather than smearing the outline.
+ *
+ * The variables are consumed by app/brand.css, which builds the fallback stacks around them.
+ */
+const display = Instrument_Serif({ variable: "--font-display", subsets: ["latin"], weight: ["400"], style: ["normal", "italic"], display: "swap" });
+const text = Inter({ variable: "--font-text", subsets: ["latin"], display: "swap" });
+const system = JetBrains_Mono({ variable: "--font-system", subsets: ["latin"], weight: ["400", "500", "600"], display: "swap" });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://oolio-product-os.vercel.app";
 
@@ -38,6 +52,12 @@ export const metadata: Metadata = {
     url: SITE_URL,
     locale: "en_AU",
   },
+  icons: {
+    // app/icon.svg is picked up by convention; naming it here as well means the tab icon is
+    // the Gate rather than Next's default even on the routes that set their own metadata.
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-icon.png" }],
+  },
   twitter: {
     card: "summary_large_image",
     title: "The product process, written down and running.",
@@ -53,7 +73,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const member = await getMember();
 
   return (
-    <html lang="en-AU" className={`dark ${sans.variable} ${mono.variable} h-full antialiased`}>
+    <html lang="en-AU" className={`dark ${display.variable} ${text.variable} ${system.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <SiteHeader
           stamp={os.stamp}

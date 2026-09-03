@@ -1,6 +1,7 @@
-/* The map's own styles, carried over unchanged in look. Two mechanical edits only:
-   the original --muted (a text colour) is --muted-ink here because shadcn already uses
-   --muted for a surface, and the two font families now come from the app's variables. */
+/* The map's own styles. The drawing is unchanged; what moved is the palette, which now comes
+   from brand/tokens/brand.tokens.json by way of app/brand.css, and the type, which is the
+   brand's three voices. The original --muted (a text colour) is --muted-ink here because
+   shadcn already uses --muted for a surface. */
 
 .mapstage svg#map { display: block; width: 100%; height: 100%; touch-action: none; }
 
@@ -15,7 +16,7 @@
 #legend .row { display: flex; gap: 14px; flex-wrap: wrap; }
 #legend .k {
   display: flex; align-items: center; gap: 5px;
-  font-family: var(--font-mono), monospace; font-size: 9.5px; color: #c3ccdb;
+  font-family: var(--font-mono), monospace; font-size: 9.5px; color: #c3ccda;
 }
 #legend .dot { width: 9px; height: 9px; border-radius: 3px; }
 
@@ -29,18 +30,24 @@
   font-family: var(--font-mono), monospace; font-size: 10px; color: var(--muted-ink);
   letter-spacing: .05em; gap: 16px; flex-wrap: wrap;
 }
-#foot b { color: #aeb9cc; font-weight: 600; }
+#foot b { color: #adb9cb; font-weight: 600; }
 
 /* svg element classes */
 .colhead {
   font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: .16em;
   fill: var(--muted-ink); text-transform: uppercase;
 }
-.node-label { font-family: var(--font-sans), sans-serif; font-weight: 600; font-size: 14px; fill: var(--ink); }
-.node-note { font-family: var(--font-mono), monospace; font-size: 9px; fill: #8493aa; }
+/* 13.5px, not 14. Inter is a little wider than the Space Grotesk it replaced, and the
+   longest label on the map ("Behavioural Alchemist") already sat close to the right edge of a
+   176px node. Half a pixel is invisible and the overflow is not. */
+.node-label { font-family: var(--font-sans), sans-serif; font-weight: 600; font-size: 13.5px; letter-spacing: -0.006em; fill: var(--ink); }
+.node-note { font-family: var(--font-mono), monospace; font-size: 9px; fill: #8593a8; }
 .badge-txt { font-family: var(--font-mono), monospace; font-size: 8.5px; font-weight: 500; }
-.gate-txt { font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: .1em; fill: var(--loop); }
-.gate-who { font-family: var(--font-mono), monospace; font-size: 9px; fill: #c9932f; }
+/* A gate is amber and a loop is rose, and until the rebrand both were the same gold: the old
+   --human and --loop were 11 degrees apart in OKLCH, so the map told a reader two different
+   things in one colour. brand/colour.md. */
+.gate-txt { font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: .1em; fill: var(--gate); }
+.gate-who { font-family: var(--font-mono), monospace; font-size: 9px; fill: #b78a2c; }
 .loop-txt { font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: .12em; fill: var(--loop); }
 
 .wire {

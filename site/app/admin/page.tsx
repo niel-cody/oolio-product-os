@@ -25,7 +25,7 @@ export default async function AdminPage() {
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-12 sm:px-8 sm:py-16">
       <div className="eyebrow">Access</div>
-      <h1 className="mt-3 text-[28px] font-bold tracking-tight sm:text-[34px]">Members</h1>
+      <h1 className="display mt-3 text-[31px] tracking-[-0.016em] sm:text-[38px]">Members</h1>
       <p className="mt-3 max-w-[640px] text-[14.5px] leading-relaxed text-[var(--muted-ink)]">
         Access is the presence of a row. Someone not on this list cannot sign in at all, and
         an empty list would lock everybody out rather than letting everybody in. Add people
@@ -47,7 +47,7 @@ export default async function AdminPage() {
         <h2 className="text-[15px] font-semibold tracking-tight">What each role can do</h2>
         <ul className="mt-3 grid gap-px overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--line)] sm:grid-cols-3">
           {ROLES.map((role) => (
-            <li key={role} className="bg-[#0b1017] p-4">
+            <li key={role} className="bg-[#09101a] p-4">
               <div className="text-[13.5px] font-semibold text-[var(--ink)]">
                 {ROLE_LABEL[role]}
               </div>

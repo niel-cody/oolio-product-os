@@ -20,7 +20,7 @@ export function CopyCommand({ command, hint }: { command: string; hint?: string 
 
   return (
     <div>
-      <div className="flex items-stretch overflow-hidden rounded-lg border border-[var(--line)] bg-[#0f1521]">
+      <div className="flex items-stretch overflow-hidden rounded-lg border border-[var(--line)] bg-[#0e1521]">
         <code className="mono flex-1 overflow-x-auto whitespace-nowrap px-3.5 py-2.5 text-[13px] text-[var(--ink)]">
           {command}
         </code>

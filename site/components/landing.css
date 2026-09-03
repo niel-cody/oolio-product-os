@@ -23,7 +23,7 @@
     radial-gradient(120% 90% at 18% 12%, rgba(45, 212, 191, 0.08), transparent 62%),
     radial-gradient(110% 80% at 82% 78%, rgba(167, 139, 250, 0.1), transparent 58%),
     radial-gradient(90% 70% at 50% 45%, rgba(147, 163, 189, 0.05), transparent 70%),
-    #070b11;
+    #03070f;
 }
 
 /* ---------- the deep field: texture, not the argument ---------- */
@@ -89,7 +89,7 @@
   text-align: left;
   border: 1px solid var(--line);
   border-radius: 9px;
-  background: #0c111a;
+  background: #0a111b;
   color: var(--muted-ink);
   font-family: inherit;
   font-size: 12.5px;
@@ -108,7 +108,7 @@
    flows clears the old one instantly and stages the new one — deliberate in, snap out. */
 .lx-stage[data-on="true"] {
   border-color: var(--sc);
-  background: #131c2a;
+  background: #131c29;
   color: var(--ink);
   box-shadow: 0 0 0 1px var(--sc) inset;
   transition-delay: var(--d, 0ms);
@@ -126,7 +126,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .lx-stage:hover { opacity: 1; color: var(--ink); border-color: #33415a; }
+  .lx-stage:hover { opacity: 1; color: var(--ink); border-color: #37465d; }
 }
 
 /* Press feedback. Instant, and it fires on pointer-down rather than on release, which is
@@ -156,7 +156,7 @@
   text-align: left;
   border: 1px solid var(--line);
   border-radius: 9px;
-  background: #0c111a;
+  background: #0a111b;
   color: var(--muted-ink);
   font-family: inherit;
   cursor: pointer;
@@ -167,13 +167,13 @@
     transform 160ms var(--ease-out);
 }
 @media (hover: hover) and (pointer: fine) {
-  .lx-flow:hover { border-color: #33415a; background: #111a27; color: var(--ink); }
+  .lx-flow:hover { border-color: #37465d; background: #111a27; color: var(--ink); }
 }
 .lx-flow:active { transform: scale(0.98); }
 .lx-flow:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 .lx-flow[aria-selected="true"] {
   border-color: var(--sc);
-  background: #131c2a;
+  background: #131c29;
   color: var(--ink);
   box-shadow: 0 0 0 1px var(--sc) inset;
 }
@@ -219,8 +219,8 @@
 }
 @media (hover: hover) and (pointer: fine) {
   .lx-card:hover {
-    border-color: #33415a;
-    background: #101723;
+    border-color: #37465d;
+    background: #0f1723;
     transform: translate3d(0, -2px, 0);
   }
 }

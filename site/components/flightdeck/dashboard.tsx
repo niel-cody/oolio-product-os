@@ -48,7 +48,7 @@ export function Dashboard({ snapshot }: { snapshot: Snapshot }) {
           <div className="eyebrow">
             {formatDate(snapshot.for_date, snapshot.timezone)} · {city}
           </div>
-          <h1 className="mt-2 max-w-[820px] text-[22px] font-semibold leading-[1.25] tracking-[-0.01em] sm:text-[26px]">
+          <h1 className="display mt-2 max-w-[820px] text-[24px] leading-[1.22] tracking-[-0.014em] sm:text-[29px]">
             {headline.text}
           </h1>
         </div>
