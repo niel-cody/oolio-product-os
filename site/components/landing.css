@@ -237,3 +237,234 @@
   .lx-stage:hover { transform: none; }
   .plate .ink { transition: none; }
 }
+
+/* ============================================================================
+   Reprinted 2026-09-10. The page stopped being an install sheet and became a pitch.
+
+   What went: the marketplace command in the hero, the three-step setup section, and
+   every mention of the company the OS was first written for. What arrived: the crew,
+   the harness, the brain, the before-and-after, and a press check of questions.
+
+   Everything below follows the same two rules as everything above it — keylines rather
+   than radii, and transform/opacity only — so nothing here needs its own motion story.
+   ========================================================================== */
+
+/* ---------- the hero findings card ---------- */
+/* A printed report rather than a screenshot of an app: keyline, hairline rules between
+   rows, mono furniture. The halftone washes sit behind it so the ink still shows without
+   ever crossing a word a reader has to parse. */
+.lx-card {
+  position: relative;
+  z-index: 2;
+  border: var(--keyline);
+  background: var(--stock-2);
+  box-shadow: var(--press-shadow);
+}
+.lx-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 13px;
+  border-bottom: var(--keyline);
+  background: var(--stock-3);
+}
+.lx-row {
+  padding: 12px 13px;
+  border-bottom: var(--hairline);
+}
+.lx-row:last-child { border-bottom: 0; }
+
+/* A finding's classification. Never yellow unless a person is the one deciding: the third
+   drum means a gate and nothing else on this site. */
+.lx-chip {
+  font-family: var(--font-system-stack);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 4px 6px;
+  border: 1px solid var(--k);
+  color: var(--k);
+  white-space: nowrap;
+}
+.lx-chip-fill { background: var(--yellow); }
+
+/* The tick that lands when the card scrolls in. One stroke, drawn, then still. */
+.lx-tick {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 22;
+  animation: lx-tick 520ms var(--ease-out) 300ms forwards;
+}
+@keyframes lx-tick { to { stroke-dashoffset: 0; } }
+
+/* ---------- the before-and-after ---------- */
+/* Ruled like a rate card. The right-hand figure is the argument, so it is the only thing
+   on the row set in the black drum at weight. */
+.lx-job {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 86px 96px;
+  align-items: baseline;
+  gap: 14px;
+  padding: 15px 0;
+  border-bottom: var(--hairline);
+}
+.lx-job:last-child { border-bottom: 0; }
+@media (max-width: 640px) {
+  .lx-job {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 14px;
+  }
+  .lx-job > :nth-child(1) { grid-column: 1 / -1; }
+}
+
+/* ---------- the crew ---------- */
+.lx-agent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 13px;
+  text-align: left;
+  background: var(--stock);
+  color: var(--soft-ink);
+  font-family: inherit;
+  cursor: pointer;
+  border: 0;
+  border-bottom: var(--hairline);
+  transition:
+    background-color var(--dur-state) var(--ease-out),
+    color var(--dur-state) var(--ease-out);
+}
+.lx-agent:last-child { border-bottom: 0; }
+.lx-agent[aria-selected="true"] {
+  background: var(--stock-3);
+  color: var(--k);
+}
+/* The selected specialist carries its ink on the leading edge, the same device the
+   lifecycle uses for a stage on the path. One idiom, used twice. */
+.lx-agent[aria-selected="true"]::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--sc, var(--blue));
+}
+@media (hover: hover) {
+  .lx-agent:hover:not([aria-selected="true"]) { background: var(--stock-2); color: var(--k); }
+}
+
+.lx-agent-panel { animation: lx-purpose-in 300ms var(--ease-out) forwards; }
+
+/* WATCHES / USES / DELIVERS. A spec block, set the way a colophon is. */
+.lx-spec {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 10px 14px;
+  align-items: baseline;
+  padding: 11px 0;
+  border-bottom: var(--hairline);
+}
+.lx-spec:last-of-type { border-bottom: 0; }
+
+/* ---------- the harness ---------- */
+/* Each capability is a claim with a small printed proof under it. The proof is drawn from
+   nothing: it is illustrative, it says so, and it ships no data. */
+.lx-cap { display: flex; flex-direction: column; }
+.lx-mock {
+  margin-top: 14px;
+  border: var(--keyline);
+  background: var(--stock);
+  padding: 11px 12px;
+  flex: 1;
+}
+.lx-mock-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--rule);
+  font-family: var(--font-system-stack);
+  font-size: 0.68rem;
+  color: var(--soft-ink);
+}
+.lx-mock-row:last-child { border-bottom: 0; }
+.lx-mock-k { color: var(--k); font-weight: 500; }
+
+/* A measure bar. Width is the only thing that varies, and it is set inline from the copy
+   so the bar cannot drift from the number printed beside it. */
+.lx-bar {
+  height: 6px;
+  background: var(--stock-3);
+  border: 1px solid var(--k);
+  overflow: hidden;
+}
+.lx-bar > i {
+  display: block;
+  height: 100%;
+  background: var(--sc, var(--blue));
+  transform-origin: left;
+  transform: scaleX(var(--v, 0));
+  transition: transform 900ms var(--ease-out) var(--d, 0ms);
+}
+
+/* ---------- the brain ---------- */
+/* Chips orbiting a centre, laid out by the grid rather than by absolute positions, so the
+   thing reflows on a phone instead of collapsing into a pile. */
+.lx-brain {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 900px) {
+  .lx-brain { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.lx-know {
+  border: var(--keyline);
+  background: var(--stock);
+  padding: 11px 12px;
+}
+
+/* ---------- the press check ---------- */
+/* Native <details>, because a hand-built accordion owes the keyboard and the screen reader
+   things this element already does correctly. */
+.lx-q {
+  border-bottom: var(--hairline);
+}
+.lx-q:last-child { border-bottom: 0; }
+.lx-q > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 15px 0;
+  cursor: pointer;
+  list-style: none;
+  color: var(--k);
+  font-weight: 500;
+  transition: color var(--dur-state) var(--ease-out);
+}
+.lx-q > summary::-webkit-details-marker { display: none; }
+.lx-q > summary::after {
+  content: "+";
+  margin-left: auto;
+  font-family: var(--font-system-stack);
+  color: var(--muted-ink);
+  transition: transform var(--dur-state) var(--ease-out);
+}
+.lx-q[open] > summary::after { content: "\2212"; }
+@media (hover: hover) {
+  .lx-q > summary:hover { color: var(--pink-blue); }
+}
+.lx-a { animation: lx-purpose-in 260ms var(--ease-out) forwards; }
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .lx-agent { transition: none; }
+  .lx-agent-panel,
+  .lx-a { animation: none; }
+  .lx-tick { animation: none; stroke-dashoffset: 0; }
+  .lx-bar > i { transition: none; }
+  .lx-q > summary,
+  .lx-q > summary::after { transition: none; }
+}

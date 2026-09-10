@@ -19,12 +19,12 @@ import { ROLE_LABEL, type Role } from "@/lib/roles";
  * bounce to /login, which reads as a broken site rather than a private one. So signed out is
  * the wordmark and the two doors, and the nav appears once it can actually be used.
  *
- * Signed out, Install is the primary and Sign in the secondary, which is the reverse of what
- * this header used to do. Signing in gets a visitor the catalogue; installing gets them the
- * thing. An earlier version faded a lone Sign in button into the ribbon once the hero
- * scrolled away, because the hero was the only place a call to action existed; the rebuilt
- * landing page carries one in the hero, at the setup steps and at the foot, so the scroll
- * listener that drove it is gone.
+ * Signed out there is exactly one door, and it is Get access. This header briefly offered
+ * Install as the primary action, which pointed a stranger at a shell command before anything
+ * had made the case for running it; the landing page is a pitch now and carries no install
+ * instructions at all. An older version also faded a lone Sign in button into the ribbon once
+ * the hero scrolled away, because the hero was the only place a call to action existed; the
+ * landing page carries one in the hero, at the crew, and at the foot, so that listener is gone.
  */
 const NAV = [
   { href: "/app/today", label: "Flightdeck" },
@@ -69,9 +69,14 @@ export function SiteHeader({
         {/* The house lockup: the Gate, then Pixie Dust Industries in Syne 800 uppercase.
             Not misregistered — the budget is one misregistration per screen and the hero
             spends it, so the header carries the clean plate. */}
-        <Link href="/" className="flex items-center gap-[7px] shrink-0 lx-press" aria-label="Pixie Dust Industries">
-          <GateMark size={19} className="text-[var(--k)]" />
-          <span className="wordmark text-[14px] leading-none">Pixie Dust Industries</span>
+        {/* Set a step down on a phone. Three words at 14px plus a call to action does not fit
+            375px, and the button was the half that fell off the edge. */}
+        <Link href="/" className="flex items-center gap-[6px] shrink-0 lx-press sm:gap-[7px]" aria-label="Pixie Dust Industries">
+          <GateMark size={17} className="text-[var(--k)] sm:hidden" />
+          <GateMark size={19} className="hidden text-[var(--k)] sm:block" />
+          <span className="wordmark text-[11.5px] leading-none sm:text-[14px]">
+            Pixie Dust Industries
+          </span>
         </Link>
 
         {signedIn && (
@@ -129,16 +134,15 @@ export function SiteHeader({
             </>
           ) : (
             <>
-              {/* Not on the sign-in page itself, where it is a link to where you already
-                  are. Install stays, because it is the thing to do next from here. */}
+              {/* One door, not two. The header used to offer Install as the primary action,
+                  which sent a stranger to a shell command before the page had made its case;
+                  the landing page no longer carries install instructions at all. On the
+                  sign-in page itself this would be a link to where you already are. */}
               {pathname !== "/login" && (
-                <Button asChild size="sm" variant="ghost" className="h-8 text-[12px]">
-                  <Link href="/login">Sign in</Link>
+                <Button asChild size="sm" className="h-8 text-[12px]">
+                  <Link href="/login">Get access</Link>
                 </Button>
               )}
-              <Button asChild size="sm" className="h-8 text-[12px]">
-                <Link href="/#install">Install</Link>
-              </Button>
             </>
           )}
 

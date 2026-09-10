@@ -15,7 +15,7 @@ import os from "@/data/os.json";
  * the wordmark, the headline and three numbers. No skill names, no stages, nothing that
  * lib/landing-sky.ts would not already hand the page.
  */
-export const alt = "Pixie Dust Industries, Product OS: the product process, written down and running";
+export const alt = "Pixie Dust Industries, Product OS: everything but the deciding";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -118,9 +118,9 @@ export default async function Image() {
   }
 
   const facts = [
-    [String(os.totals.skills), "skills"],
+    [String(os.totals.skills), "specialists"],
     [String(os.map.columns.length), "lifecycle stages"],
-    [String(os.map.flows.length), "end-to-end flows"],
+    [String(os.map.flows.length), "end-to-end paths"],
   ];
 
   return new ImageResponse(
@@ -170,7 +170,7 @@ export default async function Image() {
         <div style={{ display: "flex", flexDirection: "column" }}>
           {/* Broken by hand, one line per box: left to wrap on its own the headline breaks
               wherever the container happens to end. */}
-          {["The product process,", "written down and running."].map((line) => (
+          {["Everything but", "the deciding."].map((line) => (
             <div
               key={line}
               style={{
@@ -199,7 +199,7 @@ export default async function Image() {
             </div>
           ))}
           <div style={{ marginLeft: "auto", fontFamily: MONO, fontSize: 16, color: INK, background: PINK, padding: "5px 10px" }}>
-            oolio-product-os.vercel.app
+            Pixie Dust Industries
           </div>
         </div>
       </div>

@@ -28,9 +28,9 @@ const system = DM_Mono({ variable: "--font-system", subsets: ["latin"], weight: 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://oolio-product-os.vercel.app";
 
 const DESCRIPTION =
-  "The Oolio Product team's operating system, written down and made executable: " +
-  `${os.totals.skills} skills that carry a product decision from the first signal to the ` +
-  "measured outcome, running against the tools the team already uses.";
+  "The product process, written down and running: " +
+  `${os.totals.skills} specialists that carry a product decision from the first signal to ` +
+  "the honest look back six weeks later, against the tools your team already uses.";
 
 /**
  * Metadata, including the link preview.
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Pixie Dust Industries",
-    title: "The product process, written down and running.",
+    title: "Everything but the deciding.",
     description: DESCRIPTION,
     url: SITE_URL,
     locale: "en_AU",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "The product process, written down and running.",
+    title: "Everything but the deciding.",
     description: DESCRIPTION,
   },
 };

@@ -65,13 +65,12 @@ export function SignInForm() {
 
   return (
     <form onSubmit={onSubmit} className="mt-8">
-      {/* Not a dead end. Someone who gets here has an Oolio address and wanted in, which
-          makes them exactly the person the plugin is for — and the plugin needs no
-          allowlist. Saying only "ask Niel" was losing them at the last step. */}
+      {/* Not a dead end. Someone who gets here wanted in, which makes them exactly the
+          person this is for. Saying only "ask Niel" was losing them at the last step. */}
       {denied && (
         <p className="mb-4 rounded-md border border-[var(--destructive)]/40 bg-[var(--destructive)]/10 px-3 py-2 text-[12.5px] leading-relaxed text-[var(--ink)]">
-          That account is not on the access list. Ask Niel to add you — or skip it, because
-          the skills themselves do not need one.
+          That address is not on the access list yet. Ask Niel to add you, and it is
+          usually the same day.
         </p>
       )}
       {forbidden && !denied && (
@@ -93,7 +92,7 @@ export function SignInForm() {
       )}
 
       <label htmlFor="email" className="eyebrow block">
-        Oolio email
+        Work email
       </label>
       <input
         id="email"
@@ -103,7 +102,7 @@ export function SignInForm() {
         autoFocus
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="you@oolio.com"
+        placeholder="you@yourcompany.com"
         className="mono mt-2 w-full rounded-md border border-[var(--line)] bg-[var(--panel)] px-3 py-2.5 text-[13px] text-[var(--ink)] outline-none placeholder:text-[var(--muted-ink)]/60 focus:border-[var(--primary)]"
       />
 

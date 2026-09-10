@@ -14,8 +14,9 @@ import os from "@/data/os.json";
  *     vocabulary; naming them is what stops the page reading as generic.
  *   - the 6 flow names and the stages each one crosses. Stage indices only, never the
  *     skill names or step descriptions on the path.
- *   - the 5 skills in SHOWCASE, with hand-written public copy rather than the catalogue's
- *     own text, so trigger phrases never reach the open web.
+ *   - the 5 skills in SHOWCASE: name and stage only, with hand-written public copy rather
+ *     than the catalogue's own text, so trigger phrases never reach the open web. NOT the
+ *     slash command, which carries the plugin namespace.
  *
  * Still gated, and not derivable from anything here: the other 27 skill names, every
  * skill's triggers and excludes, the systems map, and the changelog.
@@ -68,7 +69,6 @@ export type FlowRail = {
 
 export type Showcase = {
   id: string;
-  command: string;
   title: string;
   stage: string;
   /** One line, written for a stranger. Never the catalogue blurb, which carries triggers. */
@@ -203,6 +203,10 @@ export function getShowcase(): Showcase[] {
   return order.flatMap((id) => {
     const c = byId.get(id);
     if (!c || !REVEALED.has(id)) return [];
-    return [{ id, command: c.command, title: c.title, stage: c.stage, line: SHOWCASE_COPY[id] ?? "" }];
+    // Deliberately not `c.command`. The slash command carries the plugin namespace, which
+    // names the company this was first written for, and the landing page does not. It also
+    // travelled in the payload long after the page stopped printing it, which is the same
+    // class of invisible leak as the star chart's React keys.
+    return [{ id, title: c.title, stage: c.stage, line: SHOWCASE_COPY[id] ?? "" }];
   });
 }

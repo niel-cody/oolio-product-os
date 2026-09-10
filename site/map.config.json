@@ -92,7 +92,7 @@
       "start": "storm-research"
     },
     "Grooming": {
-      "purpose": "The idea exists but is not yet fit to be read, prioritised or decided. Bring it up to Oolio's standard so the next person does not have to ask what it means.",
+      "purpose": "The idea exists but is not yet fit to be read, prioritised or decided. Bring it up to the house standard so the next person does not have to ask what it means.",
       "start": "jpd-idea-groomer"
     },
     "Definition": {

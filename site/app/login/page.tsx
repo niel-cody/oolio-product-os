@@ -5,9 +5,9 @@ import { ArrowRight } from "lucide-react";
 import { SignInForm } from "@/components/sign-in-form";
 
 export const metadata: Metadata = {
-  title: "Sign in",
+  title: "Get access",
   description:
-    "Sign in to the Oolio Product OS: the full skill catalogue, the lifecycle map, the " +
+    "Sign in to the Product OS: the full catalogue of specialists, the lifecycle map, the " +
     "changelog, and Flightdeck.",
 };
 
@@ -15,27 +15,29 @@ export const metadata: Metadata = {
  * The sign-in page, which is the second half of the landing page's funnel and used to
  * quietly undo the first half.
  *
- * Two problems, both fixed here. It described Flightdeck — a morning dashboard — to a
- * visitor who had just been told about thirty-two skills and a lifecycle map, so the door
- * did not match the room it was said to open. And it dead-ended: "ask Niel" was the only
- * instruction for anyone not on the access list, which today is nearly everyone.
+ * Three things have been fixed here over time. It described Flightdeck — a morning
+ * dashboard — to a visitor who had just been told about a crew of specialists and a
+ * lifecycle map, so the door did not match the room it was said to open. It dead-ended:
+ * "ask Niel" was the only instruction for anyone not on the access list, which today is
+ * nearly everyone. And it named the company the OS was first written for, which the landing
+ * page no longer does.
  *
- * The escape hatch matters more than it looks. Signing in is not how you get the Product OS
- * — installing is, and installing needs no allowlist at all. Sending someone away from this
- * page with nothing was losing exactly the people the onboarding push is aimed at.
+ * The escape hatch is now a link back to the argument rather than to an install command.
+ * The landing page carries no shell commands at all, so sending someone from here to
+ * "/#install" pointed at an anchor that does not exist.
  */
 export default function LoginPage() {
   return (
     <main className="flex flex-1 items-center justify-center px-5 py-16">
       <div className="w-full max-w-[420px]">
-        <div className="eyebrow">Oolio Product OS</div>
+        <div className="eyebrow">Pixie Dust Industries</div>
         <h1 className="display mt-3 text-[29px] leading-[1.16] tracking-[-0.016em]">
-          Sign in
+          Get access
         </h1>
         <p className="mt-2.5 text-[14px] leading-relaxed text-[var(--muted-ink)]">
-          Behind the door: every skill with what triggers it, the lifecycle map, the
+          Behind the door: every specialist with what triggers it, the lifecycle map, the
           changelog, and Flightdeck — where your day goes, what only you can decide, and what
-          is quietly slipping. Sign in with your Oolio address and we will email you a link.
+          is quietly slipping. Give us your work address and we will email you a link.
         </p>
 
         <Suspense fallback={<div className="mt-8 h-[120px]" />}>
@@ -44,14 +46,14 @@ export default function LoginPage() {
 
         <div className="mt-8 border-t border-[var(--line)] pt-5">
           <p className="text-[12.5px] leading-relaxed text-[var(--muted-ink)]">
-            Access is granted per person, and the site is the reference rather than the tool.
-            You do not need an account to use the skills.
+            Access is granted per person while this is still young, so a first-time address
+            may take a day. Nothing to configure and no card.
           </p>
           <Link
-            href="/#install"
+            href="/#crew"
             className="lx-press mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-[var(--orch)] hover:underline"
           >
-            Install the plugin instead <ArrowRight className="h-3.5 w-3.5" />
+            See what is behind it first <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </div>
