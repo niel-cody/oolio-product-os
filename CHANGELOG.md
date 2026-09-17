@@ -2,6 +2,17 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-09-17 — Cowork was silently dropping two skills, and the limit is not 1024 (33 skills)
+
+Cowork had been showing 31 of 33 skills. Not a stale cache and not a sync failure: it synced correctly, on demand, and then quietly served two fewer skills than the repo contains. `signal-radar` was one of them, so the flagship research skill had been invisible in Cowork for weeks while appearing perfectly healthy in Claude Code and in every count this repo checks.
+
+- **The cause is the `description` length, and the real limit is lower than the documented one.** The two skills Cowork dropped were exactly the two whose descriptions exceeded roughly 971 characters: `signal-radar` at 1003 and `competitor-watch` at 981. `behavioural-alchemist` at 971 loaded fine. That brackets Cowork's real cutoff between 971 and 981, well under the 1024 the plugin reference documents.
+- **It fails silently, which is the expensive part.** No warning, no error, no entry in any log. The skill is simply absent from the list, and the plugin card's skill count is the only place the loss shows up at all. The arithmetic is what exposed it: pushing one new skill moved Cowork from 30 to 31 while the repo went from 32 to 33, and a gap that stays at exactly two under a changing total is a filter, not a cache.
+- **Both descriptions trimmed**, prose cut and every trigger phrase kept, since the description is what routes a request: `signal-radar` 1003 to 928, `competitor-watch` 981 to 914.
+- **CLAUDE.md now carries the real numbers** instead of the documented ones, with 950 as the ceiling and 900 as the target. Nine skills currently sit between 900 and 971; they load today and are flagged as the first to break if the limit tightens again.
+- **The 28 July entry below trimmed two descriptions to fit "the 1024-character limit".** That was the same failure, diagnosed against the documented number rather than the real one, which is why it came back.
+- **Worth generalising:** this repo's own `--check` validates counts across six files and would never have caught this, because every one of those files agreed with the repo. Only the number Cowork reported disagreed. A drift check that reads only your own sources cannot see a consumer silently rejecting your input.
+
 ## 2026-09-17 — The CRM gets a standing watch: `hubspot-sweep` (33 skills)
 
 Roughly 1,200 support tickets a day land in HubSpot across fifty pipelines, and almost none of it reaches discovery. Not because nobody cares, but because the product signal inside that volume is a thin seam and reading for it is nobody's job. The result is the slow version of discovery: a need becomes a pattern, the pattern becomes a cancellation, and the cancellation becomes a post-mortem. **hubspot-sweep** is the daily watch that makes it the fast version instead.

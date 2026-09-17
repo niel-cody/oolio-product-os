@@ -2,18 +2,18 @@
 name: competitor-watch
 description: >-
   Run Oolio's competitor intelligence: maintain one living dossier per
-  competitor in the Brain, sweep the watchlist for changes on a weekly
-  cadence and report only the deltas, deep-dive a competitor's reviews and
-  communities for weaknesses, and build Fact-Impact-Act battlecards. Trigger
-  when the user says "run the sweep", "competitor sweep", "watch the
-  competition", "what's changed in the market", "update the <name> dossier",
-  "deep-dive <competitor>", "build a battlecard for <competitor>", "what are
-  <competitor>'s weaknesses", "what are competitors marketing", "check their
-  campaigns/socials", "is <claim> real or marketing", or asks what a rival
-  is doing, shipping, pricing, hiring, or campaigning on. Routes product-gap findings to `feedback-to-idea` and
-  idea evidence to `signal-radar`; never writes Jira itself. Do NOT trigger
-  for validating a specific JPD idea (use signal-radar), a general research
-  briefing (use storm-research), or win/loss deal analysis (use win-loss).
+  competitor in the Brain, sweep the watchlist weekly and report only the
+  deltas, deep-dive a competitor's reviews and communities for weaknesses, and
+  build Fact-Impact-Act battlecards. Trigger when the user says "run the sweep",
+  "competitor sweep", "watch the competition", "what's changed in the market",
+  "update the <name> dossier", "deep-dive <competitor>", "build a battlecard for
+  <competitor>", "what are <competitor>'s weaknesses", "what are competitors
+  marketing", "check their campaigns/socials", "is <claim> real or marketing",
+  or asks what a rival is doing, shipping, pricing, or hiring. Routes
+  product-gap findings to `feedback-to-idea` and idea evidence to
+  `signal-radar`. Do NOT trigger for validating a specific JPD idea (use
+  signal-radar), a general research briefing (use storm-research), or win/loss
+  deal analysis (use win-loss).
 ---
 
 # Competitor watch
