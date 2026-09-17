@@ -11,7 +11,7 @@ page is that rule made explicit, with the reasoning and some worked examples.
 3. **No buzzwords.** Not leverage, not seamless, not empower, not unlock, not supercharge, not
    "AI-powered". If a sentence survives deleting the adjective, delete it.
 4. **Short declarative sentences.** Say the thing. Then say the next thing.
-5. **Concrete nouns and real numbers.** "Thirty-two skills" beats "a comprehensive suite".
+5. **Concrete nouns and real numbers.** "Thirty-three skills" beats "a comprehensive suite".
 6. **Never claim what has not been measured.** The brand's whole credibility rests on the
    counts being generated rather than typed.
 7. **Second person for instructions, first person plural for beliefs.** "Add it to the plugin's
@@ -23,7 +23,7 @@ page is that rule made explicit, with the reasoning and some worked examples.
 | Instead of | Write |
 |---|---|
 | Leverage our AI-powered suite to supercharge discovery | Turn signal into a shaped idea |
-| A comprehensive framework for product excellence | Thirty-two skills, from the first signal to the measured outcome |
+| A comprehensive framework for product excellence | Thirty-three skills, from the first signal to the measured outcome |
 | Seamlessly integrates with your existing workflow | Runs against Jira, Confluence and JPD, which the team already uses |
 | Empowering PMs to do their best work | It removes the tax on being a product manager |
 | Our innovative solution unlocks new possibilities | Nothing reaches Jira or Confluence unreviewed |
