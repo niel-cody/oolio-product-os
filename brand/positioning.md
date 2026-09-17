@@ -3,7 +3,7 @@
 ## What it is
 
 The Oolio Product OS is the Product team's way of working, written down as skills an assistant
-can run against the tools the team already uses. Thirty-two of them today, arranged across a
+can run against the tools the team already uses. Thirty-three of them today, arranged across a
 lifecycle that runs from the first signal to the measured outcome.
 
 It is not a framework, a methodology, or a diagram of intent. It is the thing itself. Somebody
