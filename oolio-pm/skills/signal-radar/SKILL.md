@@ -3,18 +3,17 @@ name: signal-radar
 description: >-
   Synthesise HubSpot, web, and social signal (via Apify) into evidence for JPD
   ideas, and scan for gaps between market demand and the backlog. Two modes:
-  idea mode (a JPD key: gathers evidence and attaches it as
-  native Insights) and gap-scan mode (no key: scans the backlog against market,
-  customer, and social signal, handing candidates to `feedback-to-idea`).
-  Findings always land in the Brain, so research compounds. Trigger when the
-  user says "run signal radar", "sync the brain",
+  idea mode (a JPD key: gathers evidence, attaches it as native Insights) and
+  gap-scan mode (no key: scans the backlog for what the market wants and we do
+  not cover, handing candidates to `feedback-to-idea`). Findings land in the
+  Brain. Trigger when the user says "run signal radar", "sync the brain",
   "what's the market saying about X", "validate this idea with real signal",
   "find gaps in the backlog / roadmap", "what are we missing", or "scan HubSpot
-  and social for signal". Do NOT trigger for one already-found piece of evidence
-  to attach (use `add-insight`), raw pasted feedback (use `feedback-to-idea`),
-  the full VPC loop (use `jpd-loop`), a deep-dive with no backlog tie-in (use
-  `storm-research`), competitor dossiers, sweeps, or battlecards (use
-  `competitor-watch`), or closed-lost deal analysis (use `win-loss`).
+  and social for signal". Do NOT trigger for already-found evidence (use
+  `add-insight`), pasted feedback (use `feedback-to-idea`), the full VPC loop
+  (use `jpd-loop`), a deep-dive with no backlog tie-in (use `storm-research`),
+  competitor dossiers or battlecards (use `competitor-watch`), or closed-lost
+  deals (use `win-loss`).
 ---
 
 # Signal radar
