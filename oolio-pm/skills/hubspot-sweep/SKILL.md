@@ -86,13 +86,29 @@ Write the sweep log entry to Brain per research-os: the window, the queries run,
 
 Then say what is next: candidates handed to `feedback-to-idea`, and anything that recurred often enough this week to be worth a gap scan with `signal-radar`.
 
+## Running it daily
+
+**The sweep's home is Niel's always-on Mac mini, as a Cowork scheduled task.** That is deliberate rather than incidental: both of the attach route's prerequisites live on that machine and nowhere else. The helper needs the OAuth token at `~/.jpd-insights-token.json` and it needs to reach `api-private.atlassian.com`, which a local machine can and Anthropic's cloud sandbox cannot. A cloud run can do every part of this skill except the one that matters most, so the schedule belongs on the hardware that can finish the job.
+
+A Cowork scheduled task is bound to the machine it was created on, so the schedule is set up from a Cowork conversation on the Mac mini itself. It cannot be created from a cloud session on that machine's behalf.
+
+**Preflight, once per machine and again whenever a run reports an auth failure.** Confirm the helper before trusting the schedule:
+
+```bash
+node ${CLAUDE_PLUGIN_ROOT}/skills/jpd-loop/scripts/jpd-insight.mjs whoami
+```
+
+It should print the site, cloud id and token expiry. If it reports no credentials, the machine needs its one-time `auth` run before any sweep can attach anything (the command, and why the agent must not run it with the secret on the command line, are in `${CLAUDE_PLUGIN_ROOT}/skills/jpd-loop/references/jpd-insights-api.md`).
+
+**A missed day heals itself.** The window comes from the watermark in the sweep log, not from a fixed "last 24 hours", so a run skipped because the machine was asleep, rebooting, or offline is picked up by the next one rather than lost. This is the main reason the watermark exists, and the reason not to replace it with a rolling window.
+
 ## Unattended runs
 
-The daily run usually fires on a schedule with nobody at the keyboard, and two things change.
+The daily run fires with nobody at the keyboard, and two things change.
 
-**Approval still stands.** The run does everything up to step 5, then stops and reports the proposed batch. It does not attach unreviewed Insights to the backlog, because a wrong Insight costs more to find and remove than a missed one costs to catch tomorrow.
+**Approval still stands.** The run does everything up to step 5, then stops and reports the proposed batch. It does not attach unreviewed Insights, even where the attach route is fully available and the run could technically complete on its own. A wrong Insight costs more to find and remove than a missed one costs to catch tomorrow, and the house rule is that a person signs off anything that counts.
 
-**The attach route may not exist.** The helper needs credentials at `~/.jpd-insights-token.json` and network access to `api-private.atlassian.com`. Local sessions have both; Anthropic's cloud sandbox has neither, and a fresh container has no token file at all. When the helper is unavailable, the run does not silently degrade: it reports the batch **with the ready-to-run `create --file` JSON inline**, so approving and attaching later is one paste and one command. It also says plainly which route failed and why, per `references/triage-and-attach.md`.
+**The attach route may not exist.** On the Mac mini it will. Elsewhere it may not: a cloud session has no token file and no route to `api-private.atlassian.com`. When the helper is unavailable the run does not silently degrade, and it does not treat it as a bug to debug. It reports the batch **with the ready-to-run `create --file` JSON inline**, so approving and attaching later is one paste and one command, and says plainly which route was unavailable, per `references/triage-and-attach.md`.
 
 A sweep that found nothing says so in one line. Silence is indistinguishable from a broken schedule, and a watch nobody trusts gets ignored.
 
