@@ -438,6 +438,17 @@
         "art-brain"
       ]
     },
+    "push-to-brain": {
+      "label": "Push to Brain",
+      "note": "session → the note that owns it",
+      "badge": "NIEL·BRAIN",
+      "type": "human",
+      "stage": "Brain",
+      "row": 4.8,
+      "feeds": [
+        "art-brain"
+      ]
+    },
     "feedback-to-idea": {
       "label": "Feedback → Idea",
       "note": "raw signal → JPD idea",

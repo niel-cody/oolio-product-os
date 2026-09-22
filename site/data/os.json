@@ -1,5 +1,5 @@
 {
-  "stamp": "4633c49",
+  "stamp": "07284f3",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "oolio-pm",
-      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, a daily HubSpot sweep that turns the support queue into cited Insights, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding. Thirty-three skills.",
+      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, a daily HubSpot sweep that turns the support queue into cited Insights, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding, and push-to-brain, the explicit end-of-session push that lands what a session established on the page that already owns it. Thirty-four skills.",
       "skills": [
         {
           "id": "add-insight",
@@ -473,7 +473,7 @@
           "plugin": "oolio-pm",
           "description": "The front door and router for the oolio-pm skills. Trigger when someone asks \"which skill should I use\", \"where do I start\", \"what can these skills do\", \"what have you got for X\", \"help me choose\", \"I'm new to this\", or describes a product-management task without naming a skill and the right one isn't obvious. Also trigger for \"show me the pipeline\" or \"how do these skills fit together\". Reads the situation, names the one skill (or short chain) that fits, and starts it on request. Do NOT trigger when the user already named a specific skill or their phrasing clearly matches one skill's own triggers — route straight there instead.",
           "title": "PM compass",
-          "lede": "The router. Thirty-three skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
+          "lede": "The router. Thirty-four skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
           "blurb": "The front door and router for the oolio-pm skills.",
           "when": "You describe a product-management task without naming a skill and the right one isn't obvious. Reads the situation, names the one skill (or short chain) that fits, and starts it on request.",
           "phrases": [
@@ -488,6 +488,26 @@
           ],
           "excludes": [
             "When the user already named a specific skill or their phrasing clearly matches one skill's own triggers — route straight there instead"
+          ]
+        },
+        {
+          "id": "push-to-brain",
+          "plugin": "oolio-pm",
+          "description": "Push the durable knowledge from the current conversation into the my_brain vault by changing what the Brain already holds. Appends to an existing section, edits outdated wording, updates a status or a decision, inserts a section into the right existing note, and creates a new note only when no home exists. Trigger ONLY on an explicit invocation at the end of a working session, such as \"/push-to-brain\", \"push this to the brain\", \"push to brain\", \"save this session to the brain\", or \"update the brain with what we decided\". Never trigger on your own, never from inside another skill, and never mid-task unless the user asks. Do NOT trigger to file a document, transcript or URL (use wiki-ingest), to answer a question from the vault (use wiki-query), to health-check or tidy the vault (use wiki-lint), for an overview snapshot (use wiki-status), or to stand up a domain (use wiki-new).",
+          "title": "Push to Brain",
+          "lede": "The Brain is the source of truth and the conversation is a diff against it. This skill works out what the session changed or enriched, then makes the smallest change that leaves the right existing note correct. It does not write a summary of the chat and drop it in a new file: a note nobody links to is knowledge nobody will find, and the vault already has 599 of those.",
+          "blurb": "Push the durable knowledge from the current conversation into the my_brain vault by changing what the Brain already holds. Appends to an existing section, edits outdated wording, updates a status or a decision, inserts a section into the right existing note, and creates a new note only when no home exists. Trigger ONLY on an explicit invocation at the end of a working session, such as \"/push-to-brain\", \"push this to the brain\", \"push to brain\", \"save this session to the brain\", or \"update the brain with what we decided\".",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "On your own",
+            "Never from inside another skill",
+            "Never mid-task unless the user asks. Do NOT trigger to file a document",
+            "Transcript or URL (use wiki-ingest)",
+            "To answer a question from the vault (use wiki-query)",
+            "To health-check or tidy the vault (use wiki-lint)",
+            "For an overview snapshot (use wiki-status)",
+            "To stand up a domain (use wiki-new)"
           ]
         },
         {
@@ -699,14 +719,14 @@
         }
       ],
       "counts": {
-        "skills": 33,
+        "skills": 34,
         "inProgress": 0,
         "archived": 0
       }
     }
   ],
   "totals": {
-    "skills": 33,
+    "skills": 34,
     "plugins": 1,
     "inProgress": 0,
     "archived": 0,
@@ -761,7 +781,7 @@
       "title": "PM Compass",
       "blurb": "The front door and router for the oolio-pm skills.",
       "summary": "The front door and router for the oolio-pm skills.",
-      "lede": "The router. Thirty-three skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
+      "lede": "The router. Thirty-four skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
       "when": "You describe a product-management task without naming a skill and the right one isn't obvious. Reads the situation, names the one skill (or short chain) that fits, and starts it on request.",
       "phrases": [
         "which skill should I use",
@@ -1467,6 +1487,12 @@
           "label": "Wiki New",
           "via": "The Brain",
           "kind": "hop"
+        },
+        {
+          "id": "push-to-brain",
+          "label": "Push to Brain",
+          "via": "The Brain",
+          "kind": "hop"
         }
       ],
       "loops": [],
@@ -1608,6 +1634,12 @@
           "label": "Wiki New",
           "via": "The Brain",
           "kind": "hop"
+        },
+        {
+          "id": "push-to-brain",
+          "label": "Push to Brain",
+          "via": "The Brain",
+          "kind": "hop"
         }
       ],
       "loops": [],
@@ -1680,6 +1712,78 @@
         }
       ],
       "prev": "wiki-status",
+      "next": "push-to-brain"
+    },
+    {
+      "id": "push-to-brain",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:push-to-brain",
+      "title": "Push to Brain",
+      "blurb": "Push the durable knowledge from the current conversation into the my_brain vault by changing what the Brain already holds. Appends to an existing section, edits outdated wording, updates a status or a decision, inserts a section into the right existing note, and creates a new note only when no home exists. Trigger ONLY on an explicit invocation at the end of a working session, such as \"/push-to-brain\", \"push this to the brain\", \"push to brain\", \"save this session to the brain\", or \"update the brain with what we decided\".",
+      "summary": "Push the durable knowledge from the current conversation into the my_brain vault by changing what the Brain already holds.",
+      "lede": "The Brain is the source of truth and the conversation is a diff against it. This skill works out what the session changed or enriched, then makes the smallest change that leaves the right existing note correct. It does not write a summary of the chat and drop it in a new file: a note nobody links to is knowledge nobody will find, and the vault already has 599 of those.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "On your own",
+        "Never from inside another skill",
+        "Never mid-task unless the user asks. Do NOT trigger to file a document",
+        "Transcript or URL (use wiki-ingest)",
+        "To answer a question from the vault (use wiki-query)",
+        "To health-check or tidy the vault (use wiki-lint)",
+        "For an overview snapshot (use wiki-status)",
+        "To stand up a domain (use wiki-new)"
+      ],
+      "note": "session → the note that owns it",
+      "badge": "NIEL·BRAIN",
+      "type": "human",
+      "stage": "Brain",
+      "feeds": [
+        {
+          "id": "art-brain",
+          "label": "The Brain",
+          "via": "",
+          "kind": "artifact"
+        }
+      ],
+      "fedBy": [],
+      "throughArtifact": [
+        {
+          "id": "wiki-query",
+          "label": "Wiki Query",
+          "via": "The Brain",
+          "kind": "hop"
+        },
+        {
+          "id": "wiki-status",
+          "label": "Wiki Status",
+          "via": "The Brain",
+          "kind": "hop"
+        }
+      ],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "confluence",
+          "label": "Confluence",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "wiki-new",
       "next": "feedback-to-idea"
     },
     {
@@ -1814,7 +1918,7 @@
           "access": "read-write"
         }
       ],
-      "prev": "wiki-new",
+      "prev": "push-to-brain",
       "next": "storm-research"
     },
     {
@@ -3859,6 +3963,16 @@
         "desc": "Stand up a new Product Domain (or a cross-cutting knowledge area) in the my_brain vault with a README-only front door and confirmed scope, following the simplified 2026-07 structure. Trigger when the user says \"add a new domain\", \"create a Payments domain\", \"stand up a new wiki\", \"add a domain to the Brain\", or names a capability area they want tracked separately. Confirms scope and boundaries before any material lands, and creates no empty scaffolding. Do NOT trigger to ingest a source into an existing domain (use wiki-ingest), to answer a question (use wiki-query), or to health-check the vault (use wiki-lint)."
       },
       {
+        "id": "push-to-brain",
+        "label": "Push to Brain",
+        "note": "session → the note that owns it",
+        "badge": "NIEL·BRAIN",
+        "type": "human",
+        "col": 2,
+        "row": 4.8,
+        "desc": "Push the durable knowledge from the current conversation into the my_brain vault by changing what the Brain already holds. Appends to an existing section, edits outdated wording, updates a status or a decision, inserts a section into the right existing note, and creates a new note only when no home exists. Trigger ONLY on an explicit invocation at the end of a working session, such as \"/push-to-brain\", \"push this to the brain\", \"push to brain\", \"save this session to the brain\", or \"update the brain with what we decided\". Never trigger on your own, never from inside another skill, and never mid-task unless the user asks. Do NOT trigger to file a document, transcript or URL (use wiki-ingest), to answer a question from the vault (use wiki-query), to health-check or tidy the vault (use wiki-lint), for an overview snapshot (use wiki-status), or to stand up a domain (use wiki-new)."
+      },
+      {
         "id": "feedback-to-idea",
         "label": "Feedback → Idea",
         "note": "raw signal → JPD idea",
@@ -4200,6 +4314,10 @@
       },
       {
         "f": "wiki-new",
+        "t": "art-brain"
+      },
+      {
+        "f": "push-to-brain",
         "t": "art-brain"
       },
       {
@@ -5006,11 +5124,12 @@
           "jpd-loop",
           "jpd-title-standard",
           "pm-compass",
+          "push-to-brain",
           "signal-radar",
           "win-loss",
           "write-prd"
         ],
-        "skillCount": 19
+        "skillCount": 20
       },
       {
         "id": "confluence",
@@ -5049,13 +5168,14 @@
           "metrics-review",
           "operator-council-review",
           "pm-compass",
+          "push-to-brain",
           "signal-radar",
           "steering-pack",
           "storm-research",
           "win-loss",
           "write-prd"
         ],
-        "skillCount": 22
+        "skillCount": 23
       },
       {
         "id": "github",
@@ -5100,6 +5220,7 @@
           "hubspot-sweep",
           "jpd-loop",
           "pm-compass",
+          "push-to-brain",
           "signal-radar",
           "storm-research",
           "wiki-ingest",
@@ -5108,7 +5229,7 @@
           "wiki-query",
           "wiki-status"
         ],
-        "skillCount": 11
+        "skillCount": 12
       }
     ],
     "wires": [
@@ -5410,6 +5531,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-09-22",
+      "title": "push-to-brain: the end of a session becomes a diff against the Brain (34 skills)",
+      "heading": "2026-09-22 — push-to-brain: the end of a session becomes a diff against the Brain (34 skills)",
+      "body": "Sessions end and what they settled evaporates, or it lands as a new file that summarises the chat and that nothing links to. The vault has 599 pages like that. **push-to-brain** is the explicit end-of-session push: it treats the conversation as a diff against what the Brain already holds and makes the smallest change that leaves the right existing note correct.\n\n- **Append, edit, update, insert, and only then create.** In that order, and each with one shape, so two sessions a month apart leave a page that reads as one page. Creation is the last resort and has to pass the vault's birth gate: frontmatter first, a type in the vocabulary, and at least one inbound link before the skill moves on.\n- **It runs only when you ask it to.** By name, or by saying to push the session to the Brain. Never on a schedule, never chained from another skill, never because a chat got long. It works only from the conversation and the agent outputs visible in it, and the receipt says so; it never claims to have reviewed something it could not see.\n- **Four marks, and none of them promote themselves.** Every kept line is Decided, Proposed, Assumed or Open, dated, and cites a real source when the session had one, otherwise the session. A proposal nobody answered stays a proposal on every re-run.\n- **Supersede, never stack.** A decision the session overturns gets a new page with the reasoning and a \"supersedes\" line; the old page is marked superseded and links forward. A corrected claim keeps its old wording as a dated history note. Nothing is deleted, which was already the vault's rule.\n- **Running it twice writes nothing the second time.** It looks for its own footprint first, then checks every item against the destination by phrase before writing (`brain-locate.mjs has`), then checks that no existing heading already covers a section it would insert. The POS domain README carrying two `## Signals received` headings is the failure this prevents.\n- **A read-only helper does the fragile half.** `scripts/brain-locate.mjs` ranks the work-layer pages that already cover a topic (canonical pages above the ledger), proves a phrase is or is not on a page, runs the birth gate on a page, and answers whether a path is behind the work/personal wall. It never writes, and it excludes the Personal layers before scoring, so the wall is enforced by the tool rather than by discipline. Plain Node, no dependencies, under two seconds a call on a warm cache.\n- **The vault carries its half.** A runbook, `_system/Runbooks/Push to Brain.md`, states the procedure and the autonomy tiers as the vault sees them and wins where the two differ. `operating-system.md` gained `session:YYYY-MM-DD-<slug>` in the `source:` vocabulary, a **Push (on demand)** operation in §5, `push` as a log op and `push: <subject>` as a commit message. The vault's Skills Catalogue and the PMOS Capability Catalogue list it. Those vault edits are in the working tree of `~/my_brain`, uncommitted, for Niel's weekly pass: the `_system` manual edit is a schema change and the vault's own rule is that Niel approves those.\n- **Tested against the seven cases the brief named** on a fixture vault, recorded in [docs/push-to-brain-dry-run-2026-09-22.md](docs/push-to-brain-dry-run-2026-09-22.md): append, supersession, insert, duplicate avoided, casual talk ignored, creation only when nothing fits, and a second run that writes nothing. The wall test seeded a Personal page with the same words as the work pages; it never surfaced.\n- **Counts and catalogues.** 33 → **34**. Manifests, both READMEs, the catalogue (stage 7 now lists six), `pm-compass` (a routing row that says it only runs when asked for by name), and the site map (Brain column). The site check passes. Team-visible, so the Product Operating System Confluence page carries the row and a changelog entry."
+    },
     {
       "date": "2026-09-17",
       "title": "Cowork was silently dropping two skills, and the limit is not 1024 (33 skills)",

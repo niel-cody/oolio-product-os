@@ -14,7 +14,7 @@ description: >-
 
 # PM compass
 
-The router. Thirty-three skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.
+The router. Thirty-four skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.
 
 ## How to route
 
@@ -42,6 +42,7 @@ Ask at most one clarifying question, then name the skill. Match on the **situati
 | "Did the launch work?", a recurring metrics review | `metrics-review` |
 | "What does the Brain say about X?", a question for the vault | `wiki-query` |
 | A source to file into the Brain, or vault upkeep (health-check, new domain, status) | `wiki-ingest` / `wiki-lint` / `wiki-new` / `wiki-status` |
+| The end of a working session, wanting what was decided and learned kept in the Brain | `push-to-brain` (only when asked for by name; it never runs itself) |
 
 Chains worth knowing: intake → groom → loop → PRD → grill → steering → GTM → metrics is the full pipeline; the research trio (`competitor-watch`, `win-loss`, `signal-radar`) feeds evidence into all of it through the brain.
 

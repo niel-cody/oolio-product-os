@@ -1,6 +1,6 @@
 # Oolio PM — Skills Catalogue
 
-The plugin ships **33 skills**, organised here by where they sit in the product lifecycle,
+The plugin ships **34 skills**, organised here by where they sit in the product lifecycle,
 signal to shipped. The folders under `oolio-pm/skills/` stay flat (that is what the Claude
 Code plugin loader expects). This document is the map; the categories are a reading aid, not
 a folder structure.
@@ -27,7 +27,7 @@ per-skill version numbers, by design — the plugin versions by commit.
 | 4 | Delivery & Steering | Jira hygiene and executive-facing packs | 3 |
 | 5 | GTM | Take a launch to market | 3 |
 | 6 | Analysis | Close the loop after launch | 1 |
-| 7 | The Brain | Maintain the knowledge engine the research skills read and write | 5 |
+| 7 | The Brain | Maintain the knowledge engine the research skills read and write | 6 |
 
 ---
 
@@ -101,6 +101,7 @@ Maintain `my_brain`, the git-backed Obsidian vault that is the team's compoundin
 - **wiki-new** *(New, July 2026)* — Stand up a new Product Domain with a README-only front door and confirmed scope; no empty scaffolding.
 - **wiki-lint** *(New, July 2026)* — Health-check the vault for contradictions, stale claims, orphans, and frontmatter faults (missing `class`, past `review`); change only on approval.
 - **wiki-status** *(New, July 2026)* — A read-only snapshot: per-domain page counts, recent activity, stubs, orphans, and gaps worth filling.
+- **push-to-brain** *(New, September 2026)* — The explicit end-of-session push: treats the conversation as a diff against the vault and lands each durable item on the page that owns it, append → edit → update → insert before create. Decisions are superseded, never stacked; a second run writes nothing.
 
 ---
 

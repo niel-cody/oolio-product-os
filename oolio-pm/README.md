@@ -66,6 +66,7 @@ The maintenance skills for `my_brain`, the git-backed Obsidian vault that is the
 - `wiki-new` — stands up a new Product Domain with a README-only front door and confirmed scope; no empty scaffolding.
 - `wiki-lint` — health-checks the vault for contradictions, stale claims, orphans, and frontmatter faults; changes only on approval.
 - `wiki-status` — a read-only snapshot: per-domain page counts, recent activity, stubs, and gaps worth filling.
+- `push-to-brain` — the explicit end-of-session push: works out what the conversation changed or enriched and lands it on the existing page that owns the topic, appending, editing, updating or inserting before it ever creates a note. Supersedes decisions rather than stacking them. Runs only when you invoke it.
 
 **Product context**
 
