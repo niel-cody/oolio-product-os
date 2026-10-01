@@ -129,7 +129,7 @@
   transition-delay: var(--d, 0ms);
 }
 
-/* Off the selected path. Held back rather than hidden: the lifecycle is still thirteen
+/* Off the selected path. Held back rather than hidden: the lifecycle is still fourteen
    stages whichever path you are looking at. */
 .lx-stage[data-on="false"] { opacity: 0.45; }
 

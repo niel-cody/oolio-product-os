@@ -86,6 +86,7 @@ Pull what's already known about this product, in this order.
 1. **Confluence.** Search the `in` (Insights) and `PE` (GTM & Product Enablement) spaces for pages whose title contains the product name, or are referenced in the Jira epic. Read PRDs, narratives, competitor pages.
 2. **Jira.** Fetch the anchor epic and any linked stories. Capture scope, owners, ICP cues, success metrics.
 3. **Local files.** List everything in `Insights/` whose name mentions the product, was modified in the last 90 days, or is a screenshot, PDF, transcript, or PRD.
+4. **The QA verdict.** If the epic has a QA Review page (a child of the PRD), read the market handoff of the **current** verdict only (`${CLAUDE_PLUGIN_ROOT}/references/qa/market-handoff.md`). If the newest verdict is Hold, pending, or newer than the handoff, treat every claim as unverified and say so. **Every capability, performance, reliability or accessibility claim in the pack must trace to a row in its Verified claims**, with its conditions; anything else is moved to `[GAP]` or cut. Its Known issues go into the playbooks' support and onboarding sections, in customer language. No QA verdict yet: say so in the summary, and mark proof claims as unverified.
 
 Write a short summary back to the user. "Here's what I found, organised by what it'll feed."
 
@@ -165,13 +166,14 @@ Read on demand, not upfront.
 - **Voice.** Niel's rules in `references/voice-rules.md`. Non-negotiable.
 - **Brand colours.** Primary `#673AB6`, dark `#5E35B1`, light `#F9F8FC`. Hard-coded in the build script.
 - **Operator framing, not internal product framing.** Every section reads as if a venue operator is the audience. If a Sales rep can't repeat a sentence to a customer, rewrite it.
-- **Numbers beat adjectives.** "Much faster" is wrong. "Cuts order entry time by 30%" is right.
+- **Numbers beat adjectives, and every number traces to a verified claim or a cited source.** "Much faster" is wrong. "Cuts order entry time by 30%" is right only if a source says so; otherwise `[TBC]`.
 - **One pack per product, not per feature.**
 
 ## See also
 
 - `gtm-playbooks`. Run after handover. Produces the Sales, AM, and Onboarding playbooks. Reads `pack_content.json` for narrative, ICP, value prop, competitive, proof, pricing summary.
 - `gtm-marketing`. Run after handover. Produces the Marketing Pack. Reads the same keys plus your launch date and channel mix.
+- `qa-mission`. Runs before handover. Its market handoff is the list of what the pack may claim.
 
 ## When this skill is the wrong tool
 

@@ -12,7 +12,7 @@ import os from "@/data/os.json";
  * convert rather than to look nice):
  *   - the 13 lifecycle stage names and their purposes. General product-management
  *     vocabulary; naming them is what stops the page reading as generic.
- *   - the 6 flow names and the stages each one crosses. Stage indices only, never the
+ *   - the flow names and the stages each one crosses. Stage indices only, never the
  *     skill names or step descriptions on the path.
  *   - the 5 skills in SHOWCASE: name and stage only, with hand-written public copy rather
  *     than the catalogue's own text, so trigger phrases never reach the open web. NOT the
@@ -133,7 +133,7 @@ export function getSky(): Sky {
 }
 
 /**
- * The 13 lifecycle stages, in order, each with the one-paragraph purpose it carries, and
+ * The lifecycle stages, in order, each with the one-paragraph purpose it carries, and
  * whether a review gate closes behind it.
  *
  * The gate flag is the one piece of the map's meaning the landing page cannot do without:

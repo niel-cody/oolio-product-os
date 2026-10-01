@@ -18,7 +18,7 @@ House style: `${CLAUDE_PLUGIN_ROOT}/references/house-style.md`. No fabricated nu
 
 ### 1. Establish targets
 
-For launch validation, fetch the PRD and lift its Success metrics verbatim: headline metric, guardrails, operational metrics, and the measurement dependencies it named. If the PRD marked a metric as depending on infrastructure (a hold-out group, an attribution join), check first whether that dependency exists; if not, the metric is Unmeasurable and the review says so plainly rather than substituting a vanity proxy.
+For launch validation, fetch the PRD and lift its Success metrics verbatim: headline metric, guardrails, operational metrics, and the measurement dependencies it named. If the release went through `qa-mission`, start from the **metric readiness note** in its market handoff (on the epic's QA Review page): it says which metrics were proven measurable before launch, the comparison group (often the feature-flag cohort), and when this review was due. A metric QA marked measurable that now cannot be measured is a learning-loop finding for QA; say so. If the PRD marked a metric as depending on infrastructure (a hold-out group, an attribution join), check first whether that dependency exists; if not, the metric is Unmeasurable and the review says so plainly rather than substituting a vanity proxy.
 
 For a recurring review, load the previous scorecard and carry its metric set; propose additions or retirements explicitly rather than drifting.
 

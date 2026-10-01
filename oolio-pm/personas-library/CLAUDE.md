@@ -65,6 +65,8 @@ The plugin also keeps a top-level archive at `oolio-pm/_archive/` for retired sk
 | Operator Council | `uat-panel/` | Would our real users accept this, and does it survive a Friday night | Hospitality user personas |
 | Design Council | `design-council/` | Is the design sound by expert principles | Expert design and research lenses |
 | Leadership Subcommittee | `leadership-subcommittee/` | Should we invest in this, what risk are we taking, and can we sell, support and deliver it | Executive and commercial lenses |
+| Quality Bench (not a council) | `quality-bench/` | Is the build right, and how would a good tester know | Testing lenses, used by the QA family |
+| Test persona cards (not a council) | `test-personas/` | Who does the tester pretend to be when using the build | Behavioural cards on top of UAT panel personas |
 | STORM Subcommittee | the `storm-research` skill | Have we researched this widely, from perspectives we did not think of, grounded in real sources | A five-lens, citation-verified research pipeline (role files archived) |
 
 Three of these are review panels that test a decision. Each holds the floor on its own ground. The Operator Council holds operational reality. The Design Council holds design quality. The Leadership Subcommittee holds commercial and executive judgement.
@@ -163,7 +165,7 @@ The principle holds at every size. Name the decision, convene the lenses that ma
 These sit on top of the house rules in `personas.md`. Read both.
 
 1. **British English only. No em dashes. No buzzwords.** If a sentence could come out of a generic SaaS deck, rewrite it.
-2. **Use the right template.** User personas use `_framework/persona-template.md`. Design Council lenses use `design-council/_design-council-template.md`. Leadership Subcommittee lenses use `leadership-subcommittee/_leadership-subcommittee-template.md`. (The STORM Subcommittee is now the `storm-research` skill, so it has no lens template here; its archived template is in `../_archive/storm-subcommittee/`.) Fill every section. Empty sections are not allowed.
+2. **Use the right template.** User personas use `_framework/persona-template.md`. Quality Bench lenses use `quality-bench/_quality-bench-template.md`; test persona cards use `test-personas/_test-persona-template.md`. Design Council lenses use `design-council/_design-council-template.md`. Leadership Subcommittee lenses use `leadership-subcommittee/_leadership-subcommittee-template.md`. (The STORM Subcommittee is now the `storm-research` skill, so it has no lens template here; its archived template is in `../_archive/storm-subcommittee/`.) Fill every section. Empty sections are not allowed.
 3. **One file per lens or persona. Update, do not duplicate.** No v1, v2. Edit the file. Retire to `_archive/` with a note, never delete.
 4. **The Chair stays elevated.** Do not file the Chair inside a subcommittee. The Chair sits on all of them.
 5. **Lenses must disagree.** When you add a lens, name the gap it fills and the lens it argues with. A panel that all agrees is useless.

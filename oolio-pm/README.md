@@ -36,6 +36,23 @@ A single Cowork plugin bundling Oolio's product-management skills. Install it on
 - `write-prd` — writes an Oolio PRD from a groomed JPD idea or brief, in the live Oolio PRD format, and publishes it to Confluence.
 - `grill-my-prd` — grills a Confluence PRD one question at a time, then records the outcome as a versioned child page and badged in-place amendments.
 
+**Quality and release (the QA family)**
+
+Tests the built product between "the spec is right" and "the numbers moved". One rule runs through all of it: no oracle, no defect. Reference pack in `references/qa/`; testing lenses in `personas-library/quality-bench/`; test persona cards in `personas-library/test-personas/`.
+
+- `qa-mission` — the quality gate: runs the basis, picks the tier by Frequency × Consequence, convenes the specialists, verifies independently, recommends Ship, Ship with known issues or Hold, and hands GTM only verified claims. Learn mode turns escapes into fixes to the method.
+- `test-basis` — lines up PRD, stories, decisions, Figma and code before testing; surfaces conflicts, untestable ACs and unmeasurable metrics; rates risk.
+- `defect-writer` — one finding standard; routes by stage (a failed AC before merge reworks the story, no new ticket; Bugs and Improvements after merge; QA never creates Stories); keeps the epic's one QA Review page.
+- `functional-qa` — every AC as a concrete example with a negative case, plus the check that analytics events fire.
+- `exploratory-qa` — chartered, timeboxed sessions on hospitality conditions.
+- `code-qa` — read-only coverage map and the tests engineers should own.
+- `design-conformance` — the build against Figma, the component reference, the pattern library and the glossary.
+- `accessibility-audit` — WCAG 2.2 AA and the surface targets, in three separate passes.
+- `persona-uat` — synthetic users in character; a filter, never sign-off.
+- `uat-session-kit` — real-user sessions, before and after, scored against the synthetic run.
+- `resilience-qa` — survives a real service: timing, scale, network loss, concurrency, offline.
+- The Design Council and Operator Council also run in **built mode** against the live build.
+
 **Launch and GTM**
 
 - `gtm-handover` — the executive GTM handover: One-Pager and Supporting Deck, and the `pack_content.json` narrative the other GTM skills read.

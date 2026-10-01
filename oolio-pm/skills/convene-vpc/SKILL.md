@@ -10,7 +10,8 @@ description: >-
   decision. This is the orchestrator: it runs the whole loop, chairs the
   subcommittees, and produces a recorded, human-validated decision. It calls the
   child skills storm-research, operator-council-review, design-council-review,
-  and leadership-subcommittee-review.
+  and leadership-subcommittee-review. Do NOT trigger for a built release or PR
+  preview to be tested (qa-mission).
 ---
 
 # Convene the Virtual Product Council

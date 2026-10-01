@@ -14,7 +14,7 @@ description: >-
 
 # PM compass
 
-The router. Thirty-four skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.
+The router. Forty-five skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.
 
 ## How to route
 
@@ -39,12 +39,17 @@ Ask at most one clarifying question, then name the skill. Match on the **situati
 | Jira epics with weak descriptions or titles | `jira-epic-groomer` / `jira-epic-titler` |
 | A Steering or roadmap review to prepare | `steering-pack` |
 | A launch to take to market | `gtm-handover` first, then `gtm-playbooks` / `gtm-marketing` |
+| A release, epic or PR to test before it ships; "is it ready?" | `qa-mission` (runs the whole QA family and gives the verdict) |
+| "What should we test, and do the sources agree?"; is the spec testable and measurable | `test-basis` |
+| Findings to write up, de-dupe, send back for rework, or ticket | `defect-writer` |
+| One QA pass on a build: ACs (`functional-qa`), off the happy path (`exploratory-qa`), against the design (`design-conformance`), accessibility (`accessibility-audit`), synthetic users (`persona-uat`), test coverage in code (`code-qa`), load, offline and failure (`resilience-qa`) | that skill |
+| Real-user UAT sessions to plan or consolidate | `uat-session-kit` |
 | "Did the launch work?", a recurring metrics review | `metrics-review` |
 | "What does the Brain say about X?", a question for the vault | `wiki-query` |
 | A source to file into the Brain, or vault upkeep (health-check, new domain, status) | `wiki-ingest` / `wiki-lint` / `wiki-new` / `wiki-status` |
 | The end of a working session, wanting what was decided and learned kept in the Brain | `push-to-brain` (only when asked for by name; it never runs itself) |
 
-Chains worth knowing: intake → groom → loop → PRD → grill → steering → GTM → metrics is the full pipeline; the research trio (`competitor-watch`, `win-loss`, `signal-radar`) feeds evidence into all of it through the brain.
+Chains worth knowing: intake → groom → loop → PRD → grill → steering → build → `qa-mission` → GTM → metrics is the full pipeline, and QA's verdict decides what GTM may claim; the research trio (`competitor-watch`, `win-loss`, `signal-radar`) feeds evidence into all of it through the brain.
 
 ## For someone brand new
 

@@ -1,6 +1,6 @@
 # Oolio PM — Skills Catalogue
 
-The plugin ships **34 skills**, organised here by where they sit in the product lifecycle,
+The plugin ships **45 skills**, organised here by where they sit in the product lifecycle,
 signal to shipped. The folders under `oolio-pm/skills/` stay flat (that is what the Claude
 Code plugin loader expects). This document is the map; the categories are a reading aid, not
 a folder structure.
@@ -25,6 +25,7 @@ per-skill version numbers, by design — the plugin versions by commit.
 | 2 | Specs & PRDs | Shape ideas into written, pressure-tested specs | 3 |
 | 3 | Validation & Councils | Test decisions against the Virtual Product Council | 5 |
 | 4 | Delivery & Steering | Jira hygiene and executive-facing packs | 3 |
+| 4b | Quality & Release | Test the built product, gate the release, hand GTM only what was verified | 11 |
 | 5 | GTM | Take a launch to market | 3 |
 | 6 | Analysis | Close the loop after launch | 1 |
 | 7 | The Brain | Maintain the knowledge engine the research skills read and write | 6 |
@@ -78,6 +79,24 @@ Keep Jira clean and build the packs leadership reads.
 - **jira-epic-titler** — Suggest a stronger epic title using the `[Capability] for [Outcome]` standard.
 - **steering-pack** — Build a Steering-ready review pack over a slice of the JPD backlog: per-idea one-liners, field completeness, VPC verdicts and rubric scores.
 
+## 4b. Quality & Release (the QA family)
+
+Test the built product between "the spec is right" and "the numbers moved", and gate the release. One rule runs through all eleven: **no oracle, no defect**. The method lives in [`references/qa/`](../oolio-pm/references/qa/README.md); the testing lenses in `personas-library/quality-bench/`; the test persona cards in `personas-library/test-personas/`. Every run writes to one QA Review page per epic, under the PRD. All new, October 2026.
+
+- **qa-mission** *(New, October 2026)* — The quality gate and orchestrator: basis, tier by Frequency × Consequence, specialists in parallel, independent verification, a Ship / Ship with known issues / Hold recommendation, and the market handoff (verified claims only, known issues, metric readiness). Learn mode turns escapes into proposed fixes to the method.
+- **test-basis** *(New, October 2026)* — The oracle builder: lines up PRD, stories, decisions, meetings, Figma and code; surfaces dated conflicts, untestable ACs and unmeasurable metrics; rates risk and blast radius. Stops on high-consequence conflicts.
+- **defect-writer** *(New, October 2026)* — The finding standard and router: one schema, de-duped and themed, routed by stage (failed AC before merge reworks the story with no new ticket; Bugs and Improvements after merge; QA never creates Stories). Sole writer of the QA Review page.
+- **functional-qa** *(New, October 2026)* — Every AC as concrete examples with a negative case, technique by the rule's shape, regression packs, and the instrumentation pass that proves the success metrics' events fire.
+- **exploratory-qa** *(New, October 2026)* — Chartered, timeboxed sessions on hospitality conditions (midnight trading days, two managers in two tabs, empty venues), SFDPOT coverage, session notes as evidence.
+- **code-qa** *(New, October 2026)* — Read-only: AC-to-test coverage, blast radius, the missing tests proposed for engineers, and the regression test an incident needed.
+- **design-conformance** *(New, October 2026)* — The build against Figma, the component reference, the pattern library, tokens and the glossary; every deviation tagged deliberate, drift or system gap.
+- **accessibility-audit** *(New, October 2026)* — WCAG 2.2 AA plus proposed surface targets, in automated, assisted and human-required passes reported separately, with a VPAT-shaped summary.
+- **persona-uat** *(New, October 2026)* — Synthetic users in character under the test persona cards' constraints, a no-briefing task script and a scorecard. A filter for obvious friction, never UAT sign-off.
+- **uat-session-kit** *(New, October 2026)* — Real-user UAT before (recruit, script, observer sheet, SEQ and SUS) and after (consolidation), scoring which real findings the synthetic run predicted.
+- **resilience-qa** *(New, October 2026)* — Survives a real service: Doherty-threshold timing, scale fixtures, network loss mid-save and mid-publish, concurrent edits, POS offline and sync-back.
+
+`design-council-review` and `operator-council-review` gained a **built mode** for reviewing the live build rather than a mockup.
+
 ## 5. GTM
 
 Take a single product launch to market.
@@ -112,6 +131,12 @@ The candidates the next iteration draws from; each becomes a CHANGELOG entry whe
 
 - **Grilling engine split** — extract the shared interview loop from `grill-me`/`grill-my-prd`
   into one engine the wrappers invoke, so the interviewing craft improves in one place.
+- **QA family, what it still needs from people** (the skills ship; these make them sharper):
+  the environment register's allow-list and one test account per role (from QA); the
+  component reference entries for the data grid, side drawer and publish flow (with Design);
+  a decision on the accessibility surface targets and on whether a `qa-mission` Hold is
+  binding; scale fixtures for `resilience-qa`; and the first pilot on a Products App 2.1
+  release, with `uat-session-kit` scoring the synthetic run against real sessions.
 - **setup-oolio** — a one-time per-workspace setup that records Jira project keys, Confluence
   spaces, and labels in one config the other skills consult instead of hardcoding.
 - **The operator producers** — daily-brief, email-triage, jpd-keeper and the rest of the

@@ -8,7 +8,7 @@ The Product team's operating system for Cowork and Claude Code: the plugin colle
 
 ## Plugins
 
-- **oolio-pm** — the PM toolkit, signal to shipped: feedback intake into JPD, idea grooming, research and competitive intelligence, the Virtual Product Council, PRD writing and grilling, Jira hygiene, Steering packs, the GTM suite, and metrics review. Skill list and count in [oolio-pm/README.md](oolio-pm/README.md); the catalogue with stages in [docs/skills-catalogue.md](docs/skills-catalogue.md). Self-contained.
+- **oolio-pm** — the PM toolkit, signal to shipped: feedback intake into JPD, idea grooming, research and competitive intelligence, the Virtual Product Council, PRD writing and grilling, Jira hygiene, Steering packs, the QA family that tests the built product and gates the release, the GTM suite, and metrics review. Skill list and count in [oolio-pm/README.md](oolio-pm/README.md); the catalogue with stages in [docs/skills-catalogue.md](docs/skills-catalogue.md). Self-contained.
 
 ## Install (for Oolio teammates)
 
@@ -60,7 +60,7 @@ oolio-pm-plugins/           local folder name (historical); the GitHub repo is n
     ├── .claude-plugin/plugin.json
     ├── personas-library/   bundled persona-library snapshot
     ├── products/           product context briefs (facts skills may rely on)
-    ├── references/         shared references (house style, council output template)
+    ├── references/         shared references (house style, council output template, the QA reference pack in references/qa/)
     ├── _archive/           retired skills, lenses, and templates (kept for reference)
     └── skills/             the skills (count in oolio-pm/README.md)
 ```

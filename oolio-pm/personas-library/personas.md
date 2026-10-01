@@ -65,6 +65,14 @@ personas/
 │   ├── README.md               the council rules and the assignment matrix
 │   ├── _design-council-template.md
 │   └── (fourteen expert lens files)
+├── quality-bench/             the Quality Bench: testing lenses for the QA family (how a tester thinks)
+│   ├── README.md               the bench, the assignment by QA skill, the decision rule
+│   ├── _quality-bench-template.md
+│   └── (eleven testing lens files)
+├── test-personas/             test persona cards: who a tester pretends to be, on top of the UAT panel
+│   ├── README.md               the cards, the cast matrix, provenance rules
+│   ├── _test-persona-template.md
+│   └── (ten cards)
 ├── leadership-subcommittee/    SUBCOMMITTEE 3, the Leadership Subcommittee: executive and commercial lenses
 │   ├── README.md               purpose, membership, how to run a review
 │   ├── _leadership-subcommittee-template.md
@@ -84,7 +92,8 @@ Four subcommittees, one elevated Chair, one elevated cross-cutting lens, and a c
 4. **STORM Subcommittee.** The council's research arm, modelled on the Stanford OVAL STORM and Co-STORM method. Where the other three test a decision, STORM researches it first: it discovers perspectives, grounds claims in real sources, and surfaces the unknown unknowns, then hands the Chair a cited briefing so the testing panels argue from evidence. This is now run by the **`storm-research` skill**; the original five Co-STORM role files are archived in `../_archive/storm-subcommittee/`.
 5. **Product Council Chair.** The elevated role that sits on every subcommittee, adjudicates the master council, and turns the argument into a decision record. Not filed inside any subcommittee. See `product-council-chair.md`.
 6. **The Behavioural Alchemist (Roy).** The elevated cross-cutting lens. Also not filed inside any subcommittee, because his remit (perceived value, pricing, loyalty, positioning, felt experience) lands on all three testing panels. Convened as a conditional seat when a decision touches his ground, and summonable on his own through the `behavioural-alchemist` skill. See `behavioural-alchemist.md`.
-7. **Segments and verticals.** The cross-cutting map. Personas live once by role in the UAT panel, and `segments.md` pulls them through by size-segment (independent, small group, mid-market, enterprise) and by vertical (cafe, fine dining, pub, QSR, and so on). It also shows the coverage gaps and maps to the JPD business-segment field. See `segments.md`.
+7. **The Quality Bench and the test persona cards.** Not a council: they serve the QA family, which tests the *built* product rather than a decision. The Quality Bench (`quality-bench/`) holds testing lenses, inspired by published testing and accessibility practitioners, and judges whether the build is right (the Design Council still judges whether the design is good). The test persona cards (`test-personas/`) sit on top of UAT panel personas and add the behaviour a tester needs to use a screen in character: reading habits, prior system, device, time pressure, and what they will not do. Lenses are how a tester thinks; cards are who the tester pretends to be. See each folder's README.
+8. **Segments and verticals.** The cross-cutting map. Personas live once by role in the UAT panel, and `segments.md` pulls them through by size-segment (independent, small group, mid-market, enterprise) and by vertical (cafe, fine dining, pub, QSR, and so on). It also shows the coverage gaps and maps to the JPD business-segment field. See `segments.md`.
 
 The `organisations/` folder was retired on 2026-06-24 and moved to `_archive/`. The business-level view of the customer is now the owner and executive personas plus `segments.md`, not a separate organisation-persona type.
 
@@ -110,6 +119,8 @@ The standing vocabulary for calling the panels. Use these terms and the right gr
 | "front of house" / "FOH" | `uat-panel/front-of-house/` |
 | "GMs" / "general managers" | `uat-panel/general-managers/` |
 | "owners" / "executives" | `uat-panel/owners-and-executives/` |
+| **"Quality Bench"**, "the testing lenses" | All testing lenses (`quality-bench/`), loaded by the QA skills |
+| **"test personas"**, "the test cards", "Mia, Dave and Priya" | The test persona cards (`test-personas/`), used by `persona-uat` and `uat-session-kit` |
 | a persona, expert, or seat by name ("Mel", "Norman", "the CFO") | just that one file |
 | a segment ("Enterprise", "Independent", "small group", "mid-market") | the personas tagged to that tier in `segments.md` |
 | a vertical ("QSR", "fine dining", "pubs", "cafe", "stadia") | the personas tagged to that vertical in `segments.md` |

@@ -26,9 +26,9 @@ import "./landing.css";
  *   1. Hero      — what it is, and a real piece of its output sitting beside the claim.
  *   2. Problem   — the week a product manager actually has.
  *   3. Proof     — the same week run twice, by hand and through the OS. The hours.
- *   4. Crew      — seven specialists, each owning one part of the lifecycle.
+ *   4. Crew      — eight specialists, each owning one part of the lifecycle.
  *   5. Harness   — what any of them can reach for, with a printed proof under each claim.
- *   6. Plate     — thirteen named stages and six paths through them, from the real map.
+ *   6. Plate     — fourteen named stages and its paths through them, from the real map.
  *   7. Memory    — why the second quarter costs less than the first.
  *   8. Make ready— three steps, none of which are a shell command.
  *   9. Honesty   — the four rules that stop this being a machine that writes documents.
@@ -36,7 +36,7 @@ import "./landing.css";
  *  11. Door     — "Learn it once." and the way in.
  *
  * THE PUBLIC BOUNDARY. This component may only ever receive curated data
- * (lib/landing-sky.ts): thirteen stage names, six flow names, five named skills. It must
+ * (lib/landing-sky.ts): fourteen stage names, the flow names, five named skills. It must
  * never import os.json, which carries every skill's name, trigger phrases and system links.
  * scripts/check-public-leaks.mjs greps the RENDERED HTML for all of it, because the last
  * leak was invisible in the source — skill ids travelling as React keys. Run it after any
@@ -524,7 +524,7 @@ const JOBS = [
 ];
 
 /* ================================ 4 — THE CREW ================================
-   Seven specialists, each owning one part of the lifecycle. The roster is the page's most
+   Eight specialists, each owning one part of the lifecycle. The roster is the page's most
    borrowed idea and the most useful: a named thing with a job is something a reader can
    picture, where "32 skills" is a number they cannot.
    ============================================================================= */
@@ -603,6 +603,16 @@ const CREW: Agent[] = [
     finding: "This epic has no acceptance criteria and two owners. Both are fixable now.",
   },
   {
+    name: "Inspector",
+    role: "Quality and the ship call",
+    accent: "--orch",
+    line: "Tests what was built against what was promised, before a customer does: every acceptance criterion, the design, the edge of a Friday night, and whether everyone can use it. Then tells marketing exactly what it is allowed to claim.",
+    watches: "Every build heading for release, and the spec, the decisions and the designs behind it",
+    uses: "A real browser, the code read only, your issue tracker, your personas",
+    delivers: "A verdict you decide on, a story sent back when it missed its criteria, and the list of claims that were proven",
+    finding: "Saving the weekend schedule deletes the weekday one. Back to the engineer, not into the backlog.",
+  },
+  {
     name: "Proofer",
     role: "The honest look back",
     accent: "--alarm",
@@ -638,7 +648,7 @@ function Crew({ signedIn, counts }: { signedIn: boolean; counts: { skills: numbe
 
   return (
     <section id="crew" className="mx-auto max-w-6xl scroll-mt-16 px-5 py-16 sm:px-8 sm:py-24">
-      <SectionHead pass="The crew" note="seven specialists, one lifecycle" />
+      <SectionHead pass="The crew" note="eight specialists, one lifecycle" />
       <Reveal>
         <h2 className="display max-w-[720px] text-[clamp(1.7rem,3.4vw,2.7rem)] leading-[1.06] text-[var(--k)]">
           Specialists, not a chat window.
@@ -911,7 +921,7 @@ function Bars({ reduced }: { reduced: boolean }) {
 }
 
 /* ============================== 6 — THE LIFECYCLE ==============================
-   The page's proof of specificity. Thirteen stages a product manager will recognise, six
+   The page's proof of specificity. Fourteen stages a product manager will recognise, six
    real paths through them, and a purpose for each one — all read from the same map the
    team uses. Specifics are the whole defence against sounding generated.
 

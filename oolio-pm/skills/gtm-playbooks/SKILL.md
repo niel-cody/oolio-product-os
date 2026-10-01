@@ -158,6 +158,7 @@ This skill shares its references and scripts with `gtm-handover` (the upstream s
 - **Brand colours.** Primary `#673AB6`, dark `#5E35B1`, light `#F9F8FC`. Hard-coded in the build script.
 - **Internal framing where appropriate.** Playbooks are internal-only artifacts. Reps may quote sentences directly to customers, so any customer-facing line still passes the operator-framing test from handover.
 - **Numbers beat adjectives.** "Cuts order entry time by 30%". If unknown, mark `[TBC]` and move on.
+- **Only verified claims.** Every capability, performance, reliability or accessibility claim traces to Verified claims in the current QA market handoff (`${CLAUDE_PLUGIN_ROOT}/references/qa/market-handoff.md`), or to a cited source; every number too. Otherwise `[GAP]` or `[TBC]`. Known issues from the handoff go into support and onboarding material in customer language.
 - **One playbook set per product, not per feature.**
 
 ## See also

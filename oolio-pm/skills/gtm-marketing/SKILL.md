@@ -160,6 +160,7 @@ This skill shares its references and scripts with `gtm-handover` (the upstream s
 - **Brand colours.** Primary `#673AB6`, dark `#5E35B1`, light `#F9F8FC`. Hard-coded in the build script.
 - **Operator framing.** Marketing copy is the most public artifact. Every line reads as if a venue operator is the audience.
 - **Numbers beat adjectives.** Especially in social posts. "Cuts order entry time by 30%" beats "much faster", and is also more shareable.
+- **Only verified claims.** Every capability, performance, reliability or accessibility claim traces to Verified claims in the current QA market handoff (`${CLAUDE_PLUGIN_ROOT}/references/qa/market-handoff.md`), or to a cited source; every number too. Otherwise `[GAP]` or `[TBC]`. Known issues from the handoff go into support and onboarding material in customer language.
 - **One pack per product, not per feature.**
 
 ## See also

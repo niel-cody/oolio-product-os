@@ -68,6 +68,7 @@
     "Council",
     "Steering",
     "Delivery",
+    "Quality",
     "GTM",
     "Measure"
   ],
@@ -121,6 +122,10 @@
     "Delivery": {
       "purpose": "The work is committed and now lives in Jira. Keep it readable for everyone who was not in the room when it was decided.",
       "start": "jira-epic-groomer"
+    },
+    "Quality": {
+      "purpose": "It is built. Find out whether it is what we said, what we designed, usable by everyone and fit for a Friday night, before a customer does. A person makes the ship call, and only what was verified goes to market.",
+      "start": "qa-mission"
     },
     "GTM": {
       "purpose": "The product is real. Give the teams who sell it, support it and onboard customers onto it something they can use on Monday morning.",
@@ -197,6 +202,11 @@
       "after": "Delivery",
       "label": "APPROVE TO PUBLISH",
       "who": "NIEL"
+    },
+    {
+      "after": "Quality",
+      "label": "SHIP CALL",
+      "who": "OWNER"
     }
   ],
   "loops": [
@@ -219,6 +229,11 @@
       "from": "art-scorecard",
       "to": "art-brain",
       "label": "EVERY RUN COMPOUNDS IN THE BRAIN"
+    },
+    {
+      "from": "metrics-review",
+      "to": "qa-mission",
+      "label": "WHAT QA MISSED → BETTER QA"
     }
   ],
   "artifacts": {
@@ -272,7 +287,8 @@
       "stage": "Delivery",
       "row": 2,
       "feeds": [
-        "gtm-handover"
+        "gtm-handover",
+        "test-basis"
       ]
     },
     "art-pack": {
@@ -292,6 +308,16 @@
       "stage": "Measure",
       "row": 1,
       "feeds": []
+    },
+    "art-qa-review": {
+      "label": "QA Review",
+      "note": "one page per epic",
+      "badge": "CONFLUENCE",
+      "stage": "Quality",
+      "row": 11,
+      "feeds": [
+        "gtm-handover"
+      ]
     }
   },
   "skills": {
@@ -700,6 +726,147 @@
       "feeds": [
         "art-scorecard"
       ]
+    },
+    "qa-mission": {
+      "label": "QA Mission",
+      "note": "tier · verify · verdict",
+      "badge": "CLAUDE·JIRA",
+      "type": "orch",
+      "stage": "Quality",
+      "row": 0,
+      "feeds": [
+        {
+          "to": "test-basis",
+          "label": "basis first"
+        },
+        "functional-qa",
+        "exploratory-qa",
+        "persona-uat",
+        "defect-writer",
+        {
+          "to": "gtm-handover",
+          "label": "verified claims only"
+        },
+        {
+          "to": "metrics-review",
+          "label": "metric readiness"
+        }
+      ]
+    },
+    "test-basis": {
+      "label": "Test Basis",
+      "note": "sources, conflicts, risk",
+      "badge": "CLAUDE·JIRA·FIGMA",
+      "type": "ai",
+      "stage": "Quality",
+      "row": 1,
+      "feeds": [
+        "qa-mission",
+        "functional-qa"
+      ]
+    },
+    "functional-qa": {
+      "label": "Functional QA",
+      "note": "ACs + events fire",
+      "badge": "CLAUDE·BROWSER",
+      "type": "ai",
+      "stage": "Quality",
+      "row": 2,
+      "feeds": [
+        "defect-writer"
+      ]
+    },
+    "exploratory-qa": {
+      "label": "Exploratory QA",
+      "note": "chartered sessions",
+      "badge": "CLAUDE·BROWSER",
+      "type": "ai",
+      "stage": "Quality",
+      "row": 3,
+      "feeds": [
+        "defect-writer"
+      ]
+    },
+    "design-conformance": {
+      "label": "Design Conformance",
+      "note": "Figma · components · copy",
+      "badge": "CLAUDE·FIGMA",
+      "type": "ai",
+      "stage": "Quality",
+      "row": 4,
+      "feeds": [
+        "defect-writer"
+      ]
+    },
+    "accessibility-audit": {
+      "label": "Accessibility Audit",
+      "note": "WCAG 2.2 AA, 3 passes",
+      "badge": "CLAUDE·BROWSER",
+      "type": "ai",
+      "stage": "Quality",
+      "row": 5,
+      "feeds": [
+        "defect-writer"
+      ]
+    },
+    "persona-uat": {
+      "label": "Persona UAT",
+      "note": "synthetic users, a filter",
+      "badge": "CLAUDE·BROWSER",
+      "type": "ai",
+      "stage": "Quality",
+      "row": 6,
+      "feeds": [
+        "defect-writer",
+        {
+          "to": "uat-session-kit",
+          "label": "script + predictions"
+        }
+      ]
+    },
+    "uat-session-kit": {
+      "label": "UAT Session Kit",
+      "note": "real people, scored",
+      "badge": "NIEL·GRANOLA",
+      "type": "human",
+      "stage": "Quality",
+      "row": 7,
+      "feeds": [
+        "defect-writer"
+      ]
+    },
+    "code-qa": {
+      "label": "Code QA",
+      "note": "read-only coverage",
+      "badge": "CLAUDE·REPO",
+      "type": "ai",
+      "stage": "Quality",
+      "row": 8,
+      "feeds": [
+        "defect-writer"
+      ]
+    },
+    "resilience-qa": {
+      "label": "Resilience QA",
+      "note": "survives a service",
+      "badge": "CLAUDE·BROWSER",
+      "type": "ai",
+      "stage": "Quality",
+      "row": 9,
+      "feeds": [
+        "defect-writer"
+      ]
+    },
+    "defect-writer": {
+      "label": "Defect Writer",
+      "note": "rework or ticket, themed",
+      "badge": "CLAUDE·JIRA",
+      "type": "ai",
+      "stage": "Quality",
+      "row": 10,
+      "feeds": [
+        "art-qa-review"
+      ]
     }
   },
   "flows": [
@@ -981,6 +1148,57 @@
           "art-idea",
           "JPD Idea",
           "Back at the top of the funnel, with evidence this time."
+        ]
+      ]
+    },
+    {
+      "name": "Spec → Tested → Proven",
+      "accent": "--orch",
+      "path": [
+        [
+          "art-epic",
+          "Groomed Epic",
+          "The stories and their acceptance criteria are built."
+        ],
+        [
+          "test-basis",
+          "Test Basis",
+          "PRD, stories, decisions, Figma and code lined up. Conflicts go to a person before anyone tests."
+        ],
+        [
+          "qa-mission",
+          "QA Mission",
+          "The tier is set by risk and the specialists run in parallel."
+        ],
+        [
+          "persona-uat",
+          "Persona UAT",
+          "Synthetic users walk it in character and predict where real ones will stall."
+        ],
+        [
+          "defect-writer",
+          "Defect Writer",
+          "A failed AC before merge reworks the story. After merge, themed Bugs and Improvements."
+        ],
+        [
+          "art-qa-review",
+          "QA Review",
+          "One page per epic: what was tested, by whom, when, and the result."
+        ],
+        [
+          "gtm-handover",
+          "GTM Handover",
+          "The pack claims only what QA verified, and says the known issues plainly."
+        ],
+        [
+          "art-pack",
+          "GTM Pack",
+          "Shipped to the field."
+        ],
+        [
+          "metrics-review",
+          "Metrics Review",
+          "The promised metrics, proven measurable before launch, checked against reality."
         ]
       ]
     }

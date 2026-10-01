@@ -61,7 +61,7 @@ Offer the next step: `grill-my-prd` to pressure-test it (it will hang a versione
 
 - Every section of the format present or consciously omitted (some PRDs need no Funding model; none can skip What, Why, Who, Non-goals, Success metrics, Open questions).
 - Personas are named library personas, not roles or "users".
-- Success metrics measure behaviour or business movement, with the measurement dependency named if one exists.
+- Success metrics measure behaviour or business movement, with the measurement dependency named if one exists, so each can pass the measurability chain `test-basis` will run before launch (`${CLAUDE_PLUGIN_ROOT}/references/qa/measurability.md`).
 - Non-goals are real exclusions someone might otherwise assume were in scope.
 - Every open question has a named decision owner.
 - Published to Confluence in the right space, URL handed over, next step offered.

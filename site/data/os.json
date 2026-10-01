@@ -1,5 +1,5 @@
 {
-  "stamp": "07284f3",
+  "stamp": "794dddb",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -7,8 +7,21 @@
   "plugins": [
     {
       "name": "oolio-pm",
-      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, a daily HubSpot sweep that turns the support queue into cited Insights, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding, and push-to-brain, the explicit end-of-session push that lands what a session established on the page that already owns it. Thirty-four skills.",
+      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, a daily HubSpot sweep that turns the support queue into cited Insights, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding, and push-to-brain, the explicit end-of-session push that lands what a session established on the page that already owns it. The QA family tests the built product before it ships: a test basis that lines up the sources and proves the metrics are measurable, functional, exploratory, design-conformance, WCAG 2.2 accessibility, synthetic-persona, code-coverage and resilience passes, real-user UAT, one defect standard that reworks stories before merge, and a release gate whose verdict hands GTM only verified claims and learns from what it missed. Forty-five skills.",
       "skills": [
+        {
+          "id": "accessibility-audit",
+          "plugin": "oolio-pm",
+          "description": "Audit a live build against WCAG 2.2 AA and Oolio's surface targets (POS, kiosk, KDS, back office, online) in three passes reported separately: automated (axe-core rules, contrast on rendered colours), assisted (keyboard-only run of every task, focus not obscured, names and roles from the accessibility tree, target sizes, a single-pointer alternative for every drag, reflow, errors linked to fields) and the human-required list (real screen reader, cognitive load). Produces findings against the success criterion and a VPAT-shaped summary. Trigger on \"accessibility audit\", \"is this accessible\", \"WCAG check\", \"keyboard test this\", \"check contrast\", \"can everyone use it\", \"we need an ACR or VPAT\". Do NOT trigger for a mockup with no build (design-council-review, or design:accessibility-review, which targets WCAG 2.1) or design-system checks (design-conformance).",
+          "title": "Accessibility audit: can everyone use it",
+          "lede": "Three passes, reported separately, so nobody mistakes an automated pass for conformance. Automated tools catch only part of the issues; keyboard, focus and assistive-technology checks catch the rest. The floor is **WCAG 2.2 AA**, one version ahead of the generic plugin's 2.1, and 2.2's new criteria bite Oolio directly: every drag in a menu builder needs a single-pointer alternative (2.5.7), and sticky control bars and drawers must not hide the focused field (2.4.11).",
+          "blurb": "Audit a live build against WCAG 2.2 AA and Oolio's surface targets (POS, kiosk, KDS, back office, online) in three passes reported separately: automated (axe-core rules, contrast on rendered colours), assisted (keyboard-only run of every task, focus not obscured, names and roles from the accessibility tree, target sizes, a single-pointer alternative for every drag, reflow, errors linked to fields) and the human-required list (real screen reader, cognitive load). Produces findings against the success criterion and a VPAT-shaped summary. Trigger on \"accessibility audit\", \"is this accessible\", \"WCAG check\", \"keyboard test this\", \"check contrast\", \"can everyone use it\", \"we need an ACR or VPAT\".",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "For a mockup with no build (design-council-review, or design:accessibility-review, which targets WCAG 2.1) or design-system checks (design-conformance)"
+          ]
+        },
         {
           "id": "add-insight",
           "plugin": "oolio-pm",
@@ -61,6 +74,20 @@
           ]
         },
         {
+          "id": "code-qa",
+          "plugin": "oolio-pm",
+          "description": "Read-only test intelligence: reads the repo and PR diff, never writes. Maps each acceptance criterion to the unit and integration tests that cover it, lists ACs with no test, rates risky changes by blast radius (shared helpers, resolvers, the POS gateway, pricing), proposes the missing tests as Given/When/Then for engineers to own, drafts Playwright specs as suggestions, and points the browser skills at regression risk. After an incident, proposes the regression test that would have caught it. Trigger on \"what's the test coverage on this\", \"which ACs have no tests\", \"what does this PR touch\", \"blast radius of <PR>\", \"what tests are missing\", \"propose tests for <story>\", \"what test would have caught <incident>\". Do NOT trigger for running tests in the browser (functional-qa), general code review (engineering:code-review) or a general test strategy (engineering:testing-strategy).",
+          "title": "Code QA: read-only test intelligence",
+          "lede": "Push checks down the pyramid. Browser tests are slow and brittle; anything a unit or integration test can catch should be caught there, by engineers, in the repo. This skill makes sure the right tests get written, and tells the browser skills where to look, without ever touching the code.",
+          "blurb": "Read-only test intelligence: reads the repo and PR diff, never writes. Maps each acceptance criterion to the unit and integration tests that cover it, lists ACs with no test, rates risky changes by blast radius (shared helpers, resolvers, the POS gateway, pricing), proposes the missing tests as Given/When/Then for engineers to own, drafts Playwright specs as suggestions, and points the browser skills at regression risk. After an incident, proposes the regression test that would have caught it. Trigger on \"what's the test coverage on this\", \"which ACs have no tests\", \"what does this PR touch\", \"blast radius of <PR>\", \"what tests are missing\", \"propose tests for <story>\", \"what test would have caught <incident>\".",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "For running tests in the browser (functional-qa)",
+            "General code review (engineering:code-review) or a general test strategy (engineering:testing-strategy)"
+          ]
+        },
+        {
           "id": "competitor-watch",
           "plugin": "oolio-pm",
           "description": "Run Oolio's competitor intelligence: maintain one living dossier per competitor in the Brain, sweep the watchlist weekly and report only the deltas, deep-dive a competitor's reviews and communities for weaknesses, and build Fact-Impact-Act battlecards. Trigger when the user says \"run the sweep\", \"competitor sweep\", \"watch the competition\", \"what's changed in the market\", \"update the <name> dossier\", \"deep-dive <competitor>\", \"build a battlecard for <competitor>\", \"what are <competitor>'s weaknesses\", \"what are competitors marketing\", \"check their campaigns/socials\", \"is <claim> real or marketing\", or asks what a rival is doing, shipping, pricing, or hiring. Routes product-gap findings to `feedback-to-idea` and idea evidence to `signal-radar`. Do NOT trigger for validating a specific JPD idea (use signal-radar), a general research briefing (use storm-research), or win/loss deal analysis (use win-loss).",
@@ -90,7 +117,7 @@
         {
           "id": "convene-vpc",
           "plugin": "oolio-pm",
-          "description": "Convene the Oolio Virtual Product Council to pressure-test a product decision, design, requirement, spec, PRD, or piece of research. Use when the user says \"convene the VPC\", \"run the product council\", \"review this decision/design/PRD/spec\", \"pressure-test this\", \"validate this against our personas\", \"what would the council say\", or hands over a Confluence page, Jira ticket, Figma file, prototype URL, or document and asks for a validated decision. This is the orchestrator: it runs the whole loop, chairs the subcommittees, and produces a recorded, human-validated decision. It calls the child skills storm-research, operator-council-review, design-council-review, and leadership-subcommittee-review.",
+          "description": "Convene the Oolio Virtual Product Council to pressure-test a product decision, design, requirement, spec, PRD, or piece of research. Use when the user says \"convene the VPC\", \"run the product council\", \"review this decision/design/PRD/spec\", \"pressure-test this\", \"validate this against our personas\", \"what would the council say\", or hands over a Confluence page, Jira ticket, Figma file, prototype URL, or document and asks for a validated decision. This is the orchestrator: it runs the whole loop, chairs the subcommittees, and produces a recorded, human-validated decision. It calls the child skills storm-research, operator-council-review, design-council-review, and leadership-subcommittee-review. Do NOT trigger for a built release or PR preview to be tested (qa-mission).",
           "title": "Convene the Virtual Product Council",
           "lede": "You are acting as the Product Council Chair. Run the council as a loop that does not stop until it meets success criteria defined up front, verified and checked. Produce a recorded decision, never a one-pass opinion.",
           "blurb": "Convene the Oolio Virtual Product Council to pressure-test a product decision, design, requirement, spec, PRD, or piece of research.",
@@ -103,16 +130,46 @@
             "validate this against our personas",
             "what would the council say"
           ],
-          "excludes": []
+          "excludes": [
+            "For a built release or PR preview to be tested (qa-mission)"
+          ]
+        },
+        {
+          "id": "defect-writer",
+          "plugin": "oolio-pm",
+          "description": "The single place QA findings are written, merged and routed, and the only writer of an epic's QA Review page. Takes findings from any QA skill, a tester, a UAT session or a pasted list, enforces no-oracle-no-defect, de-dupes across sources and open Jira, sets type, severity and confidence, then routes by stage. Before merge a failed AC reworks its story (drafted comment to the engineer and a transition back, no new ticket); after merge it drafts themed Bugs or Improvements. QA never creates Stories. All writes held for approval. Trigger on \"write these up\", \"consolidate these findings\", \"turn this into tickets\", \"send it back for rework\", \"theme these UAT findings\", \"update the QA Review page\", or a pasted list of test issues. Do NOT trigger for raw customer feedback (feedback-to-idea), a single incident (customer-escalation), or to run testing (qa-mission).",
+          "title": "Defect writer, the finding standard",
+          "lede": "Every QA skill reports through this one, so findings from six specialists, a human tester and a real UAT session land in one shape, with one severity scale, routed the way the team actually works. Engine and wrapper: the specialists find; this skill writes, merges, routes, and keeps the epic's one QA Review page.",
+          "blurb": "The single place QA findings are written, merged and routed, and the only writer of an epic's QA Review page. Takes findings from any QA skill, a tester, a UAT session or a pasted list, enforces no-oracle-no-defect, de-dupes across sources and open Jira, sets type, severity and confidence, then routes by stage. Before merge a failed AC reworks its story (drafted comment to the engineer and a transition back, no new ticket); after merge it drafts themed Bugs or Improvements. QA never creates Stories. All writes held for approval. Trigger on \"write these up\", \"consolidate these findings\", \"turn this into tickets\", \"send it back for rework\", \"theme these UAT findings\", \"update the QA Review page\", or a pasted list of test issues.",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "For raw customer feedback (feedback-to-idea)",
+            "A single incident (customer-escalation)",
+            "To run testing (qa-mission)"
+          ]
+        },
+        {
+          "id": "design-conformance",
+          "plugin": "oolio-pm",
+          "description": "Check that the built screen is what was designed, in the system's own components. Compares the live build, in order, against the Figma frame for the work, the component reference (is this the real ControlBar or a lookalike, are all states present, does the Select follow its rules), the pattern library (navigation in the shell, drawers versus modals, save versus publish, destructive actions, empty and error states), the design tokens, and the glossary. Tags every deviation deliberate, drift or system gap, so drift goes to engineering and gaps go to Design. Trigger on \"does the build match the design\", \"check it against Figma\", \"design QA\", \"is this our component\", \"pass it through design\", \"check the copy against the glossary\". Do NOT trigger to judge whether the design itself is good (design-council-review, built mode) or for WCAG checks (accessibility-audit).",
+          "title": "Design conformance: did we build what was designed",
+          "lede": "The mechanical version of \"pass it through the design team\". It does not ask whether the design is good; that judgement stays with the Design Council. It asks whether the build is the design, built from the system, using the product's words.",
+          "blurb": "Check that the built screen is what was designed, in the system's own components. Compares the live build, in order, against the Figma frame for the work, the component reference (is this the real ControlBar or a lookalike, are all states present, does the Select follow its rules), the pattern library (navigation in the shell, drawers versus modals, save versus publish, destructive actions, empty and error states), the design tokens, and the glossary. Tags every deviation deliberate, drift or system gap, so drift goes to engineering and gaps go to Design. Trigger on \"does the build match the design\", \"check it against Figma\", \"design QA\", \"is this our component\", \"pass it through design\", \"check the copy against the glossary\".",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "To judge whether the design itself is good (design-council-review, built mode) or for WCAG checks (accessibility-audit)"
+          ]
         },
         {
           "id": "design-council-review",
           "plugin": "oolio-pm",
-          "description": "Review a design against the Oolio Design Council, the panel of expert design and research lenses. Use when the user says \"run the Design Council\", \"is the design sound\", \"review this wireframe / Figma / flow / screen\", \"run the lenses\", or hands over a UI, mockup, or interaction to be critiqued by expert principles. Assigns mandatory and contextual lenses from the matrix, runs each lens's challenge questions, applies the decision rule, and records verdicts and clashes. Can run standalone or as part of a full council review.",
+          "description": "Review a design against the Oolio Design Council, the panel of expert design and research lenses. Use when the user says \"run the Design Council\", \"is the design sound\", \"review this wireframe / Figma / flow / screen\", \"run the lenses\", or hands over a UI, mockup, or interaction to be critiqued by expert principles. Assigns mandatory and contextual lenses from the matrix, runs each lens's challenge questions, applies the decision rule, and records verdicts and clashes. Built mode reviews the live build instead of a mockup, for qa-mission. Can run standalone or as part of a full council review.",
           "title": "Design Council review",
           "lede": "You are running the Design Council, fourteen expert design and research lenses chosen to disagree. This panel raises the ceiling on design quality: is what we built any good, and how do we know. These are lenses, philosophies to test against, never invented quotes from the real practitioners who inspired them.",
           "blurb": "Review a design against the Oolio Design Council, the panel of expert design and research lenses.",
-          "when": "You hand over a UI, mockup, or interaction to be critiqued by expert principles. Assigns mandatory and contextual lenses from the matrix, runs each lens's challenge questions, applies the decision rule, and records verdicts and clashes. Can run standalone or as part of a full council review.",
+          "when": "You hand over a UI, mockup, or interaction to be critiqued by expert principles. Assigns mandatory and contextual lenses from the matrix, runs each lens's challenge questions, applies the decision rule, and records verdicts and clashes. Built mode reviews the live build instead of a mockup, for qa-mission. Can run standalone or as part of a full council review.",
           "phrases": [
             "run the Design Council",
             "is the design sound",
@@ -159,6 +216,23 @@
           "excludes": []
         },
         {
+          "id": "exploratory-qa",
+          "plugin": "oolio-pm",
+          "description": "Run chartered, timeboxed exploratory testing sessions against a live build to find what breaks off the happy path, the defects nobody wrote an AC for. Charters come from the risk map, the hospitality conditions library (midnight trading days, two managers in two tabs, back button mid-publish, empty venues, big catalogues) and past failures; SFDPOT checks coverage and HICCUPPS recognises problems. Session notes are the evidence. Trigger on \"explore this\", \"try to break it\", \"exploratory test\", \"what happens off the happy path\", \"edge cases on <feature>\", \"run some charters\", \"bug bash\". Reports through defect-writer. Do NOT trigger for scripted AC checks (functional-qa), synthetic users in character (persona-uat), load, network loss or scale (resilience-qa), or the full release run (qa-mission).",
+          "title": "Exploratory QA: what breaks off the path",
+          "lede": "Simultaneous learning, test design and execution, with a charter, a timebox and notes, so it is investigation rather than wandering. This is the skill that would have caught \"creating a Sat/Sun schedule deletes every existing schedule\": a Time × Data charter on overlapping schedules, not an AC anyone wrote.",
+          "blurb": "Run chartered, timeboxed exploratory testing sessions against a live build to find what breaks off the happy path, the defects nobody wrote an AC for. Charters come from the risk map, the hospitality conditions library (midnight trading days, two managers in two tabs, back button mid-publish, empty venues, big catalogues) and past failures; SFDPOT checks coverage and HICCUPPS recognises problems. Session notes are the evidence. Trigger on \"explore this\", \"try to break it\", \"exploratory test\", \"what happens off the happy path\", \"edge cases on <feature>\", \"run some charters\", \"bug bash\". Reports through defect-writer.",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "For scripted AC checks (functional-qa)",
+            "Synthetic users in character (persona-uat)",
+            "Load",
+            "Network loss or scale (resilience-qa)",
+            "The full release run (qa-mission)"
+          ]
+        },
+        {
           "id": "feedback-to-idea",
           "plugin": "oolio-pm",
           "description": "Turn raw customer, support, or sales signal into a Jira Product Discovery idea, or attach the signal to an existing idea, de-duped against the whole backlog. Trigger PROACTIVELY when the user pastes customer feedback, a support trend, a Slack thread, a HubSpot ticket or deal note, a churn reason, or a feature request and says \"raise this as an idea\", \"get this into JPD\", \"log this feedback\", \"is this already on the backlog\", or \"turn this into an idea\". Also trigger when the user asks to sweep a channel or ticket queue for product signal. Do NOT trigger for grooming an existing idea (use jpd-idea-groomer), for running the full loop (use jpd-loop), or for general feedback summarisation with no JPD intent.",
@@ -177,6 +251,21 @@
             "For grooming an existing idea (use jpd-idea-groomer)",
             "For running the full loop (use jpd-loop)",
             "For general feedback summarisation with no JPD intent"
+          ]
+        },
+        {
+          "id": "functional-qa",
+          "plugin": "oolio-pm",
+          "description": "Run a release's acceptance criteria as concrete examples against the live build, in the browser, by role and name, and confirm the analytics events its success metrics need actually fire. Pass, Fail or Blocked per AC with evidence, at least one negative case each, technique chosen by the rule's shape (boundaries, decision tables, state transitions, pairwise). Also re-runs the product area's regression pack. Trigger on \"test the ACs\", \"does it do what the story says\", \"functional test <story/epic/PR>\", \"run the regression pack\", \"check the events fire\", \"is it instrumented\", \"verify this fix\". Reports through defect-writer, so a failed AC before merge sends the story back for rework. Do NOT trigger for off-script exploration (exploratory-qa), design or accessibility checks (design-conformance, accessibility-audit), or the full release run (qa-mission).",
+          "title": "Functional QA: does it do what we said",
+          "lede": "Runs every acceptance criterion as a concrete example against the build, and proves the release will produce the data its own success metrics depend on. The question is narrow on purpose: does the build do what the story, the decision log and the PRD's metrics say it must.",
+          "blurb": "Run a release's acceptance criteria as concrete examples against the live build, in the browser, by role and name, and confirm the analytics events its success metrics need actually fire. Pass, Fail or Blocked per AC with evidence, at least one negative case each, technique chosen by the rule's shape (boundaries, decision tables, state transitions, pairwise). Also re-runs the product area's regression pack. Trigger on \"test the ACs\", \"does it do what the story says\", \"functional test <story/epic/PR>\", \"run the regression pack\", \"check the events fire\", \"is it instrumented\", \"verify this fix\". Reports through defect-writer, so a failed AC before merge sends the story back for rework.",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "For off-script exploration (exploratory-qa)",
+            "Design or accessibility checks (design-conformance, accessibility-audit)",
+            "The full release run (qa-mission)"
           ]
         },
         {
@@ -354,11 +443,11 @@
         {
           "id": "jpd-idea-groomer",
           "plugin": "oolio-pm",
-          "description": "Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, plus Secondary Personas, Segments, Migration Relevance, Horizon and Commitment as proposals, Escalate). Trigger PROACTIVELY when the user pastes a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link) and asks to \"groom\", \"polish\", \"fix up\", \"audit\", or \"get this Steering / roadmap ready\". Also trigger when the user references Oolio's JPD field standards, Steering review, or pastes rough idea text to be written up to JPD standard. Prefer over generic writing help when the context smells like product discovery at Oolio.",
+          "description": "Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, plus Secondary Personas, Segments, Migration Relevance, Horizon and Commitment as proposals, Escalate). Trigger PROACTIVELY when the user pastes a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link) and asks to \"groom\", \"polish\", \"fix up\", \"audit\", or \"get this Steering / roadmap ready\". Also trigger when the user references Oolio's JPD field standards, Steering review, or pastes rough idea text to be written up to JPD standard.",
           "title": "JPD Idea Groomer",
           "lede": "End-to-end grooming of a Jira Product Discovery idea so it lands cleanly against Oolio's **JPD Field Standards (2026+)**. The skill audits what's there, fills the gaps, rewrites the summary and description to standard, and sets the required custom fields. The end goal is a perfectly groomed idea that anyone can read and understand in under sixty seconds.",
           "blurb": "Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, plus Secondary Personas, Segments, Migration Relevance, Horizon and Commitment as proposals, Escalate).",
-          "when": "You paste a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link). Also trigger when you reference Oolio's JPD field standards, Steering review, or paste rough idea text to be written up to JPD standard. Prefer over generic writing help when the context smells like product discovery at Oolio.",
+          "when": "You paste a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link). Also trigger when you reference Oolio's JPD field standards, Steering review, or paste rough idea text to be written up to JPD standard.",
           "phrases": [
             "groom",
             "polish",
@@ -454,26 +543,41 @@
         {
           "id": "operator-council-review",
           "plugin": "oolio-pm",
-          "description": "Test a decision against the Oolio Operator Council, the hospitality user personas (the UAT panel). Use when the user says \"run UAT\", \"run the operator council\", \"would real users accept this\", \"does this survive a Friday night\", \"check this against our personas\", or wants the in-venue, frontline reality of a feature. Convenes the user personas the decision touches, by role and by segment or vertical, and runs each persona's challenge. Can run standalone or as part of a full council review.",
+          "description": "Test a decision against the Oolio Operator Council, the hospitality user personas (the UAT panel). Use when the user says \"run the operator council on this\", \"run the operator council\", \"would real users accept this\", \"does this survive a Friday night\", \"check this against our personas\", or wants the in-venue, frontline reality of a feature. Convenes the user personas the decision touches, by role and by segment or vertical, and runs each persona's challenge. Built mode tests the live build through the personas' eyes, for qa-mission. Can run standalone or as part of a full council review. Do NOT trigger to test a live build (persona-uat, uat-session-kit) or for resilience (resilience-qa).",
           "title": "Operator Council review",
           "lede": "You are running the Operator Council, the hospitality user personas. This panel holds the floor of operational reality: whether a real venue would accept and adopt this, and whether it survives service under pressure.",
           "blurb": "Test a decision against the Oolio Operator Council, the hospitality user personas (the UAT panel).",
-          "when": "You want the in-venue, frontline reality of a feature. Convenes the user personas the decision touches, by role and by segment or vertical, and runs each persona's challenge. Can run standalone or as part of a full council review.",
+          "when": "You want the in-venue, frontline reality of a feature. Convenes the user personas the decision touches, by role and by segment or vertical, and runs each persona's challenge. Built mode tests the live build through the personas' eyes, for qa-mission. Can run standalone or as part of a full council review.",
           "phrases": [
-            "run UAT",
+            "run the operator council on this",
             "run the operator council",
             "would real users accept this",
             "does this survive a Friday night",
             "check this against our personas"
           ],
-          "excludes": []
+          "excludes": [
+            "To test a live build (persona-uat, uat-session-kit) or for resilience (resilience-qa)"
+          ]
+        },
+        {
+          "id": "persona-uat",
+          "plugin": "oolio-pm",
+          "description": "Run synthetic users through a live build, in character and under real constraints, before real people see it. Picks the test persona cards the epic touches (the literal-reading cafe owner, the Bepoz pub manager, the 12-venue ops lead, the online-first operator, the new casual, the chef at the pass, the fat finger at 8pm), writes a no-briefing task script (create, structure, populate, design, modify, recover, publish), runs each task in the browser as that persona, and produces a per-persona, per-task scorecard with what decided it. A pre-filter for obvious friction, never UAT sign-off. Trigger on \"persona UAT\", \"run the personas through it\", \"walk it as Mia and Dave\", \"usability test with personas\", \"synthetic UAT\", \"would a new user get this\". Do NOT trigger for real-user sessions (uat-session-kit) or for opinion on a mockup or decision (operator-council-review).",
+          "title": "Persona UAT: synthetic users with real constraints",
+          "lede": "The PR-1095 usability session as a repeatable skill. Synthetic personas walked the menu builder and found the problems the external session later confirmed: users could not tell what page they were on, what an edit would change, or whether anything was live. That is the job: clear the obvious friction cheaply so real sessions spend their time on the deep problems.",
+          "blurb": "Run synthetic users through a live build, in character and under real constraints, before real people see it. Picks the test persona cards the epic touches (the literal-reading cafe owner, the Bepoz pub manager, the 12-venue ops lead, the online-first operator, the new casual, the chef at the pass, the fat finger at 8pm), writes a no-briefing task script (create, structure, populate, design, modify, recover, publish), runs each task in the browser as that persona, and produces a per-persona, per-task scorecard with what decided it. A pre-filter for obvious friction, never UAT sign-off. Trigger on \"persona UAT\", \"run the personas through it\", \"walk it as Mia and Dave\", \"usability test with personas\", \"synthetic UAT\", \"would a new user get this\".",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "For real-user sessions (uat-session-kit) or for opinion on a mockup or decision (operator-council-review)"
+          ]
         },
         {
           "id": "pm-compass",
           "plugin": "oolio-pm",
           "description": "The front door and router for the oolio-pm skills. Trigger when someone asks \"which skill should I use\", \"where do I start\", \"what can these skills do\", \"what have you got for X\", \"help me choose\", \"I'm new to this\", or describes a product-management task without naming a skill and the right one isn't obvious. Also trigger for \"show me the pipeline\" or \"how do these skills fit together\". Reads the situation, names the one skill (or short chain) that fits, and starts it on request. Do NOT trigger when the user already named a specific skill or their phrasing clearly matches one skill's own triggers — route straight there instead.",
           "title": "PM compass",
-          "lede": "The router. Thirty-four skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
+          "lede": "The router. Forty-five skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
           "blurb": "The front door and router for the oolio-pm skills.",
           "when": "You describe a product-management task without naming a skill and the right one isn't obvious. Reads the situation, names the one skill (or short chain) that fits, and starts it on request.",
           "phrases": [
@@ -508,6 +612,35 @@
             "To health-check or tidy the vault (use wiki-lint)",
             "For an overview snapshot (use wiki-status)",
             "To stand up a domain (use wiki-new)"
+          ]
+        },
+        {
+          "id": "qa-mission",
+          "plugin": "oolio-pm",
+          "description": "The quality gate and orchestrator of the QA family, for releases what convene-vpc is for decisions. Takes an epic, fix version, PR preview or flag, runs test-basis and stops on high-consequence conflicts; picks Smoke, Standard or Full by risk; convenes the specialists that tier needs (functional, exploratory, design, accessibility, persona UAT, code, resilience, councils in built mode); merges through defect-writer; verifies independently; recommends Ship, Ship with known issues or Hold; and hands GTM only verified claims and metrics-review a measurable launch. Learn mode turns escapes into method fixes. Trigger on \"QA this release\", \"is it ready to ship\", \"run QA on <epic>\", \"release verdict\", \"quality gate\", \"what did QA miss\". Do NOT trigger for one specialist pass (call that skill), a decision, PRD or mockup (convene-vpc), or a deploy checklist (engineering:deploy-checklist).",
+          "title": "QA mission: the quality gate",
+          "lede": "What `convene-vpc` does for decisions, this does for releases: it plans the testing by risk, convenes the right specialists, makes them report in one shape, has an independent checker attack the result, and gives a verdict a person can act on. Then it closes the loop: it tells GTM what it may claim, tells measurement what to measure and when, and learns from what reality finds later.",
+          "blurb": "The quality gate and orchestrator of the QA family, for releases what convene-vpc is for decisions. Takes an epic, fix version, PR preview or flag, runs test-basis and stops on high-consequence conflicts; picks Smoke, Standard or Full by risk; convenes the specialists that tier needs (functional, exploratory, design, accessibility, persona UAT, code, resilience, councils in built mode); merges through defect-writer; verifies independently; recommends Ship, Ship with known issues or Hold; and hands GTM only verified claims and metrics-review a measurable launch. Learn mode turns escapes into method fixes. Trigger on \"QA this release\", \"is it ready to ship\", \"run QA on <epic>\", \"release verdict\", \"quality gate\", \"what did QA miss\".",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "For one specialist pass (call that skill)",
+            "A decision",
+            "PRD or mockup (convene-vpc)",
+            "A deploy checklist (engineering:deploy-checklist)"
+          ]
+        },
+        {
+          "id": "resilience-qa",
+          "plugin": "oolio-pm",
+          "description": "Test whether a build survives a real service, the Q4 question. Times key interactions against the Doherty threshold (about 400 ms for anything an operator waits on), runs against scale fixtures (thousands of products, many price lists times variants, a 40-venue group), simulates network loss and recovery mid-save and mid-publish, tests concurrent edits by two managers, and for POS-side work checks offline mode, the offline-versus-no-network states and sync-back. Trigger on \"will it survive Friday night\", \"performance check\", \"is it fast enough\", \"what happens if the network drops\", \"test offline mode\", \"concurrent edits\", \"does it scale to a big group\", \"resilience test\". Do NOT trigger for infrastructure load testing or security testing (engineering and the security lead own those) or for edge cases at normal load (exploratory-qa).",
+          "title": "Resilience QA: survives a real service",
+          "lede": "If a system fails under real operational pressure, it is not acceptable. The other specialists test the build on a quiet afternoon with a small catalogue and a good connection. This one tests it the way a venue uses it: at scale, under time pressure, with the network misbehaving and two people editing at once.",
+          "blurb": "Test whether a build survives a real service, the Q4 question. Times key interactions against the Doherty threshold (about 400 ms for anything an operator waits on), runs against scale fixtures (thousands of products, many price lists times variants, a 40-venue group), simulates network loss and recovery mid-save and mid-publish, tests concurrent edits by two managers, and for POS-side work checks offline mode, the offline-versus-no-network states and sync-back. Trigger on \"will it survive Friday night\", \"performance check\", \"is it fast enough\", \"what happens if the network drops\", \"test offline mode\", \"concurrent edits\", \"does it scale to a big group\", \"resilience test\".",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "For infrastructure load testing or security testing (engineering and the security lead own those) or for edge cases at normal load (exploratory-qa)"
           ]
         },
         {
@@ -571,6 +704,35 @@
             "give me a STORM briefing on X"
           ],
           "excludes": []
+        },
+        {
+          "id": "test-basis",
+          "plugin": "oolio-pm",
+          "description": "Build the Test Basis for a release, epic or PR before anyone tests it. Gathers every source that says what the build should be (PRD, stories and ACs, decisions, meetings, Figma, the diff), finds where they disagree, flags untestable ACs with Given/When/Then rewrites, checks every success metric can be measured, rates each flow Frequency × Consequence, and maps the blast radius. Trigger on \"build the test basis\", \"what should we test\", \"is this spec testable\", \"line up the sources\", \"are the sources consistent\", \"is this measurable\", \"risk map for <release>\", or a release key with \"before we test\". The first step of every qa-mission run. Never resolves a conflict; dates it and hands it to a person. Do NOT trigger to run tests (functional-qa, exploratory-qa), to grill the PRD (grill-my-prd), a general test strategy (engineering:testing-strategy), or the full QA run (qa-mission).",
+          "title": "Test basis, the oracle builder",
+          "lede": "The most valuable skill in the QA family and the one everything else consumes. Before a single click, it assembles everything that says what this release should be, and finds where those sources disagree. The best findings from September's manual QA came from contradiction, not clicking: a tooltip that said one thing, a decision that said another, a publish screen that misreported what was live. Lining the sources up first finds those for the price of reading.",
+          "blurb": "Build the Test Basis for a release, epic or PR before anyone tests it. Gathers every source that says what the build should be (PRD, stories and ACs, decisions, meetings, Figma, the diff), finds where they disagree, flags untestable ACs with Given/When/Then rewrites, checks every success metric can be measured, rates each flow Frequency × Consequence, and maps the blast radius. Trigger on \"build the test basis\", \"what should we test\", \"is this spec testable\", \"line up the sources\", \"are the sources consistent\", \"is this measurable\", \"risk map for <release>\", or a release key with \"before we test\". The first step of every qa-mission run. Never resolves a conflict; dates it and hands it to a person.",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "To run tests (functional-qa, exploratory-qa)",
+            "To grill the PRD (grill-my-prd)",
+            "A general test strategy (engineering:testing-strategy)",
+            "The full QA run (qa-mission)"
+          ]
+        },
+        {
+          "id": "uat-session-kit",
+          "plugin": "oolio-pm",
+          "description": "Both ends of real-user UAT, the part that actually validates. Before: recruit criteria (personas, segments, pilot venues), the no-briefing task script, the facilitator and observer sheet, and the measures (task success, time on task, Single Ease Question, SUS). After: ingests Granola transcripts and notes, keys each source, de-dupes across sessions and against the synthetic run, themes it through defect-writer, and scores which real findings persona-uat predicted. Trigger on \"plan the UAT sessions\", \"set up user testing\", \"pilot sessions for <release>\", \"write the observer sheet\", \"consolidate the UAT\", \"process the user testing transcripts\", \"how did synthetic UAT compare\". Do NOT trigger for AI-only persona runs (persona-uat) or interview research on a problem space (design:user-research, synthesize-research).",
+          "title": "UAT session kit: real people, less overhead",
+          "lede": "Real-user UAT is the part of the family that validates; everything synthetic is a filter in front of it. This skill makes real sessions cheaper to run and faster to act on, and it measures whether the synthetic filter is earning its place.",
+          "blurb": "Both ends of real-user UAT, the part that actually validates. Before: recruit criteria (personas, segments, pilot venues), the no-briefing task script, the facilitator and observer sheet, and the measures (task success, time on task, Single Ease Question, SUS). After: ingests Granola transcripts and notes, keys each source, de-dupes across sessions and against the synthetic run, themes it through defect-writer, and scores which real findings persona-uat predicted. Trigger on \"plan the UAT sessions\", \"set up user testing\", \"pilot sessions for <release>\", \"write the observer sheet\", \"consolidate the UAT\", \"process the user testing transcripts\", \"how did synthetic UAT compare\".",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "For AI-only persona runs (persona-uat) or interview research on a problem space (design:user-research, synthesize-research)"
+          ]
         },
         {
           "id": "wiki-ingest",
@@ -719,14 +881,14 @@
         }
       ],
       "counts": {
-        "skills": 34,
+        "skills": 45,
         "inProgress": 0,
         "archived": 0
       }
     }
   ],
   "totals": {
-    "skills": 34,
+    "skills": 45,
     "plugins": 1,
     "inProgress": 0,
     "archived": 0,
@@ -781,7 +943,7 @@
       "title": "PM Compass",
       "blurb": "The front door and router for the oolio-pm skills.",
       "summary": "The front door and router for the oolio-pm skills.",
-      "lede": "The router. Thirty-four skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
+      "lede": "The router. Forty-five skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
       "when": "You describe a product-management task without naming a skill and the right one isn't obvious. Reads the situation, names the one skill (or short chain) that fits, and starts it on request.",
       "phrases": [
         "which skill should I use",
@@ -2100,7 +2262,7 @@
       "blurb": "Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, plus Secondary Personas, Segments, Migration Relevance, Horizon and Commitment as proposals, Escalate).",
       "summary": "Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, plus Secondary Personas, Segments, Migration Relevance, Horizon and Commitment as proposals, Escalate).",
       "lede": "End-to-end grooming of a Jira Product Discovery idea so it lands cleanly against Oolio's **JPD Field Standards (2026+)**. The skill audits what's there, fills the gaps, rewrites the summary and description to standard, and sets the required custom fields. The end goal is a perfectly groomed idea that anyone can read and understand in under sixty seconds.",
-      "when": "You paste a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link). Also trigger when you reference Oolio's JPD field standards, Steering review, or paste rough idea text to be written up to JPD standard. Prefer over generic writing help when the context smells like product discovery at Oolio.",
+      "when": "You paste a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link). Also trigger when you reference Oolio's JPD field standards, Steering review, or paste rough idea text to be written up to JPD standard.",
       "phrases": [
         "groom",
         "polish",
@@ -2708,7 +2870,9 @@
         "validate this against our personas",
         "what would the council say"
       ],
-      "excludes": [],
+      "excludes": [
+        "For a built release or PR preview to be tested (qa-mission)"
+      ],
       "note": "chairs the council",
       "badge": "CLAUDE·OWNER",
       "type": "orch",
@@ -2819,15 +2983,17 @@
       "blurb": "Test a decision against the Oolio Operator Council, the hospitality user personas (the UAT panel).",
       "summary": "Test a decision against the Oolio Operator Council, the hospitality user personas (the UAT panel).",
       "lede": "The hospitality personas sitting as a UAT panel. They hold the floor of operational reality: whether a real venue would accept and adopt this, and whether it survives a Friday night service.",
-      "when": "You want the in-venue, frontline reality of a feature. Convenes the user personas the decision touches, by role and by segment or vertical, and runs each persona's challenge. Can run standalone or as part of a full council review.",
+      "when": "You want the in-venue, frontline reality of a feature. Convenes the user personas the decision touches, by role and by segment or vertical, and runs each persona's challenge. Built mode tests the live build through the personas' eyes, for qa-mission. Can run standalone or as part of a full council review.",
       "phrases": [
-        "run UAT",
+        "run the operator council on this",
         "run the operator council",
         "would real users accept this",
         "does this survive a Friday night",
         "check this against our personas"
       ],
-      "excludes": [],
+      "excludes": [
+        "To test a live build (persona-uat, uat-session-kit) or for resilience (resilience-qa)"
+      ],
       "note": "hospitality personas",
       "badge": "CLAUDE",
       "type": "ai",
@@ -2860,6 +3026,12 @@
       "loops": [],
       "systems": [
         {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
           "id": "confluence",
           "label": "Confluence",
           "band": "record",
@@ -2877,7 +3049,7 @@
       "blurb": "Review a design against the Oolio Design Council, the panel of expert design and research lenses.",
       "summary": "Review a design against the Oolio Design Council, the panel of expert design and research lenses.",
       "lede": "Fourteen expert design and research lenses, chosen because they disagree with each other. The panel exists to raise the ceiling on design quality by answering one question honestly: is what we built any good, and how would we know? They are lenses to test against, never invented quotes from the practitioners who inspired them.",
-      "when": "You hand over a UI, mockup, or interaction to be critiqued by expert principles. Assigns mandatory and contextual lenses from the matrix, runs each lens's challenge questions, applies the decision rule, and records verdicts and clashes. Can run standalone or as part of a full council review.",
+      "when": "You hand over a UI, mockup, or interaction to be critiqued by expert principles. Assigns mandatory and contextual lenses from the matrix, runs each lens's challenge questions, applies the decision rule, and records verdicts and clashes. Built mode reviews the live build instead of a mockup, for qa-mission. Can run standalone or as part of a full council review.",
       "phrases": [
         "run the Design Council",
         "is the design sound",
@@ -2921,6 +3093,12 @@
           "label": "Figma",
           "band": "source",
           "access": "read"
+        },
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
         },
         {
           "id": "confluence",
@@ -3204,6 +3382,12 @@
           "label": "GTM Handover",
           "via": "Groomed Epic",
           "kind": "hop"
+        },
+        {
+          "id": "test-basis",
+          "label": "Test Basis",
+          "via": "Groomed Epic",
+          "kind": "hop"
         }
       ],
       "fromArtifact": [
@@ -3334,6 +3518,771 @@
         }
       ],
       "prev": "jira-epic-groomer",
+      "next": "qa-mission"
+    },
+    {
+      "id": "qa-mission",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:qa-mission",
+      "title": "QA Mission",
+      "blurb": "The quality gate and orchestrator of the QA family, for releases what convene-vpc is for decisions. Takes an epic, fix version, PR preview or flag, runs test-basis and stops on high-consequence conflicts; picks Smoke, Standard or Full by risk; convenes the specialists that tier needs (functional, exploratory, design, accessibility, persona UAT, code, resilience, councils in built mode); merges through defect-writer; verifies independently; recommends Ship, Ship with known issues or Hold; and hands GTM only verified claims and metrics-review a measurable launch. Learn mode turns escapes into method fixes. Trigger on \"QA this release\", \"is it ready to ship\", \"run QA on <epic>\", \"release verdict\", \"quality gate\", \"what did QA miss\".",
+      "summary": "The quality gate and orchestrator of the QA family, for releases what convene-vpc is for decisions.",
+      "lede": "What `convene-vpc` does for decisions, this does for releases: it plans the testing by risk, convenes the right specialists, makes them report in one shape, has an independent checker attack the result, and gives a verdict a person can act on. Then it closes the loop: it tells GTM what it may claim, tells measurement what to measure and when, and learns from what reality finds later.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "For one specialist pass (call that skill)",
+        "A decision",
+        "PRD or mockup (convene-vpc)",
+        "A deploy checklist (engineering:deploy-checklist)"
+      ],
+      "note": "tier · verify · verdict",
+      "badge": "CLAUDE·JIRA",
+      "type": "orch",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "test-basis",
+          "label": "Test Basis",
+          "via": "basis first",
+          "kind": "skill"
+        },
+        {
+          "id": "functional-qa",
+          "label": "Functional QA",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "exploratory-qa",
+          "label": "Exploratory QA",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "persona-uat",
+          "label": "Persona UAT",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "defect-writer",
+          "label": "Defect Writer",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "gtm-handover",
+          "label": "GTM Handover",
+          "via": "verified claims only",
+          "kind": "skill"
+        },
+        {
+          "id": "metrics-review",
+          "label": "Metrics Review",
+          "via": "metric readiness",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [
+        {
+          "id": "test-basis",
+          "label": "Test Basis",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "throughArtifact": [],
+      "fromArtifact": [],
+      "loops": [
+        {
+          "id": "metrics-review",
+          "label": "Metrics Review",
+          "via": "WHAT QA MISSED → BETTER QA",
+          "kind": "skill"
+        }
+      ],
+      "systems": [
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "confluence",
+          "label": "Confluence",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "jira-epic-titler",
+      "next": "test-basis"
+    },
+    {
+      "id": "test-basis",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:test-basis",
+      "title": "Test Basis",
+      "blurb": "Build the Test Basis for a release, epic or PR before anyone tests it. Gathers every source that says what the build should be (PRD, stories and ACs, decisions, meetings, Figma, the diff), finds where they disagree, flags untestable ACs with Given/When/Then rewrites, checks every success metric can be measured, rates each flow Frequency × Consequence, and maps the blast radius. Trigger on \"build the test basis\", \"what should we test\", \"is this spec testable\", \"line up the sources\", \"are the sources consistent\", \"is this measurable\", \"risk map for <release>\", or a release key with \"before we test\". The first step of every qa-mission run. Never resolves a conflict; dates it and hands it to a person.",
+      "summary": "Build the Test Basis for a release, epic or PR before anyone tests it.",
+      "lede": "The most valuable skill in the QA family and the one everything else consumes. Before a single click, it assembles everything that says what this release should be, and finds where those sources disagree. The best findings from September's manual QA came from contradiction, not clicking: a tooltip that said one thing, a decision that said another, a publish screen that misreported what was live. Lining the sources up first finds those for the price of reading.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "To run tests (functional-qa, exploratory-qa)",
+        "To grill the PRD (grill-my-prd)",
+        "A general test strategy (engineering:testing-strategy)",
+        "The full QA run (qa-mission)"
+      ],
+      "note": "sources, conflicts, risk",
+      "badge": "CLAUDE·JIRA·FIGMA",
+      "type": "ai",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "qa-mission",
+          "label": "QA Mission",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "functional-qa",
+          "label": "Functional QA",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [
+        {
+          "id": "art-epic",
+          "label": "Groomed Epic",
+          "via": "",
+          "kind": "artifact"
+        },
+        {
+          "id": "qa-mission",
+          "label": "QA Mission",
+          "via": "basis first",
+          "kind": "skill"
+        }
+      ],
+      "throughArtifact": [],
+      "fromArtifact": [
+        {
+          "id": "jira-epic-groomer",
+          "label": "Jira Epic Groomer",
+          "via": "Groomed Epic",
+          "kind": "hop"
+        }
+      ],
+      "loops": [],
+      "systems": [
+        {
+          "id": "granola",
+          "label": "Granola",
+          "band": "source",
+          "access": "read"
+        },
+        {
+          "id": "posthog",
+          "label": "PostHog",
+          "band": "source",
+          "access": "read"
+        },
+        {
+          "id": "figma",
+          "label": "Figma",
+          "band": "source",
+          "access": "read"
+        },
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "confluence",
+          "label": "Confluence",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "qa-mission",
+      "next": "functional-qa"
+    },
+    {
+      "id": "functional-qa",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:functional-qa",
+      "title": "Functional QA",
+      "blurb": "Run a release's acceptance criteria as concrete examples against the live build, in the browser, by role and name, and confirm the analytics events its success metrics need actually fire. Pass, Fail or Blocked per AC with evidence, at least one negative case each, technique chosen by the rule's shape (boundaries, decision tables, state transitions, pairwise). Also re-runs the product area's regression pack. Trigger on \"test the ACs\", \"does it do what the story says\", \"functional test <story/epic/PR>\", \"run the regression pack\", \"check the events fire\", \"is it instrumented\", \"verify this fix\". Reports through defect-writer, so a failed AC before merge sends the story back for rework.",
+      "summary": "Run a release's acceptance criteria as concrete examples against the live build, in the browser, by role and name, and confirm the analytics events its success metrics need actually fire.",
+      "lede": "Runs every acceptance criterion as a concrete example against the build, and proves the release will produce the data its own success metrics depend on. The question is narrow on purpose: does the build do what the story, the decision log and the PRD's metrics say it must.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "For off-script exploration (exploratory-qa)",
+        "Design or accessibility checks (design-conformance, accessibility-audit)",
+        "The full release run (qa-mission)"
+      ],
+      "note": "ACs + events fire",
+      "badge": "CLAUDE·BROWSER",
+      "type": "ai",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "defect-writer",
+          "label": "Defect Writer",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [
+        {
+          "id": "qa-mission",
+          "label": "QA Mission",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "test-basis",
+          "label": "Test Basis",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "throughArtifact": [],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "posthog",
+          "label": "PostHog",
+          "band": "source",
+          "access": "read"
+        },
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "confluence",
+          "label": "Confluence",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "test-basis",
+      "next": "exploratory-qa"
+    },
+    {
+      "id": "exploratory-qa",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:exploratory-qa",
+      "title": "Exploratory QA",
+      "blurb": "Run chartered, timeboxed exploratory testing sessions against a live build to find what breaks off the happy path, the defects nobody wrote an AC for. Charters come from the risk map, the hospitality conditions library (midnight trading days, two managers in two tabs, back button mid-publish, empty venues, big catalogues) and past failures; SFDPOT checks coverage and HICCUPPS recognises problems. Session notes are the evidence. Trigger on \"explore this\", \"try to break it\", \"exploratory test\", \"what happens off the happy path\", \"edge cases on <feature>\", \"run some charters\", \"bug bash\". Reports through defect-writer.",
+      "summary": "Run chartered, timeboxed exploratory testing sessions against a live build to find what breaks off the happy path, the defects nobody wrote an AC for.",
+      "lede": "Simultaneous learning, test design and execution, with a charter, a timebox and notes, so it is investigation rather than wandering. This is the skill that would have caught \"creating a Sat/Sun schedule deletes every existing schedule\": a Time × Data charter on overlapping schedules, not an AC anyone wrote.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "For scripted AC checks (functional-qa)",
+        "Synthetic users in character (persona-uat)",
+        "Load",
+        "Network loss or scale (resilience-qa)",
+        "The full release run (qa-mission)"
+      ],
+      "note": "chartered sessions",
+      "badge": "CLAUDE·BROWSER",
+      "type": "ai",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "defect-writer",
+          "label": "Defect Writer",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [
+        {
+          "id": "qa-mission",
+          "label": "QA Mission",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "throughArtifact": [],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "confluence",
+          "label": "Confluence",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "functional-qa",
+      "next": "design-conformance"
+    },
+    {
+      "id": "design-conformance",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:design-conformance",
+      "title": "Design Conformance",
+      "blurb": "Check that the built screen is what was designed, in the system's own components. Compares the live build, in order, against the Figma frame for the work, the component reference (is this the real ControlBar or a lookalike, are all states present, does the Select follow its rules), the pattern library (navigation in the shell, drawers versus modals, save versus publish, destructive actions, empty and error states), the design tokens, and the glossary. Tags every deviation deliberate, drift or system gap, so drift goes to engineering and gaps go to Design. Trigger on \"does the build match the design\", \"check it against Figma\", \"design QA\", \"is this our component\", \"pass it through design\", \"check the copy against the glossary\".",
+      "summary": "Check that the built screen is what was designed, in the system's own components.",
+      "lede": "The mechanical version of \"pass it through the design team\". It does not ask whether the design is good; that judgement stays with the Design Council. It asks whether the build is the design, built from the system, using the product's words.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "To judge whether the design itself is good (design-council-review, built mode) or for WCAG checks (accessibility-audit)"
+      ],
+      "note": "Figma · components · copy",
+      "badge": "CLAUDE·FIGMA",
+      "type": "ai",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "defect-writer",
+          "label": "Defect Writer",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [],
+      "throughArtifact": [],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "figma",
+          "label": "Figma",
+          "band": "source",
+          "access": "read"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "exploratory-qa",
+      "next": "accessibility-audit"
+    },
+    {
+      "id": "accessibility-audit",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:accessibility-audit",
+      "title": "Accessibility Audit",
+      "blurb": "Audit a live build against WCAG 2.2 AA and Oolio's surface targets (POS, kiosk, KDS, back office, online) in three passes reported separately: automated (axe-core rules, contrast on rendered colours), assisted (keyboard-only run of every task, focus not obscured, names and roles from the accessibility tree, target sizes, a single-pointer alternative for every drag, reflow, errors linked to fields) and the human-required list (real screen reader, cognitive load). Produces findings against the success criterion and a VPAT-shaped summary. Trigger on \"accessibility audit\", \"is this accessible\", \"WCAG check\", \"keyboard test this\", \"check contrast\", \"can everyone use it\", \"we need an ACR or VPAT\".",
+      "summary": "Audit a live build against WCAG 2.2 AA and Oolio's surface targets (POS, kiosk, KDS, back office, online) in three passes reported separately: automated (axe-core rules, contrast on rendered colours), assisted (keyboard-only run of every task, focus not obscured, names and roles from the accessibility tree, target sizes, a single-pointer alternative for every drag, reflow, errors linked to fields) and the human-required list (real screen reader, cognitive load).",
+      "lede": "Three passes, reported separately, so nobody mistakes an automated pass for conformance. Automated tools catch only part of the issues; keyboard, focus and assistive-technology checks catch the rest. The floor is **WCAG 2.2 AA**, one version ahead of the generic plugin's 2.1, and 2.2's new criteria bite Oolio directly: every drag in a menu builder needs a single-pointer alternative (2.5.7), and sticky control bars and drawers must not hide the focused field (2.4.11).",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "For a mockup with no build (design-council-review, or design:accessibility-review, which targets WCAG 2.1) or design-system checks (design-conformance)"
+      ],
+      "note": "WCAG 2.2 AA, 3 passes",
+      "badge": "CLAUDE·BROWSER",
+      "type": "ai",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "defect-writer",
+          "label": "Defect Writer",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [],
+      "throughArtifact": [],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "design-conformance",
+      "next": "persona-uat"
+    },
+    {
+      "id": "persona-uat",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:persona-uat",
+      "title": "Persona UAT",
+      "blurb": "Run synthetic users through a live build, in character and under real constraints, before real people see it. Picks the test persona cards the epic touches (the literal-reading cafe owner, the Bepoz pub manager, the 12-venue ops lead, the online-first operator, the new casual, the chef at the pass, the fat finger at 8pm), writes a no-briefing task script (create, structure, populate, design, modify, recover, publish), runs each task in the browser as that persona, and produces a per-persona, per-task scorecard with what decided it. A pre-filter for obvious friction, never UAT sign-off. Trigger on \"persona UAT\", \"run the personas through it\", \"walk it as Mia and Dave\", \"usability test with personas\", \"synthetic UAT\", \"would a new user get this\".",
+      "summary": "Run synthetic users through a live build, in character and under real constraints, before real people see it.",
+      "lede": "The PR-1095 usability session as a repeatable skill. Synthetic personas walked the menu builder and found the problems the external session later confirmed: users could not tell what page they were on, what an edit would change, or whether anything was live. That is the job: clear the obvious friction cheaply so real sessions spend their time on the deep problems.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "For real-user sessions (uat-session-kit) or for opinion on a mockup or decision (operator-council-review)"
+      ],
+      "note": "synthetic users, a filter",
+      "badge": "CLAUDE·BROWSER",
+      "type": "ai",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "defect-writer",
+          "label": "Defect Writer",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "uat-session-kit",
+          "label": "UAT Session Kit",
+          "via": "script + predictions",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [
+        {
+          "id": "qa-mission",
+          "label": "QA Mission",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "throughArtifact": [],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "confluence",
+          "label": "Confluence",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "accessibility-audit",
+      "next": "uat-session-kit"
+    },
+    {
+      "id": "uat-session-kit",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:uat-session-kit",
+      "title": "UAT Session Kit",
+      "blurb": "Both ends of real-user UAT, the part that actually validates. Before: recruit criteria (personas, segments, pilot venues), the no-briefing task script, the facilitator and observer sheet, and the measures (task success, time on task, Single Ease Question, SUS). After: ingests Granola transcripts and notes, keys each source, de-dupes across sessions and against the synthetic run, themes it through defect-writer, and scores which real findings persona-uat predicted. Trigger on \"plan the UAT sessions\", \"set up user testing\", \"pilot sessions for <release>\", \"write the observer sheet\", \"consolidate the UAT\", \"process the user testing transcripts\", \"how did synthetic UAT compare\".",
+      "summary": "Both ends of real-user UAT, the part that actually validates.",
+      "lede": "Real-user UAT is the part of the family that validates; everything synthetic is a filter in front of it. This skill makes real sessions cheaper to run and faster to act on, and it measures whether the synthetic filter is earning its place.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "For AI-only persona runs (persona-uat) or interview research on a problem space (design:user-research, synthesize-research)"
+      ],
+      "note": "real people, scored",
+      "badge": "NIEL·GRANOLA",
+      "type": "human",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "defect-writer",
+          "label": "Defect Writer",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [
+        {
+          "id": "persona-uat",
+          "label": "Persona UAT",
+          "via": "script + predictions",
+          "kind": "skill"
+        }
+      ],
+      "throughArtifact": [],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "granola",
+          "label": "Granola",
+          "band": "source",
+          "access": "read"
+        },
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "confluence",
+          "label": "Confluence",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "persona-uat",
+      "next": "code-qa"
+    },
+    {
+      "id": "code-qa",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:code-qa",
+      "title": "Code QA",
+      "blurb": "Read-only test intelligence: reads the repo and PR diff, never writes. Maps each acceptance criterion to the unit and integration tests that cover it, lists ACs with no test, rates risky changes by blast radius (shared helpers, resolvers, the POS gateway, pricing), proposes the missing tests as Given/When/Then for engineers to own, drafts Playwright specs as suggestions, and points the browser skills at regression risk. After an incident, proposes the regression test that would have caught it. Trigger on \"what's the test coverage on this\", \"which ACs have no tests\", \"what does this PR touch\", \"blast radius of <PR>\", \"what tests are missing\", \"propose tests for <story>\", \"what test would have caught <incident>\".",
+      "summary": "Read-only test intelligence: reads the repo and PR diff, never writes.",
+      "lede": "Push checks down the pyramid. Browser tests are slow and brittle; anything a unit or integration test can catch should be caught there, by engineers, in the repo. This skill makes sure the right tests get written, and tells the browser skills where to look, without ever touching the code.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "For running tests in the browser (functional-qa)",
+        "General code review (engineering:code-review) or a general test strategy (engineering:testing-strategy)"
+      ],
+      "note": "read-only coverage",
+      "badge": "CLAUDE·REPO",
+      "type": "ai",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "defect-writer",
+          "label": "Defect Writer",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [],
+      "throughArtifact": [],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "github",
+          "label": "GitHub",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "uat-session-kit",
+      "next": "resilience-qa"
+    },
+    {
+      "id": "resilience-qa",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:resilience-qa",
+      "title": "Resilience QA",
+      "blurb": "Test whether a build survives a real service, the Q4 question. Times key interactions against the Doherty threshold (about 400 ms for anything an operator waits on), runs against scale fixtures (thousands of products, many price lists times variants, a 40-venue group), simulates network loss and recovery mid-save and mid-publish, tests concurrent edits by two managers, and for POS-side work checks offline mode, the offline-versus-no-network states and sync-back. Trigger on \"will it survive Friday night\", \"performance check\", \"is it fast enough\", \"what happens if the network drops\", \"test offline mode\", \"concurrent edits\", \"does it scale to a big group\", \"resilience test\".",
+      "summary": "Test whether a build survives a real service, the Q4 question.",
+      "lede": "If a system fails under real operational pressure, it is not acceptable. The other specialists test the build on a quiet afternoon with a small catalogue and a good connection. This one tests it the way a venue uses it: at scale, under time pressure, with the network misbehaving and two people editing at once.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "For infrastructure load testing or security testing (engineering and the security lead own those) or for edge cases at normal load (exploratory-qa)"
+      ],
+      "note": "survives a service",
+      "badge": "CLAUDE·BROWSER",
+      "type": "ai",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "defect-writer",
+          "label": "Defect Writer",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [],
+      "throughArtifact": [],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "code-qa",
+      "next": "defect-writer"
+    },
+    {
+      "id": "defect-writer",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:defect-writer",
+      "title": "Defect Writer",
+      "blurb": "The single place QA findings are written, merged and routed, and the only writer of an epic's QA Review page. Takes findings from any QA skill, a tester, a UAT session or a pasted list, enforces no-oracle-no-defect, de-dupes across sources and open Jira, sets type, severity and confidence, then routes by stage. Before merge a failed AC reworks its story (drafted comment to the engineer and a transition back, no new ticket); after merge it drafts themed Bugs or Improvements. QA never creates Stories. All writes held for approval. Trigger on \"write these up\", \"consolidate these findings\", \"turn this into tickets\", \"send it back for rework\", \"theme these UAT findings\", \"update the QA Review page\", or a pasted list of test issues.",
+      "summary": "The single place QA findings are written, merged and routed, and the only writer of an epic's QA Review page.",
+      "lede": "Every QA skill reports through this one, so findings from six specialists, a human tester and a real UAT session land in one shape, with one severity scale, routed the way the team actually works. Engine and wrapper: the specialists find; this skill writes, merges, routes, and keeps the epic's one QA Review page.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "For raw customer feedback (feedback-to-idea)",
+        "A single incident (customer-escalation)",
+        "To run testing (qa-mission)"
+      ],
+      "note": "rework or ticket, themed",
+      "badge": "CLAUDE·JIRA",
+      "type": "ai",
+      "stage": "Quality",
+      "feeds": [
+        {
+          "id": "art-qa-review",
+          "label": "QA Review",
+          "via": "",
+          "kind": "artifact"
+        }
+      ],
+      "fedBy": [
+        {
+          "id": "qa-mission",
+          "label": "QA Mission",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "functional-qa",
+          "label": "Functional QA",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "exploratory-qa",
+          "label": "Exploratory QA",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "design-conformance",
+          "label": "Design Conformance",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "accessibility-audit",
+          "label": "Accessibility Audit",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "persona-uat",
+          "label": "Persona UAT",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "uat-session-kit",
+          "label": "UAT Session Kit",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "code-qa",
+          "label": "Code QA",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "resilience-qa",
+          "label": "Resilience QA",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "throughArtifact": [
+        {
+          "id": "gtm-handover",
+          "label": "GTM Handover",
+          "via": "QA Review",
+          "kind": "hop"
+        }
+      ],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "confluence",
+          "label": "Confluence",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "resilience-qa",
       "next": "gtm-handover"
     },
     {
@@ -3390,6 +4339,12 @@
           "kind": "artifact"
         },
         {
+          "id": "art-qa-review",
+          "label": "QA Review",
+          "via": "",
+          "kind": "artifact"
+        },
+        {
           "id": "pm-compass",
           "label": "PM Compass",
           "via": "",
@@ -3399,6 +4354,12 @@
           "id": "drive",
           "label": "Drive",
           "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "qa-mission",
+          "label": "QA Mission",
+          "via": "verified claims only",
           "kind": "skill"
         }
       ],
@@ -3415,6 +4376,12 @@
           "id": "jira-epic-groomer",
           "label": "Jira Epic Groomer",
           "via": "Groomed Epic",
+          "kind": "hop"
+        },
+        {
+          "id": "defect-writer",
+          "label": "Defect Writer",
+          "via": "QA Review",
           "kind": "hop"
         }
       ],
@@ -3439,7 +4406,7 @@
           "access": "read-write"
         }
       ],
-      "prev": "jira-epic-titler",
+      "prev": "defect-writer",
       "next": "gtm-playbooks"
     },
     {
@@ -3638,6 +4605,12 @@
           "label": "Steering Pack",
           "via": "",
           "kind": "skill"
+        },
+        {
+          "id": "qa-mission",
+          "label": "QA Mission",
+          "via": "metric readiness",
+          "kind": "skill"
         }
       ],
       "throughArtifact": [],
@@ -3666,6 +4639,12 @@
           "id": "feedback-to-idea",
           "label": "Feedback → Idea",
           "via": "SHIPPED METRICS → NEW IDEAS",
+          "kind": "skill"
+        },
+        {
+          "id": "qa-mission",
+          "label": "QA Mission",
+          "via": "WHAT QA MISSED → BETTER QA",
           "kind": "skill"
         }
       ],
@@ -3750,6 +4729,11 @@
       "start": "jira-epic-groomer"
     },
     {
+      "name": "Quality",
+      "purpose": "It is built. Find out whether it is what we said, what we designed, usable by everyone and fit for a Friday night, before a customer does. A person makes the ship call, and only what was verified goes to market.",
+      "start": "qa-mission"
+    },
+    {
       "name": "GTM",
       "purpose": "The product is real. Give the teams who sell it, support it and onboard customers onto it something they can use on Monday morning.",
       "start": "gtm-handover"
@@ -3775,6 +4759,7 @@
       "Council",
       "Steering",
       "Delivery",
+      "Quality",
       "GTM",
       "Measure"
     ],
@@ -3830,7 +4815,7 @@
         "note": "6-artifact launch pack",
         "badge": "PACK",
         "type": "output",
-        "col": 11,
+        "col": 12,
         "row": 3
       },
       {
@@ -3839,8 +4824,17 @@
         "note": "target vs actual verdict",
         "badge": "POSTHOG",
         "type": "output",
-        "col": 12,
+        "col": 13,
         "row": 1
+      },
+      {
+        "id": "art-qa-review",
+        "label": "QA Review",
+        "note": "one page per epic",
+        "badge": "CONFLUENCE",
+        "type": "output",
+        "col": 11,
+        "row": 11
       },
       {
         "id": "pm-compass",
@@ -4010,7 +5004,7 @@
         "type": "ai",
         "col": 5,
         "row": 0,
-        "desc": "Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, plus Secondary Personas, Segments, Migration Relevance, Horizon and Commitment as proposals, Escalate). Trigger PROACTIVELY when the user pastes a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link) and asks to \"groom\", \"polish\", \"fix up\", \"audit\", or \"get this Steering / roadmap ready\". Also trigger when the user references Oolio's JPD field standards, Steering review, or pastes rough idea text to be written up to JPD standard. Prefer over generic writing help when the context smells like product discovery at Oolio."
+        "desc": "Groom a Jira Product Discovery (JPD) idea end-to-end against Oolio's JPD Field Standards (2026+) — rewrites the summary to `[Action / Capability] + [Outcome / Value]`, restructures the description into Problem / Hypothesis / Success Metrics, and sets every required custom field (Pillar, Theme, Investment Type, Source, Customer Signal, Primary Persona, Category, Our Objective, Size, plus Secondary Personas, Segments, Migration Relevance, Horizon and Commitment as proposals, Escalate). Trigger PROACTIVELY when the user pastes a JPD URL or key (`OHSI-72`, `IDEA-xx`, `DISC-xx`, `JPD-xx`, a `/browse/OHSI-…` link, or a Polaris idea link) and asks to \"groom\", \"polish\", \"fix up\", \"audit\", or \"get this Steering / roadmap ready\". Also trigger when the user references Oolio's JPD field standards, Steering review, or pastes rough idea text to be written up to JPD standard."
       },
       {
         "id": "jpd-title-standard",
@@ -4070,7 +5064,7 @@
         "type": "orch",
         "col": 7,
         "row": 1,
-        "desc": "Convene the Oolio Virtual Product Council to pressure-test a product decision, design, requirement, spec, PRD, or piece of research. Use when the user says \"convene the VPC\", \"run the product council\", \"review this decision/design/PRD/spec\", \"pressure-test this\", \"validate this against our personas\", \"what would the council say\", or hands over a Confluence page, Jira ticket, Figma file, prototype URL, or document and asks for a validated decision. This is the orchestrator: it runs the whole loop, chairs the subcommittees, and produces a recorded, human-validated decision. It calls the child skills storm-research, operator-council-review, design-council-review, and leadership-subcommittee-review."
+        "desc": "Convene the Oolio Virtual Product Council to pressure-test a product decision, design, requirement, spec, PRD, or piece of research. Use when the user says \"convene the VPC\", \"run the product council\", \"review this decision/design/PRD/spec\", \"pressure-test this\", \"validate this against our personas\", \"what would the council say\", or hands over a Confluence page, Jira ticket, Figma file, prototype URL, or document and asks for a validated decision. This is the orchestrator: it runs the whole loop, chairs the subcommittees, and produces a recorded, human-validated decision. It calls the child skills storm-research, operator-council-review, design-council-review, and leadership-subcommittee-review. Do NOT trigger for a built release or PR preview to be tested (qa-mission)."
       },
       {
         "id": "operator-council-review",
@@ -4080,7 +5074,7 @@
         "type": "ai",
         "col": 8,
         "row": 0,
-        "desc": "Test a decision against the Oolio Operator Council, the hospitality user personas (the UAT panel). Use when the user says \"run UAT\", \"run the operator council\", \"would real users accept this\", \"does this survive a Friday night\", \"check this against our personas\", or wants the in-venue, frontline reality of a feature. Convenes the user personas the decision touches, by role and by segment or vertical, and runs each persona's challenge. Can run standalone or as part of a full council review."
+        "desc": "Test a decision against the Oolio Operator Council, the hospitality user personas (the UAT panel). Use when the user says \"run the operator council on this\", \"run the operator council\", \"would real users accept this\", \"does this survive a Friday night\", \"check this against our personas\", or wants the in-venue, frontline reality of a feature. Convenes the user personas the decision touches, by role and by segment or vertical, and runs each persona's challenge. Built mode tests the live build through the personas' eyes, for qa-mission. Can run standalone or as part of a full council review. Do NOT trigger to test a live build (persona-uat, uat-session-kit) or for resilience (resilience-qa)."
       },
       {
         "id": "design-council-review",
@@ -4090,7 +5084,7 @@
         "type": "ai",
         "col": 8,
         "row": 1,
-        "desc": "Review a design against the Oolio Design Council, the panel of expert design and research lenses. Use when the user says \"run the Design Council\", \"is the design sound\", \"review this wireframe / Figma / flow / screen\", \"run the lenses\", or hands over a UI, mockup, or interaction to be critiqued by expert principles. Assigns mandatory and contextual lenses from the matrix, runs each lens's challenge questions, applies the decision rule, and records verdicts and clashes. Can run standalone or as part of a full council review."
+        "desc": "Review a design against the Oolio Design Council, the panel of expert design and research lenses. Use when the user says \"run the Design Council\", \"is the design sound\", \"review this wireframe / Figma / flow / screen\", \"run the lenses\", or hands over a UI, mockup, or interaction to be critiqued by expert principles. Assigns mandatory and contextual lenses from the matrix, runs each lens's challenge questions, applies the decision rule, and records verdicts and clashes. Built mode reviews the live build instead of a mockup, for qa-mission. Can run standalone or as part of a full council review."
       },
       {
         "id": "leadership-subcommittee-review",
@@ -4148,7 +5142,7 @@
         "note": "one-pager · deck · pack",
         "badge": "CLAUDE·NIEL",
         "type": "ai",
-        "col": 11,
+        "col": 12,
         "row": 0,
         "desc": "Build the executive GTM handover for a single Oolio product. Two artifacts, the One-Pager and the Supporting Deck. This is the narrative source of truth that gtm-playbooks and gtm-marketing read from downstream. Trigger PROACTIVELY when the user asks to \"build the GTM handover\", \"do the one-pager and deck for [product]\", \"draft the GTM narrative for [product]\", \"build the supporting deck\", \"write the product narrative\", or pastes a Jira epic key (OR-XXXX, EDU-XXXX, etc.) and asks for the executive launch story. Also trigger when the user mentions the Oolio GTM Framework and wants the upstream artifacts only. Don't trigger for sales / AM / onboarding playbooks, use gtm-playbooks. Don't trigger for campaign material, use gtm-marketing. Don't trigger for a single tagline edit, edit the file directly."
       },
@@ -4158,7 +5152,7 @@
         "note": "sales · AM · onboarding",
         "badge": "CLAUDE",
         "type": "ai",
-        "col": 11,
+        "col": 12,
         "row": 1,
         "desc": "Build the three internal-facing GTM playbooks for a single Oolio product. Sales (discovery, demo, objections, pricing, close), Account Management (adoption signals, expansion, renewal, at-risk, QBR), and Onboarding (configuration, migration, training, go-live, first-week). Trigger PROACTIVELY when the user asks to \"build the GTM playbooks for [product]\", \"do the sales playbook\", \"do the AM playbook\", \"do the onboarding playbook\", \"draft the playbooks for [product]\", \"build the rep enablement\", or any combination of the three. Also trigger when the user pastes a Jira epic key (OR-XXXX, EDU-XXXX) and asks for sales / AM / onboarding enablement. Don't trigger for the executive One-Pager or Deck, use gtm-handover. Don't trigger for campaign material, use gtm-marketing. Reads pack_content.json produced by gtm-handover and refuses to run if that file is missing."
       },
@@ -4168,7 +5162,7 @@
         "note": "launch · social · email",
         "badge": "CLAUDE",
         "type": "ai",
-        "col": 11,
+        "col": 12,
         "row": 2,
         "desc": "Build the Marketing Pack for a single Oolio product launch. Launch announcement, social posts, email sequence, sales note, and campaign brief. Trigger PROACTIVELY when the user asks to \"build the marketing pack\", \"draft launch comms for [product]\", \"do the campaign brief for [product]\", \"write the launch announcement\", \"build the social posts for [product]\", \"draft the email sequence for [product]\", or \"build the marketing assets\". Also trigger when the user pastes a Jira epic key (OR-XXXX, EDU-XXXX) and asks for launch / campaign / customer comms material. Don't trigger for the executive One-Pager or Deck, use gtm-handover. Don't trigger for sales / AM / onboarding playbooks, use gtm-playbooks. Reads pack_content.json produced by gtm-handover and refuses to run if that file is missing."
       },
@@ -4178,9 +5172,119 @@
         "note": "did it hit its metrics?",
         "badge": "CLAUDE·POSTHOG",
         "type": "ai",
-        "col": 12,
+        "col": 13,
         "row": 0,
         "desc": "Run a product metrics review against real data — post-launch validation of a PRD's success metrics, or a recurring weekly/monthly product review — producing a scorecard with targets, actuals, trends, verdicts, and actions. Trigger PROACTIVELY when the user says \"metrics review\", \"how is [feature] performing\", \"did [launch] work\", \"check the success metrics\", \"weekly product review\", \"validate the launch\", or names a shipped PRD/feature and asks whether it met its numbers. Uses the connected PostHog MCP where available, and PRD success metrics as the target source. Do NOT trigger for ad-hoc SQL help or building a dashboard (use the data skills), or for market research (storm-research)."
+      },
+      {
+        "id": "qa-mission",
+        "label": "QA Mission",
+        "note": "tier · verify · verdict",
+        "badge": "CLAUDE·JIRA",
+        "type": "orch",
+        "col": 11,
+        "row": 0,
+        "desc": "The quality gate and orchestrator of the QA family, for releases what convene-vpc is for decisions. Takes an epic, fix version, PR preview or flag, runs test-basis and stops on high-consequence conflicts; picks Smoke, Standard or Full by risk; convenes the specialists that tier needs (functional, exploratory, design, accessibility, persona UAT, code, resilience, councils in built mode); merges through defect-writer; verifies independently; recommends Ship, Ship with known issues or Hold; and hands GTM only verified claims and metrics-review a measurable launch. Learn mode turns escapes into method fixes. Trigger on \"QA this release\", \"is it ready to ship\", \"run QA on <epic>\", \"release verdict\", \"quality gate\", \"what did QA miss\". Do NOT trigger for one specialist pass (call that skill), a decision, PRD or mockup (convene-vpc), or a deploy checklist (engineering:deploy-checklist)."
+      },
+      {
+        "id": "test-basis",
+        "label": "Test Basis",
+        "note": "sources, conflicts, risk",
+        "badge": "CLAUDE·JIRA·FIGMA",
+        "type": "ai",
+        "col": 11,
+        "row": 1,
+        "desc": "Build the Test Basis for a release, epic or PR before anyone tests it. Gathers every source that says what the build should be (PRD, stories and ACs, decisions, meetings, Figma, the diff), finds where they disagree, flags untestable ACs with Given/When/Then rewrites, checks every success metric can be measured, rates each flow Frequency × Consequence, and maps the blast radius. Trigger on \"build the test basis\", \"what should we test\", \"is this spec testable\", \"line up the sources\", \"are the sources consistent\", \"is this measurable\", \"risk map for <release>\", or a release key with \"before we test\". The first step of every qa-mission run. Never resolves a conflict; dates it and hands it to a person. Do NOT trigger to run tests (functional-qa, exploratory-qa), to grill the PRD (grill-my-prd), a general test strategy (engineering:testing-strategy), or the full QA run (qa-mission)."
+      },
+      {
+        "id": "functional-qa",
+        "label": "Functional QA",
+        "note": "ACs + events fire",
+        "badge": "CLAUDE·BROWSER",
+        "type": "ai",
+        "col": 11,
+        "row": 2,
+        "desc": "Run a release's acceptance criteria as concrete examples against the live build, in the browser, by role and name, and confirm the analytics events its success metrics need actually fire. Pass, Fail or Blocked per AC with evidence, at least one negative case each, technique chosen by the rule's shape (boundaries, decision tables, state transitions, pairwise). Also re-runs the product area's regression pack. Trigger on \"test the ACs\", \"does it do what the story says\", \"functional test <story/epic/PR>\", \"run the regression pack\", \"check the events fire\", \"is it instrumented\", \"verify this fix\". Reports through defect-writer, so a failed AC before merge sends the story back for rework. Do NOT trigger for off-script exploration (exploratory-qa), design or accessibility checks (design-conformance, accessibility-audit), or the full release run (qa-mission)."
+      },
+      {
+        "id": "exploratory-qa",
+        "label": "Exploratory QA",
+        "note": "chartered sessions",
+        "badge": "CLAUDE·BROWSER",
+        "type": "ai",
+        "col": 11,
+        "row": 3,
+        "desc": "Run chartered, timeboxed exploratory testing sessions against a live build to find what breaks off the happy path, the defects nobody wrote an AC for. Charters come from the risk map, the hospitality conditions library (midnight trading days, two managers in two tabs, back button mid-publish, empty venues, big catalogues) and past failures; SFDPOT checks coverage and HICCUPPS recognises problems. Session notes are the evidence. Trigger on \"explore this\", \"try to break it\", \"exploratory test\", \"what happens off the happy path\", \"edge cases on <feature>\", \"run some charters\", \"bug bash\". Reports through defect-writer. Do NOT trigger for scripted AC checks (functional-qa), synthetic users in character (persona-uat), load, network loss or scale (resilience-qa), or the full release run (qa-mission)."
+      },
+      {
+        "id": "design-conformance",
+        "label": "Design Conformance",
+        "note": "Figma · components · copy",
+        "badge": "CLAUDE·FIGMA",
+        "type": "ai",
+        "col": 11,
+        "row": 4,
+        "desc": "Check that the built screen is what was designed, in the system's own components. Compares the live build, in order, against the Figma frame for the work, the component reference (is this the real ControlBar or a lookalike, are all states present, does the Select follow its rules), the pattern library (navigation in the shell, drawers versus modals, save versus publish, destructive actions, empty and error states), the design tokens, and the glossary. Tags every deviation deliberate, drift or system gap, so drift goes to engineering and gaps go to Design. Trigger on \"does the build match the design\", \"check it against Figma\", \"design QA\", \"is this our component\", \"pass it through design\", \"check the copy against the glossary\". Do NOT trigger to judge whether the design itself is good (design-council-review, built mode) or for WCAG checks (accessibility-audit)."
+      },
+      {
+        "id": "accessibility-audit",
+        "label": "Accessibility Audit",
+        "note": "WCAG 2.2 AA, 3 passes",
+        "badge": "CLAUDE·BROWSER",
+        "type": "ai",
+        "col": 11,
+        "row": 5,
+        "desc": "Audit a live build against WCAG 2.2 AA and Oolio's surface targets (POS, kiosk, KDS, back office, online) in three passes reported separately: automated (axe-core rules, contrast on rendered colours), assisted (keyboard-only run of every task, focus not obscured, names and roles from the accessibility tree, target sizes, a single-pointer alternative for every drag, reflow, errors linked to fields) and the human-required list (real screen reader, cognitive load). Produces findings against the success criterion and a VPAT-shaped summary. Trigger on \"accessibility audit\", \"is this accessible\", \"WCAG check\", \"keyboard test this\", \"check contrast\", \"can everyone use it\", \"we need an ACR or VPAT\". Do NOT trigger for a mockup with no build (design-council-review, or design:accessibility-review, which targets WCAG 2.1) or design-system checks (design-conformance)."
+      },
+      {
+        "id": "persona-uat",
+        "label": "Persona UAT",
+        "note": "synthetic users, a filter",
+        "badge": "CLAUDE·BROWSER",
+        "type": "ai",
+        "col": 11,
+        "row": 6,
+        "desc": "Run synthetic users through a live build, in character and under real constraints, before real people see it. Picks the test persona cards the epic touches (the literal-reading cafe owner, the Bepoz pub manager, the 12-venue ops lead, the online-first operator, the new casual, the chef at the pass, the fat finger at 8pm), writes a no-briefing task script (create, structure, populate, design, modify, recover, publish), runs each task in the browser as that persona, and produces a per-persona, per-task scorecard with what decided it. A pre-filter for obvious friction, never UAT sign-off. Trigger on \"persona UAT\", \"run the personas through it\", \"walk it as Mia and Dave\", \"usability test with personas\", \"synthetic UAT\", \"would a new user get this\". Do NOT trigger for real-user sessions (uat-session-kit) or for opinion on a mockup or decision (operator-council-review)."
+      },
+      {
+        "id": "uat-session-kit",
+        "label": "UAT Session Kit",
+        "note": "real people, scored",
+        "badge": "NIEL·GRANOLA",
+        "type": "human",
+        "col": 11,
+        "row": 7,
+        "desc": "Both ends of real-user UAT, the part that actually validates. Before: recruit criteria (personas, segments, pilot venues), the no-briefing task script, the facilitator and observer sheet, and the measures (task success, time on task, Single Ease Question, SUS). After: ingests Granola transcripts and notes, keys each source, de-dupes across sessions and against the synthetic run, themes it through defect-writer, and scores which real findings persona-uat predicted. Trigger on \"plan the UAT sessions\", \"set up user testing\", \"pilot sessions for <release>\", \"write the observer sheet\", \"consolidate the UAT\", \"process the user testing transcripts\", \"how did synthetic UAT compare\". Do NOT trigger for AI-only persona runs (persona-uat) or interview research on a problem space (design:user-research, synthesize-research)."
+      },
+      {
+        "id": "code-qa",
+        "label": "Code QA",
+        "note": "read-only coverage",
+        "badge": "CLAUDE·REPO",
+        "type": "ai",
+        "col": 11,
+        "row": 8,
+        "desc": "Read-only test intelligence: reads the repo and PR diff, never writes. Maps each acceptance criterion to the unit and integration tests that cover it, lists ACs with no test, rates risky changes by blast radius (shared helpers, resolvers, the POS gateway, pricing), proposes the missing tests as Given/When/Then for engineers to own, drafts Playwright specs as suggestions, and points the browser skills at regression risk. After an incident, proposes the regression test that would have caught it. Trigger on \"what's the test coverage on this\", \"which ACs have no tests\", \"what does this PR touch\", \"blast radius of <PR>\", \"what tests are missing\", \"propose tests for <story>\", \"what test would have caught <incident>\". Do NOT trigger for running tests in the browser (functional-qa), general code review (engineering:code-review) or a general test strategy (engineering:testing-strategy)."
+      },
+      {
+        "id": "resilience-qa",
+        "label": "Resilience QA",
+        "note": "survives a service",
+        "badge": "CLAUDE·BROWSER",
+        "type": "ai",
+        "col": 11,
+        "row": 9,
+        "desc": "Test whether a build survives a real service, the Q4 question. Times key interactions against the Doherty threshold (about 400 ms for anything an operator waits on), runs against scale fixtures (thousands of products, many price lists times variants, a 40-venue group), simulates network loss and recovery mid-save and mid-publish, tests concurrent edits by two managers, and for POS-side work checks offline mode, the offline-versus-no-network states and sync-back. Trigger on \"will it survive Friday night\", \"performance check\", \"is it fast enough\", \"what happens if the network drops\", \"test offline mode\", \"concurrent edits\", \"does it scale to a big group\", \"resilience test\". Do NOT trigger for infrastructure load testing or security testing (engineering and the security lead own those) or for edge cases at normal load (exploratory-qa)."
+      },
+      {
+        "id": "defect-writer",
+        "label": "Defect Writer",
+        "note": "rework or ticket, themed",
+        "badge": "CLAUDE·JIRA",
+        "type": "ai",
+        "col": 11,
+        "row": 10,
+        "desc": "The single place QA findings are written, merged and routed, and the only writer of an epic's QA Review page. Takes findings from any QA skill, a tester, a UAT session or a pasted list, enforces no-oracle-no-defect, de-dupes across sources and open Jira, sets type, severity and confidence, then routes by stage. Before merge a failed AC reworks its story (drafted comment to the engineer and a transition back, no new ticket); after merge it drafts themed Bugs or Improvements. QA never creates Stories. All writes held for approval. Trigger on \"write these up\", \"consolidate these findings\", \"turn this into tickets\", \"send it back for rework\", \"theme these UAT findings\", \"update the QA Review page\", or a pasted list of test issues. Do NOT trigger for raw customer feedback (feedback-to-idea), a single incident (customer-escalation), or to run testing (qa-mission)."
       }
     ],
     "edges": [
@@ -4217,8 +5321,16 @@
         "t": "gtm-handover"
       },
       {
+        "f": "art-epic",
+        "t": "test-basis"
+      },
+      {
         "f": "art-pack",
         "t": "metrics-review"
+      },
+      {
+        "f": "art-qa-review",
+        "t": "gtm-handover"
       },
       {
         "f": "pm-compass",
@@ -4465,6 +5577,86 @@
       {
         "f": "metrics-review",
         "t": "art-scorecard"
+      },
+      {
+        "f": "qa-mission",
+        "t": "test-basis",
+        "lbl": "basis first"
+      },
+      {
+        "f": "qa-mission",
+        "t": "functional-qa"
+      },
+      {
+        "f": "qa-mission",
+        "t": "exploratory-qa"
+      },
+      {
+        "f": "qa-mission",
+        "t": "persona-uat"
+      },
+      {
+        "f": "qa-mission",
+        "t": "defect-writer"
+      },
+      {
+        "f": "qa-mission",
+        "t": "gtm-handover",
+        "lbl": "verified claims only"
+      },
+      {
+        "f": "qa-mission",
+        "t": "metrics-review",
+        "lbl": "metric readiness"
+      },
+      {
+        "f": "test-basis",
+        "t": "qa-mission"
+      },
+      {
+        "f": "test-basis",
+        "t": "functional-qa"
+      },
+      {
+        "f": "functional-qa",
+        "t": "defect-writer"
+      },
+      {
+        "f": "exploratory-qa",
+        "t": "defect-writer"
+      },
+      {
+        "f": "design-conformance",
+        "t": "defect-writer"
+      },
+      {
+        "f": "accessibility-audit",
+        "t": "defect-writer"
+      },
+      {
+        "f": "persona-uat",
+        "t": "defect-writer"
+      },
+      {
+        "f": "persona-uat",
+        "t": "uat-session-kit",
+        "lbl": "script + predictions"
+      },
+      {
+        "f": "uat-session-kit",
+        "t": "defect-writer"
+      },
+      {
+        "f": "code-qa",
+        "t": "defect-writer"
+      },
+      {
+        "f": "resilience-qa",
+        "t": "defect-writer"
+      },
+      {
+        "f": "defect-writer",
+        "t": "art-qa-review"
       }
     ],
     "gates": [
@@ -4482,6 +5674,11 @@
         "after": 10,
         "label": "APPROVE TO PUBLISH",
         "who": "NIEL"
+      },
+      {
+        "after": 11,
+        "label": "SHIP CALL",
+        "who": "OWNER"
       }
     ],
     "loops": [
@@ -4504,6 +5701,11 @@
         "f": "art-scorecard",
         "t": "art-brain",
         "label": "EVERY RUN COMPOUNDS IN THE BRAIN"
+      },
+      {
+        "f": "metrics-review",
+        "t": "qa-mission",
+        "label": "WHAT QA MISSED → BETTER QA"
       }
     ],
     "flows": [
@@ -4787,6 +5989,57 @@
             "Back at the top of the funnel, with evidence this time."
           ]
         ]
+      },
+      {
+        "name": "Spec → Tested → Proven",
+        "accent": "--orch",
+        "path": [
+          [
+            "art-epic",
+            "Groomed Epic",
+            "The stories and their acceptance criteria are built."
+          ],
+          [
+            "test-basis",
+            "Test Basis",
+            "PRD, stories, decisions, Figma and code lined up. Conflicts go to a person before anyone tests."
+          ],
+          [
+            "qa-mission",
+            "QA Mission",
+            "The tier is set by risk and the specialists run in parallel."
+          ],
+          [
+            "persona-uat",
+            "Persona UAT",
+            "Synthetic users walk it in character and predict where real ones will stall."
+          ],
+          [
+            "defect-writer",
+            "Defect Writer",
+            "A failed AC before merge reworks the story. After merge, themed Bugs and Improvements."
+          ],
+          [
+            "art-qa-review",
+            "QA Review",
+            "One page per epic: what was tested, by whom, when, and the result."
+          ],
+          [
+            "gtm-handover",
+            "GTM Handover",
+            "The pack claims only what QA verified, and says the known issues plainly."
+          ],
+          [
+            "art-pack",
+            "GTM Pack",
+            "Shipped to the field."
+          ],
+          [
+            "metrics-review",
+            "Metrics Review",
+            "The promised metrics, proven measurable before launch, checked against reality."
+          ]
+        ]
       }
     ],
     "typeColour": {
@@ -4848,8 +6101,11 @@
         ],
         "writes": [],
         "detail": "A meeting earns a page in the vault only if it produced a decision, a material action, or a knowledge signal. Everything else becomes one line in that month's log, carrying its Granola id. Granola stays the full record; the vault keeps the distillate.",
-        "skills": [],
-        "skillCount": 0
+        "skills": [
+          "test-basis",
+          "uat-session-kit"
+        ],
+        "skillCount": 2
       },
       {
         "id": "slack",
@@ -5000,9 +6256,11 @@
         "writes": [],
         "detail": "The only system on this map that can tell us we were wrong. Its numbers are read against targets a PRD committed to before launch, so the verdict is not chosen after the fact.",
         "skills": [
-          "metrics-review"
+          "functional-qa",
+          "metrics-review",
+          "test-basis"
         ],
-        "skillCount": 1
+        "skillCount": 3
       },
       {
         "id": "figma",
@@ -5020,14 +6278,16 @@
         "detail": "Read as evidence, not as a source of truth. A design enters the map when someone asks the council to test it, and leaves as a verdict on the decision record.",
         "skills": [
           "convene-vpc",
+          "design-conformance",
           "design-council-review",
           "discovery-wayfinder",
           "grill-me",
           "jpd-idea-groomer",
           "jpd-loop",
+          "test-basis",
           "write-prd"
         ],
-        "skillCount": 7
+        "skillCount": 9
       },
       {
         "id": "core",
@@ -5108,10 +6368,15 @@
         ],
         "detail": "Search, link, check, validate, and only create if it is genuinely needed. Every write is amber: a person approves it. The fastest way to ruin a backlog is to let something tireless write to it.",
         "skills": [
+          "code-qa",
           "competitor-watch",
           "convene-vpc",
+          "defect-writer",
+          "design-council-review",
           "discovery-wayfinder",
+          "exploratory-qa",
           "feedback-to-idea",
+          "functional-qa",
           "grill-me",
           "grill-my-prd",
           "gtm-handover",
@@ -5123,13 +6388,18 @@
           "jpd-idea-groomer",
           "jpd-loop",
           "jpd-title-standard",
+          "operator-council-review",
+          "persona-uat",
           "pm-compass",
           "push-to-brain",
+          "qa-mission",
           "signal-radar",
+          "test-basis",
+          "uat-session-kit",
           "win-loss",
           "write-prd"
         ],
-        "skillCount": 20
+        "skillCount": 30
       },
       {
         "id": "confluence",
@@ -5153,8 +6423,11 @@
         "skills": [
           "competitor-watch",
           "convene-vpc",
+          "defect-writer",
           "design-council-review",
           "discovery-wayfinder",
+          "exploratory-qa",
+          "functional-qa",
           "grill-me",
           "grill-my-prd",
           "gtm-handover",
@@ -5167,15 +6440,19 @@
           "leadership-subcommittee-review",
           "metrics-review",
           "operator-council-review",
+          "persona-uat",
           "pm-compass",
           "push-to-brain",
+          "qa-mission",
           "signal-radar",
           "steering-pack",
           "storm-research",
+          "test-basis",
+          "uat-session-kit",
           "win-loss",
           "write-prd"
         ],
-        "skillCount": 23
+        "skillCount": 30
       },
       {
         "id": "github",
@@ -5194,8 +6471,10 @@
           "The Product OS itself, versioned by commit"
         ],
         "detail": "Two repos: the plugin the team installs, and the vault it writes into. Both are versioned by commit rather than by a number someone has to remember to bump, which is why an edit reaches the team without a release.",
-        "skills": [],
-        "skillCount": 0
+        "skills": [
+          "code-qa"
+        ],
+        "skillCount": 1
       },
       {
         "id": "brain",
@@ -5216,20 +6495,31 @@
         ],
         "detail": "The floor the whole thing stands on. Owned markdown, typed pages, supersession instead of deletion, and answers that come back with receipts. It is why the second time someone asks a question, the answer does not start from zero.",
         "skills": [
+          "accessibility-audit",
+          "code-qa",
           "competitor-watch",
+          "defect-writer",
+          "design-conformance",
+          "exploratory-qa",
+          "functional-qa",
           "hubspot-sweep",
           "jpd-loop",
+          "persona-uat",
           "pm-compass",
           "push-to-brain",
+          "qa-mission",
+          "resilience-qa",
           "signal-radar",
           "storm-research",
+          "test-basis",
+          "uat-session-kit",
           "wiki-ingest",
           "wiki-lint",
           "wiki-new",
           "wiki-query",
           "wiki-status"
         ],
-        "skillCount": 12
+        "skillCount": 23
       }
     ],
     "wires": [
@@ -5531,6 +6821,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-10-02",
+      "title": "The QA family, testing the built product and gating the release (45 skills)",
+      "heading": "2026-10-02 – The QA family, testing the built product and gating the release (45 skills)",
+      "body": "The OS tested decisions well and the built product not at all. Every quality skill ran before build (the councils, `grill-my-prd`) or after launch (`metrics-review`). Between \"the spec is right\" and \"the numbers moved\" there was nothing, and that gap is where September's QA was done by hand: the price list schedule test that found a Sat/Sun schedule deleted every other schedule, the independent verification that failed a build the councils had passed, the PR-1095 persona session, and the 71-finding Menus 2.0 UAT consolidation. Good work, all improvised. This codifies it, from the QA Skill Family proposal (1 Oct 2026).\n\n- **Eleven new skills.** Two engines: `test-basis` (lines up PRD, stories, decisions, meetings, Figma and code before anyone tests; surfaces dated conflicts, untestable ACs and unmeasurable metrics; rates every flow Frequency × Consequence) and `defect-writer` (one finding standard, de-duped, themed and routed). Seven specialists: `functional-qa`, `exploratory-qa`, `code-qa`, `design-conformance`, `accessibility-audit`, `persona-uat`, `uat-session-kit`. One later-phase specialist, `resilience-qa`, shipped now and honest about the fixtures it still needs. One orchestrator, `qa-mission`, the quality gate.\n- **No oracle, no defect.** Every finding cites the source that says it is wrong: an AC, a decision, a WCAG criterion, a component rule, a glossary entry, a PRD metric. Without one it is a Decision needed for a person, never a Bug.\n- **Routing follows how the team works.** Before merge, a failed AC sends the story back for rework: a drafted comment to the engineer and the rework transition, and no new ticket, because linked tickets on a story still in rework are how an epic ends up with thousands. After merge, in Dev or Prod, findings become themed Bugs (what was missed) and Improvements (minor). **QA never creates Stories**: new functionality is a requirement gap handed to the PO. Every write waits for a yes.\n- **One QA Review page per epic, under the PRD.** What was tested, by whom, when, and the result per AC (Pass, Fail, Blocked, Not tested), plus the quality checks, run log, verdict history and lessons. No page per run.\n- **Designed to be optimised, and proven in the market.** `test-basis` checks every PRD success metric can actually be measured (metric, behaviour, event, query, baseline); `functional-qa` confirms the events fire. `qa-mission`'s verdict carries a market handoff: GTM may claim only what QA verified, known issues are said plainly, and `metrics-review` is told what to measure and when. `gtm-handover` now reads it before writing any proof; `metrics-review` starts from its readiness note; `write-prd`'s success metrics must survive the measurability chain.\n- **Builder and checker are different.** An agent that saw none of the planning re-checks every P0 and P1, and at Full tier every claimed pass on a high-consequence flow. Synthetic findings resting on drag, hover or timing are capped at \"needs human repro\". Synthetic UAT is a filter, never sign-off.\n- **It learns.** `qa-mission` learn mode traces escapes to the question that missed them, computes escape rate, verification overturn rate, synthetic-to-real prediction and source yield, and proposes amendments to the reference pack for approval. The same numbers decide when a skill earns autonomy.\n- **Built mode for both councils.** `design-council-review` and `operator-council-review` now review the live build, not just a mockup. No new skill.\n- **The reference pack, `oolio-pm/references/qa/`.** The quality model, oracles (HICCUPPS), risk model, test design techniques, exploration (charters, SFDPOT, tours), severity and defect standard, finding schema, routing, the QA Review page, WCAG 2.2 accessibility standard with proposed surface targets, component reference (Select and ControlBar, more to come with Design), pattern library and glossary grounded in the decision log, hospitality conditions library, device matrix, environment register, browser method, measurability, market handoff, and the learning loop. Facts come from the Brain with their sources; what is proposed or unsettled is marked so, and cited as such.\n- **New personas.** The **Quality Bench** (`personas-library/quality-bench/`): eleven testing lenses (Bach and Bolton, Hendrickson, Crispin and Gregory, Adzic, Kaner, Nygard, Watson, Pickering, Frost, Curtis, Krug), the same convention as the Design Council, never invented quotes. **Test persona cards** (`personas-library/test-personas/`): ten behavioural cards on top of the UAT panel, four lifted from the PR-1095 session (Mia, Dave, Priya, Jordan) and six new, each field marked observed or test assumption.\n- **Decisions still Niel's, defaulted rather than blocked on:** the gate is advisory until made binding; the reference pack lives in the plugin (the vault is a reference, not a home for it); the accessibility surface targets are proposed; the named lenses are kept. Each is stated where it applies.\n- **Tested and pressure-tested before shipping**, recorded in [docs/qa-family-test-record-2026-10-02.md](docs/qa-family-test-record-2026-10-02.md). A routing test routed 12 of 12 findings as expected. A back-test, planning blind from a neutral brief, targeted 7 of the 10 defects the August price list schedule test found and partly targeted the other 3. An adversarial review raised 38 findings (7 Critical), and all were fixed before shipping: escalations are now drafted, never sent; autonomy never covers an external write; a suspected P0 blocks Ship; GTM can read only the current verdict's handoff; rework waits for verification.\n- **A new permanent lint, `scripts/check-skills.mjs`,** now part of `npm --prefix site run check`. It fails on descriptions over 950 characters (the silent Cowork drop), unresolved plugin paths and links, mismatched names, per-skill versions, and em dashes in the QA family. Its first run caught `jpd-idea-groomer` at 963 characters, over the ceiling, trimmed here.\n- **Counts and catalogues.** 34 → **45**. Manifests, both READMEs, the catalogue (a new Quality & Release stage), `pm-compass` routing, and the site: a new **Quality** column on the map with a **Ship call** gate, a \"Spec → Tested → Proven\" flow, a loop from measurement back to QA, and an eighth crew member, the Inspector, on the landing page."
+    },
     {
       "date": "2026-09-22",
       "title": "push-to-brain: the end of a session becomes a diff against the Brain (34 skills)",
