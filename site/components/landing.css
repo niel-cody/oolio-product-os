@@ -469,3 +469,21 @@
   .lx-q > summary,
   .lx-q > summary::after { transition: none; }
 }
+
+/* ---------- the folded sheet ---------- */
+/* Paper on paper: the stock, its edge, and one tint for the underside of the fold. The
+   flap arrives a few pixels off its crease and settles, once, as the beat reveals. */
+.lx-fold-sheet { fill: var(--stock-2); stroke: var(--rule-2); stroke-width: 1; }
+.lx-fold-next { stroke: var(--rule-2); stroke-width: 1; stroke-dasharray: 3 5; stroke-linecap: round; }
+.lx-fold-under { fill: var(--pink-tint); stroke: var(--rule-2); stroke-width: 1; stroke-linejoin: round; }
+.lx-fold-shadow { fill: var(--k); opacity: 0.08; transform: translate(-3px, 3px); }
+.lx-fold-crease { stroke: var(--k); stroke-width: 1; opacity: 0.5; }
+.lx-fold-flap {
+  transform-origin: 164px 76px;
+  transition: transform 700ms var(--ease-out) 240ms, opacity 500ms var(--ease-out) 240ms;
+}
+.lx-reveal:not(.is-in) .lx-fold-flap { transform: translate(5px, -5px) rotate(-4deg); opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .lx-fold-flap { transition: none; }
+  .lx-reveal:not(.is-in) .lx-fold-flap { transform: none; opacity: 1; }
+}

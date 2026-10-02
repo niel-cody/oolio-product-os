@@ -12,6 +12,7 @@ cannot drift from this folder.
 |---|---|
 | Header | Standard lockup on the stock, under the one black keyline on the page |
 | Landing hero | Syne 700, misregistered once, beside a three-tint halftone plate. One pink-tint call to action |
+| The idea beat | The brand story told once, beside the folded sheet (`assets/fold.svg`). The only paper-inspired illustration and the only paper-inspired movement on the site |
 | Body copy | `t-body` in Archivo, never wider than about 56 characters |
 | Furniture | The pass marker in DM Mono, sitting on the keyline that opens each section |
 | The map | A snake of fourteen stage plates with soft corners, an ink dot per tile, Cream Yellow gate beads with black ticks, pink loops through the channel |

@@ -28,6 +28,39 @@ installs it and the next PRD they write is written with it.
   ids and URLs, not the brand, and every installed reference and skill namespace depends on
   them. Renaming any of them would break every install for no reader's benefit.
 
+## The idea behind the brand
+
+Pixie Dust Industries builds a product operating system that helps teams turn ideas into
+useful products. It brings structure to the work between recognising a possibility and
+making something real: understanding the problem, deciding what matters, shaping a solution,
+and learning as it develops. The feeling is quiet creativity backed by serious craft. There
+is imagination in the name; the experience should feel grounded, considered and capable.
+
+**Origami is the supporting idea.** A sheet of paper holds possibility. Through a sequence of
+deliberate folds it gains structure and becomes something with a purpose. Product work
+follows the same pattern: an idea becomes clearer through questions, decisions, experiment
+and refinement, and the OS is that sequence, written down. The muted palette sets the mood;
+origami gives the mood a meaning.
+
+The line, where the story is told:
+
+> An idea is a sheet of possibility. Pixie Dust Industries gives teams the structure to
+> shape it into something useful.
+
+It is a story, not a theme, and the boundaries matter more than the idea:
+
+- The muted palette stays the foundation. Origami is used sparingly, where it strengthens
+  the story: on the site that is one beat, with one restrained folded sheet
+  ([`assets/fold.svg`](assets/fold.svg)) beside it, and nowhere else.
+- No cranes, no paper textures on controls, no collection of folds as decoration. In the
+  app the idea shows up as the quality of the experience: clear structure, thoughtful
+  progression, details that feel intentional, and nothing else.
+- No broad Japanese cultural styling. The reference is the craft of the fold and the
+  palette, and that is as far as it goes.
+- Never imply that product work ends in perfection. The emphasis is care, purpose and
+  continued refinement: one fold made, the next one marked.
+- The Gate remains the mark. The fold is an illustration, never a logo.
+
 ## The line
 
 > The product process, written down and running.

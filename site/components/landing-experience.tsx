@@ -24,6 +24,7 @@ import "./landing.css";
  *
  * The order is an argument, and each beat earns the next:
  *   1. Hero      — what it is, and a real piece of its output sitting beside the claim.
+ *   1b. Idea     — the one place the brand story is told: a sheet of possibility, folded.
  *   2. Problem   — the week a product manager actually has.
  *   3. Proof     — the same week run twice, by hand and through the OS. The hours.
  *   4. Crew      — eight specialists, each owning one part of the lifecycle.
@@ -193,6 +194,7 @@ export function LandingExperience({
   return (
     <main className="flex-1">
       <Hero signedIn={signedIn} counts={counts} />
+      <Idea />
       <Problem />
       <Proof />
       <Crew signedIn={signedIn} counts={counts} />
@@ -404,6 +406,73 @@ function Fact({ n, label }: { n: number; label: string }) {
       <dd className="text-[13px] font-medium tracking-normal tabular-nums text-[var(--k)]">{n}</dd>
       <span>{label}</span>
     </span>
+  );
+}
+
+/* ================================ 1b — THE IDEA ================================
+   The brand story, told once. Origami is the supporting idea behind the house: a sheet of
+   paper holds possibility, and a sequence of deliberate folds gives it structure and a
+   purpose. It is a story, not a theme, so it appears here, with one restrained folded
+   sheet beside it, and nowhere else on the site. No cranes, no paper textures on controls,
+   no broad cultural styling: the reference is the craft of the fold and nothing wider.
+   ============================================================================== */
+
+function Idea() {
+  return (
+    <section className="border-b border-[var(--rule-2)]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.7fr)] lg:items-center lg:gap-16">
+        <Reveal>
+          <SectionHead pass="The idea" note="a sheet of possibility" />
+          <p className="display max-w-[20ch] text-[clamp(1.55rem,3.1vw,2.5rem)] leading-[1.05] text-[var(--k)]">
+            An idea is a sheet of possibility.
+          </p>
+          <p className="mt-7 max-w-[56ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16.5px]">
+            Pixie Dust Industries gives teams the structure to shape it into something useful.
+            A sheet of paper holds every shape it could become. A sequence of deliberate folds
+            gives it structure, and then a purpose.
+          </p>
+          <p className="mt-4 max-w-[56ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16.5px]">
+            Product work goes the same way. An idea gets clearer through questions, decisions,
+            trying things, and refining what came back. The Product OS is that sequence,
+            written down and running. It does not end in perfection. It ends in something
+            people can use, and the next fold.
+          </p>
+        </Reveal>
+        <Reveal delay={120} className="flex justify-center lg:justify-end">
+          <FoldedSheet />
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * One sheet, one fold made, the next one marked. Drawn in the stock and one tint, so it
+ * reads as paper on paper rather than as an icon. The flap settles into place as the beat
+ * reveals, behind the reduced-motion preference, which is the only paper-inspired movement
+ * on the site.
+ */
+function FoldedSheet() {
+  return (
+    <svg
+      viewBox="0 0 240 240"
+      width="240"
+      height="240"
+      className="lx-fold h-[200px] w-[200px] sm:h-[240px] sm:w-[240px]"
+      role="img"
+      aria-label="A square sheet of paper with one corner folded over and the next fold marked"
+    >
+      {/* the sheet */}
+      <rect x="24" y="24" width="192" height="192" rx="3" className="lx-fold-sheet" />
+      {/* the next fold, marked but not yet made */}
+      <line x1="24" y1="152" x2="216" y2="88" className="lx-fold-next" />
+      {/* the shadow the flap casts, and the flap: the underside of the sheet is the tint */}
+      <g className="lx-fold-flap">
+        <polygon points="216,24 216,128 112,24" className="lx-fold-shadow" />
+        <polygon points="216,24 216,128 112,24" className="lx-fold-under" />
+        <line x1="112" y1="24" x2="216" y2="128" className="lx-fold-crease" />
+      </g>
+    </svg>
   );
 }
 

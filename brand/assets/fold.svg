@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="A square sheet of paper with one corner folded over and the next fold marked">
+  <!-- The folded sheet. Paper on paper: the stock, its edge, and the pink tint for the
+       underside of the fold. One fold made, the next one marked. brand/positioning.md,
+       "The idea behind the brand". Used once, on the landing page's idea beat. -->
+  <rect x="24" y="24" width="192" height="192" rx="3" fill="#EFEDE7" stroke="#A8A39A"/>
+  <line x1="24" y1="152" x2="216" y2="88" stroke="#A8A39A" stroke-dasharray="3 5" stroke-linecap="round"/>
+  <polygon points="213,27 213,131 109,27" fill="#231F20" opacity="0.08"/>
+  <polygon points="216,24 216,128 112,24" fill="#F8B6BA" stroke="#A8A39A" stroke-linejoin="round"/>
+  <line x1="112" y1="24" x2="216" y2="128" stroke="#231F20" opacity="0.5"/>
+</svg>
