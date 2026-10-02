@@ -21,8 +21,8 @@ npm --prefix site run check:public -- http://127.0.0.1:3000   # needs a running 
 | Page | What it is | Where it comes from |
 |---|---|---|
 | `/` | What the OS is and who it is for, and how to install it | `map.config.json` under `about` |
-| `/map` | The lifecycle map: skills, gates, loops, flows | the skills, plus the editorial overlay |
-| `/skills` | Every skill, grouped by lifecycle stage, searchable | the skills themselves |
+| `/map` | The lifecycle map, drawn as a snake of fourteen stage plates: skills, gates, loops, flows. Click a stage chip, a plate or a tile to zoom; the panel answers where you are | the skills, plus the editorial overlay |
+| `/skills` | The library: folders are stages, rows are skills, and a row opens the skill in a drawer (`?skill=<id>`) without leaving the shelf | the skills themselves |
 | `/changelog` | What changed, newest first | `CHANGELOG.md` at the repo root |
 | `/systems` | How the tools connect. Not built yet | placeholder |
 | `/admin` | Who may use the site, and as what. Admins only | the `members` table |
@@ -47,7 +47,8 @@ because they were two dead palettes sitting exactly where somebody would look fo
 rather than reimplementing it.
 
 Editing `app/brand.css` by hand is caught by `npm run check`, as is leaving a retired colour
-anywhere in this folder. The guard knows both retired palettes: the dark one and the Tailwind
+anywhere in this folder. The guard knows all three retired palettes: the fluorescent press
+that ran until 2 October 2026, the dark one before it, and the Tailwind
 defaults before it.
 
 ## The two inputs

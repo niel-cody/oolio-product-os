@@ -10,11 +10,11 @@ cannot drift from this folder.
 
 | Element | What it is |
 |---|---|
-| Header | Standard lockup on the stock, under a black keyline |
-| Landing hero | Syne 800, misregistered once, beside a three-drum halftone plate. One pink call to action |
+| Header | Standard lockup on the stock, under the one black keyline on the page |
+| Landing hero | Syne 700, misregistered once, beside a three-tint halftone plate. One pink-tint call to action |
 | Body copy | `t-body` in Archivo, never wider than about 56 characters |
 | Furniture | The pass marker in DM Mono, sitting on the keyline that opens each section |
-| The map | Squared keylined plates, an ink spine per node type, Sun Yellow gates with black ticks |
+| The map | A snake of fourteen stage plates with soft corners, an ink dot per tile, Cream Yellow gate beads with black ticks, pink loops through the channel |
 | Favicon | [`assets/favicon.svg`](assets/favicon.svg) |
 
 ## Link previews
@@ -33,7 +33,7 @@ costs nothing:
 
 - Headings in the page's own font. Confluence will not load Syne and fighting it produces a
   worse page than accepting it.
-- Panel colours from the stock: `#EFEDE7` for a callout, `#FFE800` behind black type for
+- Panel colours from the stock: `#EFEDE7` for a callout, `#FDBF68` behind black type for
   anything gate-related.
 - The lockup goes at the top as `lockup-paper.svg`, exported with outlined text.
 - British English, sentence case, and no file paths or field ids. That page is written for a
@@ -70,7 +70,7 @@ rather than for Product.
 ## Before you ship a surface
 
 - Does every number on it come from the thing it describes, or was one typed?
-- Is Sun Yellow on this page? If so, is it a gate?
+- Is Cream Yellow on this page? If so, is it a gate?
 - Is there exactly one misregistration on each screen?
 - Does any texture touch something a person has to copy or click?
 - Does it read at the smallest size it will actually be seen at?

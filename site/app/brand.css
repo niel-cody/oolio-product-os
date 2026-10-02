@@ -1,5 +1,5 @@
 /* ============================================================================
-   PIXIE DUST INDUSTRIES — the press
+   PIXIE DUST INDUSTRIES. The press.
 
    GENERATED FILE. Do not edit.
    Source: brand/tokens/brand.tokens.json. Rebuild: node brand/tokens/build.mjs
@@ -12,27 +12,37 @@
 
    The site is LIGHT, and that is not a preference. Riso ink is translucent and needs a
    pale sheet to sit on; the process physically cannot print on dark stock.
+   The inks come from Sanzo Wada's A Dictionary of Color Combinations: papery, muted,
+   and used as flashes rather than surfaces. See brand/colour.md.
    ========================================================================== */
 
 :root {
   color-scheme: light;
 
-  /* ---- STOCK ---- Uncoated cool grey. Riso ink is translucent, so it needs a pale sheet to sit on; the process physically cannot print on dark stock. This is why the site is light. */
+  /* ---- STOCK ---- Uncoated warm grey. Riso ink is translucent, so it needs a pale sheet to sit on; the process physically cannot print on dark stock. This is why the site is light. The stock did not change: it is the thing about the old sheet worth keeping. */
   --stock: #E4E2DB; /* the sheet: every page ground */
-  --stock-2: #EFEDE7; /* a second sheet, lifted: cards, plates, panels */
-  --stock-3: #D6D3CA; /* recessed, a gutter or a well */
-  --rule: #C4C0B7; /* a hairline division inside a plate. Never a keyline */
+  --stock-2: #EFEDE7; /* a second sheet, lifted: cards, plates, panels, the drawer */
+  --stock-3: #D6D3CA; /* recessed, a gutter or a well, a selected row */
+  --rule: #C4C0B7; /* a hairline division inside a plate */
+  --rule-2: #A8A39A; /* a firm division: the edge of a card, a control, a panel. Replaces the black keyline almost everywhere */
 
-  /* ---- THE DRUMS ---- one ink per pass, in order */
-  --pink: #FF48B0; /* 01 · Fluorescent Pink 806U · 2.38:1 on stock · FILL ONLY, never a word */
-  --blue: #3D5588; /* 02 · Blue · 5.68:1 on stock · may set copy */
-  --yellow: #FFE800; /* 03 · Sun Yellow · 1.04:1 on stock · FILL ONLY, never a word */
+  /* ---- THE DRUMS ---- one ink per pass, in order. Solid draws; tint may be a ground. */
+  --pink: #BF5892; /* 01 · Eupatorium Purple · 3.5:1 on stock · LINE OR MARK ONLY, never a word */
+  --pink-tint: #F8B6BA; /* Corinthian Pink · a ground with black type on it, 9.62:1 */
+  --blue: #40456A; /* 02 · Violet Blue · 7.11:1 on stock · may set copy */
+  --blue-tint: #97ACC8; /* Salvia Blue · a ground with black type on it, 7.03:1 */
+  --yellow: #FDBF68; /* 03 · Cream Yellow · 1.26:1 on stock · LINE OR MARK ONLY, never a word */
   --k: #231F20; /* K · Black drum · 12.57:1 on stock · may set copy */
 
-  /* ---- OVERPRINTS ---- Translucent ink multiplies where two passes cross. These are not chosen; the press produces them. That is why they are worth more than a fourth drum. */
-  --pink-blue: #3D185E; /* pink × blue · 10.87:1 on stock */
-  --pink-yellow: #FF4100; /* pink × yellow · 2.7:1 on stock */
-  --blue-yellow: #3D4D00; /* blue × yellow · 7.17:1 on stock */
+  /* ---- TINTS ---- Two more pale inks from the Dictionary, for the places that need a ground that is not pink or blue. A tint is a surface with black type on it, never a line. */
+  --glaucous: #B4CDC2; /* Glaucous Green · black on it 9.67:1 · a calm green ground: a passing check, an output chip */
+  --lavender: #C0A9B3; /* Grayish Lavender · black on it 7.43:1 · a dusty mauve ground, between the pink and the blue */
+
+  /* ---- DEEP INKS ---- Four deep inks, each a named plate colour, for the map's meanings that need to be a line or a word. Deliberately dark so the pale stock stays pale: the colour is in the small marks, not the sheet. */
+  --plum: #501345; /* Cotinga Purple · 10.66:1 on stock · may set copy */
+  --olive: #6B7140; /* Olive Green · 3.99:1 on stock · never a word on the stock */
+  --plumbeous: #70727C; /* Plumbeous · 3.69:1 on stock · never a word on the stock */
+  --carmine: #A62C37; /* Carmine Red · 5.33:1 on stock · may set copy */
 
   /* ---- TYPE COLOUR ---- every figure measured on the stock */
   --ink: #231F20; /* headings and body · 12.57:1 */
@@ -41,16 +51,19 @@
   --faint-ink: #7A757F; /* decoration only. Never a word a person has to read · 3.46:1 */
 
   /* ---- THE SIX MEANINGS ---- drawn from the ink set, not from a colour wheel */
-  --gate: #FFE800; /* yellow · a person decides here. The third drum, and the whole argument */
-  --orch: #3D5588; /* blue · orchestration: a skill driving a tool. Blue carries structure */
-  --ai: #3D185E; /* pink-blue · the assistant runs this step */
-  --output: #3D4D00; /* blue-yellow · an artefact the OS produced */
-  --loop: #FF48B0; /* pink · learning returning upstream. The reason this is a system and not a pipeline, so it gets the signature ink */
-  --signal: #65606A; /* ink-mid · raw input, before anyone has shaped it. Uncoloured on purpose: colouring it would be a claim about it */
-  --alarm: #FF4100; /* pink-yellow · destructive, failed, or unplaced */
+  --gate: #FDBF68; /* yellow · a person decides here. The third drum, and the whole argument */
+  --orch: #40456A; /* blue · orchestration: a skill driving a tool. Blue carries structure */
+  --ai: #501345; /* plum · the assistant runs this step */
+  --output: #6B7140; /* olive · an artefact the OS produced */
+  --loop: #BF5892; /* pink · learning returning upstream. The reason this is a system and not a pipeline, so it gets the signature ink */
+  --signal: #70727C; /* plumbeous · raw input, before anyone has shaped it. Nearly uncoloured on purpose: colouring it would be a claim about it */
+  --alarm: #A62C37; /* carmine · destructive, failed, or unplaced */
 
   /* Kept alive so nothing had to be rewritten to be reprinted. */
   --human: var(--gate);
+  --pink-blue: var(--plum);
+  --blue-yellow: var(--olive);
+  --pink-yellow: var(--alarm);
 
   /* The names the site spoke when it was dark, now pointing at stock and ink. A
      component written against them prints without being touched. */
@@ -58,7 +71,7 @@
   --panel: var(--stock-2);
   --raise: var(--stock-3);
   --line: var(--rule);
-  --edge: var(--k); /* a border that has to be seen is a keyline, and a keyline is black */
+  --edge: var(--rule-2); /* a border that has to be seen is a firm grey, not a black keyline */
   --void: var(--stock-3);
 
   /* Type. Loaded by next/font in app/layout.tsx, which sets these three variables. */
@@ -67,14 +80,16 @@
   --font-system-stack: var(--font-system), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Shape. Print has keylines, not rounded cards. */
-  --keyline: 1.5px solid #231F20;
+  --keyline: 1px solid #231F20; /* emphasis only: the header rule, a section head */
+  --edge-line: 1px solid #A8A39A; /* the ordinary edge of a card, control or panel */
   --hairline: 1px solid #C4C0B7;
-  --press-shadow: 3px 3px 0 #FF48B0;
+  --press-shadow: 2px 2px 0 #F8B6BA;
+  --lift-shadow: 0 1px 2px rgba(35, 31, 32, 0.05), 0 12px 32px rgba(35, 31, 32, 0.08); /* the drawer and anything that floats over the sheet */
   --r-none: 0;
-  --r-sm: 0;
-  --r-md: 0;
-  --r-lg: 0;
-  --r-xl: 0;
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 18px;
   --r-pill: 999px;
 
   /* Motion */
@@ -84,6 +99,7 @@
   --dur-state: 180ms;
   --dur-plate: 600ms;
   --dur-reveal: 520ms;
+  --dur-drawer: 320ms;
 
   /* Screen angles. Two drums at the same angle produce moiré, which is why these are
      fixed rather than picked per component. */
@@ -99,7 +115,7 @@
    layout; get them wrong and it is a filter over a SaaS site.
    ========================================================================== */
 
-/* 01 GRAIN. Fixed, so it never scrolls with the content: the sheet stays still while the ink moves. Around 18 to 20 per cent is the line between paper and dirty screen.
+/* 01 GRAIN. Fixed, so it never scrolls with the content: the sheet stays still while the ink moves. Eleven per cent is paper. Nineteen, where it used to sit, was a dirty screen.
    Applied once, on the page, by <body class="sheet">. Never per component: two grain
    layers over one another read as dirt rather than paper. */
 .sheet::after {
@@ -110,14 +126,14 @@
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: multiply;
-  opacity: 0.19;
+  opacity: 0.11;
 }
 
 /* 02 OVERPRINT. Ink is translucent, so shapes darken where they cross instead of hiding each other. Without the isolation the blend escapes its container. */
 .ink { mix-blend-mode: multiply; }
 .plate { isolation: isolate; position: relative; }
 
-/* 03 HALFTONE. A Riso cannot do continuous tone; it screens everything into dots. Two drums at the same angle produce moiré, which is why the angles are fixed.
+/* 03 HALFTONE. A Riso cannot do continuous tone; it screens everything into dots. Two drums at the same angle produce moiré, which is why the angles are fixed. Screened in the tints now, so a halftone plate is a wash rather than a shout.
    --dot sets the ink, --dot-size the screen ruling, --dot-angle the drum. */
 .halftone {
   background-image: radial-gradient(var(--dot, var(--blue)) 44%, transparent 47%);
@@ -125,11 +141,11 @@
   transform: rotate(var(--dot-angle, var(--angle-blue)));
   mix-blend-mode: multiply;
 }
-.halftone-pink { --dot: var(--pink); --dot-angle: 15deg; --dot-size: 7px; }
-.halftone-blue { --dot: var(--blue); --dot-angle: 75deg; --dot-size: 9px; }
+.halftone-pink { --dot: var(--pink-tint); --dot-angle: 15deg; --dot-size: 7px; }
+.halftone-blue { --dot: var(--blue-tint); --dot-angle: 75deg; --dot-size: 9px; }
 .halftone-yellow { --dot: var(--yellow); --dot-angle: 45deg; --dot-size: 6px; }
 
-/* 04 MISREGISTRATION. The paper shifts between passes so the plates never quite line up. It is a signature, not a texture: overdone it stops reading as a press and starts reading as a filter.
+/* 04 MISREGISTRATION. The paper shifts between passes so the plates never quite line up. It is a signature, not a texture: overdone it stops reading as a press and starts reading as a filter. The offsets came in a pixel; the solid inks are quieter and the ghost no longer needs to travel.
    Budget: once per screen, display type only. The ghosts are aria-hidden duplicates of the
    text, sitting behind it; a screen reader hears the word once. */
 .misreg { position: relative; display: inline-block; isolation: isolate; }
@@ -143,18 +159,18 @@
   user-select: none;
   pointer-events: none;
 }
-.misreg .ghost { color: var(--pink); transform: translate(3px, -3px); z-index: -1; }
-.misreg .ghost2 { color: var(--blue); transform: translate(-2px, 2px); z-index: -2; opacity: 0.85; }
+.misreg .ghost { color: var(--pink); transform: translate(2px, -2px); z-index: -1; opacity: 0.55; }
+.misreg .ghost2 { color: var(--blue); transform: translate(-1.5px, 1.5px); z-index: -2; opacity: 0.45; }
 
 /* Texture never touches anything functional. A slash command is there to be copied, so
    it gets no grain, no halftone and no misregistration — a hard pink shadow is as far as
    it goes. */
-.press-edge { border: var(--keyline); box-shadow: var(--press-shadow); }
+.press-edge { border: var(--edge-line); border-radius: var(--r-md); box-shadow: var(--press-shadow); }
 
 /* The scale. Eight steps and no more: a ninth is always somebody avoiding a decision. */
-.t-display-xl { font-family: var(--font-display-stack); font-size: clamp(2.9rem, 7.4vw, 5.6rem); line-height: 0.92; letter-spacing: -0.028em; font-weight: 800; }
-.t-display-l { font-family: var(--font-display-stack); font-size: clamp(1.85rem, 3.6vw, 2.9rem); line-height: 1.02; letter-spacing: -0.02em; font-weight: 800; }
-.t-display-m { font-family: var(--font-display-stack); font-size: 1.16rem; line-height: 1.24; letter-spacing: -0.01em; font-weight: 700; }
+.t-display-xl { font-family: var(--font-display-stack); font-size: clamp(2.6rem, 6.4vw, 4.8rem); line-height: 0.98; letter-spacing: -0.022em; font-weight: 700; }
+.t-display-l { font-family: var(--font-display-stack); font-size: clamp(1.75rem, 3.2vw, 2.6rem); line-height: 1.06; letter-spacing: -0.018em; font-weight: 700; }
+.t-display-m { font-family: var(--font-display-stack); font-size: 1.16rem; line-height: 1.26; letter-spacing: -0.01em; font-weight: 700; }
 .t-lede { font-family: var(--font-text-stack); font-size: 1.12rem; line-height: 1.55; letter-spacing: 0; }
 .t-body { font-family: var(--font-text-stack); font-size: 1rem; line-height: 1.6; letter-spacing: 0; }
 .t-ui { font-family: var(--font-text-stack); font-size: 0.9rem; line-height: 1.45; letter-spacing: 0; }
@@ -165,17 +181,17 @@
    belongs in Archivo, whatever size it is set at. */
 .display {
   font-family: var(--font-display-stack);
-  font-weight: 800;
-  letter-spacing: -0.028em;
+  font-weight: 700;
+  letter-spacing: -0.022em;
   text-wrap: balance;
 }
 
-/* The wordmark. Syne 800, uppercase, tight. It is set in the black drum; the pink and
-   blue arrive as misregistration ghosts rather than as a colour choice. */
+/* The wordmark. Syne 700, uppercase, a little tracked. It is set in the black drum; the
+   pink and blue arrive as misregistration ghosts rather than as a colour choice. */
 .wordmark {
   font-family: var(--font-display-stack);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 0.94;
   text-transform: uppercase;
   color: var(--ink);

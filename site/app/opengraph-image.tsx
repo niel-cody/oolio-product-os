@@ -24,8 +24,8 @@ export const contentType = "image/png";
 const STOCK = "#E4E2DB";
 const INK = "#231F20";
 const MUTED = "#65606A";
-const PINK = "#FF48B0";
-const YELLOW = "#FFE800";
+const PINK = "#F8B6BA"; // Corinthian Pink, the tint: a ground, never a line here
+const YELLOW = "#FDBF68"; // Cream Yellow, the gate
 const RULE = "#C4C0B7";
 
 /**

@@ -64,7 +64,7 @@ export function SiteHeader({
   };
 
   return (
-    <header className="sticky top-0 z-30 border-b-[1.5px] border-[var(--k)] bg-[var(--stock)]/92 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-[var(--k)] bg-[var(--stock)]/92 backdrop-blur">
       <div className="mx-auto flex h-14 w-full max-w-7xl items-center gap-3 px-4 sm:px-6">
         {/* The house lockup: the Gate, then Pixie Dust Industries in Syne 800 uppercase.
             Not misregistered — the budget is one misregistration per screen and the hero

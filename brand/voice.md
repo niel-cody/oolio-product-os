@@ -38,7 +38,7 @@ Existing copy, all of it already load-bearing. Reuse rather than rewrite.
 
 > The car does not win the race. But nobody wins it in the wrong car.
 
-> Fluorescent pink is a colour a screen cannot honestly show and CMYK cannot mix.
+> Colour is in the dots and the beads. The sheet stays the sheet.
 
 > Discipline is the first thing to go when the quarter gets loud.
 

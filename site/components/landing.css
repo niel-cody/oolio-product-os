@@ -35,7 +35,7 @@
 }
 
 /* ---------- tags ---------- */
-/* A print tag is a box with a keyline, not a pill with a tint. */
+/* A tag is a small pill: the one place a tint may be a surface. */
 .lx-tag {
   font-family: var(--font-system-stack);
   font-size: 0.7rem;
@@ -43,13 +43,14 @@
   text-transform: uppercase;
   font-weight: 500;
   line-height: 1;
-  padding: 5px 9px;
-  border: var(--keyline);
+  padding: 6px 10px;
+  border: var(--edge-line);
+  border-radius: var(--r-pill);
   color: var(--k);
 }
 .lx-tag-pink {
-  background: var(--pink);
-  border-color: var(--pink);
+  background: var(--pink-tint);
+  border-color: var(--pink-tint);
 }
 
 /* ---------- the path list ---------- */
@@ -105,7 +106,7 @@
   width: 100%;
   padding: 9px 11px;
   text-align: left;
-  border: var(--keyline);
+  border: var(--edge-line);
   background: var(--stock);
   color: var(--soft-ink);
   font-family: inherit;
@@ -142,7 +143,7 @@
 }
 .lx-stage[data-gate="true"][data-on="false"] { opacity: 0.5; }
 
-.lx-stage[data-selected="true"] { outline: 3px solid var(--pink); outline-offset: -3px; }
+.lx-stage[data-selected="true"] { outline: 2px solid var(--blue); outline-offset: -2px; }
 
 .lx-ord {
   font-family: var(--font-system-stack);
@@ -163,8 +164,8 @@
    and the reason the page reads as a printed sheet. */
 .lx-cell {
   padding: 18px 18px 20px;
-  border-right: var(--keyline);
-  border-bottom: var(--keyline);
+  border-right: var(--hairline);
+  border-bottom: var(--hairline);
   min-width: 0;
 }
 .lx-cell:last-child { border-right: 0; }
@@ -256,7 +257,7 @@
 .lx-card {
   position: relative;
   z-index: 2;
-  border: var(--keyline);
+  border: var(--edge-line);
   background: var(--stock-2);
   box-shadow: var(--press-shadow);
 }
@@ -265,7 +266,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 13px;
-  border-bottom: var(--keyline);
+  border-bottom: var(--hairline);
   background: var(--stock-3);
 }
 .lx-row {
@@ -373,7 +374,7 @@
 .lx-cap { display: flex; flex-direction: column; }
 .lx-mock {
   margin-top: 14px;
-  border: var(--keyline);
+  border: var(--edge-line);
   background: var(--stock);
   padding: 11px 12px;
   flex: 1;
@@ -421,7 +422,7 @@
   .lx-brain { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 .lx-know {
-  border: var(--keyline);
+  border: var(--edge-line);
   background: var(--stock);
   padding: 11px 12px;
 }
@@ -454,7 +455,7 @@
 }
 .lx-q[open] > summary::after { content: "\2212"; }
 @media (hover: hover) {
-  .lx-q > summary:hover { color: var(--pink-blue); }
+  .lx-q > summary:hover { color: var(--blue); }
 }
 .lx-a { animation: lx-purpose-in 260ms var(--ease-out) forwards; }
 

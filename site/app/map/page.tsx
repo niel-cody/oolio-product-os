@@ -12,6 +12,7 @@ export default function MapPage() {
   return (
     <ProductMap
       map={os.map}
+      stages={os.stages}
       stamp={os.stamp}
       skills={os.totals.skills}
       unplaced={os.totals.unplaced}

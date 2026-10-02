@@ -93,11 +93,10 @@
   --popover: var(--stock-2);
   --popover-foreground: var(--ink);
 
-  /* The primary is the first drum. Fluorescent pink is out of gamut, unmixable in CMYK and
-     the ink people recognise as Riso on sight, so it is the moment that matters on a page
-     and never a whole surface. It cannot carry a word — 2.38:1 on the stock — so it is a
-     ground with black type on it, which measures 5.28:1. brand/colour.md argues it. */
-  --primary: var(--pink);
+  /* The primary is the first drum at its tint: Corinthian Pink, a ground with black type
+     on it, 9.62:1. The solid pink draws lines and marks and never a surface, and never a
+     word. brand/colour.md argues it. */
+  --primary: var(--pink-tint);
   --primary-foreground: var(--k);
 
   --secondary: var(--stock-3);
@@ -108,12 +107,12 @@
   --accent-foreground: var(--ink);
   --destructive: var(--alarm);
   --border: var(--rule);
-  --input: var(--k);
-  --ring: var(--pink);
+  --input: var(--rule-2);
+  --ring: var(--blue);
 
-  /* Print has keylines, not rounded cards. Everything shadcn would round is squared, and
-     the one exception is a pill, which is a real shape rather than a soft corner. */
-  --radius: 0;
+  /* Soft corners, 2026-10-02. The squared keylined card was the single thing that made the
+     sheet read as brutalist rather than printed; a die-cut sheet has rounded corners. */
+  --radius: var(--r-md);
 }
 
 /* Press feedback for anything pressable that is not a <Button>: a link acting as a call to
@@ -151,14 +150,15 @@
    than living in either map's own stylesheet.
    -------------------------------------------------------------------------- */
 .flowbtn {
-  text-align: left; background: #EFEDE7; border: var(--keyline); border-radius: 0;
-  padding: 8px 11px; color: var(--ink); cursor: pointer; font-family: inherit; transition: .18s;
+  text-align: left; background: var(--stock-2); border: var(--edge-line); border-radius: var(--r-md);
+  padding: 8px 11px; color: var(--ink); cursor: pointer; font-family: inherit;
+  transition: background-color var(--dur-state) var(--ease-out), border-color var(--dur-state) var(--ease-out);
   display: flex; align-items: center; gap: 9px; width: 100%;
 }
-.flowbtn:hover { border-color: #231F20; background: #c4c1bb; }
+.flowbtn:hover { border-color: var(--muted-ink); background: var(--stock-3); }
 .flowbtn.on {
-  border-color: var(--accent-line, #3D185E); background: #D6D3CA;
-  box-shadow: 0 0 0 1px var(--accent-line, #3D185E) inset;
+  border-color: var(--accent-line, var(--blue)); background: var(--stock-3);
+  box-shadow: 0 0 0 1px var(--accent-line, var(--blue)) inset;
 }
 .flowbtn .idx { font-family: var(--font-mono), monospace; font-size: 10px; color: var(--muted-ink); width: 14px; }
 .flowbtn .nm { font-size: 12.5px; font-weight: 500; }
@@ -168,11 +168,11 @@
   font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: .14em;
   color: var(--muted-ink); text-transform: uppercase; margin-bottom: 10px;
 }
-.step { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px dashed #bdb9b3; }
+.step { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--rule); }
 .step:last-child { border-bottom: none; }
 .step .n {
-  font-family: var(--font-mono), monospace; font-size: 10px; color: #E4E2DB;
-  background: var(--sc, #3D185E); min-width: 19px; height: 19px; border-radius: 0;
+  font-family: var(--font-mono), monospace; font-size: 10px; color: var(--stock);
+  background: var(--sc, var(--blue)); min-width: 19px; height: 19px; border-radius: var(--r-sm);
   display: flex; align-items: center; justify-content: center; font-weight: 600; margin-top: 1px;
 }
 .step .b { font-size: 12.5px; font-weight: 600; line-height: 1.25; }
@@ -185,13 +185,13 @@
 .changelog-body li { position: relative; margin-bottom: 0.6em; padding-left: 0.35em; }
 .changelog-body li::before {
   content: ""; position: absolute; left: -0.75em; top: 0.62em;
-  width: 4px; height: 4px; border-radius: 0; background: var(--orch); opacity: .75;
+  width: 5px; height: 5px; border-radius: 999px; background: var(--pink); opacity: .9;
 }
 .changelog-body strong { color: var(--ink); font-weight: 600; }
 .changelog-body code {
   font-family: var(--font-mono), monospace; font-size: 0.86em;
-  background: var(--secondary); border: var(--keyline);
-  border-radius: 0; padding: 0.1em 0.34em; color: #373232;
+  background: var(--secondary); border: var(--hairline);
+  border-radius: var(--r-sm); padding: 0.1em 0.34em; color: var(--soft-ink);
 }
 .changelog-body a { color: var(--orch); text-decoration: none; }
 .changelog-body a:hover { text-decoration: underline; }

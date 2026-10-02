@@ -167,23 +167,23 @@
   },
   "types": {
     "ai": {
-      "colour": "#3D185E",
+      "colour": "var(--ai)",
       "label": "AI skill"
     },
     "orch": {
-      "colour": "#3D5588",
+      "colour": "var(--orch)",
       "label": "Orchestrator"
     },
     "human": {
-      "colour": "#FFE800",
+      "colour": "var(--gate)",
       "label": "Human-gated"
     },
     "signal": {
-      "colour": "#65606A",
+      "colour": "var(--signal)",
       "label": "Signal intake"
     },
     "output": {
-      "colour": "#3D4D00",
+      "colour": "var(--output)",
       "label": "Output / artifact"
     }
   },

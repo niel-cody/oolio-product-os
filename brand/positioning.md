@@ -74,7 +74,7 @@ count, the changelog. No hand-typed figures anywhere, because a brand whose fact
 being believed at exactly the moment it matters.
 
 **2. The third drum is a person.**
-Sun Yellow means a human decides here. It is the smallest ink budget on the sheet and it is
+Cream Yellow means a human decides here. It is the smallest ink budget on the sheet and it is
 spent on the review gates and nothing else. As the only warm thing on the page it makes "a
 person signs off anything that counts" the loudest mark on the map, which is what the page
 claims in words already.

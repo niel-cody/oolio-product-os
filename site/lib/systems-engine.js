@@ -16,7 +16,7 @@
  */
 
 /* --gate from brand/tokens/brand.tokens.json. The one colour that means a person. */
-const GATE = "#FFE800";
+const GATE = "var(--gate)";
 
 const NS = "http://www.w3.org/2000/svg";
 
@@ -39,7 +39,7 @@ const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
 export function renderSystems(root, SYS, opts = {}) {
   const { systems: LIST, wires: WIRES, routes: ROUTES, kinds: KINDS } = SYS;
-  const colour = (kind) => KINDS[kind]?.colour || "#65606A";
+  const colour = (kind) => KINDS[kind]?.colour || "var(--signal)";
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const svg = root.querySelector("#sysmap");
@@ -66,9 +66,16 @@ export function renderSystems(root, SYS, opts = {}) {
   // rather than fanning past it. Without this the top and bottom wires enter through thin air.
   const onCore = (y, mid) => clamp(CORE_Y + (y - mid) * 0.42, CORE_T + 26, CORE_B - 26);
 
+  // fill and stroke that name a CSS variable go through style: a presentation attribute
+  // is parsed before custom properties resolve in some browsers, and a wire that silently
+  // renders black is the kind of regression nobody reports.
   function el(tag, attrs) {
     const e = document.createElementNS(NS, tag);
-    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    for (const k in attrs) {
+      const v = attrs[k];
+      if ((k === "fill" || k === "stroke") && typeof v === "string" && v.startsWith("var(")) e.style.setProperty(k, v);
+      else e.setAttribute(k, v);
+    }
     return e;
   }
   const curveH = (x1, y1, x2, y2) => {
@@ -96,7 +103,7 @@ export function renderSystems(root, SYS, opts = {}) {
   /* ---- defs ---- */
   const defs = el("defs", {});
   const pat = el("pattern", { id: "sysdots", width: 26, height: 26, patternUnits: "userSpaceOnUse" });
-  pat.appendChild(el("circle", { cx: 1.2, cy: 1.2, r: 1.2, fill: "#c3c0b9" }));
+  pat.appendChild(el("circle", { cx: 1.2, cy: 1.2, r: 1.2, fill: "var(--rule)" }));
   defs.appendChild(pat);
   const glow = el("filter", { id: "sysglow", x: "-60%", y: "-60%", width: "220%", height: "220%" });
   glow.appendChild(el("feGaussianBlur", { stdDeviation: "2.6", result: "b" }));
@@ -138,8 +145,8 @@ export function renderSystems(root, SYS, opts = {}) {
       const pt = L ? probe.getPointAtLength(L * 0.5) : { x: 0, y: 0 };
       const tw = w.label.length * 5.5 + 14;
       const lg = el("g", { class: "swlbl" });
-      lg.appendChild(el("rect", { x: pt.x - tw / 2, y: pt.y - 17, width: tw, height: 14, rx: 4, fill: "#cecbc5", stroke: c, "stroke-opacity": 0.4 }));
-      const tt = el("text", { x: pt.x, y: pt.y - 6.8, "text-anchor": "middle", class: "sw-lbl", fill: "#464141" });
+      lg.appendChild(el("rect", { x: pt.x - tw / 2, y: pt.y - 17, width: tw, height: 14, rx: 4, fill: "var(--rule)", stroke: c, "stroke-opacity": 0.4 }));
+      const tt = el("text", { x: pt.x, y: pt.y - 6.8, "text-anchor": "middle", class: "sw-lbl", fill: "var(--soft-ink)" });
       tt.textContent = w.label; lg.appendChild(tt);
       g.appendChild(lg);
     }
@@ -154,7 +161,7 @@ export function renderSystems(root, SYS, opts = {}) {
     const g = el("g", { class: "snode", "data-id": n.id, tabindex: "0", role: "button" });
     const tip = el("title", {}); tip.textContent = `${n.label} — ${n.note}`; g.appendChild(tip);
     const box = el("g", { class: "sbox" });
-    box.appendChild(el("rect", { x, y, width: n.w, height: n.h, rx: 11, fill: "#cac7c1", stroke: c, "stroke-opacity": 0.5, "stroke-width": 1.4 }));
+    box.appendChild(el("rect", { x, y, width: n.w, height: n.h, rx: 11, fill: "var(--rule)", stroke: c, "stroke-opacity": 0.5, "stroke-width": 1.4 }));
     box.appendChild(el("rect", { x, y, width: 4, height: n.h, rx: 2, fill: c }));
 
     // Three lines, each owning its full width. Sharing a line between the name and the stats
@@ -196,7 +203,7 @@ export function renderSystems(root, SYS, opts = {}) {
       const halo = el("rect", { x: x - 7, y: y - 7, width: n.w + 14, height: n.h + 14, rx: 20, fill: "none", stroke: c, "stroke-width": 1.2, class: "corehalo" });
       box.appendChild(halo);
     }
-    box.appendChild(el("rect", { x, y, width: n.w, height: n.h, rx: 16, fill: "#EFEDE7", stroke: c, "stroke-opacity": 0.75, "stroke-width": 1.8 }));
+    box.appendChild(el("rect", { x, y, width: n.w, height: n.h, rx: 16, fill: "var(--stock-2)", stroke: c, "stroke-opacity": 0.75, "stroke-width": 1.8 }));
 
     const eyebrow = el("text", { x: n.x, y: y + 36, "text-anchor": "middle", class: "sys-cad", fill: c });
     eyebrow.textContent = "THE ONLY CROSSING"; box.appendChild(eyebrow);
@@ -226,7 +233,7 @@ export function renderSystems(root, SYS, opts = {}) {
     const g = el("g", { class: "snode", "data-id": n.id, tabindex: "0", role: "button" });
     const tip = el("title", {}); tip.textContent = `${n.label} — ${n.note}`; g.appendChild(tip);
     const box = el("g", { class: "sbox" });
-    box.appendChild(el("rect", { x, y, width: n.w, height: n.h, rx: 14, fill: "#FFE800", "fill-opacity": 0.85, stroke: c, "stroke-opacity": 0.5, "stroke-width": 1.4 }));
+    box.appendChild(el("rect", { x, y, width: n.w, height: n.h, rx: 14, fill: "var(--lavender)", "fill-opacity": 0.75, stroke: c, "stroke-opacity": 0.5, "stroke-width": 1.4 }));
     box.appendChild(el("rect", { x, y, width: n.w, height: 3, rx: 1.5, fill: c }));
 
     const lab = el("text", { x: x + 26, y: y + 34, class: "core-title" }); lab.textContent = n.label;

@@ -1,72 +1,128 @@
-/* The map's own styles. The drawing is unchanged; what moved is the palette, which now comes
-   from brand/tokens/brand.tokens.json by way of app/brand.css, and the type, which is the
-   brand's three voices. The original --muted (a text colour) is --muted-ink here because
-   shadcn already uses --muted for a surface. */
+/* The map's own styles. The palette comes from brand/tokens/brand.tokens.json by way of
+   app/brand.css, and the type is the brand's three voices. Nothing here is a hex. */
 
 .mapstage svg#map { display: block; width: 100%; height: 100%; touch-action: none; }
+.mapstage { background: var(--stock); }
+.mappanel { background: var(--stock-2); border-top: var(--hairline); }
+@media (min-width: 1024px) { .mappanel { border-top: 0; border-left: var(--hairline); } }
 
+/* ---- the stage chips ---- */
+.stagestrip {
+  position: absolute; left: 12px; right: 12px; top: 10px; z-index: 6;
+  display: flex; gap: 4px; overflow-x: auto; padding: 4px 2px 6px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  mask-image: linear-gradient(to right, transparent, #000 10px, #000 calc(100% - 10px), transparent);
+}
+.stagestrip::-webkit-scrollbar { display: none; }
+.stagechip {
+  flex: none; display: inline-flex; align-items: center; gap: 6px;
+  height: 28px; padding: 0 10px 0 8px; border-radius: var(--r-pill);
+  background: color-mix(in oklab, var(--stock-2) 88%, transparent); border: var(--hairline);
+  color: var(--soft-ink); font-family: var(--font-text-stack); font-size: 11.5px; font-weight: 500;
+  cursor: pointer; backdrop-filter: blur(3px);
+  transition: background-color var(--dur-state) var(--ease-out), border-color var(--dur-state) var(--ease-out), color var(--dur-state) var(--ease-out);
+}
+.stagechip .n { font-family: var(--font-system-stack); font-size: 9.5px; letter-spacing: .08em; color: var(--muted-ink); }
+.stagechip:hover { background: var(--stock-2); border-color: var(--rule-2); color: var(--ink); }
+.stagechip.on { background: var(--blue-tint); border-color: var(--blue-tint); color: var(--ink); }
+.stagechip.on .n { color: var(--ink); }
+.stagechip:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+
+/* ---- legend ---- */
 #legend {
-  position: absolute; top: 12px; right: 14px; z-index: 5; background: rgba(239, 237, 231, 0.92);
-  border: var(--keyline); padding: 9px 12px; backdrop-filter: blur(2px);
+  position: absolute; bottom: 52px; right: 14px; z-index: 5;
+  background: color-mix(in oklab, var(--stock-2) 90%, transparent);
+  border: var(--hairline); border-radius: var(--r-md); padding: 8px 11px; backdrop-filter: blur(3px);
 }
 #legend .lt {
-  font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: .14em;
+  font-family: var(--font-system-stack); font-size: 9px; letter-spacing: .14em;
   color: var(--muted-ink); text-transform: uppercase; margin-bottom: 6px;
 }
-#legend .row { display: flex; gap: 14px; flex-wrap: wrap; }
+#legend .row { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; }
 #legend .k {
-  display: flex; align-items: center; gap: 5px;
-  font-family: var(--font-mono), monospace; font-size: 9.5px; color: var(--ink);
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-text-stack); font-size: 10.5px; color: var(--soft-ink); white-space: nowrap;
 }
-#legend .dot { width: 10px; height: 10px; border: 1px solid var(--k); }
+#legend .dot, .ctxeyebrow .dot, .ctxchip .dot, .ctxitem .dot, #tip .dot { width: 8px; height: 8px; border-radius: 999px; flex: none; }
+#legend .dot-gate { background: var(--gate); border: 1px solid var(--ink); }
+#legend .dash { width: 14px; height: 0; border-top: 2px dashed var(--loop); }
 
-/* The path list and its step rows are shared with the systems map, so they live in
-   globals.css. Only the container is the map's own. */
-#flows { display: flex; flex-direction: column; gap: 6px; }
-
-/* No `display` here on purpose: this is an ID selector, so it would beat Tailwind's
-   `hidden md:flex` and the stats would sit on top of the map on a phone. */
+/* ---- the foot ---- */
 #foot {
-  font-family: var(--font-mono), monospace; font-size: 10px; color: var(--muted-ink);
+  font-family: var(--font-system-stack); font-size: 10px; color: var(--muted-ink);
   letter-spacing: .05em; gap: 16px; flex-wrap: wrap;
 }
-#foot b { color: #433e3e; font-weight: 600; }
+#foot b { color: var(--soft-ink); font-weight: 600; }
+#foot .alarm { color: var(--alarm); }
+.mapbtn { background: color-mix(in oklab, var(--stock-2) 90%, transparent); backdrop-filter: blur(3px); }
 
-/* svg element classes */
-.colhead {
-  font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: .16em;
-  fill: var(--muted-ink); text-transform: uppercase;
+/* ---- tooltip ---- */
+#tip {
+  position: absolute; left: 0; top: 0; z-index: 8; width: 280px; pointer-events: none;
+  background: var(--stock-2); border: var(--hairline); border-radius: var(--r-md);
+  box-shadow: var(--lift-shadow); padding: 10px 12px;
 }
-/* 13.5px, not 14. Inter is a little wider than the Space Grotesk it replaced, and the
-   longest label on the map ("Behavioural Alchemist") already sat close to the right edge of a
-   176px node. Half a pixel is invisible and the overflow is not. */
-.node-label { font-family: var(--font-sans), sans-serif; font-weight: 600; font-size: 13.5px; letter-spacing: -0.006em; fill: var(--ink); }
-.node-note { font-family: var(--font-mono), monospace; font-size: 9px; fill: #5e5857; }
-.badge-txt { font-family: var(--font-mono), monospace; font-size: 8.5px; font-weight: 500; }
-/* A gate is amber and a loop is rose, and until the rebrand both were the same gold: the old
-   --human and --loop were 11 degrees apart in OKLCH, so the map told a reader two different
-   things in one colour. brand/colour.md. */
-.gate-txt { font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: .1em; fill: var(--gate); }
-.gate-who { font-family: var(--font-mono), monospace; font-size: 9px; fill: #3D4D00; }
-.loop-txt { font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: .12em; fill: var(--loop); }
+#tip .t-h { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--ink); }
+#tip .t-n { font-family: var(--font-system-stack); font-size: 10px; color: var(--muted-ink); margin-top: 3px; }
+#tip .t-d { font-size: 12px; line-height: 1.45; color: var(--soft-ink); margin-top: 6px; }
 
+/* ---- svg: the track, the plates, the tiles ---- */
+.track { fill: none; stroke: var(--stock-3); stroke-width: 30; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+.plate-bg { fill: color-mix(in oklab, var(--stock-3) 45%, var(--stock)); stroke: var(--rule); stroke-width: 1; transition: stroke .2s, fill .2s; }
+.plate { cursor: pointer; }
+.plate:hover .plate-bg { stroke: var(--rule-2); }
+.plate.on .plate-bg { stroke: var(--blue); fill: color-mix(in oklab, var(--blue-tint) 22%, var(--stock)); }
+.plate-rule { stroke: var(--rule); stroke-width: 1; }
+.plate-num { font-family: var(--font-system-stack); font-size: 11px; letter-spacing: .08em; fill: var(--muted-ink); }
+.plate-name { font-family: var(--font-text-stack); font-size: 11.5px; font-weight: 600; letter-spacing: .12em; fill: var(--ink); }
+.plate-count { font-family: var(--font-system-stack); font-size: 10px; fill: var(--muted-ink); }
+
+.tile { fill: var(--stock-2); stroke: var(--rule-2); stroke-width: 1; transition: stroke .2s, fill .2s; }
+.node { cursor: pointer; outline: none; }
+.node:hover .tile, .node.hl .tile { stroke: var(--ink); }
+.node.on .tile { stroke: var(--blue); stroke-width: 1.5; fill: color-mix(in oklab, var(--blue-tint) 28%, var(--stock-2)); }
+.node:focus-visible .tile { stroke: var(--blue); stroke-width: 2; }
+.tile-dot-gate { stroke: var(--ink); stroke-width: 1; }
+.node-label { font-family: var(--font-text-stack); font-weight: 600; font-size: 12.5px; letter-spacing: -0.005em; fill: var(--ink); }
+.node-note { font-family: var(--font-system-stack); font-size: 9px; fill: var(--muted-ink); }
+.badge-txt { font-family: var(--font-system-stack); font-size: 8px; letter-spacing: .06em; fill: var(--muted-ink); }
+.nbox { transition: opacity .2s; }
+
+/* Far away, the tiles drop their small print so the labels have the plate to themselves. */
+svg.lod-far .node-note, svg.lod-far .badge-txt, svg.lod-far .wire-lbl { display: none; }
+svg.lod-far .node-label { font-size: 15.5px; transform: translateY(6px); }
+svg.lod-far .plate-name { font-size: 15px; letter-spacing: .1em; transform: translateY(3px); }
+svg.lod-far .plate-num { font-size: 14px; transform: translateY(3px); }
+svg.lod-far .plate-count { font-size: 13px; transform: translateY(3px); }
+svg.lod-far .gate-txt { font-size: 12px; }
+
+/* gates */
+.gate-rule { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 6; stroke-opacity: .45; stroke-linecap: round; }
+.gate-bead { fill: var(--gate); stroke: var(--ink); stroke-width: 1.25; }
+.gate-tick { fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.gate-txt { font-family: var(--font-system-stack); font-size: 9.5px; letter-spacing: .12em; fill: var(--ink); }
+.gate-who { font-family: var(--font-system-stack); font-size: 9px; letter-spacing: .08em; fill: var(--muted-ink); }
+
+/* wires */
 .wire {
-  fill: none; stroke-width: 1.9; stroke-linecap: round; opacity: .4;
-  stroke-dasharray: 5 7; animation: mapflow 2.6s linear infinite;
+  fill: none; stroke-width: 1.6; stroke-linecap: round; opacity: .32;
+  stroke-dasharray: 5 7; animation: mapflow 2.8s linear infinite;
 }
-.edge.on .wire, .edge.hl .wire { opacity: 1; stroke-dasharray: none; stroke-width: 2.5; animation: none; }
+.edge.on .wire, .edge.hl .wire { opacity: 1; stroke-dasharray: none; stroke-width: 2.2; animation: none; }
+.wire-lbl-bg { fill: var(--stock-2); stroke-width: 1; }
+.wire-lbl-txt { font-family: var(--font-system-stack); font-size: 8px; fill: var(--ink); }
 .loopwire {
-  fill: none; stroke: var(--loop); stroke-width: 1.7; opacity: .42;
+  fill: none; stroke: var(--loop); stroke-width: 1.6; opacity: .5;
   stroke-dasharray: 7 8; animation: mapflow 3.4s linear infinite;
 }
-.loop.on .loopwire, .loop.hl .loopwire { opacity: 1; stroke-width: 2.3; }
-.node { cursor: pointer; }
-.nbox { transition: opacity .2s; }
+.loop.on .loopwire, .loop.hl .loopwire { opacity: 1; stroke-width: 2.2; }
+.loop-lbl-bg { fill: var(--pink-tint); }
+.loop-txt { font-family: var(--font-system-stack); font-size: 9.5px; letter-spacing: .1em; fill: var(--ink); }
 @keyframes mapflow { to { stroke-dashoffset: -24; } }
 
-svg.has-sel .edge:not(.on):not(.hl) { opacity: .06; }
-svg.has-sel .loop:not(.on):not(.hl) { opacity: .06; }
-svg.has-sel .node:not(.on):not(.hl) { opacity: .14; }
+svg.has-sel .edge:not(.on):not(.hl) { opacity: .08; }
+svg.has-sel .loop:not(.on):not(.hl) { opacity: .1; }
+svg.has-sel .node:not(.on):not(.hl) { opacity: .28; }
 .particle { opacity: .95; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -74,19 +130,59 @@ svg.has-sel .node:not(.on):not(.hl) { opacity: .14; }
   .particle { display: none; }
 }
 
+/* ---- the panel's context area ---- */
+.ctxcard { display: flex; flex-direction: column; gap: 8px; }
+.ctxeyebrow { display: flex; align-items: center; gap: 7px; font-family: var(--font-system-stack); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-ink); }
+.ctxtitle { font-family: var(--font-display-stack); font-weight: 700; font-size: 19px; line-height: 1.15; letter-spacing: -0.012em; color: var(--ink); }
+.ctxnote { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--font-system-stack); font-size: 10.5px; color: var(--soft-ink); }
+.ctxbadge { font-size: 8.5px; letter-spacing: .08em; color: var(--muted-ink); border: var(--hairline); border-radius: var(--r-sm); padding: 2px 5px; }
+.ctxdesc { font-size: 13px; line-height: 1.5; color: var(--soft-ink); margin-top: 2px; }
+.ctxlink {
+  align-self: flex-start; margin-top: 4px; display: inline-flex; align-items: center; gap: 6px;
+  height: 32px; padding: 0 12px; border-radius: var(--r-pill); background: var(--pink-tint); color: var(--ink);
+  font-size: 12.5px; font-weight: 600; text-decoration: none;
+  transition: transform 160ms var(--ease-out), background-color var(--dur-state) var(--ease-out);
+}
+.ctxlink:hover { background: color-mix(in oklab, var(--pink-tint) 80%, var(--pink)); }
+.ctxlink:active { transform: scale(.985); }
+.ctxrow { margin-top: 8px; }
+.ctxchips { display: flex; flex-wrap: wrap; gap: 5px; }
+.ctxchip {
+  display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 9px 0 7px;
+  border: var(--hairline); border-radius: var(--r-pill); background: var(--stock); color: var(--ink);
+  font-family: var(--font-text-stack); font-size: 11.5px; cursor: pointer;
+  transition: border-color var(--dur-state) var(--ease-out), background-color var(--dur-state) var(--ease-out);
+}
+.ctxchip:hover { border-color: var(--rule-2); background: var(--stock-2); }
+.ctxlist { display: flex; flex-direction: column; }
+.ctxitem {
+  display: grid; grid-template-columns: 8px 1fr; grid-template-rows: auto auto; column-gap: 9px; align-items: center;
+  width: 100%; text-align: left; padding: 7px 6px; border: 0; border-bottom: var(--hairline); background: transparent;
+  border-radius: var(--r-sm); cursor: pointer; font-family: inherit; color: var(--ink);
+  transition: background-color var(--dur-state) var(--ease-out);
+}
+.ctxitem:last-child { border-bottom: 0; }
+.ctxitem:hover { background: var(--stock); }
+.ctxitem .dot { grid-row: 1 / span 2; }
+.ctxitem .b { font-size: 12.5px; font-weight: 600; line-height: 1.25; }
+.ctxitem .d { font-family: var(--font-system-stack); font-size: 9.5px; color: var(--muted-ink); margin-top: 1px; }
+.ctxhint p { font-size: 12.5px; line-height: 1.55; color: var(--soft-ink); margin-bottom: 8px; }
+#context .step { width: 100%; text-align: left; background: transparent; border-left: 0; border-right: 0; border-top: 0; cursor: pointer; font-family: inherit; color: var(--ink); border-radius: 0; }
+#context .step:hover .b { color: var(--blue); }
+.ctxchip:focus-visible, .ctxitem:focus-visible, #context .step:focus-visible, .ctxlink:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+
 /* The map is the one page that must fill the viewport exactly. Expressed here as a plain
    media query rather than an arbitrary utility, because `calc()` inside a Tailwind
    arbitrary value is easy to write in a form that silently emits nothing. 3.5rem is the header. */
 @media (min-width: 1024px) {
   /* flex: none matters. The page sits inside a flex column, so without it flex-basis
      wins over height on the main axis and the element grows to fit the sidebar's content. */
-  /* 3.5rem header + its 1px bottom border */
   .maproot { flex: none; height: calc(100dvh - 3.5rem - 1px); }
   .maproot .mapstage, .maproot > aside { height: 100%; }
 }
 
-/* A phone in landscape is roughly 2.16 wide, and the map is 2.27. That is the shape this
-   thing wants, so landscape gets the whole screen and the flows move below the fold. */
+/* A phone in landscape is close to the map's own shape, so landscape gets the whole
+   screen and the panel moves below the fold. */
 @media (max-width: 1023px) and (orientation: landscape) {
   .maproot .mapstage { height: calc(100dvh - 3.5rem - 1px); }
 }

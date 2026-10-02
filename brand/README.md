@@ -5,7 +5,9 @@ typography, the mark and the words are defined here, and everything that carries
 reads from here.
 
 The direction is **Risograph**. Three ink drums plus a black drum, printed on uncoated stock,
-and its whole argument is physical constraint: a fixed number of drums, translucent ink, paper
+reloaded on 2 October 2026 with muted inks from Sanzo Wada's *A Dictionary of Color
+Combinations* so the sheet reads as paper first and as a press second. The whole argument
+is physical constraint: a fixed number of drums, translucent ink, paper
 showing through, registration that never quite lands. Constraints are the thing a generator
 cannot fake, which is why this is the direction and not another dark palette.
 
@@ -22,10 +24,10 @@ generated from them, and a build fails if the two disagree.
 | **Product** | Product OS. The house is the name on the door; the Product OS is what it ships. |
 | **Line** | The product process, written down and running. |
 | **Thesis** | The loop closes on a person. |
-| **Mark** | The Gate: a ring with a break in it, and a bead of Sun Yellow standing in the break. |
+| **Mark** | The Gate: a ring with a break in it, and a bead of Cream Yellow standing in the break. |
 | **Stock** | Uncoated cool grey `#E4E2DB`. The site is light, and that is physics rather than preference. |
-| **Drums** | Fluorescent Pink `#FF48B0`, Blue `#3D5588`, Sun Yellow `#FFE800`, Black `#231F20`. |
-| **Type** | Syne for the argument, Archivo for the interface, DM Mono for the machine. |
+| **Drums** | Eupatorium Purple `#BF5892` (tint Corinthian Pink `#F8B6BA`), Violet Blue `#40456A` (tint Salvia Blue `#97ACC8`), Cream Yellow `#FDBF68`, Black `#231F20`. Every chromatic ink is a named colour from Sanzo Wada's *A Dictionary of Color Combinations*. |
+| **Type** | Syne 700 for the argument, Archivo for the interface, DM Mono for the machine. |
 | **Voice** | British English. Short declarative sentences. Concrete nouns. No buzzwords, no em dashes. |
 
 ## The four moves
@@ -74,8 +76,11 @@ Committing to this has real costs, and they were decided rather than discovered.
   photocopy degradation — not Riso with the colours inverted.
 - **Texture never touches anything functional.** No grain, no halftone and no misregistration
   inside a command block. A hard pink shadow is as far as it goes.
-- **Fluorescent pink is not a text colour.** `#FF48B0` measures 2.38:1 on the stock. It is a
-  fill, a rule, a ghost layer, or a button ground with black type on it.
+- **Pink is not a text colour.** The solid, `#BF5892`, measures 3.5:1 on the stock: a line, a
+  dot, a ghost layer. Its tint, Corinthian Pink, is a ground with black type on it.
+- **Flashes, not surfaces.** Since 2 October 2026 colour lives in dots, beads, rules and small
+  pills. A tint may be a ground; a solid may not. The black keyline is emphasis only, and every
+  card has a firm grey edge and a soft corner instead. [colour.md](colour.md) has the argument.
 - **Once per screen.** Misregistration is a signature, not a texture. Overdone it stops reading
   as a press and starts reading as a filter, which lands you back where you started.
 

@@ -26,7 +26,7 @@ const lines = [];
 const p = (s = "") => lines.push(s);
 
 p("/* ============================================================================");
-p("   PIXIE DUST INDUSTRIES — the press");
+p("   PIXIE DUST INDUSTRIES. The press.");
 p("");
 p("   GENERATED FILE. Do not edit.");
 p("   Source: brand/tokens/brand.tokens.json. Rebuild: node brand/tokens/build.mjs");
@@ -39,6 +39,8 @@ p("   generator cannot fake, which is the point.");
 p("");
 p("   The site is LIGHT, and that is not a preference. Riso ink is translucent and needs a");
 p("   pale sheet to sit on; the process physically cannot print on dark stock.");
+p("   The inks come from Sanzo Wada's A Dictionary of Color Combinations: papery, muted,");
+p("   and used as flashes rather than surfaces. See brand/colour.md.");
 p("   ========================================================================== */");
 p();
 
@@ -51,16 +53,23 @@ for (const [k, v] of Object.entries(t.press.stock)) {
   p(`  --${k}: ${v.hex}; /* ${v.use} */`);
 }
 p();
-p("  /* ---- THE DRUMS ---- one ink per pass, in order */");
+p("  /* ---- THE DRUMS ---- one ink per pass, in order. Solid draws; tint may be a ground. */");
 for (const [k, v] of Object.entries(t.press.drums)) {
   if (k === "_") continue;
-  p(`  --${k}: ${v.hex}; /* ${v.pass} · ${v.riso} · ${v.contrastOnStock}:1 on stock · ${v.text ? "may set copy" : "FILL ONLY, never a word"} */`);
+  p(`  --${k}: ${v.hex}; /* ${v.pass} · ${v.name} · ${v.contrastOnStock}:1 on stock · ${v.text ? "may set copy" : "LINE OR MARK ONLY, never a word"} */`);
+  if (v.tint) p(`  --${k}-tint: ${v.tint.hex}; /* ${v.tint.name} · a ground with black type on it, ${v.tint.contrastOfBlackOnIt}:1 */`);
 }
 p();
-p(`  /* ---- OVERPRINTS ---- ${t.press.overprints._} */`);
-for (const [k, v] of Object.entries(t.press.overprints)) {
+p(`  /* ---- TINTS ---- ${t.press.tints._} */`);
+for (const [k, v] of Object.entries(t.press.tints)) {
   if (k === "_") continue;
-  p(`  --${k}: ${v.hex}; /* ${v.from.join(" × ")} · ${v.contrastOnStock}:1 on stock */`);
+  p(`  --${k}: ${v.hex}; /* ${v.name} · black on it ${v.contrastOfBlackOnIt}:1 · ${v.use} */`);
+}
+p();
+p(`  /* ---- DEEP INKS ---- ${t.press.deep._} */`);
+for (const [k, v] of Object.entries(t.press.deep)) {
+  if (k === "_") continue;
+  p(`  --${k}: ${v.hex}; /* ${v.name} · ${v.contrastOnStock}:1 on stock · ${v.text ? "may set copy" : "never a word on the stock"} */`);
 }
 p();
 p("  /* ---- TYPE COLOUR ---- every figure measured on the stock */");
@@ -87,7 +96,7 @@ p("  --bg: var(--stock);");
 p("  --panel: var(--stock-2);");
 p("  --raise: var(--stock-3);");
 p("  --line: var(--rule);");
-p("  --edge: var(--k); /* a border that has to be seen is a keyline, and a keyline is black */");
+p("  --edge: var(--rule-2); /* a border that has to be seen is a firm grey, not a black keyline */");
 p("  --void: var(--stock-3);");
 p();
 p("  /* Type. Loaded by next/font in app/layout.tsx, which sets these three variables. */");
@@ -96,9 +105,11 @@ p(`  --font-text-stack: var(--font-text), ${t.type.text.fallback};`);
 p(`  --font-system-stack: var(--font-system), ${t.type.system.fallback};`);
 p();
 p("  /* Shape. Print has keylines, not rounded cards. */");
-p(`  --keyline: ${t.shape.keyline};`);
+p(`  --keyline: ${t.shape.keyline}; /* emphasis only: the header rule, a section head */`);
+p(`  --edge-line: ${t.shape.edge}; /* the ordinary edge of a card, control or panel */`);
 p(`  --hairline: ${t.shape.hairline};`);
 p(`  --press-shadow: ${t.shape.shadow.press};`);
+p(`  --lift-shadow: ${t.shape.shadow.lift}; /* the drawer and anything that floats over the sheet */`);
 for (const [k, v] of Object.entries(t.shape.radius)) p(`  --r-${k}: ${v};`);
 p();
 p("  /* Motion */");
@@ -148,7 +159,8 @@ p("  transform: rotate(var(--dot-angle, var(--angle-blue)));");
 p("  mix-blend-mode: multiply;");
 p("}");
 for (const [drum, angle] of Object.entries(t.moves.halftone.angles)) {
-  p(`.halftone-${drum} { --dot: var(--${drum}); --dot-angle: ${angle}deg; --dot-size: ${t.moves.halftone.sizes[drum]}; }`);
+  const ink = t.press.drums[drum].tint ? `--${drum}-tint` : `--${drum}`;
+  p(`.halftone-${drum} { --dot: var(${ink}); --dot-angle: ${angle}deg; --dot-size: ${t.moves.halftone.sizes[drum]}; }`);
 }
 p();
 p(`/* 04 MISREGISTRATION. ${t.moves.misregistration.why}`);
@@ -165,13 +177,13 @@ p("  -webkit-user-select: none;");
 p("  user-select: none;");
 p("  pointer-events: none;");
 p("}");
-p(`.misreg .ghost { color: var(--pink); transform: ${t.moves.misregistration.offsets.pink}; z-index: -1; }`);
-p(`.misreg .ghost2 { color: var(--blue); transform: ${t.moves.misregistration.offsets.blue}; z-index: -2; opacity: 0.85; }`);
+p(`.misreg .ghost { color: var(--pink); transform: ${t.moves.misregistration.offsets.pink}; z-index: -1; opacity: 0.55; }`);
+p(`.misreg .ghost2 { color: var(--blue); transform: ${t.moves.misregistration.offsets.blue}; z-index: -2; opacity: 0.45; }`);
 p();
 p("/* Texture never touches anything functional. A slash command is there to be copied, so");
 p("   it gets no grain, no halftone and no misregistration — a hard pink shadow is as far as");
 p("   it goes. */");
-p(".press-edge { border: var(--keyline); box-shadow: var(--press-shadow); }");
+p(".press-edge { border: var(--edge-line); border-radius: var(--r-md); box-shadow: var(--press-shadow); }");
 p();
 
 /* ---------------------------------------------------------------- type */
@@ -193,17 +205,17 @@ p("/* Display type: the argument, and only the argument. A heading that is reall
 p("   belongs in Archivo, whatever size it is set at. */");
 p(".display {");
 p(`  font-family: var(--font-display-stack);`);
-p("  font-weight: 800;");
-p("  letter-spacing: -0.028em;");
+p("  font-weight: 700;");
+p("  letter-spacing: -0.022em;");
 p("  text-wrap: balance;");
 p("}");
 p();
-p("/* The wordmark. Syne 800, uppercase, tight. It is set in the black drum; the pink and");
-p("   blue arrive as misregistration ghosts rather than as a colour choice. */");
+p("/* The wordmark. Syne 700, uppercase, a little tracked. It is set in the black drum; the");
+p("   pink and blue arrive as misregistration ghosts rather than as a colour choice. */");
 p(".wordmark {");
 p("  font-family: var(--font-display-stack);");
-p("  font-weight: 800;");
-p("  letter-spacing: -0.03em;");
+p("  font-weight: 700;");
+p("  letter-spacing: -0.01em;");
 p("  line-height: 0.94;");
 p("  text-transform: uppercase;");
 p("  color: var(--ink);");
@@ -221,20 +233,27 @@ const css = lines.join("\n") + "\n";
  * the second is the Tailwind defaults that were the reason for the rebrand in the first place.
  */
 const RETIRED = {
+  // The fluorescent press, 2026-09-03 to 2026-10-02. Loud in every corner at once.
+  "#ff48b0": "--pink #BF5892 (or --pink-tint #F8B6BA for a ground)", "#3d5588": "--blue #40456A",
+  "#ffe800": "--yellow #FDBF68", "#3d185e": "--plum #501345", "#3d4d00": "--olive #6B7140",
+  "#ff4100": "--alarm #A62C37",
   "#070d17": "--stock #E4E2DB", "#03070f": "--stock-3 #D6D3CA", "#0e1521": "--stock-2 #EFEDE7",
   "#151f2c": "--stock-3 #D6D3CA", "#1f2a3a": "--rule #C4C0B7", "#37465d": "--k #231F20",
   "#808fa4": "--muted-ink #65606A", "#b0bcce": "--soft-ink #45414A", "#ecf0f7": "--ink #231F20",
-  "#fcbd30": "--gate #FFE800", "#5ddd89": "--output #3D4D00", "#44d0de": "--orch #3D5588",
-  "#95acc5": "--signal #65606A", "#b296fd": "--ai #3D185E", "#f07eb3": "--loop #FF48B0",
-  "#fd6560": "--alarm #FF4100",
+  "#fcbd30": "--gate", "#5ddd89": "--output", "#44d0de": "--orch",
+  "#95acc5": "--signal", "#b296fd": "--ai", "#f07eb3": "--loop",
+  "#fd6560": "--alarm",
   "#0a0e14": "--stock #E4E2DB", "#0d121b": "--stock-2 #EFEDE7", "#1c2534": "--rule #C4C0B7",
   "#e6ecf5": "--ink #231F20", "#7d8aa0": "--muted-ink #65606A", "#33415a": "--k #231F20",
-  "#a78bfa": "--ai #3D185E", "#2dd4bf": "--orch #3D5588", "#34d399": "--output #3D4D00",
-  "#f59e0b": "--gate #FFE800", "#93a3bd": "--signal #65606A", "#f5b942": "--loop #FF48B0",
-  "#f87171": "--alarm #FF4100",
+  "#a78bfa": "--ai", "#2dd4bf": "--orch", "#34d399": "--output",
+  "#f59e0b": "--gate", "#93a3bd": "--signal", "#f5b942": "--loop",
+  "#f87171": "--alarm",
 };
 const SITE = resolve(here, "../../site");
-const SKIP = new Set(["node_modules", ".next", ".git", "package-lock.json"]);
+// _archive is the record of what was true then, and data/os.json is generated and carries the
+// changelog's prose, which names retired inks on purpose. Neither is a place a stray colour
+// could reach a page from.
+const SKIP = new Set(["node_modules", ".next", ".git", "package-lock.json", "_archive", "data"]);
 
 function* sourceFiles(dir) {
   for (const name of readdirSync(dir)) {

@@ -17,7 +17,7 @@
   --fd-surface: var(--panel);
   --fd-plane: var(--bg);
   --fd-ink: var(--ink);
-  --fd-ink-2: #494343;
+  --fd-ink-2: var(--soft-ink);
   --fd-ink-3: var(--muted-ink);
   --fd-hair: var(--line);
   --fd-rule: var(--ring);
@@ -25,18 +25,18 @@
 
   --fd-good: var(--output);
   --fd-warn: var(--loop);
-  --fd-serious: #FF4100;
+  --fd-serious: var(--alarm);
   --fd-critical: var(--destructive);
 
-  /* Domain hues, tuned for the site's #E4E2DB ground. */
-  --fd-d-insights: #3D5588;
-  --fd-d-products-app: #FF48B0;
-  --fd-d-inventory: #3D4D00;
-  --fd-d-customer-engagement: #FF48B0;
-  --fd-d-core-pos: #3D185E;
-  --fd-d-kiosk: #65606A;
-  --fd-d-payments: #3D185E;
-  --fd-d-leadership: #FF4100;
+  /* Domain hues: seven inks from the sheet, the eighth is muted ink. brand/colour.md. */
+  --fd-d-insights: var(--blue);
+  --fd-d-products-app: var(--pink);
+  --fd-d-inventory: var(--olive);
+  --fd-d-customer-engagement: var(--lavender);
+  --fd-d-core-pos: var(--plum);
+  --fd-d-kiosk: var(--plumbeous);
+  --fd-d-payments: var(--blue-tint);
+  --fd-d-leadership: var(--carmine);
   --fd-d-none: var(--muted-ink);
 
   font-size: 14px;

@@ -5,7 +5,7 @@ brand goes wrong, so the division is strict.
 
 | | Face | Says |
 |---|---|---|
-| **Display** | Syne 700–800 | The argument. What a person believes |
+| **Display** | Syne 700 | The argument. What a person believes |
 | **Text** | Archivo 400–700 | The interface. What a person reads and clicks |
 | **System** | DM Mono 400–500 | The machine. What was counted, stamped, or run |
 
@@ -15,7 +15,8 @@ Drawn for a French art centre, not a startup. Wide, slightly wrong proportions, 
 ampersand with opinions. It reads as an art press rather than as a design system, which is the
 point of the whole direction.
 
-- **800 for the wordmark and headlines**, 700 where a heading is smaller than about 20px.
+- **700 for the wordmark and headlines.** It was 800 until 2 October 2026; at 800 across a
+  whole site Syne stops being a poster and becomes a barricade.
 - Tracking is negative and gets more negative as it gets bigger: `-0.02em` at 30px,
   `-0.028em` at 60px and above.
 - Line height goes **below 1** at display sizes. At 0.92 to 0.95 the lines lock together into
@@ -60,8 +61,8 @@ the generated stylesheet.
 
 | Step | Size | Line | Track | Face |
 |---|---|---|---|---|
-| `t-display-xl` | `clamp(2.9rem, 7.4vw, 5.6rem)` | 0.92 | −0.028em | Syne 800 |
-| `t-display-l` | `clamp(1.85rem, 3.6vw, 2.9rem)` | 1.02 | −0.02em | Syne 800 |
+| `t-display-xl` | `clamp(2.6rem, 6.4vw, 4.8rem)` | 0.98 | −0.022em | Syne 700 |
+| `t-display-l` | `clamp(1.75rem, 3.2vw, 2.6rem)` | 1.06 | −0.018em | Syne 700 |
 | `t-display-m` | 1.16rem | 1.24 | −0.01em | Syne 700 |
 | `t-lede` | 1.12rem | 1.55 | 0 | Archivo |
 | `t-body` | 1rem | 1.6 | 0 | Archivo |

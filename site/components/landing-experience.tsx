@@ -224,7 +224,7 @@ function Hero({
   counts: { skills: number; stages: number; flows: number; changes: number };
 }) {
   return (
-    <section className="border-b-[1.5px] border-[var(--k)]">
+    <section className="border-b border-[var(--rule-2)]">
       <div className="mx-auto w-full max-w-6xl px-5 pt-14 pb-16 sm:px-8 sm:pt-20 sm:pb-24">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14">
           <div>
@@ -271,7 +271,7 @@ function Hero({
                 up on scroll, which is the single most recognisable tic of a generated
                 landing page and made four true facts look like decoration. */}
             <Reveal delay={240}>
-              <dl className="mono mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 border-t-[1.5px] border-[var(--k)] pt-4 text-[0.7rem] uppercase tracking-[0.14em] text-[var(--muted-ink)]">
+              <dl className="mono mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[var(--rule-2)] pt-4 text-[0.7rem] uppercase tracking-[0.14em] text-[var(--muted-ink)]">
                 <Fact n={counts.skills} label="specialists" />
                 <Divider />
                 <Fact n={counts.stages} label="lifecycle stages" />
@@ -431,7 +431,7 @@ function Problem() {
         </Reveal>
 
         <Reveal delay={80}>
-          <ul className="border-[1.5px] border-[var(--k)] bg-[var(--stock-2)]">
+          <ul className="border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock-2)]">
             {TAX.map((t) => (
               <li
                 key={t.k}
@@ -468,7 +468,7 @@ const TAX = [
 
 function Proof() {
   return (
-    <section className="border-y-[1.5px] border-[var(--k)] bg-[var(--stock-2)]">
+    <section className="border-y border-[var(--rule-2)] bg-[var(--stock-2)]">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <SectionHead pass="Proof" note="the same week, run twice" />
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
@@ -488,8 +488,8 @@ function Proof() {
           </Reveal>
 
           <Reveal delay={80}>
-            <div className="border-[1.5px] border-[var(--k)] bg-[var(--stock)] px-5 py-2 sm:px-6">
-              <div className="mono flex items-baseline gap-[14px] border-b-[1.5px] border-[var(--k)] py-3 text-[0.62rem] uppercase tracking-[0.13em] text-[var(--muted-ink)]">
+            <div className="border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock)] px-5 py-2 sm:px-6">
+              <div className="mono flex items-baseline gap-[14px] border-b border-[var(--rule-2)] py-3 text-[0.62rem] uppercase tracking-[0.13em] text-[var(--muted-ink)]">
                 <span className="flex-1">The job</span>
                 <span className="w-[86px] shrink-0">By hand</span>
                 <span className="w-[96px] shrink-0 text-[var(--k)]">With the crew</span>
@@ -667,7 +667,7 @@ function Crew({ signedIn, counts }: { signedIn: boolean; counts: { skills: numbe
             aria-label="The crew"
             aria-orientation="vertical"
             onKeyDown={onKey}
-            className="flex flex-col self-start border-[1.5px] border-[var(--k)]"
+            className="flex flex-col self-start overflow-hidden rounded-[var(--r-lg)] border border-[var(--rule-2)]"
           >
             {CREW.map((c, idx) => (
               <button
@@ -703,7 +703,7 @@ function Crew({ signedIn, counts }: { signedIn: boolean; counts: { skills: numbe
 
             {/* Not on the roster, because it is not one of them: it is the thing you do when
                 none of them fit. Kept in the same block so it reads as part of the crew. */}
-            <div className="border-t-[1.5px] border-[var(--k)] bg-[var(--stock-2)] px-3 py-3">
+            <div className="border-t border-[var(--rule-2)] bg-[var(--stock-2)] px-3 py-3">
               <div className="text-[12.5px] font-semibold leading-tight text-[var(--k)]">
                 Commission your own
               </div>
@@ -718,7 +718,7 @@ function Crew({ signedIn, counts }: { signedIn: boolean; counts: { skills: numbe
             id="lx-agent-panel"
             role="tabpanel"
             aria-labelledby={`lx-agent-${i}`}
-            className="border-[1.5px] border-[var(--k)] bg-[var(--stock-2)] p-6 sm:p-8"
+            className="border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock-2)] p-6 sm:p-8"
           >
             <div key={i} className="lx-agent-panel">
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -775,7 +775,7 @@ function Spec({ k, v }: { k: string; v: string }) {
 
 function Harness({ reduced }: { reduced: boolean }) {
   return (
-    <section className="border-y-[1.5px] border-[var(--k)] bg-[var(--stock-2)]">
+    <section className="border-y border-[var(--rule-2)] bg-[var(--stock-2)]">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <SectionHead pass="The harness" note="what any of them can reach for" />
         <Reveal>
@@ -788,7 +788,7 @@ function Harness({ reduced }: { reduced: boolean }) {
           </p>
         </Reveal>
 
-        <ul className="mt-10 grid border-[1.5px] border-[var(--k)] bg-[var(--stock)] sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid overflow-hidden rounded-[var(--r-lg)] border border-[var(--rule-2)] bg-[var(--stock)] sm:grid-cols-2 lg:grid-cols-3">
           <Cap
             i={0}
             head="Ask the backlog"
@@ -1006,7 +1006,7 @@ function Lifecycle({
             aria-label="End-to-end flows"
             aria-orientation="vertical"
             onKeyDown={onTabKey}
-            className="flex flex-col self-start border-[1.5px] border-[var(--k)]"
+            className="flex flex-col self-start overflow-hidden rounded-[var(--r-lg)] border border-[var(--rule-2)]"
           >
             {flows.map((f, i) => (
               <button
@@ -1086,7 +1086,7 @@ function Lifecycle({
             </div>
 
             {/* What the stage you tapped is for. */}
-            <div className="mt-6 border-[1.5px] border-[var(--k)] bg-[var(--stock-2)] p-5" aria-live="polite">
+            <div className="mt-6 border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock-2)] p-5" aria-live="polite">
               <div key={stageIdx} className="lx-purpose">
                 <div className="eyebrow text-[var(--k)]">{stage?.name}</div>
                 <p className="mt-2.5 text-[14px] leading-[1.6] text-[var(--soft-ink)] sm:text-[15px]">
@@ -1117,7 +1117,7 @@ const KNOWLEDGE = [
 
 function Memory() {
   return (
-    <section className="border-y-[1.5px] border-[var(--k)] bg-[var(--stock-2)]">
+    <section className="border-y border-[var(--rule-2)] bg-[var(--stock-2)]">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <SectionHead pass="Memory" note="why the second quarter costs less" />
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
@@ -1141,7 +1141,7 @@ function Memory() {
                 "Never stops learning. Change course and it follows you.",
               ].map((l) => (
                 <li key={l} className="flex gap-2.5 text-[14px] leading-[1.55] text-[var(--soft-ink)]">
-                  <span aria-hidden className="mt-[7px] h-[7px] w-[7px] shrink-0 border border-[var(--k)] bg-[var(--pink)]" />
+                  <span aria-hidden className="mt-[7px] h-[7px] w-[7px] shrink-0 rounded-full bg-[var(--pink)]" />
                   {l}
                 </li>
               ))}
@@ -1207,7 +1207,7 @@ function HowItWorks() {
       <ol className="mt-10 grid gap-4 lg:grid-cols-3">
         {STEPS.map((s, i) => (
           <Reveal as="li" key={s.n} delay={i * 60}>
-            <div className="flex h-full flex-col border-[1.5px] border-[var(--k)] bg-[var(--stock-2)] p-5 sm:p-6">
+            <div className="flex h-full flex-col border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock-2)] p-5 sm:p-6">
               <div className="mono text-[0.68rem] tracking-[0.14em] text-[var(--muted-ink)]">
                 {s.n}
               </div>
@@ -1221,7 +1221,7 @@ function HowItWorks() {
       </ol>
 
       <Reveal delay={180}>
-        <div className="mt-6 border-[1.5px] border-[var(--k)] bg-[var(--stock-2)] p-5 sm:p-6">
+        <div className="mt-6 border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock-2)] p-5 sm:p-6">
           <div className="eyebrow text-[var(--k)]">So it sounds like this</div>
           <div className="mono mt-3 flex items-start gap-2.5 text-[13px] leading-relaxed text-[var(--k)] sm:text-[14px]">
             <CornerDownRight className="mt-1 h-3.5 w-3.5 shrink-0" aria-hidden />
@@ -1244,7 +1244,7 @@ function HowItWorks() {
 
 function Showcased({ showcase, counts }: { showcase: Showcase[]; counts: { skills: number } }) {
   return (
-    <section className="border-y-[1.5px] border-[var(--k)] bg-[var(--stock-2)]">
+    <section className="border-y border-[var(--rule-2)] bg-[var(--stock-2)]">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <SectionHead pass="Impression" note="five of them, by name" />
         <Reveal>
@@ -1259,7 +1259,7 @@ function Showcased({ showcase, counts }: { showcase: Showcase[]; counts: { skill
 
         {/* One keyline around the block and hairlines between, the way a table is ruled on a
             press sheet, rather than six separate floating cards. */}
-        <ul className="mt-10 grid border-[1.5px] border-[var(--k)] bg-[var(--stock)] sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid overflow-hidden rounded-[var(--r-lg)] border border-[var(--rule-2)] bg-[var(--stock)] sm:grid-cols-2 lg:grid-cols-3">
           {showcase.map((s, i) => (
             <Reveal as="li" key={s.id} delay={Math.min(i, 3) * 60} className="lx-cell">
               <div className="flex items-baseline justify-between gap-3">
@@ -1332,7 +1332,7 @@ function Honesty() {
           </p>
         </Reveal>
 
-        <ul className="grid border-[1.5px] border-[var(--k)] sm:grid-cols-2">
+        <ul className="grid border border-[var(--rule-2)] rounded-[var(--r-lg)] sm:grid-cols-2">
           {HONEST.map((h, i) => (
             <Reveal as="li" key={h.head} delay={Math.min(i, 3) * 60} className="lx-cell bg-[var(--stock-2)]">
               <div className="text-[15px] font-semibold leading-snug tracking-tight text-[var(--k)]">
@@ -1390,7 +1390,7 @@ const QUESTIONS: [string, string][] = [
 
 function PressCheck() {
   return (
-    <section className="border-y-[1.5px] border-[var(--k)] bg-[var(--stock-2)]">
+    <section className="border-y border-[var(--rule-2)] bg-[var(--stock-2)]">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <SectionHead pass="Press check" note="asked before signing anything" />
         <div className="grid gap-10 lg:grid-cols-[380px_1fr] lg:gap-16">
@@ -1405,7 +1405,7 @@ function PressCheck() {
           </Reveal>
 
           <Reveal delay={80}>
-            <div className="border-[1.5px] border-[var(--k)] bg-[var(--stock)] px-5 py-1 sm:px-6">
+            <div className="border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock)] px-5 py-1 sm:px-6">
               {QUESTIONS.map(([q, a], i) => (
                 <details key={q} className="lx-q">
                   <summary>
@@ -1463,7 +1463,7 @@ function Door({ signedIn }: { signedIn: boolean }) {
 
 function Foot({ counts }: { counts: { skills: number; changes: number } }) {
   return (
-    <footer className="border-t-[1.5px] border-[var(--k)] bg-[var(--stock-2)]">
+    <footer className="border-t border-[var(--rule-2)] bg-[var(--stock-2)]">
       <div className="mono mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-5 py-6 text-[0.68rem] uppercase tracking-[0.14em] text-[var(--muted-ink)] sm:px-8">
         <span className="text-[var(--k)]">Pixie Dust Industries</span>
         <Divider />

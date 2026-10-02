@@ -3,81 +3,111 @@
 Values are in [`tokens/brand.tokens.json`](tokens/brand.tokens.json). This page is why they
 are what they are. Do not copy a hex out of here; read the token.
 
+## What changed on 2 October 2026, and why
+
+The first press ran three fluorescent drums: Fluorescent Pink, a federal Blue and Sun Yellow,
+every one of them at full strength, on every page, inside 1.5px black keylines. It was
+recognisably Riso and it was also loud in every corner at once. At forty-five skills the map,
+the library and the landing page had all become walls of bold ink, and the sheet read as
+brutalist rather than printed.
+
+The second press keeps the process and reloads the drums. Every chromatic ink is now a named
+colour from Sanzo Wada's **A Dictionary of Color Combinations** (1933), chosen because the
+book's whole argument is restraint: muted, papery inks that sit together because they were
+printed together. The brief that chose it: papery, minimalist and classic, with small flashes
+of colour that are vivid without being flashy. So the rule that governs everything below is
+**flashes, not surfaces**. Colour lives in dots, beads, rules, ghosts and small pills. The sheet
+stays the sheet.
+
 ## The stock
 
-Riso ink is translucent. It has no opacity of its own, so it needs a pale sheet to sit under
-it, and the process physically cannot print on dark stock. **The site is light because of the
-process, not because somebody preferred light.** That is the single most consequential line in
-this folder.
+Riso ink is translucent. It needs a pale sheet to sit under it, and the process physically
+cannot print on dark stock. **The site is light because of the process, not because somebody
+preferred light.** The stock did not change: it is the thing about the old sheet worth keeping.
 
 | Token | Hex | What it is |
 |---|---|---|
 | `--stock` | `#E4E2DB` | The sheet. Every page ground |
-| `--stock-2` | `#EFEDE7` | A second sheet, lifted: plates, panels, cells |
+| `--stock-2` | `#EFEDE7` | A second sheet, lifted: plates, panels, the drawer |
 | `--stock-3` | `#D6D3CA` | Recessed. A gutter, a well, a selected row |
-| `--rule` | `#C4C0B7` | A hairline division inside a plate. Never a keyline |
+| `--rule` | `#C4C0B7` | A hairline division inside a plate |
+| `--rule-2` | `#A8A39A` | A firm division: the edge of a card, a control, a panel |
 
-A keyline is `1.5px solid #231F20` and it is the black drum, not a grey border. The difference
-between a keyline and a rule is the difference between a printed sheet and a web page.
+The black keyline, `1px solid #231F20`, is now **emphasis only**: the rule under the header and
+the rule that opens a section. Everything that used to carry a black border carries `--rule-2`
+and a soft corner instead. That one change is most of the difference between the two presses.
 
 ## The drums
 
-One ink per pass, and the drum is reloaded between them. Three is the practical ceiling before
-the paper starts to buckle, so three is the palette — not a restriction to work around, the
-reason the look holds together.
+One ink per pass. Each drum now has two strengths, the way a plate prints at full and at a
+tint: the **solid** draws lines, dots, dashes and ghosts; the **tint** is the only one allowed to
+be a surface, and always carries black type.
 
 | Pass | Ink | Hex | On stock | May set copy? |
 |---|---|---|---|---|
-| 01 | **Fluorescent Pink** 806U | `#FF48B0` | 2.38:1 | **No** |
-| 02 | **Blue** | `#3D5588` | 5.68:1 | Yes |
-| 03 | **Sun Yellow** | `#FFE800` | 1.04:1 | **No** |
+| 01 | **Eupatorium Purple** | `#BF5892` | 3.50:1 | **No** |
+| 01 tint | Corinthian Pink | `#F8B6BA` | black on it 9.62:1 | ground only |
+| 02 | **Violet Blue** | `#40456A` | 7.11:1 | Yes |
+| 02 tint | Salvia Blue | `#97ACC8` | black on it 7.03:1 | ground only |
+| 03 | **Cream Yellow** | `#FDBF68` | black on it 9.96:1 | **No** |
 | K | **Black drum** | `#231F20` | 12.57:1 | Yes |
 
-**Pink is the dust.** Out of gamut, unmixable in CMYK, and the ink people recognise as Riso on
-sight. It is the moment that matters on a page and never a whole surface: a fill, a rule, a
-ghost layer, or a button ground with black type on it, which measures 5.28:1.
+**Pink is the dust.** A dusty magenta for the loops, the misregistration ghost and the smallest
+marks on the page. Its tint, Corinthian Pink, is the one surface the brand allows itself: the
+primary button, a tag, a wash under a command.
 
-**Blue is the industry.** A dusty federal navy that carries structure, rules and diagrams. It
-is the only drum besides black that may set a word.
+**Blue is the industry.** A muted indigo that carries structure, links, orchestration and the
+diagrams. It is the only drum besides black that may set a word. Its tint, Salvia Blue, is the
+cool ground under anything selected.
 
-**Yellow is the spark**, and it is the whole argument. Third drum, smallest budget, reserved
-for the human sign-off gates. As the only warm thing on the sheet it makes "a person decides
-here" the loudest mark on the map, which is what the page claims in words already. At 1.04:1
-it can never be a line or a letter: a gate is a yellow ground with black type on it, and that
-measures **13:1** — the highest contrast anywhere on the site.
+**Yellow is the spark**, and it is still the whole argument. Third drum, smallest budget,
+reserved for the human sign-off gates. As the only warm thing on the sheet it makes "a person
+decides here" the loudest mark on the map. It has no tint and no other job. A gate is a Cream
+Yellow bead or ground with black on it, and nothing else on the site may be yellow.
 
-**Black is never `#000`.** A Riso black drum lays down a soft warm neutral that sits on the
-paper rather than punching a hole in it. All body copy runs here.
+**Black is never `#000`.** A Riso black lays down a soft warm neutral that sits on the paper
+rather than punching a hole in it. All body copy runs here.
 
-## The overprints are the palette
+## Two more tints
 
-Translucent ink multiplies where two passes cross. You do not choose these; the press produces
-them. That is why they are worth more than a fourth drum.
-
-| | Hex | On stock | Text |
+| Token | Ink | Hex | For |
 |---|---|---|---|
-| Pink × Blue | `#3D185E` | 10.87:1 | Yes |
-| Pink × Yellow | `#FF4100` | 2.70:1 | No |
-| Blue × Yellow | `#3D4D00` | 7.17:1 | Yes |
+| `--glaucous` | Glaucous Green | `#B4CDC2` | A calm green ground: a passing check, an artefact chip |
+| `--lavender` | Grayish Lavender | `#C0A9B3` | A dusty mauve ground, between the pink and the blue |
 
-## The six meanings
+A tint is a surface with black type on it, never a line. Black on either measures above 7:1.
 
-Seven inks exist once the overprints are counted, and the lifecycle map has seven things to
-say, so nothing had to be invented.
+## Four deep inks
+
+The map has seven things to say and three drums cannot say them all. Four deep inks, each a
+named plate colour, carry the meanings that have to be a line or a word. They are dark on
+purpose: the colour is in the small marks, so the pale stock stays pale.
+
+| Token | Ink | Hex | On stock | Text |
+|---|---|---|---|---|
+| `--plum` | Cotinga Purple | `#501345` | 10.66:1 | Yes |
+| `--olive` | Olive Green | `#6B7140` | 3.99:1 | No |
+| `--plumbeous` | Plumbeous | `#70727C` | 3.69:1 | No |
+| `--carmine` | Carmine Red | `#A62C37` | 5.33:1 | Yes |
+
+Olive and Plumbeous clear the 3:1 that a line or an icon needs and not the 4.5:1 a word needs,
+so they draw and never speak.
+
+## The seven meanings
 
 | Token | Ink | Hex | Means |
 |---|---|---|---|
-| `--gate` | Sun Yellow | `#FFE800` | **A person decides here** |
-| `--orch` | Blue | `#3D5588` | Orchestration: a skill driving a tool |
-| `--ai` | Pink × Blue | `#3D185E` | The assistant runs this step |
-| `--output` | Blue × Yellow | `#3D4D00` | An artefact the OS produced |
-| `--loop` | Pink | `#FF48B0` | Learning returning upstream |
-| `--signal` | Ink mid | `#65606A` | Raw input, before anyone has shaped it |
-| `--alarm` | Pink × Yellow | `#FF4100` | Destructive, failed, or unplaced |
+| `--gate` | Cream Yellow | `#FDBF68` | **A person decides here** |
+| `--orch` | Violet Blue | `#40456A` | Orchestration: a skill driving a tool |
+| `--ai` | Cotinga Purple | `#501345` | The assistant runs this step |
+| `--output` | Olive Green | `#6B7140` | An artefact the OS produced |
+| `--loop` | Eupatorium Purple | `#BF5892` | Learning returning upstream |
+| `--signal` | Plumbeous | `#70727C` | Raw input, before anyone has shaped it |
+| `--alarm` | Carmine Red | `#A62C37` | Destructive, failed, or unplaced |
 
 `--loop` gets the signature ink because the returns are the reason this is a system and not a
-pipeline, which is the map's most-earned claim. `--signal` is nearly colourless on purpose:
-raw signal has not been interpreted yet, and colouring it would be a claim about it.
+pipeline. `--signal` is nearly colourless on purpose: raw signal has not been interpreted yet,
+and colouring it would be a claim about it.
 
 ## What may carry a word
 
@@ -93,8 +123,21 @@ the stock:
 | `--muted-ink` | `#65606A` | 4.72:1 | Captions, eyebrows, the mono furniture. The last step that clears AA |
 | `--faint-ink` | `#7A757F` | 3.46:1 | **Decoration only.** Never a word a person has to read |
 
-Blue at 5.68:1 may carry copy where a second voice is genuinely needed. Pink, yellow and the
-pink × yellow overprint may not, at any size, ever.
+Violet Blue at 7.11:1 may carry copy where a second voice is genuinely needed, which in
+practice means links. Cotinga Purple and Carmine Red clear AA and are allowed in a label. Solid
+pink, Cream Yellow, Olive and Plumbeous may not set a word, at any size, ever. A coloured chip
+is a tinted ground with black type on it, not coloured type on the stock.
+
+## Flashes, not surfaces
+
+- A tint may be a ground. A solid may not, except the gate bead.
+- One flash per component. A row has its dot; a card has its chip; a command has its wash. Two
+  flashes in one component is a poster.
+- The halftone plates on the landing page are screened in the tints, so they read as a wash
+  rather than a shout.
+- Misregistration offsets came in a pixel, and the ghosts sit at about half opacity, because
+  the solid inks are quieter and the ghost no longer needs to travel.
+- Grain is at eleven per cent. Nineteen, where it used to sit, was a dirty screen.
 
 ## Accessibility
 
@@ -102,13 +145,22 @@ Two rules that contrast ratios do not cover:
 
 - **Colour is never the only carrier.** The map's node types are an ink *and* a badge; the
   gates are yellow *and* a labelled tick; the loops are pink *and* dashed. Roughly one man in
-  twelve cannot separate the pink from the orange overprint, and the map has to work for him.
+  twelve cannot separate the pink from the carmine, and the map has to work for him.
 - **Texture never touches anything functional.** A slash command is there to be copied, and a
   shifted plate over a URL is a command somebody mistypes.
 
 ## The Flightdeck's domains, and the one exception
 
-The Flightdeck encodes eight product domains, and there are seven inks. Seven take an ink each
-and the eighth takes `--muted-ink`. Sun Yellow appears in that set, which is the only place it
-appears outside a gate: the Flightdeck has no gates, and the rule binds where gates exist. It
-is a bounded exception, written down here so it stays bounded.
+The Flightdeck encodes eight product domains. Seven take an ink or a tint each and the eighth
+takes `--muted-ink`. Cream Yellow does not appear in that set, so the gate rule holds there
+without an exception now.
+
+## Where the colours come from
+
+The transcription used is [mattdesl/dictionary-of-colour-combinations](https://github.com/mattdesl/dictionary-of-colour-combinations),
+which carries all 159 of the book's colours with the plates each appears on. The inks above
+were chosen from that list for three things in this order: the job (a line, a ground, a word),
+the contrast figure on the stock, and whether they sit together in the book's own plates.
+Corinthian Pink and Cream Yellow share a plate; Cream Yellow and Cotinga Purple share a plate;
+Violet Blue sits beside a pale blue and a fawn on another. The set was not lifted from one page
+of the book, and it does not pretend to have been.

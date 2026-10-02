@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { SkillsBrowser } from "@/components/skills-browser";
+import { Suspense } from "react";
+import { SkillsLibrary } from "@/components/skills-library";
 import { SKILLS, STAGES, TOTALS } from "@/lib/skills";
 
 export const metadata: Metadata = {
@@ -9,24 +10,23 @@ export const metadata: Metadata = {
 
 export default function SkillsPage() {
   return (
-    <main className="mx-auto w-full max-w-5xl px-5 py-14 sm:px-6 sm:py-20">
+    <main className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 sm:py-20">
       <div className="eyebrow">
         {TOTALS.skills} skills · {TOTALS.plugins} plugin{TOTALS.plugins === 1 ? "" : "s"}
       </div>
       <h1 className="display mt-3 text-[34px] tracking-[-0.018em] sm:text-[44px]">Every skill</h1>
       <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-[var(--muted-ink)]">
         A skill is one product habit, written down well enough that an assistant runs it the same
-        way every time. Grouped below by where it sits in the lifecycle rather than
+        way every time. They are shelved by where they sit in the lifecycle rather than
         alphabetically, because the useful question is not what a skill is called but when you
-        reach for it.
-      </p>
-      <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-[var(--muted-ink)]">
-        Open one to see what it does, when to reach for it, when to reach for something else
-        instead, and what it hands on to next. Everything on these pages is generated from the
-        skills themselves, so they cannot fall behind the plugin.
+        reach for it. Open one to see what it does, when to reach for something else, and what it
+        hands on to next. Everything here is generated from the skills themselves.
       </p>
 
-      <SkillsBrowser skills={SKILLS} stages={STAGES} />
+      {/* The library reads the open skill from the URL, which needs a Suspense boundary. */}
+      <Suspense fallback={null}>
+        <SkillsLibrary skills={SKILLS} stages={STAGES} />
+      </Suspense>
     </main>
   );
 }

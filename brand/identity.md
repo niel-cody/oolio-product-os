@@ -4,7 +4,7 @@
 
 ## The Gate
 
-A ring with a break in it, and a bead of Sun Yellow standing in the break.
+A ring with a break in it, and a bead of Cream Yellow standing in the break.
 
 The ring is the loop: signal, shaped idea, decision, ship, learn, back to signal. It is the
 reason the OS is a system rather than a pipeline. The break is where the loop does not close on
@@ -15,8 +15,9 @@ That is the entire idea, and it is the same sentence as the thesis in
 word is read, at sixteen pixels, in one stroke and one dot.
 
 The mark survived the move to the press unchanged in geometry and changed in ink: the ring is
-the black drum and the bead is Sun Yellow. The meaning survives with it, because Sun Yellow is
-the human-gate drum. Had the bead landed on any other ink the mark would have kept its shape
+the black drum and the bead is the yellow drum: Sun Yellow on the first press, Cream Yellow
+since 2 October 2026. The meaning survives each change of ink, because yellow is the
+human-gate drum. Had the bead landed on any other ink the mark would have kept its shape
 and lost its argument.
 
 It is also, unavoidably and usefully, an **O**.
@@ -28,7 +29,7 @@ Drawn on a 32 unit grid. Every value here is exact; nothing is eyeballed.
 | | |
 |---|---|
 | Ring ink | Black drum `#231F20` |
-| Bead ink | Sun Yellow `#FFE800` |
+| Bead ink | Cream Yellow `#FDBF68` |
 | Centre | 16, 16 |
 | Ring radius | 11 |
 | Ring stroke | 3, round cap |
@@ -54,7 +55,7 @@ becomes a dot in a circle, which means nothing.
 
 | File | For |
 |---|---|
-| [`assets/mark.svg`](assets/mark.svg) | The mark on the stock. Black ring, Sun Yellow bead |
+| [`assets/mark.svg`](assets/mark.svg) | The mark on the stock. Black ring, Cream Yellow bead |
 | [`assets/mark-mono.svg`](assets/mark-mono.svg) | One colour, inherited from `currentColor`. Single-ink print, embossing, a mask |
 | [`assets/favicon.svg`](assets/favicon.svg) | The tile: ink ground, rounded square, mark drawn at r=9.5 so the break keeps its clear space |
 | [`assets/lockup.svg`](assets/lockup.svg) | Horizontal lockup, ink |
@@ -104,7 +105,7 @@ Every one of these has been considered and rejected, so they do not need relitig
 
 - **Do not close the ring.** A closed ring is a loop that runs without anybody in it, which is
   the opposite of what this team believes.
-- **Do not recolour the bead.** It is Sun Yellow because Sun Yellow is the drum that means a
+- **Do not recolour the bead.** It is Cream Yellow because that is the drum that means a
   person. Making it match a deck's accent colour deletes the meaning and leaves a dot.
 - **Do not put the bead inside the ring.** It sits on the ring's path, in the break.
 - **Do not add a gradient, a glow, a bevel, or an outer ring.**
