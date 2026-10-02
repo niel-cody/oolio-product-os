@@ -1,19 +1,15 @@
 /* ============================================================================
-   PIXIE DUST INDUSTRIES. The press.
+   PIXIE DUST INDUSTRIES. The sheet.
 
    GENERATED FILE. Do not edit.
    Source: brand/tokens/brand.tokens.json. Rebuild: node brand/tokens/build.mjs
    Why it is generated, and what each ink means: brand/README.md
 
-   Risograph: three ink drums plus a black drum, printed on uncoated stock. The whole
-   argument is physical constraint — a fixed number of drums, translucent ink, paper
-   showing through, registration that never quite lands. Constraints are the thing a
-   generator cannot fake, which is the point.
+   Paper: uncoated stock, muted inks from Sanzo Wada's A Dictionary of Color Combinations,
+   a quiet serif for the argument and a grotesque for everything else, one radius scale,
+   and the fold as the single signature. One system from end to end.
 
-   The site is LIGHT, and that is not a preference. Riso ink is translucent and needs a
-   pale sheet to sit on; the process physically cannot print on dark stock.
-   The inks come from Sanzo Wada's A Dictionary of Color Combinations: papery, muted,
-   and used as flashes rather than surfaces. See brand/colour.md.
+   The site is LIGHT, and that is not a preference. Ink sits on a pale sheet.
    ========================================================================== */
 
 :root {
@@ -50,7 +46,7 @@
   --muted-ink: #65606A; /* captions, eyebrows and the mono furniture. The last step that clears AA · 4.72:1 */
   --faint-ink: #7A757F; /* decoration only. Never a word a person has to read · 3.46:1 */
 
-  /* ---- THE SIX MEANINGS ---- drawn from the ink set, not from a colour wheel */
+  /* ---- THE SEVEN MEANINGS ---- drawn from the ink set, not from a colour wheel */
   --gate: #FDBF68; /* yellow · a person decides here. The third drum, and the whole argument */
   --orch: #40456A; /* blue · orchestration: a skill driving a tool. Blue carries structure */
   --ai: #501345; /* plum · the assistant runs this step */
@@ -75,46 +71,37 @@
   --void: var(--stock-3);
 
   /* Type. Loaded by next/font in app/layout.tsx, which sets these three variables. */
-  --font-display-stack: var(--font-display), Archivo, Helvetica Neue, Arial, sans-serif;
+  --font-display-stack: var(--font-display), Georgia, Times New Roman, serif;
   --font-text-stack: var(--font-text), Helvetica Neue, Arial, sans-serif;
   --font-system-stack: var(--font-system), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Shape. Print has keylines, not rounded cards. */
-  --keyline: 1px solid #231F20; /* emphasis only: the header rule, a section head */
+  /* Shape. One radius scale, three steps, and every element on every page takes one of them: small for a chip, a code span or a tag; control for every button, input and selectable row; surface for every card, panel, tile and drawer. No pills. The fold is the signature: a dog-ear on the top right corner of a surface that holds content, drawn in the stock and the pink tint, never on a control. */
+  --keyline: 1px solid #231F20; /* emphasis only */
   --edge-line: 1px solid #A8A39A; /* the ordinary edge of a card, control or panel */
   --hairline: 1px solid #C4C0B7;
-  --press-shadow: 2px 2px 0 #F8B6BA;
   --lift-shadow: 0 1px 2px rgba(35, 31, 32, 0.05), 0 12px 32px rgba(35, 31, 32, 0.08); /* the drawer and anything that floats over the sheet */
-  --r-none: 0;
-  --r-sm: 4px;
-  --r-md: 8px;
-  --r-lg: 12px;
-  --r-xl: 18px;
-  --r-pill: 999px;
+  --r-sm: 6px;
+  --r-ctl: 10px;
+  --r-card: 14px;
+  --fold: 18px;
 
   /* Motion */
   --ease-out: cubic-bezier(0.2, 0.9, 0.3, 1); /* a plate settling: entering and exiting */
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* movement across the screen */
   --dur-press: 160ms;
   --dur-state: 180ms;
-  --dur-plate: 600ms;
   --dur-reveal: 520ms;
   --dur-drawer: 320ms;
-
-  /* Screen angles. Two drums at the same angle produce moiré, which is why these are
-     fixed rather than picked per component. */
-  --angle-pink: 15deg;
-  --angle-blue: 75deg;
-  --angle-yellow: 45deg;
+  --dur-glide: 620ms;
 }
 
 /* ============================================================================
-   THE MOVES
+   THE TEXTURE
 
-   Riso on the web was four techniques; it is three now. Grain, overprint and halftone remain, all turned down so the sheet reads as paper first. Misregistration was retired on 2026-10-02: ghost plates behind a headline read as shouting, and a deliberate house prints its line once.
+   One texture, and it is paper. Grain is the only move left: the halftone washes, the overprint blend and the misregistration ghosts of the first press were retired on 2026-10-02 because they read as a filter over the page rather than as the page. The sheet is calm, and the ink sits on it once.
    ========================================================================== */
 
-/* 01 GRAIN. Fixed, so it never scrolls with the content: the sheet stays still while the ink moves. Eleven per cent is paper. Nineteen, where it used to sit, was a dirty screen.
+/* GRAIN. Fixed, so it never scrolls with the content: the sheet stays still while the ink moves. Eight per cent is uncoated paper under a lamp. Anything higher starts to read as dirt.
    Applied once, on the page, by <body class="sheet">. Never per component: two grain
    layers over one another read as dirt rather than paper. */
 .sheet::after {
@@ -125,60 +112,62 @@
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: multiply;
-  opacity: 0.11;
+  opacity: 0.08;
 }
 
-/* 02 OVERPRINT. Ink is translucent, so shapes darken where they cross instead of hiding each other. Without the isolation the blend escapes its container. */
-.ink { mix-blend-mode: multiply; }
-.plate { isolation: isolate; position: relative; }
+/* halftone: retired 2026-10-02. Screens of dots behind the hero card and the systems map: a pattern, not a print. */
+/* overprint: retired 2026-10-02. Existed only to blend the halftone plates. */
+/* misregistration: retired 2026-10-02. Two coloured ghosts behind a headline read as shouting. You cannot cut a sheet of paper twice. */
 
-/* 03 HALFTONE. A Riso cannot do continuous tone; it screens everything into dots. Two drums at the same angle produce moiré, which is why the angles are fixed. Screened in the tints now, so a halftone plate is a wash rather than a shout.
-   --dot sets the ink, --dot-size the screen ruling, --dot-angle the drum. */
-.halftone {
-  background-image: radial-gradient(var(--dot, var(--blue)) 44%, transparent 47%);
-  background-size: var(--dot-size, 8px) var(--dot-size, 8px);
-  transform: rotate(var(--dot-angle, var(--angle-blue)));
-  mix-blend-mode: multiply;
+/* ============================================================================
+   THE FOLD
+
+   A sheet with one corner turned shows what it is made of. One per surface, top right, never on a control, never bigger than the type beside it.
+   .folded goes on a surface that holds content: a card, a panel, a drawer. The dog-ear is
+   the stock showing through where the corner lifts, and the pink tint for the underside.
+   ========================================================================== */
+.folded { position: relative; overflow: hidden; }
+.folded::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--fold);
+  height: var(--fold);
+  background: linear-gradient(to bottom left, var(--fold-sheet, var(--stock)) 50%, var(--pink-tint) 50%);
+  border-bottom-left-radius: 3px;
+  box-shadow: -1px 1px 2px rgba(35, 31, 32, 0.08);
+  pointer-events: none;
 }
-.halftone-pink { --dot: var(--pink-tint); --dot-angle: 15deg; --dot-size: 7px; }
-.halftone-blue { --dot: var(--blue-tint); --dot-angle: 75deg; --dot-size: 9px; }
-.halftone-yellow { --dot: var(--yellow); --dot-angle: 45deg; --dot-size: 6px; }
-
-/* 04 MISREGISTRATION. Retired 2026-10-02. Two coloured ghosts behind display type made the headline hard to read and loud, which is the opposite of calm and deliberate. You cannot cut a sheet of paper twice. The class is no longer generated; nothing on the site may reproduce the effect by hand.
-   No class is generated for it. */
-
-/* Texture never touches anything functional. A slash command is there to be copied, so
-   it gets no grain, no halftone and no misregistration — a hard pink shadow is as far as
-   it goes. */
-.press-edge { border: var(--edge-line); border-radius: var(--r-md); box-shadow: var(--press-shadow); }
 
 /* The scale. Eight steps and no more: a ninth is always somebody avoiding a decision. */
-.t-display-xl { font-family: var(--font-display-stack); font-size: clamp(2.6rem, 6.4vw, 4.8rem); line-height: 0.98; letter-spacing: -0.022em; font-weight: 700; }
-.t-display-l { font-family: var(--font-display-stack); font-size: clamp(1.75rem, 3.2vw, 2.6rem); line-height: 1.06; letter-spacing: -0.018em; font-weight: 700; }
-.t-display-m { font-family: var(--font-display-stack); font-size: 1.16rem; line-height: 1.26; letter-spacing: -0.01em; font-weight: 700; }
-.t-lede { font-family: var(--font-text-stack); font-size: 1.12rem; line-height: 1.55; letter-spacing: 0; }
-.t-body { font-family: var(--font-text-stack); font-size: 1rem; line-height: 1.6; letter-spacing: 0; }
-.t-ui { font-family: var(--font-text-stack); font-size: 0.9rem; line-height: 1.45; letter-spacing: 0; }
-.t-spec { font-family: var(--font-system-stack); font-size: 0.76rem; line-height: 1.5; letter-spacing: 0.01em; }
-.t-pass { font-family: var(--font-system-stack); font-size: 0.7rem; line-height: 1.2; letter-spacing: 0.14em; text-transform: uppercase; }
+.t-display-xl { font-family: var(--font-display-stack); font-size: clamp(2.3rem, 4.6vw, 3.5rem); line-height: 1.06; letter-spacing: -0.015em; font-weight: 400; }
+.t-display-l { font-family: var(--font-display-stack); font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.1; letter-spacing: -0.012em; font-weight: 400; }
+.t-display-m { font-family: var(--font-display-stack); font-size: 1.3rem; line-height: 1.25; letter-spacing: -0.008em; font-weight: 400; }
+.t-lede { font-family: var(--font-text-stack); font-size: 1.08rem; line-height: 1.6; letter-spacing: 0; }
+.t-body { font-family: var(--font-text-stack); font-size: 0.97rem; line-height: 1.62; letter-spacing: 0; }
+.t-ui { font-family: var(--font-text-stack); font-size: 0.85rem; line-height: 1.45; letter-spacing: 0; }
+.t-spec { font-family: var(--font-system-stack); font-size: 0.74rem; line-height: 1.5; letter-spacing: 0.01em; }
+.t-pass { font-family: var(--font-system-stack); font-size: 0.68rem; line-height: 1.2; letter-spacing: 0.12em; text-transform: uppercase; }
 
-/* Display type: the argument, and only the argument. A heading that is really a label
-   belongs in Archivo, whatever size it is set at. */
+/* Display type: the argument, and only the argument. Regular weight, never bold: a serif
+   at 400 is a statement, at 700 it is a headline in a newspaper. A heading that is really
+   a label belongs in the grotesque, whatever size it is set at. */
 .display {
   font-family: var(--font-display-stack);
-  font-weight: 700;
-  letter-spacing: -0.022em;
+  font-weight: 400;
+  letter-spacing: -0.015em;
   text-wrap: balance;
+  font-variation-settings: "opsz" 72;
 }
 
-/* The wordmark. Syne 700, uppercase, a little tracked. It is set in the black drum; the
-   pink and blue arrive as misregistration ghosts rather than as a colour choice. */
+/* The wordmark. The serif, regular, sentence case, a little tracked. Quiet on purpose. */
 .wordmark {
   font-family: var(--font-display-stack);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 0.94;
-  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  line-height: 1;
   color: var(--ink);
+  font-variation-settings: "opsz" 24;
 }
 

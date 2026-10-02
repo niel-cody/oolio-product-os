@@ -26,21 +26,17 @@ const lines = [];
 const p = (s = "") => lines.push(s);
 
 p("/* ============================================================================");
-p("   PIXIE DUST INDUSTRIES. The press.");
+p("   PIXIE DUST INDUSTRIES. The sheet.");
 p("");
 p("   GENERATED FILE. Do not edit.");
 p("   Source: brand/tokens/brand.tokens.json. Rebuild: node brand/tokens/build.mjs");
 p("   Why it is generated, and what each ink means: brand/README.md");
 p("");
-p("   Risograph: three ink drums plus a black drum, printed on uncoated stock. The whole");
-p("   argument is physical constraint — a fixed number of drums, translucent ink, paper");
-p("   showing through, registration that never quite lands. Constraints are the thing a");
-p("   generator cannot fake, which is the point.");
+p("   Paper: uncoated stock, muted inks from Sanzo Wada's A Dictionary of Color Combinations,");
+p("   a quiet serif for the argument and a grotesque for everything else, one radius scale,");
+p("   and the fold as the single signature. One system from end to end.");
 p("");
-p("   The site is LIGHT, and that is not a preference. Riso ink is translucent and needs a");
-p("   pale sheet to sit on; the process physically cannot print on dark stock.");
-p("   The inks come from Sanzo Wada's A Dictionary of Color Combinations: papery, muted,");
-p("   and used as flashes rather than surfaces. See brand/colour.md.");
+p("   The site is LIGHT, and that is not a preference. Ink sits on a pale sheet.");
 p("   ========================================================================== */");
 p();
 
@@ -78,7 +74,7 @@ for (const [k, v] of Object.entries(t.press["type-colour"])) {
   p(`  --${k}: ${v.hex}; /* ${v.use} · ${v.contrastOnStock}:1 */`);
 }
 p();
-p("  /* ---- THE SIX MEANINGS ---- drawn from the ink set, not from a colour wheel */");
+p("  /* ---- THE SEVEN MEANINGS ---- drawn from the ink set, not from a colour wheel */");
 for (const [k, v] of Object.entries(t.semantic)) {
   if (k === "_") continue;
   p(`  --${k}: ${v.hex}; /* ${v.ink} · ${v.means} */`);
@@ -104,34 +100,30 @@ p(`  --font-display-stack: var(--font-display), ${t.type.display.fallback};`);
 p(`  --font-text-stack: var(--font-text), ${t.type.text.fallback};`);
 p(`  --font-system-stack: var(--font-system), ${t.type.system.fallback};`);
 p();
-p("  /* Shape. Print has keylines, not rounded cards. */");
-p(`  --keyline: ${t.shape.keyline}; /* emphasis only: the header rule, a section head */`);
+p(`  /* Shape. ${t.shape._} */`);
+p(`  --keyline: ${t.shape.keyline}; /* emphasis only */`);
 p(`  --edge-line: ${t.shape.edge}; /* the ordinary edge of a card, control or panel */`);
 p(`  --hairline: ${t.shape.hairline};`);
-p(`  --press-shadow: ${t.shape.shadow.press};`);
 p(`  --lift-shadow: ${t.shape.shadow.lift}; /* the drawer and anything that floats over the sheet */`);
 for (const [k, v] of Object.entries(t.shape.radius)) p(`  --r-${k}: ${v};`);
+p(`  --fold: ${t.shape.fold.size};`);
 p();
 p("  /* Motion */");
 for (const [k, v] of Object.entries(t.motion.ease)) {
   p(`  --ease-${k === "inOut" ? "in-out" : k}: ${v.value}; /* ${v.use} */`);
 }
 for (const [k, v] of Object.entries(t.motion.duration)) p(`  --dur-${k}: ${v};`);
-p();
-p("  /* Screen angles. Two drums at the same angle produce moiré, which is why these are");
-p("     fixed rather than picked per component. */");
-for (const [k, v] of Object.entries(t.moves.halftone.angles)) p(`  --angle-${k}: ${v}deg;`);
 p("}");
 p();
 
-/* ---------------------------------------------------------------- the four moves */
+/* ---------------------------------------------------------------- the texture */
 p("/* ============================================================================");
-p("   THE MOVES");
+p("   THE TEXTURE");
 p("");
 p(`   ${t.moves._}`);
 p("   ========================================================================== */");
 p();
-p(`/* 01 GRAIN. ${t.moves.grain.why}`);
+p(`/* GRAIN. ${t.moves.grain.why}`);
 p("   Applied once, on the page, by <body class=\"sheet\">. Never per component: two grain");
 p("   layers over one another read as dirt rather than paper. */");
 p(".sheet::after {");
@@ -145,30 +137,30 @@ p("  mix-blend-mode: multiply;");
 p(`  opacity: ${t.moves.grain.opacity};`);
 p("}");
 p();
-p(`/* 02 OVERPRINT. ${t.moves.overprint.why} */`);
-p(".ink { mix-blend-mode: multiply; }");
-p(".plate { isolation: isolate; position: relative; }");
+for (const [k, why] of Object.entries(t.moves.retired)) p(`/* ${k}: retired ${why} */`);
 p();
-p(`/* 03 HALFTONE. ${t.moves.halftone.why}`);
-p("   --dot sets the ink, --dot-size the screen ruling, --dot-angle the drum. */");
-p(".halftone {");
-p("  background-image: radial-gradient(var(--dot, var(--blue)) 44%, transparent 47%);");
-p("  background-size: var(--dot-size, 8px) var(--dot-size, 8px);");
-p("  transform: rotate(var(--dot-angle, var(--angle-blue)));");
-p("  mix-blend-mode: multiply;");
+
+/* ---------------------------------------------------------------- the fold */
+p("/* ============================================================================");
+p("   THE FOLD");
+p("");
+p(`   ${t.shape.fold.why}`);
+p("   .folded goes on a surface that holds content: a card, a panel, a drawer. The dog-ear is");
+p("   the stock showing through where the corner lifts, and the pink tint for the underside.");
+p("   ========================================================================== */");
+p(".folded { position: relative; overflow: hidden; }");
+p(".folded::after {");
+p("  content: \"\";");
+p("  position: absolute;");
+p("  top: 0;");
+p("  right: 0;");
+p("  width: var(--fold);");
+p("  height: var(--fold);");
+p("  background: linear-gradient(to bottom left, var(--fold-sheet, var(--stock)) 50%, var(--pink-tint) 50%);");
+p("  border-bottom-left-radius: 3px;");
+p("  box-shadow: -1px 1px 2px rgba(35, 31, 32, 0.08);");
+p("  pointer-events: none;");
 p("}");
-for (const [drum, angle] of Object.entries(t.moves.halftone.angles)) {
-  const ink = t.press.drums[drum].tint ? `--${drum}-tint` : `--${drum}`;
-  p(`.halftone-${drum} { --dot: var(${ink}); --dot-angle: ${angle}deg; --dot-size: ${t.moves.halftone.sizes[drum]}; }`);
-}
-p();
-p(`/* 04 MISREGISTRATION. Retired ${t.moves.misregistration.retired}. ${t.moves.misregistration.why}`);
-p("   No class is generated for it. */");
-p();
-p("/* Texture never touches anything functional. A slash command is there to be copied, so");
-p("   it gets no grain, no halftone and no misregistration — a hard pink shadow is as far as");
-p("   it goes. */");
-p(".press-edge { border: var(--edge-line); border-radius: var(--r-md); box-shadow: var(--press-shadow); }");
 p();
 
 /* ---------------------------------------------------------------- type */
@@ -186,24 +178,25 @@ for (const [k, s] of Object.entries(t.type.scale)) {
   p(`.t-${k} { ${bits.join("; ")}; }`);
 }
 p();
-p("/* Display type: the argument, and only the argument. A heading that is really a label");
-p("   belongs in Archivo, whatever size it is set at. */");
+p("/* Display type: the argument, and only the argument. Regular weight, never bold: a serif");
+p("   at 400 is a statement, at 700 it is a headline in a newspaper. A heading that is really");
+p("   a label belongs in the grotesque, whatever size it is set at. */");
 p(".display {");
 p(`  font-family: var(--font-display-stack);`);
-p("  font-weight: 700;");
-p("  letter-spacing: -0.022em;");
+p("  font-weight: 400;");
+p("  letter-spacing: -0.015em;");
 p("  text-wrap: balance;");
+p("  font-variation-settings: \"opsz\" 72;");
 p("}");
 p();
-p("/* The wordmark. Syne 700, uppercase, a little tracked. It is set in the black drum; the");
-p("   pink and blue arrive as misregistration ghosts rather than as a colour choice. */");
+p("/* The wordmark. The serif, regular, sentence case, a little tracked. Quiet on purpose. */");
 p(".wordmark {");
 p("  font-family: var(--font-display-stack);");
-p("  font-weight: 700;");
-p("  letter-spacing: -0.01em;");
-p("  line-height: 0.94;");
-p("  text-transform: uppercase;");
+p("  font-weight: 500;");
+p("  letter-spacing: 0.005em;");
+p("  line-height: 1;");
 p("  color: var(--ink);");
+p("  font-variation-settings: \"opsz\" 24;");
 p("}");
 p();
 
@@ -214,11 +207,10 @@ const css = lines.join("\n") + "\n";
  *
  * A stray old value does not look broken, which is exactly why it needs a test: it looks like
  * a slightly different grey, or an amber that is nearly the amber, and it survives for
- * quarters. The first block is the dark palette the site carried before the press direction;
- * the second is the Tailwind defaults that were the reason for the rebrand in the first place.
+ * quarters. The first block is the fluorescent press; the second the dark palette before it;
+ * the third the Tailwind defaults that were the reason for the rebrand in the first place.
  */
 const RETIRED = {
-  // The fluorescent press, 2026-09-03 to 2026-10-02. Loud in every corner at once.
   "#ff48b0": "--pink #BF5892 (or --pink-tint #F8B6BA for a ground)", "#3d5588": "--blue #40456A",
   "#ffe800": "--yellow #FDBF68", "#3d185e": "--plum #501345", "#3d4d00": "--olive #6B7140",
   "#ff4100": "--alarm #A62C37",
@@ -266,6 +258,26 @@ function retiredStillPresent() {
   return hits;
 }
 
+/**
+ * Radii the system does not have. One scale, three steps, and a fourth value anywhere in
+ * the site is a page drifting away from the others. Tailwind's own rounded-* utilities and
+ * raw pixel radii are both caught; the three tokens, `rounded-full` on a dot, and
+ * `rounded-none` on a thing that must be square are the only allowed spellings.
+ */
+const RADIUS_RE = /rounded-(?!full\b|none\b|\[var\(--r-(?:sm|ctl|card)\)\]|\[inherit\]|t-\[var|b-\[var|l-\[var|r-\[var|tl-\[var|tr-\[var|bl-\[var|br-\[var)[a-z0-9\[\]()%.,-]+|border-radius:(?!\s*(?:var\(--r-(?:sm|ctl|card)\)|999px|50%|0\b|inherit|3px))[^;]+/g;
+function offScaleRadii() {
+  const hits = [];
+  for (const file of sourceFiles(SITE)) {
+    if (!/\.(tsx|css)$/.test(file)) continue;
+    if (file.includes(`${SITE}/components/ui/`)) continue; // shadcn primitives map --radius themselves
+    const lines = readFileSync(file, "utf8").split("\n");
+    lines.forEach((line, i) => {
+      for (const m of line.matchAll(RADIUS_RE)) hits.push(`${relative(SITE, file)}:${i + 1}  ${m[0]}`);
+    });
+  }
+  return hits;
+}
+
 if (process.argv.includes("--check")) {
   let current = "";
   try { current = readFileSync(OUT, "utf8"); } catch { /* missing counts as drift */ }
@@ -281,7 +293,14 @@ if (process.argv.includes("--check")) {
     console.error("");
     process.exit(1);
   }
-  console.log("  Brand stylesheet is in sync with the tokens, and no retired colour remains.");
+  const radii = offScaleRadii();
+  if (radii.length) {
+    console.error("\n  Radii off the scale (use --r-sm, --r-ctl or --r-card):\n");
+    for (const h of radii) console.error("    " + h);
+    console.error("");
+    process.exit(1);
+  }
+  console.log("  Brand stylesheet is in sync with the tokens, no retired colour remains, and every radius is on the scale.");
 } else {
   writeFileSync(OUT, css);
   console.log(`  Wrote ${OUT} (${css.split("\n").length} lines) from brand.tokens.json`);

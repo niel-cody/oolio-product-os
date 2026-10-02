@@ -5,8 +5,10 @@ brand adds is one signature animation and the rule that it is the only one with 
 
 ## What left
 
-Misregistration, the ghost plates behind the hero and the closing line, retired 2 October
-2026. It was the first press's signature and it read as shouting. Nothing replaces it.
+Misregistration, the halftone plates and their hover shift, retired 2 October 2026. They
+were the first press's signature and they read as a filter. What replaces them is one bead
+travelling one wire on the map, the fold settling once on the landing page, and the drawer
+sliding in. Everything else is a colour or a transform changing state.
 
 ## The rules
 

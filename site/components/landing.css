@@ -34,25 +34,6 @@
   transform: translate3d(0, 0, 0);
 }
 
-/* ---------- tags ---------- */
-/* A tag is a small pill: the one place a tint may be a surface. */
-.lx-tag {
-  font-family: var(--font-system-stack);
-  font-size: 0.7rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  font-weight: 500;
-  line-height: 1;
-  padding: 6px 10px;
-  border: var(--edge-line);
-  border-radius: var(--r-pill);
-  color: var(--k);
-}
-.lx-tag-pink {
-  background: var(--pink-tint);
-  border-color: var(--pink-tint);
-}
-
 /* ---------- the path list ---------- */
 /* Ruled rows inside one keylined block, the way a contents list is set, rather than six
    separate buttons with gaps between them. */
@@ -106,7 +87,8 @@
   width: 100%;
   padding: 9px 11px;
   text-align: left;
-  border: var(--edge-line);
+  border: var(--hairline);
+  border-radius: var(--r-ctl);
   background: var(--stock);
   color: var(--soft-ink);
   font-family: inherit;
@@ -134,16 +116,23 @@
    stages whichever path you are looking at. */
 .lx-stage[data-on="false"] { opacity: 0.45; }
 
-/* A review gate closes behind this stage, and that is the third drum's entire job. Yellow
-   is unreadable as a text colour at 1.04:1 on the stock, so it is a ground with black type
-   on it, which measures 13:1 — the highest contrast anywhere on the site. */
-.lx-stage[data-gate="true"] {
-  background: var(--yellow);
-  color: var(--k);
+/* A review gate closes behind this stage, and that is the third drum's entire job. It is
+   said with the same bead the map uses, at the end of the row, rather than by flooding the
+   cell: four yellow cells in a fourteen-cell plate was a flash that had become a surface. */
+.lx-stage[data-gate="true"]::after {
+  content: "";
+  margin-left: auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--gate);
+  border: 1px solid var(--k);
+  flex: none;
+  align-self: center;
 }
 .lx-stage[data-gate="true"][data-on="false"] { opacity: 0.5; }
 
-.lx-stage[data-selected="true"] { outline: 2px solid var(--blue); outline-offset: -2px; }
+.lx-stage[data-selected="true"] { outline: 2px solid var(--blue); outline-offset: -2px; border-radius: var(--r-ctl); }
 
 .lx-ord {
   font-family: var(--font-system-stack);
@@ -194,31 +183,6 @@
   to { opacity: 1; transform: none; }
 }
 
-/* ---------- the hero plate ---------- */
-/* Each pass is masked so the sheet shows through it. Unmasked, three full-density screens
-   over one another read as a solid field of dots — a pattern, not a print. The paper has to
-   be visible for the ink to look like ink. */
-.lx-fade-a {
-  -webkit-mask-image: linear-gradient(115deg, #000 8%, rgba(0, 0, 0, 0.35) 58%, transparent 86%);
-  mask-image: linear-gradient(115deg, #000 8%, rgba(0, 0, 0, 0.35) 58%, transparent 86%);
-}
-.lx-fade-b {
-  -webkit-mask-image: linear-gradient(295deg, #000 4%, rgba(0, 0, 0, 0.4) 52%, transparent 84%);
-  mask-image: linear-gradient(295deg, #000 4%, rgba(0, 0, 0, 0.4) 52%, transparent 84%);
-}
-.lx-fade-c {
-  -webkit-mask-image: radial-gradient(circle at 32% 74%, #000 12%, rgba(0, 0, 0, 0.4) 44%, transparent 72%);
-  mask-image: radial-gradient(circle at 32% 74%, #000 12%, rgba(0, 0, 0, 0.4) 44%, transparent 72%);
-}
-
-/* The ink layers shift very slightly on hover, the way a sheet moves under the drum. Behind
-   a real pointer only, and small: the plate is atmosphere, not a toy. */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .plate .ink { transition: transform var(--dur-plate) var(--ease-out); }
-  .plate:hover .halftone-pink { transform: rotate(var(--angle-pink)) translate(5px, -4px); }
-  .plate:hover .halftone-blue { transform: rotate(var(--angle-blue)) translate(-4px, 4px); }
-}
-
 /* ---------- reduced motion ---------- */
 /* A request to be spared movement, not a request for faster movement. Everything resolves
    to its final state rather than running quickly. */
@@ -236,7 +200,6 @@
   .lx-stage,
   .lx-flow { transition: none; }
   .lx-stage:hover { transform: none; }
-  .plate .ink { transition: none; }
 }
 
 /* ============================================================================
@@ -246,20 +209,17 @@
    every mention of the company the OS was first written for. What arrived: the crew,
    the harness, the brain, the before-and-after, and a press check of questions.
 
-   Everything below follows the same two rules as everything above it — keylines rather
-   than radii, and transform/opacity only — so nothing here needs its own motion story.
+   Everything below follows the same rules as everything above it: the shared furniture in
+   globals.css, the three radii, and transform/opacity only.
    ========================================================================== */
 
 /* ---------- the hero findings card ---------- */
-/* A printed report rather than a screenshot of an app: keyline, hairline rules between
-   rows, mono furniture. The halftone washes sit behind it so the ink still shows without
-   ever crossing a word a reader has to parse. */
+/* A printed report rather than a screenshot of an app: a folded sheet, hairline rules
+   between rows, mono furniture. */
 .lx-card {
   position: relative;
   z-index: 2;
-  border: var(--edge-line);
-  background: var(--stock-2);
-  box-shadow: var(--press-shadow);
+  --fold-sheet: var(--stock);
 }
 .lx-card-head {
   display: flex;
@@ -283,9 +243,11 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1;
-  padding: 4px 6px;
-  border: 1px solid var(--k);
+  padding: 5px 7px;
+  border: var(--hairline);
+  border-radius: var(--r-sm);
   color: var(--k);
+  background: var(--stock-2);
   white-space: nowrap;
 }
 .lx-chip-fill { background: var(--yellow); }
@@ -374,7 +336,8 @@
 .lx-cap { display: flex; flex-direction: column; }
 .lx-mock {
   margin-top: 14px;
-  border: var(--edge-line);
+  border: var(--hairline);
+  border-radius: var(--r-ctl);
   background: var(--stock);
   padding: 11px 12px;
   flex: 1;
@@ -398,7 +361,7 @@
 .lx-bar {
   height: 6px;
   background: var(--stock-3);
-  border: 1px solid var(--k);
+  border-radius: var(--r-sm);
   overflow: hidden;
 }
 .lx-bar > i {
@@ -422,7 +385,8 @@
   .lx-brain { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 .lx-know {
-  border: var(--edge-line);
+  border: var(--hairline);
+  border-radius: var(--r-ctl);
   background: var(--stock);
   padding: 11px 12px;
 }

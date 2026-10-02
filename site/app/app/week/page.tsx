@@ -75,7 +75,7 @@ export default async function WeekPage() {
           <div className="eyebrow">
             Next {DAYS} days · {TIMEZONE.split("/").pop()?.replace(/_/g, " ")}
           </div>
-          <h1 className="display mt-2 text-[24px] leading-[1.22] tracking-[-0.014em] sm:text-[29px]">
+          <h1 className="page-title mt-2 max-w-[820px] text-[clamp(1.6rem,2.6vw,2rem)]">
             {failed
               ? "The calendar could not be read"
               : next

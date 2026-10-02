@@ -64,7 +64,7 @@ export function SiteHeader({
   };
 
   return (
-    <header className="sticky top-0 z-30 border-b border-[var(--k)] bg-[var(--stock)]/92 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-[var(--rule)] bg-[var(--stock)]/92 backdrop-blur">
       <div className="mx-auto flex h-14 w-full max-w-7xl items-center gap-3 px-4 sm:px-6">
         {/* The house lockup: the Gate, then Pixie Dust Industries in Syne 800 uppercase.
             Printed once, like every line on the site since misregistration was retired. The hero
@@ -74,7 +74,7 @@ export function SiteHeader({
         <Link href="/" className="flex items-center gap-[6px] shrink-0 lx-press sm:gap-[7px]" aria-label="Pixie Dust Industries">
           <GateMark size={17} className="text-[var(--k)] sm:hidden" />
           <GateMark size={19} className="hidden text-[var(--k)] sm:block" />
-          <span className="wordmark text-[11.5px] leading-none sm:text-[14px]">
+          <span className="wordmark text-[15px] sm:text-[17px]">
             Pixie Dust Industries
           </span>
         </Link>
@@ -86,10 +86,10 @@ export function SiteHeader({
                 key={n.href}
                 href={n.href}
                 className={cn(
-                  "rounded-md px-3 py-1.5 text-[13px] transition-colors",
+                  "rounded-[var(--r-ctl)] px-3 py-1.5 text-[13.5px] font-medium transition-colors duration-[var(--dur-state)]",
                   active(n.href)
-                    ? "bg-[var(--secondary)] text-[var(--ink)]"
-                    : "text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--secondary)]/60",
+                    ? "bg-[var(--stock-2)] text-[var(--ink)] shadow-[inset_0_0_0_1px_var(--rule)]"
+                    : "text-[var(--soft-ink)] hover:bg-[var(--stock-2)] hover:text-[var(--ink)]",
                 )}
               >
                 {n.label}
@@ -101,14 +101,14 @@ export function SiteHeader({
         <div className="ml-auto flex items-center gap-3">
           {signedIn ? (
             <>
-              <span className="mono hidden lg:inline text-[9.5px] tracking-[0.14em] uppercase text-[var(--muted-ink)]">
+              <span className="eyebrow hidden lg:inline">
                 {role ? `${ROLE_LABEL[role]} · ` : ""}{skills} skills · {stamp}
               </span>
               <Button
                 asChild
                 size="sm"
                 variant="outline"
-                className="hidden sm:inline-flex h-8 text-[12px]"
+                className="hidden sm:inline-flex"
               >
                 <a
                   href="https://github.com/niel-cody/oolio-product-os"
@@ -124,7 +124,7 @@ export function SiteHeader({
                   type="submit"
                   size="icon"
                   variant="ghost"
-                  className="h-8 w-8 text-[var(--muted-ink)] hover:text-[var(--ink)]"
+                  className="text-[var(--muted-ink)] hover:text-[var(--ink)]"
                   aria-label="Sign out"
                   title="Sign out"
                 >
@@ -139,7 +139,7 @@ export function SiteHeader({
                   the landing page no longer carries install instructions at all. On the
                   sign-in page itself this would be a link to where you already are. */}
               {pathname !== "/login" && (
-                <Button asChild size="sm" className="h-8 text-[12px]">
+                <Button asChild size="sm">
                   <Link href="/login">Get access</Link>
                 </Button>
               )}
@@ -149,12 +149,12 @@ export function SiteHeader({
           {signedIn && (
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden h-9 w-9" aria-label="Open menu">
+                <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open menu">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[16rem] bg-[var(--panel)] border-[var(--line)]">
-                <SheetTitle className="wordmark px-4 pt-4 text-[15px]">Pixie Dust Industries</SheetTitle>
+              <SheetContent side="right" className="w-[17rem] border-[var(--rule)] bg-[var(--stock-2)] sm:rounded-l-[var(--r-card)]">
+                <SheetTitle className="wordmark px-4 pt-4 text-[17px]">Pixie Dust Industries</SheetTitle>
                 <nav className="mt-4 flex flex-col gap-1 px-2">
                   {nav.map((n) => (
                     <Link
@@ -162,10 +162,10 @@ export function SiteHeader({
                       href={n.href}
                       onClick={() => setOpen(false)}
                       className={cn(
-                        "rounded-md px-3 py-2.5 text-[14px] transition-colors",
+                        "rounded-[var(--r-ctl)] px-3 py-2.5 text-[14px] font-medium transition-colors",
                         active(n.href)
-                          ? "bg-[var(--secondary)] text-[var(--ink)]"
-                          : "text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--secondary)]/60",
+                          ? "bg-[var(--stock)] text-[var(--ink)]"
+                          : "text-[var(--soft-ink)] hover:bg-[var(--stock)] hover:text-[var(--ink)]",
                       )}
                     >
                       {n.label}
@@ -190,7 +190,7 @@ export function SiteHeader({
                     </button>
                   </form>
                 </div>
-                <div className="mono mt-6 px-4 text-[9.5px] tracking-[0.14em] uppercase text-[var(--muted-ink)]">
+                <div className="eyebrow mt-6 px-4">
                   {role ? `${ROLE_LABEL[role]} · ` : ""}{skills} skills · {stamp}
                 </div>
               </SheetContent>

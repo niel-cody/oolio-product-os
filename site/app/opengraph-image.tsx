@@ -27,6 +27,8 @@ const MUTED = "#65606A";
 const PINK = "#F8B6BA"; // Corinthian Pink, the tint: a ground, never a line here
 const YELLOW = "#FDBF68"; // Cream Yellow, the gate
 const RULE = "#C4C0B7";
+const RULE2 = "#A8A39A";
+const SHEET = "#EFEDE7";
 
 /**
  * The Gate, as a data URI. Satori renders no <path>, so the mark cannot be drawn as elements
@@ -52,7 +54,7 @@ const MARK =
  * card size. Confirmed against `written`, `kitten`, `button` and `letter`, all of which had
  * it and none of which do now.
  *
- * It was found on Space Grotesk and is kept through the move to Instrument Serif, which has
+ * It was found on Space Grotesk and is kept through every face since, each of which has
  * its own `tt`. Only `tt`: inserting joiners into pairs that are not broken would disable
  * typography that is doing its job. If a new headline word looks wrongly spaced, measure it
  * before adding it here.
@@ -80,42 +82,32 @@ async function googleFont(family: string, weight: number): Promise<ArrayBuffer |
 
 export default async function Image() {
   // Two families, because the card is the brand in miniature: the headline is the argument
-  // and is set in Syne, the numbers along the foot are machine output and are set in DM Mono.
+  // and is set in the serif, the numbers along the foot are machine output and are set in
+  // the mono. The same two the site uses, so the card and the page are one thing.
   const [display, mono] = await Promise.all([
-    googleFont("Syne", 800),
-    googleFont("DM Mono", 500),
+    googleFont("Newsreader", 400),
+    googleFont("Geist Mono", 500),
   ]);
 
   const fonts = [
-    display && { name: "Syne", data: display, weight: 800 as const, style: "normal" as const },
-    mono && { name: "DM Mono", data: mono, weight: 500 as const, style: "normal" as const },
+    display && { name: "Newsreader", data: display, weight: 400 as const, style: "normal" as const },
+    mono && { name: "Geist Mono", data: mono, weight: 500 as const, style: "normal" as const },
   ].filter((f): f is NonNullable<typeof f> => Boolean(f));
 
-  const MONO = fonts.length > 1 ? "DM Mono" : "monospace";
+  const MONO = fonts.length > 1 ? "Geist Mono" : "monospace";
 
-  /**
-   * A halftone screen, drawn dot by dot.
-   *
-   * Satori resolves no CSS masks, blend modes or repeating background images, so the screen
-   * the site draws in three lines of CSS has to be laid out here as individual elements.
-   * A regular grid at a fixed pitch with the dot radius falling off from the top right is
-   * exactly what a Riso does to a gradient, and it is the one part of the press language
-   * this renderer can honestly reproduce.
-   *
-   * It replaces a random star field, which was the dark card's atmosphere and reads on a
-   * printed sheet as dirt rather than ink.
-   */
-  const PITCH = 22;
-  const dots: { left: number; top: number; r: number }[] = [];
-  for (let x = 0; x <= 1200 + PITCH; x += PITCH) {
-    for (let y = 0; y <= 630 + PITCH; y += PITCH) {
-      // Distance from the top-right corner, normalised, then eased so the screen opens up
-      // rather than fading linearly — a dot either prints or it does not.
-      const d = Math.hypot((1200 - x) / 1200, y / 630) / 1.35;
-      const r = (1 - Math.min(1, d)) ** 1.7 * (PITCH * 0.44);
-      if (r > 0.55) dots.push({ left: x, top: y, r });
-    }
-  }
+  // The fold: one corner of the sheet turned over, drawn as two triangles because Satori
+  // draws no <path>. The same dog-ear every surface on the site carries.
+  const FOLD = 64;
+  const FOLD_SVG =
+    "data:image/svg+xml," +
+    encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">` +
+        `<path d="M0 0H64V64Z" fill="${STOCK}"/>` +
+        `<path d="M0 0V64H64Z" fill="${PINK}"/>` +
+        `<path d="M0 0L64 64" stroke="${RULE2}" stroke-width="1"/>` +
+      `</svg>`,
+    );
 
   const facts = [
     [String(os.totals.skills), "specialists"],
@@ -133,36 +125,20 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           background: STOCK,
-          // Two ink washes standing in for the halftone plate the page carries. Satori draws
-          // no CSS masks or blend modes, so the screen itself cannot be reproduced here; a
-          // soft pass of each drum is the honest approximation rather than a fake screen.
-          backgroundImage:
-            "radial-gradient(700px 520px at 97% 88%, rgba(61,85,136,0.24), transparent 62%)",
           padding: "70px 74px",
-          fontFamily: fonts.length ? "Syne" : "sans-serif",
+          fontFamily: fonts.length ? "Newsreader" : "serif",
         }}
       >
-        {dots.map((d, i) => (
-          <div
-            key={i}
-            style={{
-              position: "absolute",
-              left: d.left - d.r,
-              top: d.top - d.r,
-              width: d.r * 2,
-              height: d.r * 2,
-              borderRadius: d.r * 2,
-              background: PINK,
-              opacity: 0.55,
-            }}
-          />
-        ))}
-
+        {/* The lifted sheet behind everything, with its corner folded. Satori draws no
+            <path> and no CSS triangles, so the fold arrives as an inline SVG, the same way
+            the mark does. */}
+        <div style={{ position: "absolute", inset: 28, background: SHEET, border: `1px solid ${RULE2}`, borderRadius: 22, display: "flex" }} />
+        <img width={FOLD} height={FOLD} src={FOLD_SVG} alt="" style={{ position: "absolute", top: 28, right: 28 }} />
         {/* The lockup. Satori draws no <path>, so the mark arrives as an inline SVG data URI
             rather than as elements: same geometry as brand/assets/mark.svg, nothing else. */}
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <img width={28} height={28} src={MARK} alt="" />
-          <div style={{ fontSize: 23, color: INK, letterSpacing: "-0.03em", textTransform: "uppercase" }}>
+          <div style={{ fontSize: 26, color: INK, letterSpacing: "0.005em" }}>
             Pixie Dust Industries
           </div>
         </div>
@@ -174,10 +150,10 @@ export default async function Image() {
             <div
               key={line}
               style={{
-                fontSize: 72,
+                fontSize: 74,
                 color: INK,
-                lineHeight: 0.98,
-                letterSpacing: "-0.028em",
+                lineHeight: 1.04,
+                letterSpacing: "-0.015em",
               }}
             >
               {unligature(line)}
@@ -198,8 +174,8 @@ export default async function Image() {
               </div>
             </div>
           ))}
-          <div style={{ marginLeft: "auto", fontFamily: MONO, fontSize: 16, color: INK, background: PINK, padding: "5px 10px" }}>
-            Pixie Dust Industries
+          <div style={{ marginLeft: "auto", fontFamily: MONO, fontSize: 15, letterSpacing: "0.08em", color: INK, background: PINK, padding: "7px 12px", borderRadius: 6 }}>
+            PRODUCT OS
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 40" width="264" height="40" role="img" aria-label="Pixie Dust Industries">
   <title>Pixie Dust Industries</title>
-  <!-- Horizontal lockup, ink ground. LIVE TEXT: correct wherever Instrument Serif is loaded,
+  <!-- Horizontal lockup, ink ground. LIVE TEXT: correct wherever Newsreader is loaded,
        a generic serif everywhere else. Outline it before the file leaves Oolio (brand/identity.md).
        Clear space is one bead diameter, 6px at this size, on every side. -->
   <g transform="translate(4 4)">
@@ -8,6 +8,6 @@
           stroke-width="3" stroke-linecap="round"/>
     <circle cx="23.778" cy="8.222" r="3" fill="#FDBF68"/>
   </g>
-  <text x="46" y="27.5" font-family="Syne, Archivo, Helvetica Neue, Arial, sans-serif" font-weight="800"
-        font-size="26" letter-spacing="-0.26" fill="#231F20">Pixie Dust Industries</text>
+  <text x="46" y="27.5" font-family="Newsreader, Georgia, Times New Roman, serif" font-weight="500"
+        font-size="26" letter-spacing="0.13" fill="#231F20">Pixie Dust Industries</text>
 </svg>

@@ -14,8 +14,8 @@ export default function SkillsPage() {
       <div className="eyebrow">
         {TOTALS.skills} skills · {TOTALS.plugins} plugin{TOTALS.plugins === 1 ? "" : "s"}
       </div>
-      <h1 className="display mt-3 text-[34px] tracking-[-0.018em] sm:text-[44px]">Every skill</h1>
-      <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-[var(--muted-ink)]">
+      <h1 className="page-title mt-3">Every skill</h1>
+      <p className="page-lede mt-5">
         A skill is one product habit, written down well enough that an assistant runs it the same
         way every time. They are shelved by where they sit in the lifecycle rather than
         alphabetically, because the useful question is not what a skill is called but when you

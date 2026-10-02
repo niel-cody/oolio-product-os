@@ -232,15 +232,15 @@ function Hero({
           <div>
             <Reveal>
               <div className="flex flex-wrap items-center gap-2.5">
-                <span className="lx-tag lx-tag-pink">Product OS</span>
-                <span className="lx-tag">A crew of {counts.skills}</span>
+                <span className="tag tag-pink">Product OS</span>
+                <span className="tag">A crew of {counts.skills}</span>
               </div>
             </Reveal>
 
             {/* Set clean. The headline used to carry two misregistration ghosts, which read as
                 shouting; a deliberate house prints its line once. */}
             <Reveal delay={60}>
-              <h1 className="display mt-7 max-w-[14ch] text-[clamp(2.1rem,4.4vw,3.5rem)] leading-[1.02] text-[var(--k)]">
+              <h1 className="display mt-7 max-w-[14ch] text-[clamp(2.3rem,4.6vw,3.5rem)] leading-[1.06] text-[var(--k)]">
                 Everything but the deciding.
               </h1>
             </Reveal>
@@ -301,24 +301,8 @@ function Hero({
 function FindingsCard() {
   return (
     <figure className="m-0">
-      {/* The washes bleed off the card and are clipped by this wrapper's own edge, which is
-          what a plate does: ink runs past the image and stops at the trim. Unclipped they
-          ran over the caption underneath and up behind the header. */}
-      <div className="plate relative overflow-hidden px-4 pb-5 pt-4 sm:px-6 sm:pb-7 sm:pt-5">
-        <i
-          className="ink halftone halftone-pink lx-fade-a absolute -left-[8%] -top-[10%] h-[62%] w-[70%]"
-          aria-hidden
-        />
-        <i
-          className="ink halftone halftone-blue lx-fade-b absolute -bottom-[10%] -right-[8%] h-[66%] w-[64%]"
-          aria-hidden
-        />
-        <i
-          className="ink halftone halftone-yellow lx-fade-c absolute bottom-[4%] left-[16%] h-[44%] w-[52%]"
-          aria-hidden
-        />
-
-        <div className="lx-card">
+      <div className="relative px-1 pb-5 pt-1 sm:px-2 sm:pb-7 sm:pt-2">
+        <div className="lx-card surface folded">
         <div className="lx-card-head">
           <span className="mono text-[0.62rem] uppercase tracking-[0.14em] text-[var(--k)]">
             Scout &middot; market signal
@@ -417,7 +401,7 @@ function Idea() {
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.7fr)] lg:items-center lg:gap-16">
         <Reveal>
           <SectionHead pass="The idea" note="a sheet of possibility" />
-          <p className="display max-w-[20ch] text-[clamp(1.55rem,3.1vw,2.5rem)] leading-[1.05] text-[var(--k)]">
+          <p className="display max-w-[20ch] text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
             An idea is a sheet of possibility.
           </p>
           <p className="mt-7 max-w-[56ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16.5px]">
@@ -478,7 +462,7 @@ function Problem() {
       <SectionHead pass="Finding" note="the week you actually have" />
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-16">
         <Reveal>
-          <p className="display text-[clamp(1.55rem,3.1vw,2.5rem)] leading-[1.05] text-[var(--k)]">
+          <p className="display text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
             Nobody took this job to format documents.
           </p>
           <p className="mt-7 max-w-[56ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16.5px]">
@@ -494,7 +478,7 @@ function Problem() {
         </Reveal>
 
         <Reveal delay={80}>
-          <ul className="border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock-2)]">
+          <ul className="border border-[var(--rule-2)] rounded-[var(--r-card)] bg-[var(--stock-2)]">
             {TAX.map((t) => (
               <li
                 key={t.k}
@@ -536,7 +520,7 @@ function Proof() {
         <SectionHead pass="Proof" note="the same week, run twice" />
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
           <Reveal>
-            <h2 className="display text-[clamp(1.7rem,3.4vw,2.7rem)] leading-[1.06] text-[var(--k)]">
+            <h2 className="display text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
               Most of a day back. The boring half.
             </h2>
             <p className="mt-6 text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16px]">
@@ -551,7 +535,7 @@ function Proof() {
           </Reveal>
 
           <Reveal delay={80}>
-            <div className="border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock)] px-5 py-2 sm:px-6">
+            <div className="border border-[var(--rule-2)] rounded-[var(--r-card)] bg-[var(--stock)] px-5 py-2 sm:px-6">
               <div className="mono flex items-baseline gap-[14px] border-b border-[var(--rule-2)] py-3 text-[0.62rem] uppercase tracking-[0.13em] text-[var(--muted-ink)]">
                 <span className="flex-1">The job</span>
                 <span className="w-[86px] shrink-0">By hand</span>
@@ -713,7 +697,7 @@ function Crew({ signedIn, counts }: { signedIn: boolean; counts: { skills: numbe
     <section id="crew" className="mx-auto max-w-6xl scroll-mt-16 px-5 py-16 sm:px-8 sm:py-24">
       <SectionHead pass="The crew" note="eight specialists, one lifecycle" />
       <Reveal>
-        <h2 className="display max-w-[720px] text-[clamp(1.7rem,3.4vw,2.7rem)] leading-[1.06] text-[var(--k)]">
+        <h2 className="display max-w-[720px] text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
           Specialists, not a chat window.
         </h2>
         <p className="mt-5 max-w-[58ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16px]">
@@ -730,7 +714,7 @@ function Crew({ signedIn, counts }: { signedIn: boolean; counts: { skills: numbe
             aria-label="The crew"
             aria-orientation="vertical"
             onKeyDown={onKey}
-            className="flex flex-col self-start overflow-hidden rounded-[var(--r-lg)] border border-[var(--rule-2)]"
+            className="flex flex-col self-start overflow-hidden rounded-[var(--r-card)] border border-[var(--rule-2)]"
           >
             {CREW.map((c, idx) => (
               <button
@@ -781,7 +765,7 @@ function Crew({ signedIn, counts }: { signedIn: boolean; counts: { skills: numbe
             id="lx-agent-panel"
             role="tabpanel"
             aria-labelledby={`lx-agent-${i}`}
-            className="border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock-2)] p-6 sm:p-8"
+            className="border border-[var(--rule-2)] rounded-[var(--r-card)] bg-[var(--stock-2)] p-6 sm:p-8"
           >
             <div key={i} className="lx-agent-panel">
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -842,7 +826,7 @@ function Harness({ reduced }: { reduced: boolean }) {
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <SectionHead pass="The harness" note="what any of them can reach for" />
         <Reveal>
-          <h2 className="display max-w-[680px] text-[clamp(1.7rem,3.4vw,2.7rem)] leading-[1.06] text-[var(--k)]">
+          <h2 className="display max-w-[680px] text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
             One harness. Every tool you already pay for.
           </h2>
           <p className="mt-5 max-w-[58ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16px]">
@@ -851,7 +835,7 @@ function Harness({ reduced }: { reduced: boolean }) {
           </p>
         </Reveal>
 
-        <ul className="mt-10 grid overflow-hidden rounded-[var(--r-lg)] border border-[var(--rule-2)] bg-[var(--stock)] sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid overflow-hidden rounded-[var(--r-card)] border border-[var(--rule-2)] bg-[var(--stock)] sm:grid-cols-2 lg:grid-cols-3">
           <Cap
             i={0}
             head="Ask the backlog"
@@ -1051,7 +1035,7 @@ function Lifecycle({
     <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
       <SectionHead pass="Plate" note="the lifecycle, and six paths across it" />
       <Reveal>
-        <h2 className="display max-w-[680px] text-[clamp(1.7rem,3.4vw,2.7rem)] leading-[1.06] text-[var(--k)]">
+        <h2 className="display max-w-[680px] text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
           {counts.stages} stages. {counts.flows} paths through them.
         </h2>
         <p className="mt-5 max-w-[56ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16px]">
@@ -1069,7 +1053,7 @@ function Lifecycle({
             aria-label="End-to-end flows"
             aria-orientation="vertical"
             onKeyDown={onTabKey}
-            className="flex flex-col self-start overflow-hidden rounded-[var(--r-lg)] border border-[var(--rule-2)]"
+            className="flex flex-col self-start overflow-hidden rounded-[var(--r-card)] border border-[var(--rule-2)]"
           >
             {flows.map((f, i) => (
               <button
@@ -1149,7 +1133,7 @@ function Lifecycle({
             </div>
 
             {/* What the stage you tapped is for. */}
-            <div className="mt-6 border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock-2)] p-5" aria-live="polite">
+            <div className="mt-6 border border-[var(--rule-2)] rounded-[var(--r-card)] bg-[var(--stock-2)] p-5" aria-live="polite">
               <div key={stageIdx} className="lx-purpose">
                 <div className="eyebrow text-[var(--k)]">{stage?.name}</div>
                 <p className="mt-2.5 text-[14px] leading-[1.6] text-[var(--soft-ink)] sm:text-[15px]">
@@ -1185,7 +1169,7 @@ function Memory() {
         <SectionHead pass="Memory" note="why the second quarter costs less" />
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <Reveal>
-            <h2 className="display text-[clamp(1.7rem,3.4vw,2.7rem)] leading-[1.06] text-[var(--k)]">
+            <h2 className="display text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
               It learns your product. Not the other way around.
             </h2>
             <p className="mt-6 text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16px]">
@@ -1258,7 +1242,7 @@ function HowItWorks() {
     <section id="how" className="mx-auto max-w-6xl scroll-mt-16 px-5 py-16 sm:px-8 sm:py-24">
       <SectionHead pass="Make ready" note="three steps, none of them a command" />
       <Reveal>
-        <h2 className="display max-w-[680px] text-[clamp(1.7rem,3.4vw,2.7rem)] leading-[1.06] text-[var(--k)]">
+        <h2 className="display max-w-[680px] text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
           You lead. They do the digging.
         </h2>
         <p className="mt-5 max-w-[56ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16px]">
@@ -1270,7 +1254,7 @@ function HowItWorks() {
       <ol className="mt-10 grid gap-4 lg:grid-cols-3">
         {STEPS.map((s, i) => (
           <Reveal as="li" key={s.n} delay={i * 60}>
-            <div className="flex h-full flex-col border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock-2)] p-5 sm:p-6">
+            <div className="flex h-full flex-col border border-[var(--rule-2)] rounded-[var(--r-card)] bg-[var(--stock-2)] p-5 sm:p-6">
               <div className="mono text-[0.68rem] tracking-[0.14em] text-[var(--muted-ink)]">
                 {s.n}
               </div>
@@ -1284,7 +1268,7 @@ function HowItWorks() {
       </ol>
 
       <Reveal delay={180}>
-        <div className="mt-6 border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock-2)] p-5 sm:p-6">
+        <div className="mt-6 border border-[var(--rule-2)] rounded-[var(--r-card)] bg-[var(--stock-2)] p-5 sm:p-6">
           <div className="eyebrow text-[var(--k)]">So it sounds like this</div>
           <div className="mono mt-3 flex items-start gap-2.5 text-[13px] leading-relaxed text-[var(--k)] sm:text-[14px]">
             <CornerDownRight className="mt-1 h-3.5 w-3.5 shrink-0" aria-hidden />
@@ -1311,7 +1295,7 @@ function Showcased({ showcase, counts }: { showcase: Showcase[]; counts: { skill
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <SectionHead pass="Impression" note="five of them, by name" />
         <Reveal>
-          <h2 className="display max-w-[680px] text-[clamp(1.7rem,3.4vw,2.7rem)] leading-[1.06] text-[var(--k)]">
+          <h2 className="display max-w-[680px] text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
             Five of the {counts.skills}.
           </h2>
           <p className="mt-5 max-w-[56ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16px]">
@@ -1322,7 +1306,7 @@ function Showcased({ showcase, counts }: { showcase: Showcase[]; counts: { skill
 
         {/* One keyline around the block and hairlines between, the way a table is ruled on a
             press sheet, rather than six separate floating cards. */}
-        <ul className="mt-10 grid overflow-hidden rounded-[var(--r-lg)] border border-[var(--rule-2)] bg-[var(--stock)] sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid overflow-hidden rounded-[var(--r-card)] border border-[var(--rule-2)] bg-[var(--stock)] sm:grid-cols-2 lg:grid-cols-3">
           {showcase.map((s, i) => (
             <Reveal as="li" key={s.id} delay={Math.min(i, 3) * 60} className="lx-cell">
               <div className="flex items-baseline justify-between gap-3">
@@ -1382,7 +1366,7 @@ function Honesty() {
       <SectionHead pass="Registration" note="what stops it drifting" />
       <div className="grid gap-10 lg:grid-cols-[380px_1fr] lg:gap-16">
         <Reveal>
-          <h2 className="display text-[clamp(1.7rem,3.4vw,2.7rem)] leading-[1.06] text-[var(--k)]">
+          <h2 className="display text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
             What keeps it honest.
           </h2>
           <p className="mt-6 text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16px]">
@@ -1395,7 +1379,7 @@ function Honesty() {
           </p>
         </Reveal>
 
-        <ul className="grid border border-[var(--rule-2)] rounded-[var(--r-lg)] sm:grid-cols-2">
+        <ul className="grid border border-[var(--rule-2)] rounded-[var(--r-card)] sm:grid-cols-2">
           {HONEST.map((h, i) => (
             <Reveal as="li" key={h.head} delay={Math.min(i, 3) * 60} className="lx-cell bg-[var(--stock-2)]">
               <div className="text-[15px] font-semibold leading-snug tracking-tight text-[var(--k)]">
@@ -1458,7 +1442,7 @@ function PressCheck() {
         <SectionHead pass="Press check" note="asked before signing anything" />
         <div className="grid gap-10 lg:grid-cols-[380px_1fr] lg:gap-16">
           <Reveal>
-            <h2 className="display text-[clamp(1.7rem,3.4vw,2.7rem)] leading-[1.06] text-[var(--k)]">
+            <h2 className="display text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.1] text-[var(--k)]">
               The questions people ask first.
             </h2>
             <p className="mt-6 text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16px]">
@@ -1468,7 +1452,7 @@ function PressCheck() {
           </Reveal>
 
           <Reveal delay={80}>
-            <div className="border border-[var(--rule-2)] rounded-[var(--r-lg)] bg-[var(--stock)] px-5 py-1 sm:px-6">
+            <div className="border border-[var(--rule-2)] rounded-[var(--r-card)] bg-[var(--stock)] px-5 py-1 sm:px-6">
               {QUESTIONS.map(([q, a], i) => (
                 <details key={q} className="lx-q">
                   <summary>
@@ -1496,7 +1480,7 @@ function Door({ signedIn }: { signedIn: boolean }) {
   return (
     <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
       <Reveal>
-        <p className="display text-[clamp(2.1rem,4.6vw,3.6rem)] leading-[1.02] text-[var(--k)]">
+        <p className="display text-[clamp(2.3rem,4.6vw,3.5rem)] leading-[1.06] text-[var(--k)]">
           Learn it once.
         </p>
         <p className="mt-7 max-w-[52ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16.5px]">

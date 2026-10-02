@@ -7,25 +7,30 @@ export const metadata: Metadata = {
   description: "What changed in the Oolio Product OS, newest first. Rendered from the repo, so shipping a skill updates this page.",
 };
 
+/**
+ * Each entry is a folded sheet: a record of something that happened, which is exactly what
+ * the fold is for. The date is the pass marker, the title the serif line, and the body the
+ * markdown rendered from CHANGELOG.md.
+ */
 export default async function ChangelogPage() {
   const entries = await Promise.all(
     os.changelog.map(async (e) => ({ ...e, html: await marked.parse(e.body) })),
   );
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-5 py-14 sm:px-6 sm:py-20">
+    <main className="mx-auto w-full max-w-3xl px-5 py-12 sm:px-8 sm:py-16">
       <div className="eyebrow">Changelog</div>
-      <h1 className="display mt-3 text-[34px] tracking-[-0.018em] sm:text-[44px]">What changed</h1>
-      <p className="mt-5 text-[15px] leading-relaxed text-[var(--muted-ink)]">
+      <h1 className="page-title mt-3">What changed</h1>
+      <p className="page-lede mt-5">
         Newest first, rendered straight from the repo. The plugin is versioned by commit rather
         than by a number, so entries are dated. Shipping a skill updates this page.
       </p>
 
-      <div className="mt-12 space-y-14">
+      <div className="mt-10 space-y-6">
         {entries.map((e, i) => (
-          <article key={i} className="border-t border-[var(--line)] pt-8">
-            {e.date && <div className="mono text-[10px] tracking-[0.14em] text-[var(--muted-ink)]">{e.date}</div>}
-            <h2 className="mt-2 text-[19px] font-semibold leading-snug">{e.title}</h2>
+          <article key={i} className="surface folded p-6 sm:p-8">
+            {e.date && <div className="eyebrow">{e.date}</div>}
+            <h2 className="t-display-m mt-2">{e.title}</h2>
             <div className="changelog-body mt-4" dangerouslySetInnerHTML={{ __html: e.html }} />
           </article>
         ))}

@@ -313,7 +313,7 @@ export function renderMap(root, MAP, opts = {}) {
     strip.innerHTML = "";
     plates.forEach((p) => {
       const b = document.createElement("button");
-      b.className = "stagechip"; b.type = "button"; b.dataset.stage = String(p.i);
+      b.className = "chip stagechip"; b.type = "button"; b.dataset.stage = String(p.i);
       b.innerHTML = `<span class="n">${String(p.i + 1).padStart(2, "0")}</span><span class="nm">${esc(p.name)}</span>`;
       on(b, "click", () => selectStage(p.i));
       strip.appendChild(b);
@@ -396,7 +396,9 @@ export function renderMap(root, MAP, opts = {}) {
     fl.path.forEach((p) => { const nd = root.querySelector(`.node[data-id="${p[0]}"]`); if (nd) nd.classList.add("on"); });
     pathLinks(fl).forEach((g) => { g.classList.add("on"); if (!reduce) addParticle(g._path, g._color, true); });
     renderContext();
-    if (view.w < CANVAS_W - 1) animateTo(fitView());
+    // On a wide stage a path is best read whole, so the view opens out to show it. On a
+    // phone the fitted map is a thumbnail, so the reader stays where the chips put them.
+    if (window.innerWidth >= 1024 && view.w < CANVAS_W - 1) animateTo(fitView());
   }
   function selectNode(id) {
     const n = byId[id]; if (!n) return;
@@ -478,7 +480,7 @@ export function renderMap(root, MAP, opts = {}) {
     EDGES.forEach((e) => { if (e.t === id && byId[e.f]) from.push(byId[e.f]); if (e.f === id && byId[e.t]) to.push(byId[e.t]); });
     return { from, to };
   }
-  const chip = (n) => `<button type="button" class="ctxchip" data-node="${esc(n.id)}"><span class="dot" style="background:${TYPE_COLOR[n.type]}"></span>${esc(n.label)}</button>`;
+  const chip = (n) => `<button type="button" class="chip ctxchip" data-node="${esc(n.id)}"><span class="dot" style="background:${TYPE_COLOR[n.type]}"></span>${esc(n.label)}</button>`;
 
   function renderContext() {
     if (!ctx) return;
@@ -487,7 +489,7 @@ export function renderMap(root, MAP, opts = {}) {
       const n = byId[selectedNode];
       const { from, to } = connectionsOf(n.id);
       const isSkill = !n.id.startsWith("art-");
-      h += `<div class="ctxcard">
+      h += `<div class="ctxcard surface folded">
         <div class="ctxeyebrow"><span class="dot" style="background:${TYPE_COLOR[n.type]}"></span>${esc(TYPE_LABEL[n.type] || n.type)} · ${esc(COLUMNS[n.col])}</div>
         <h3 class="ctxtitle">${esc(n.label)}</h3>
         <div class="ctxnote">${esc(n.note)}<span class="ctxbadge">${esc(n.badge)}</span></div>
@@ -499,7 +501,7 @@ export function renderMap(root, MAP, opts = {}) {
     } else if (selectedStage >= 0) {
       const p = plates[selectedStage];
       const st = STAGES.find((s) => s.name === p.name);
-      h += `<div class="ctxcard">
+      h += `<div class="ctxcard surface folded">
         <div class="ctxeyebrow">Stage ${String(p.i + 1).padStart(2, "0")} of ${COLUMNS.length}</div>
         <h3 class="ctxtitle">${esc(p.name)}</h3>
         ${st?.purpose ? `<p class="ctxdesc">${esc(st.purpose)}</p>` : ""}

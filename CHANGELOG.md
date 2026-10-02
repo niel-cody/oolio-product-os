@@ -2,6 +2,18 @@
 
 All notable changes to the **oolio-pm** plugin, newest first. The plugin is versioned **by git commit** (there is no `version` field in the manifests, by design), so new entries are dated rather than numbered. Every change updates this file (see [CLAUDE.md](CLAUDE.md)). Entries below that carry version numbers are the historical record from before the switch.
 
+## 2026-10-02 – One system, end to end: the paper edition of the site
+
+The first reprint of the day fixed the map and the library and quietened the inks, and it was still not one thing. A round button on one page, a square chip on another, a black keyline here, a halftone wash there, three faces that argued. The site now reads from one short set of decisions on every page, and the build fails when a page drifts from them.
+
+- **Type.** Newsreader, regular weight, for the argument: page titles, section lines, the wordmark. Geist for everything a person reads or clicks. Geist Mono for every label, count and command. Mincho and Gothic, the classic pairing. Syne and Archivo are retired.
+- **Shape.** Three radii, by role: 6px for a tag or a code span, 10px for every button, input, chip and selectable row, 14px for every card, panel, tile and drawer. No pills. A radius off the scale fails `npm --prefix site run check`.
+- **The fold.** The origami idea, in eighteen pixels: a dog-ear on the top right corner of any surface that holds content, in the stock and the pink tint. The hero's findings sheet, the map's panel cards, the skill's Run it sheet, each changelog entry, the sign-in confirmation. One per surface, never on a control. It is the same mark on every page, and it is the only decoration.
+- **One button, one label, one surface.** The black drum for the primary action, one per view; a lifted sheet with a firm edge for the secondary. The eyebrow above every title. The surface for every card.
+- **Textures gone.** The halftone washes behind the hero, the dotted ground under the systems map, the overprint blend and the pulsing core are retired. Grain at eight per cent is the only texture, and the sheet is otherwise plain.
+- **Every page, not the three big ones.** Sign-in, members, changelog, about, Flightdeck and the systems map were brought onto the same furniture, and the link preview card is set in the same serif on the same folded sheet.
+- The brand documents say all of this in one place: [brand/README.md](brand/README.md) under "One system", [brand/typography.md](brand/typography.md), [brand/colour.md](brand/colour.md).
+
 ## 2026-10-02 – The site reprinted: a snake map, a skills library with a drawer, and muted inks from the Dictionary (45 skills)
 
 The site had outgrown two of its own ideas. The map laid fourteen stages in one row and stacked each stage's skills in a column, which was legible at thirty skills and a strip of unreadable boxes at forty-five: a 13.5px label drawn at a third of its size is not a label. The skills page was forty-five cards that each opened a separate page. And the fluorescent press was loud in every corner at once. All three were audited and fixed in one pass, recorded in [docs/site-ux-audit-2026-10-02.md](docs/site-ux-audit-2026-10-02.md).

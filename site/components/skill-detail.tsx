@@ -73,18 +73,18 @@ export function SkillDetail({
         {drawer ? (
           // The drawer's heading is the Sheet's own title, rendered by the caller, so here it
           // is plain display type rather than a second h1 on the page.
-          <p className="display mt-3 text-[26px] leading-[1.14] tracking-[-0.018em]">{s.title}</p>
+          <p className="display mt-3 pr-6 text-[clamp(1.7rem,3vw,2.3rem)] leading-[1.1]">{s.title}</p>
         ) : (
-          <h1 className="display mt-4 text-[32px] leading-[1.14] tracking-[-0.018em] sm:text-[42px]">{s.title}</h1>
+          <h1 className="page-title mt-4">{s.title}</h1>
         )}
         <p className={`mt-4 leading-relaxed text-[var(--soft-ink)] ${drawer ? "text-[15.5px]" : "text-[17px]"}`}>
           {s.blurb}
         </p>
       </header>
 
-      {/* The one flash on the view: a wash of the pink tint under the thing you leave to go and
-          type. A wash rather than the full tint, so it reads as a mark on the sheet. */}
-      <div className="mt-7 rounded-[var(--r-lg)] border border-[var(--pink-tint)] bg-[color-mix(in_oklab,var(--pink-tint)_38%,var(--stock-2))] p-4">
+      {/* The thing you leave to go and type, on its own folded sheet. The fold is the flash;
+          the ground stays the stock. */}
+      <div className="surface folded mt-7 p-4" style={{ ["--fold-sheet" as string]: drawer ? "var(--stock-2)" : "var(--stock)" }}>
         <div className="eyebrow mb-2.5 !text-[var(--ink)]">Run it</div>
         <CopyCommand
           command={s.command}
@@ -129,7 +129,7 @@ export function SkillDetail({
             {s.excludes.map((e, i) => (
               <li key={i} className="flex gap-2.5">
                 {/* Yellow is the gate ink: a person decides here, which is exactly what this list asks of them. */}
-                <span aria-hidden className="mt-[0.55em] h-1 w-1 shrink-0 rounded-[1px] bg-[var(--yellow)]" />
+                <span aria-hidden className="dot mt-[0.5em] bg-[var(--yellow)]" />
                 <span>
                   <Linked fragments={withSkillLinks(e, s.id)} hrefFor={hrefFor} scroll={scroll} />
                 </span>
@@ -167,7 +167,7 @@ export function SkillDetail({
             {s.systems.map((sys) => (
               <li
                 key={sys.id}
-                className="flex items-center gap-2 rounded-[var(--r-md)] border border-[var(--rule)] px-2.5 py-1.5 text-[12.5px]"
+                className="chip chip-static"
               >
                 <span className="text-[var(--ink)]">{sys.label}</span>
                 {sys.access && (
@@ -233,7 +233,7 @@ function Chain({
                 <Link
                   href={hrefFor(l.id)}
                   scroll={scroll}
-                  className="inline-flex items-center gap-1.5 rounded-[var(--r-md)] border border-[var(--rule)] px-2.5 py-1.5 text-[12.5px] text-[var(--ink)] transition-colors duration-[var(--dur-state)] ease-[var(--ease-out)] hover:border-[var(--rule-2)] hover:text-[var(--blue)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] motion-reduce:transition-none"
+                  className="chip"
                 >
                   {l.label}
                   {l.via && (
@@ -243,7 +243,7 @@ function Chain({
                   )}
                 </Link>
               ) : (
-                <span className="inline-flex items-center gap-1.5 rounded-[var(--r-md)] bg-[var(--glaucous)] px-2.5 py-1.5 text-[12.5px] text-[var(--ink)]">
+                <span className="chip chip-static !border-[var(--glaucous)] !bg-[var(--glaucous)] !text-[var(--ink)]">
                   {l.label}
                 </span>
               )}
@@ -312,7 +312,7 @@ function Neighbour({
     <Link
       href={hrefFor(s.id)}
       scroll={scroll}
-      className={`group rounded-[var(--r-lg)] border border-[var(--rule)] p-4 transition-colors duration-[var(--dur-state)] ease-[var(--ease-out)] hover:border-[var(--rule-2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] motion-reduce:transition-none ${
+      className={`group surface p-4 transition-colors duration-[var(--dur-state)] ease-[var(--ease-out)] hover:border-[var(--rule-2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] motion-reduce:transition-none ${
         dir === "next" ? "sm:text-right" : ""
       }`}
     >

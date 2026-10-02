@@ -4,12 +4,12 @@ This folder is the brand. Not a description of one kept somewhere else: the ink 
 typography, the mark and the words are defined here, and everything that carries the brand
 reads from here.
 
-The direction is **Risograph**. Three ink drums plus a black drum, printed on uncoated stock,
-reloaded on 2 October 2026 with muted inks from Sanzo Wada's *A Dictionary of Color
-Combinations* so the sheet reads as paper first and as a press second. The whole argument
-is physical constraint: a fixed number of drums, translucent ink, paper
-showing through, registration that never quite lands. Constraints are the thing a generator
-cannot fake, which is why this is the direction and not another dark palette.
+The direction is **paper**. Uncoated stock, muted inks from Sanzo Wada's *A Dictionary of
+Color Combinations*, a quiet serif for the argument and a grotesque for everything else, one
+radius scale, and the fold as the single signature. It began as a Risograph press and was
+reprinted on 2 October 2026 as the thing under the press: the sheet itself, calm, with the
+ink sitting on it once. The whole argument is restraint, which is the one thing a generator
+cannot fake.
 
 The rule is the same one the OS itself runs on. **Written down is not the same as running.** A
 brand book that lives in a PDF drifts from the product within a quarter. So the tokens in
@@ -27,22 +27,36 @@ generated from them, and a build fails if the two disagree.
 | **Mark** | The Gate: a ring with a break in it, and a bead of Cream Yellow standing in the break. |
 | **Stock** | Uncoated cool grey `#E4E2DB`. The site is light, and that is physics rather than preference. |
 | **Drums** | Eupatorium Purple `#BF5892` (tint Corinthian Pink `#F8B6BA`), Violet Blue `#40456A` (tint Salvia Blue `#97ACC8`), Cream Yellow `#FDBF68`, Black `#231F20`. Every chromatic ink is a named colour from Sanzo Wada's *A Dictionary of Color Combinations*. |
-| **Type** | Syne 700 for the argument, Archivo for the interface, DM Mono for the machine. |
+| **Type** | Newsreader 400 for the argument, Geist for the interface, Geist Mono for the machine. Mincho and Gothic. |
 | **Voice** | British English. Short declarative sentences. Concrete nouns. No buzzwords, no em dashes. |
 
-## The three moves
+## One texture, one signature
 
-Riso on the web was four techniques and is three. Grain, overprint and halftone are generated
-into [`site/app/brand.css`](../site/app/brand.css) as classes, all turned down so the sheet
-reads as paper first. Misregistration was retired on 2 October 2026: two ghost plates behind
-a headline made it hard to read and loud, and a calm, deliberate house prints its line once.
-You cannot cut a sheet of paper twice.
+Grain is the only texture: fractal noise at eight per cent, fixed, once, on the page. The
+halftone screens, the overprint blend and the misregistration ghosts of the first press were
+all retired on 2 October 2026 because they read as a filter over the page rather than as the
+page. You cannot cut a sheet of paper twice.
 
-| | What | Where |
-|---|---|---|
-| **01 Grain** | Fractal noise multiplied over the page in one fixed pass, at 19%. The sheet stays still while the ink moves. | `.sheet`, on `<body>`, once |
-| **02 Overprint** | Translucent ink multiplies where two passes cross, so shapes darken instead of hiding each other. | `.ink` + `.plate` |
-| **03 Halftone** | A Riso screens everything into dots. One angle per drum: 15°, 75°, 45°. | `.halftone-pink` / `-blue` / `-yellow` |
+The signature is **the fold**: a small dog-ear on the top right corner of any surface that
+holds content, drawn in the stock and the pink tint, generated as `.folded`. One per surface,
+never on a control, never bigger than the type beside it. It is the whole origami idea in
+eighteen pixels, and it is the same on every page.
+
+## One system
+
+Every page reads from the same few decisions, and a page that invents its own is a page that
+belongs to a different product:
+
+- **Three radii, by role.** 6px for a tag or a code span, 10px for every button, input, chip
+  and selectable row, 14px for every card, panel, tile and drawer. No pills. The build fails
+  on a fourth value.
+- **One button.** The black drum on the stock for the primary action, one per view; the
+  lifted sheet with a firm edge for the secondary; nothing until hovered for the quiet ones.
+- **One label.** The eyebrow, in the mono, above every title and on every section rule.
+- **One surface.** The lifted sheet with a firm edge and the surface radius. It is folded
+  when it holds something and plain when it only holds controls.
+- **Flashes, not surfaces.** Colour is a dot, a bead, a rule, a tag, a fold. A tint may be a
+  ground; a solid may not; the black keyline is gone from everything but the section rule.
 
 ## The documents
 
@@ -75,8 +89,8 @@ Committing to this has real costs, and they were decided rather than discovered.
   sheet to sit on; the process physically cannot print on dark stock. If dark ever becomes
   non-negotiable, the honest analogue is a xerox language — toner black, blown contrast,
   photocopy degradation — not Riso with the colours inverted.
-- **Texture never touches anything functional.** No grain, no halftone and no misregistration
-  inside a command block. A hard pink shadow is as far as it goes.
+- **Texture never touches anything functional.** The grain is the page's, not a control's,
+  and a command block is a plain lifted sheet.
 - **Pink is not a text colour.** The solid, `#BF5892`, measures 3.5:1 on the stock: a line, a
   dot, a ghost layer. Its tint, Corinthian Pink, is a ground with black type on it.
 - **Flashes, not surfaces.** Since 2 October 2026 colour lives in dots, beads, rules and small
@@ -87,7 +101,7 @@ Committing to this has real costs, and they were decided rather than discovered.
 
 ## What is deliberately not here
 
-**Outlined wordmark files.** The lockups in [`assets/`](assets) set live text in Syne, which
+**Outlined wordmark files.** The lockups in [`assets/`](assets) set live text in Newsreader, which
 renders correctly anywhere the webfont is available and falls back to a grotesque anywhere it
 is not. That is right for the site and wrong for anything leaving it. Before sending a lockup
 to a printer or an agency, open it in Figma, convert the text to outlines, and export that

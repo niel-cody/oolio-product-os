@@ -2,31 +2,44 @@
    Flightdeck styling.
 
    Every colour here resolves to a Product OS site token. Flightdeck is a surface of the
-   same product, not a second one, so it inherits the site's palette, typefaces and card
-   treatment rather than carrying its own. The --fd-* names below are aliases, not new
-   values: they exist only so this file reads in dashboard vocabulary (surface, hair, rule)
-   while the actual colours stay owned by globals.css. Change the site palette and
-   Flightdeck follows automatically.
+   same product, not a second one, so it inherits the site's palette, typefaces, radius
+   scale and card treatment rather than carrying its own. The --fd-* names below are
+   aliases, not new values: they exist only so this file reads in dashboard vocabulary
+   (surface, hair, rule) while the actual colours stay owned by brand.css. Change the sheet
+   and Flightdeck follows automatically.
 
-   The site is dark-only by design, so this file is too. The only genuinely new values are
-   the domain hues, which encode data rather than chrome: they are a legend the reader
-   decodes, so they have to stay distinguishable from each other.
+   The site is light, and so is this. The only genuinely new values are the domain hues,
+   which encode data rather than chrome: they are a legend the reader decodes, so they have
+   to stay distinguishable from each other.
+
+   Three rules of the sheet are kept here on purpose. Every radius is one of the three
+   steps: a card takes the surface radius, a tag or chip the control radius, a meter or
+   bar the small one, and only a dot is round. A status word is never set in a coloured ink:
+   the level lives in the ground and the mark, and the word stays in ink, because the pink
+   and the olive do not clear contrast as type. And a panel is a surface like any other
+   on the site: the lifted sheet, a firm edge, a fold when it holds something.
    ========================================================================== */
 
 .fd {
-  --fd-surface: var(--panel);
-  --fd-plane: var(--bg);
+  --fd-surface: var(--stock-2);
+  --fd-plane: var(--stock);
   --fd-ink: var(--ink);
   --fd-ink-2: var(--soft-ink);
   --fd-ink-3: var(--muted-ink);
-  --fd-hair: var(--line);
-  --fd-rule: var(--ring);
-  --fd-ring: var(--line);
+  --fd-hair: var(--rule);
+  --fd-rule: var(--blue);
+  --fd-ring: var(--rule);
 
   --fd-good: var(--output);
   --fd-warn: var(--loop);
   --fd-serious: var(--alarm);
-  --fd-critical: var(--destructive);
+  --fd-critical: var(--alarm);
+
+  /* Grounds for the status levels: a tint with ink on it, never a coloured word. */
+  --fd-good-ground: var(--glaucous);
+  --fd-warn-ground: var(--pink-tint);
+  --fd-serious-ground: color-mix(in oklab, var(--alarm) 14%, var(--stock-2));
+  --fd-critical-ground: color-mix(in oklab, var(--alarm) 24%, var(--stock-2));
 
   /* Domain hues: seven inks from the sheet, the eighth is muted ink. brand/colour.md. */
   --fd-d-insights: var(--blue);
@@ -52,34 +65,43 @@
   .fd-wrap { padding: 28px 24px 64px; }
 }
 
+/* The dashboard's headline is a page title at the smaller end of the scale: it is a
+   sentence about today, not the name of the page, and it has to share a row with the
+   load tag. Set here rather than as a utility because the title's own size would win. */
+.fd .page-title { font-size: clamp(1.6rem, 2.6vw, 2rem); }
+
 /* ---------- shared furniture ---------- */
+/* A panel is a surface: the lifted sheet with a firm edge at the surface radius. */
 .fd-card {
   background: var(--fd-surface);
-  border: 1px solid var(--fd-hair);
-  border-radius: 0;
+  border: var(--edge-line);
+  border-radius: var(--r-card);
 }
 .fd-cap {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-system-stack);
   font-size: 10.5px;
   color: var(--fd-ink-3);
   font-variant-numeric: tabular-nums;
 }
+/* The panel heading is the one label style, so a panel reads like a section anywhere else. */
 .fd-h2 {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 10px;
-  letter-spacing: 0.16em;
+  font-family: var(--font-system-stack);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   margin: 0;
   font-weight: 500;
   color: var(--fd-ink-3);
 }
-.fd-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; display: inline-block; }
+.fd-dot { width: 8px; height: 8px; border-radius: 999px; flex: none; display: inline-block; }
 
 .fd-tag {
   font-size: 11px;
-  padding: 1px 7px;
-  border-radius: 999px;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: var(--r-ctl);
   border: 1px solid var(--fd-ring);
+  background: var(--fd-surface);
   color: var(--fd-ink-2);
   display: inline-flex;
   align-items: center;
@@ -88,37 +110,42 @@
 }
 .fd-tag .fd-dot { width: 6px; height: 6px; }
 
+/* The status level is carried by the ground and the mark. The word stays in ink. */
 .fd-stat {
   font-size: 11px;
   font-weight: 600;
-  padding: 1px 7px;
-  border-radius: 999px;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: var(--r-ctl);
   display: inline-flex;
   align-items: center;
   gap: 5px;
   white-space: nowrap;
-  border: 1px solid currentColor;
+  color: var(--fd-ink);
+  background: var(--fd-surface);
+  border: 1px solid transparent;
 }
-.fd-stat[data-level="critical"] { color: var(--fd-critical); }
-.fd-stat[data-level="serious"] { color: var(--fd-serious); }
-.fd-stat[data-level="warning"] { color: var(--fd-warn); }
-.fd-stat[data-level="good"] { color: var(--fd-good); }
-.fd-stat[data-level="none"] { color: var(--fd-ink-3); }
+.fd-stat[data-level="critical"] { background: var(--fd-critical-ground); --fd-mark: var(--fd-critical); }
+.fd-stat[data-level="serious"] { background: var(--fd-serious-ground); --fd-mark: var(--fd-serious); }
+.fd-stat[data-level="warning"] { background: var(--fd-warn-ground); --fd-mark: var(--fd-warn); }
+.fd-stat[data-level="good"] { background: var(--fd-good-ground); --fd-mark: var(--fd-good); }
+.fd-stat[data-level="none"] { color: var(--fd-ink-3); border-color: var(--fd-ring); font-weight: 500; }
+.fd-stat > [aria-hidden] { color: var(--fd-mark, currentColor); font-size: 9px; }
 
 /* ---------- day bar ---------- */
 .fd-track {
   position: relative;
   height: 34px;
   background: var(--fd-surface);
-  border: 1px solid var(--fd-hair);
-  border-radius: 0;
+  border: var(--edge-line);
+  border-radius: var(--r-sm);
   overflow: hidden;
 }
 .fd-blk {
   position: absolute;
   top: 4px;
   bottom: 4px;
-  border-radius: 0;
+  border-radius: var(--r-sm);
   box-shadow: 0 0 0 2px var(--fd-surface);
 }
 .fd-blk[data-free="true"] {
@@ -136,14 +163,14 @@
   left: -3px;
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: 999px;
   background: var(--fd-critical);
 }
 .fd-ticks {
   display: flex;
   justify-content: space-between;
   margin-top: 6px;
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-system-stack);
   font-size: 10px;
   color: var(--fd-ink-3);
   font-variant-numeric: tabular-nums;
@@ -154,7 +181,7 @@
 .fd-items > li {
   counter-increment: fditem;
   padding: 11px 0 12px 26px;
-  border-top: 1px solid var(--fd-hair);
+  border-top: var(--hairline);
   position: relative;
 }
 .fd-items > li:first-child { border-top: none; }
@@ -163,14 +190,19 @@
   position: absolute;
   left: 0;
   top: 12px;
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-system-stack);
   font-size: 10px;
   color: var(--fd-ink-3);
   font-variant-numeric: tabular-nums;
 }
 .fd-ttl { font-weight: 600; font-size: 13.5px; display: block; line-height: 1.35; color: var(--fd-ink); }
-.fd-ttl a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--fd-rule); }
-.fd-ttl a:hover { border-bottom-color: var(--primary); color: var(--primary); }
+.fd-ttl a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--fd-rule);
+  transition: color var(--dur-state) var(--ease-out), border-color var(--dur-state) var(--ease-out);
+}
+.fd-ttl a:hover { border-bottom-color: var(--blue); color: var(--blue); }
 .fd-why { margin: 3px 0 0; font-size: 12.5px; color: var(--fd-ink-2); }
 .fd-src { border-bottom: 1px solid var(--fd-rule); }
 .fd-meta { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
@@ -179,19 +211,19 @@
 .fd-tj { width: 100%; border-collapse: collapse; }
 .fd-tj th {
   text-align: left;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-family: var(--font-system-stack);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fd-ink-3);
   font-weight: 500;
   padding: 0 0 8px;
 }
-.fd-tj td { padding: 10px 0; border-top: 1px solid var(--fd-hair); vertical-align: middle; font-size: 13px; }
-.fd-meter { height: 8px; border-radius: 0; background: var(--secondary); overflow: hidden; }
-.fd-meter > i { display: block; height: 100%; border-radius: 0; }
+.fd-tj td { padding: 10px 0; border-top: var(--hairline); vertical-align: middle; font-size: 13px; }
+.fd-meter { height: 8px; border-radius: var(--r-sm); background: var(--stock-3); overflow: hidden; }
+.fd-meter > i { display: block; height: 100%; border-radius: var(--r-sm); }
 .fd-meter[data-none="true"] {
-  background: repeating-linear-gradient(135deg, var(--secondary) 0 5px, transparent 5px 10px);
+  background: repeating-linear-gradient(135deg, var(--stock-3) 0 5px, transparent 5px 10px);
 }
 .fd-mnote { font-size: 11px; color: var(--fd-ink-3); margin-top: 4px; }
 
@@ -199,7 +231,7 @@
 @media (max-width: 720px) {
   .fd-tj, .fd-tj tbody, .fd-tj tr, .fd-tj td { display: block; width: 100%; }
   .fd-tj thead { display: none; }
-  .fd-tj tr { border-top: 1px solid var(--fd-hair); padding: 12px 0; }
+  .fd-tj tr { border-top: var(--hairline); padding: 12px 0; }
   .fd-tj tr:first-child { border-top: none; }
   .fd-tj td { border-top: none; padding: 2px 0; }
 }
@@ -230,30 +262,33 @@
    A shared vertical time axis with one lane per day. Meetings are drawn to scale rather
    than listed, because the question the view answers is spatial: not "what is on Tuesday"
    but "where is the room". Free windows are drawn as objects in their own right, not as
-   the gaps between blocks, for the same reason. */
+   the gaps between blocks, for the same reason.
+
+   The grid is a surface. overflow-x: auto clips the lanes to the rounded corners as well as
+   letting a narrow screen scroll sideways. */
 .fdw-grid {
   display: flex;
   gap: 1px;
   overflow-x: auto;
   background: var(--fd-hair);
-  border: 1px solid var(--fd-hair);
-  border-radius: 0;
+  border: var(--edge-line);
+  border-radius: var(--r-card);
   padding: 0;
 }
 .fdw-gutter, .fdw-col {
   display: flex;
   flex-direction: column;
-  background: var(--fd-plane);
+  background: var(--fd-surface);
 }
 .fdw-gutter { flex: 0 0 52px; }
 .fdw-col { flex: 1 1 0; min-width: 132px; }
-.fdw-col[data-off="true"] { background: color-mix(in srgb, var(--fd-plane) 88%, var(--fd-ink-3)); }
+.fdw-col[data-off="true"] { background: color-mix(in oklab, var(--fd-surface) 55%, var(--fd-plane)); }
 .fdw-col[data-today="true"] .fdw-dow { color: var(--fd-ink); }
 
 .fdw-head {
   height: 62px;
   padding: 9px 10px 0;
-  border-bottom: 1px solid var(--fd-hair);
+  border-bottom: var(--hairline);
   overflow: hidden;
 }
 .fdw-dow {
@@ -267,31 +302,32 @@
   display: inline-block;
   width: 5px; height: 5px;
   margin-left: 5px;
-  border-radius: 50%;
+  border-radius: 999px;
   background: var(--fd-critical);
   vertical-align: middle;
 }
 .fdw-num {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-system-stack);
   font-size: 10.5px;
   color: var(--fd-ink-3);
   margin-top: 1px;
 }
 .fdw-sum {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-system-stack);
   font-size: 10px;
   color: var(--fd-ink-3);
   margin-top: 4px;
   white-space: nowrap;
 }
-.fdw-clear { color: var(--fd-good); }
+/* "clear" is a word, so it is set in ink and made to stand out by weight, not by colour. */
+.fdw-clear { color: var(--fd-ink); font-weight: 600; }
 
 .fdw-axis, .fdw-lane { position: relative; height: var(--fdw-h); }
 .fdw-tick {
   position: absolute;
   right: 8px;
   transform: translateY(-50%);
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-system-stack);
   font-size: 10px;
   color: var(--fd-ink-3);
   font-variant-numeric: tabular-nums;
@@ -307,15 +343,17 @@
 .fdw-work {
   position: absolute;
   left: 0; right: 0;
-  background: color-mix(in srgb, var(--fd-surface) 70%, transparent);
+  background: color-mix(in oklab, var(--fd-plane) 55%, transparent);
 }
 
+/* A free window is a mark, so the olive may draw its edge and tint its ground; the
+   duration written on it is a word, so it stays in ink. */
 .fdw-free {
   position: absolute;
   left: 3px; right: 3px;
-  border: 1px dashed color-mix(in srgb, var(--fd-good) 45%, transparent);
-  border-radius: 0;
-  background: color-mix(in srgb, var(--fd-good) 7%, transparent);
+  border: 1px dashed color-mix(in oklab, var(--fd-good) 45%, transparent);
+  border-radius: var(--r-sm);
+  background: color-mix(in oklab, var(--fd-good) 9%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -323,14 +361,14 @@
 }
 .fdw-free[data-grade="deep"] {
   border-style: solid;
-  border-color: color-mix(in srgb, var(--fd-good) 60%, transparent);
-  background: color-mix(in srgb, var(--fd-good) 13%, transparent);
+  border-color: color-mix(in oklab, var(--fd-good) 60%, transparent);
+  background: color-mix(in oklab, var(--fd-good) 16%, transparent);
 }
 .fdw-free[data-grade="short"] { opacity: 0.6; }
 .fdw-free-label {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-system-stack);
   font-size: 10px;
-  color: var(--fd-good);
+  color: var(--fd-ink-2);
   font-variant-numeric: tabular-nums;
 }
 
@@ -339,9 +377,9 @@
   left: 3px; right: 3px;
   box-sizing: border-box;
   padding: 2px 6px 2px 7px;
-  border-radius: 0;
+  border-radius: var(--r-sm);
   border-left: 3px solid var(--fd-d-none);
-  background: color-mix(in srgb, var(--fd-surface) 92%, var(--fd-ink));
+  background: color-mix(in oklab, var(--fd-surface) 92%, var(--fd-ink));
   box-shadow: 0 0 0 1px var(--fd-hair);
   overflow: hidden;
   font-size: 11px;
@@ -353,7 +391,7 @@
   border-left-style: dashed;
 }
 .fdw-ev-time {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-system-stack);
   font-size: 9.5px;
   color: var(--fd-ink-3);
 }
@@ -377,13 +415,13 @@
   position: absolute;
   left: -3px; top: -3px;
   width: 8px; height: 8px;
-  border-radius: 50%;
+  border-radius: 999px;
   background: var(--fd-critical);
 }
 
 /* ---------- the availability list ---------- */
 .fdw-list { list-style: none; margin: 0; padding: 0; }
-.fdw-list > li { padding: 11px 0; border-top: 1px solid var(--fd-hair); }
+.fdw-list > li { padding: 11px 0; border-top: var(--hairline); }
 .fdw-list > li:first-child { border-top: none; }
 .fdw-list-day {
   display: flex;
@@ -397,47 +435,45 @@
   text-transform: capitalize;
 }
 .fdw-chips { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+/* A free window as a chip. The deep ones take the green ground, with ink on it. */
 .fdw-chip {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-system-stack);
   font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 999px;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: var(--r-ctl);
   border: 1px solid var(--fd-ring);
+  background: var(--fd-surface);
   color: var(--fd-ink-2);
   display: inline-flex;
+  align-items: center;
   gap: 7px;
   font-variant-numeric: tabular-nums;
 }
 .fdw-chip b { color: var(--fd-ink-3); font-weight: 500; }
 .fdw-chip[data-grade="deep"] {
-  border-color: color-mix(in srgb, var(--fd-good) 55%, transparent);
-  color: var(--fd-good);
+  background: var(--fd-good-ground);
+  border-color: var(--fd-good-ground);
+  color: var(--fd-ink);
 }
-.fdw-chip[data-grade="deep"] b { color: color-mix(in srgb, var(--fd-good) 75%, var(--fd-ink-3)); }
+.fdw-chip[data-grade="deep"] b { color: var(--fd-ink-2); }
 
-/* ---------- the view switch ---------- */
+/* ---------- the view switch ----------
+   The two views are chips (the links carry the .chip class from globals.css). The one you
+   are on is marked by aria-current, which the chip reads the way it reads .on. */
 .fd-tabs {
   max-width: 1320px;
   margin: 0 auto;
   padding: 16px 20px 0;
   display: flex;
-  gap: 4px;
+  gap: 6px;
 }
 @media (min-width: 640px) {
   .fd-tabs { padding: 20px 24px 0; }
 }
-.fd-tabs a {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fd-ink-3);
-  text-decoration: none;
-  padding: 5px 10px;
-  border: 1px solid transparent;
-  border-radius: 999px;
-}
-.fd-tabs a:hover {
-  color: var(--fd-ink);
-  border-color: var(--fd-hair);
+.fd-tabs a { text-decoration: none; }
+.fd-tabs a[aria-current="page"] {
+  background: var(--blue-tint);
+  border-color: var(--blue-tint);
+  color: var(--ink);
 }

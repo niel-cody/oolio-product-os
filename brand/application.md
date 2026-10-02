@@ -10,12 +10,12 @@ cannot drift from this folder.
 
 | Element | What it is |
 |---|---|
-| Header | Standard lockup on the stock, under the one black keyline on the page |
-| Landing hero | Syne 700, printed once and clean, beside a three-tint halftone plate. One pink-tint call to action |
+| Header | The Gate and the wordmark in the serif, on the stock, over a hairline |
+| Landing hero | Newsreader, printed once, beside a folded findings sheet. One black call to action |
 | The idea beat | The brand story told once, beside the folded sheet (`assets/fold.svg`). The only paper-inspired illustration and the only paper-inspired movement on the site |
-| Body copy | `t-body` in Archivo, never wider than about 56 characters |
-| Furniture | The pass marker in DM Mono, sitting on the keyline that opens each section |
-| The map | A snake of fourteen stage plates with soft corners, an ink dot per tile, Cream Yellow gate beads with black ticks, pink loops through the channel |
+| Body copy | `t-body` in Geist, never wider than about 60 characters |
+| Furniture | The eyebrow in Geist Mono, sitting on the firm rule that opens each section |
+| The map | A snake of fourteen stage plates with soft corners, an ink dot per tile, Cream Yellow gate beads with black ticks, pink loops through the channel. The panel cards are folded |
 | Favicon | [`assets/favicon.svg`](assets/favicon.svg) |
 
 ## Link previews
@@ -32,8 +32,8 @@ already show a signed-out visitor.
 The Product Operating System page is the human-readable front door. Confluence is already light, which for once
 costs nothing:
 
-- Headings in the page's own font. Confluence will not load Syne and fighting it produces a
-  worse page than accepting it.
+- Headings in the page's own font. Confluence will not load Newsreader and fighting it
+  produces a worse page than accepting it.
 - Panel colours from the stock: `#EFEDE7` for a callout, `#FDBF68` behind black type for
   anything gate-related.
 - The lockup goes at the top as `lockup-paper.svg`, exported with outlined text.
@@ -42,12 +42,12 @@ costs nothing:
 
 ## Decks
 
-- Title slide: the large lockup on the stock, one line of Syne, nothing else, printed once.
-- Content slides: Archivo throughout. Syne only for a section break or a pull quote.
+- Title slide: the large lockup on the stock, one line of Newsreader, nothing else.
+- Content slides: Geist throughout. Newsreader only for a section break or a pull quote.
 - One ink per slide beyond the black. If two things are shouting, one of them is wrong.
 - The map is the argument. Screenshot it rather than redrawing it, so the deck cannot show a
   lifecycle the OS is not running.
-- Slide numbers and dates in DM Mono at `t-spec`.
+- Slide numbers and dates in Geist Mono at `t-spec`.
 
 ## Terminal and plugin surfaces
 

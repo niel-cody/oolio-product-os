@@ -1,5 +1,5 @@
 {
-  "_": "The Pixie Dust Industries brand tokens. This file is the source; site/app/brand.css is generated from it by build.mjs, and never edited by hand. The direction is still Risograph: ink on uncoated stock, grain, halftone, a plate that never quite registers. What changed on 2026-10-02 is the ink set. The fluorescent drums were loud in every corner of the site at once, and the sheet read as brutalist rather than printed. The inks now come from Sanzo Wada's A Dictionary of Color Combinations (1933): papery, muted, and used as flashes rather than surfaces. Every contrast figure here was computed, not estimated.",
+  "_": "The Pixie Dust Industries brand tokens. This file is the source; site/app/brand.css is generated from it by build.mjs, and never edited by hand. The direction since 2026-10-02 is paper: uncoated stock, muted inks from Sanzo Wada's A Dictionary of Color Combinations, one quiet serif for the argument and one grotesque for everything else, one radius scale, and the fold as the single signature. It is one system from end to end, and every page reads from it. Every contrast figure here was computed, not estimated.",
   "house": {
     "name": "Pixie Dust Industries",
     "product": "Product OS",
@@ -207,135 +207,122 @@
     }
   },
   "moves": {
-    "_": "Riso on the web was four techniques; it is three now. Grain, overprint and halftone remain, all turned down so the sheet reads as paper first. Misregistration was retired on 2026-10-02: ghost plates behind a headline read as shouting, and a deliberate house prints its line once.",
+    "_": "One texture, and it is paper. Grain is the only move left: the halftone washes, the overprint blend and the misregistration ghosts of the first press were retired on 2026-10-02 because they read as a filter over the page rather than as the page. The sheet is calm, and the ink sits on it once.",
     "grain": {
       "how": "fractalNoise at baseFrequency 0.82, four octaves, multiplied over the page in one position:fixed pass",
-      "opacity": 0.11,
-      "why": "Fixed, so it never scrolls with the content: the sheet stays still while the ink moves. Eleven per cent is paper. Nineteen, where it used to sit, was a dirty screen."
+      "opacity": 0.08,
+      "why": "Fixed, so it never scrolls with the content: the sheet stays still while the ink moves. Eight per cent is uncoated paper under a lamp. Anything higher starts to read as dirt."
     },
-    "overprint": {
-      "how": "mix-blend-mode: multiply on the ink layer, isolation: isolate on its parent",
-      "why": "Ink is translucent, so shapes darken where they cross instead of hiding each other. Without the isolation the blend escapes its container."
-    },
-    "halftone": {
-      "how": "radial-gradient dots, one screen angle per drum",
-      "angles": {
-        "pink": 15,
-        "blue": 75,
-        "yellow": 45
-      },
-      "sizes": {
-        "pink": "7px",
-        "blue": "9px",
-        "yellow": "6px"
-      },
-      "why": "A Riso cannot do continuous tone; it screens everything into dots. Two drums at the same angle produce moiré, which is why the angles are fixed. Screened in the tints now, so a halftone plate is a wash rather than a shout."
-    },
-    "misregistration": {
-      "retired": "2026-10-02",
-      "why": "Two coloured ghosts behind display type made the headline hard to read and loud, which is the opposite of calm and deliberate. You cannot cut a sheet of paper twice. The class is no longer generated; nothing on the site may reproduce the effect by hand."
+    "retired": {
+      "halftone": "2026-10-02. Screens of dots behind the hero card and the systems map: a pattern, not a print.",
+      "overprint": "2026-10-02. Existed only to blend the halftone plates.",
+      "misregistration": "2026-10-02. Two coloured ghosts behind a headline read as shouting. You cannot cut a sheet of paper twice."
     }
   },
   "type": {
+    "_": "Mincho and Gothic: a quiet serif for the argument and a precise grotesque for everything a person reads or clicks, which is the classic Japanese pairing and the calmest one there is. Three faces, one job each, and every page uses the same three in the same roles.",
     "display": {
-      "family": "Syne",
+      "family": "Newsreader",
       "weights": [
-        700,
-        800
+        400,
+        500
       ],
-      "fallback": "Archivo, Helvetica Neue, Arial, sans-serif",
-      "use": "the wordmark and headlines. Drawn for a French art centre, not a startup: wide, slightly wrong proportions. Set at 700 now rather than 800, which is the difference between a poster and a barricade"
+      "axes": [
+        "opsz"
+      ],
+      "fallback": "Georgia, Times New Roman, serif",
+      "use": "the argument: page titles, section lines, the wordmark. Regular weight, never bold. The optical-size axis lets it set small without going spindly"
     },
     "text": {
-      "family": "Archivo",
+      "family": "Geist",
       "weights": [
         400,
         500,
-        600,
-        700
+        600
       ],
       "fallback": "Helvetica Neue, Arial, sans-serif",
-      "use": "everything a person reads. A grotesque built for small sizes and dense text, doing nothing interesting on purpose so Syne can"
+      "use": "everything a person reads or clicks. Precise, neutral, built for interfaces, doing nothing interesting on purpose so the serif can"
     },
     "system": {
-      "family": "DM Mono",
+      "family": "Geist Mono",
       "weights": [
         400,
         500
       ],
       "fallback": "ui-monospace, SFMono-Regular, Menlo, monospace",
-      "use": "every label, ink code, screen angle, count, stamp and slash command. Typewriter rather than terminal"
+      "use": "every label, count, stamp and slash command. The one piece of furniture that does not vary"
     },
     "scale": {
       "display-xl": {
-        "size": "clamp(2.6rem, 6.4vw, 4.8rem)",
-        "line": 0.98,
-        "track": "-0.022em",
+        "size": "clamp(2.3rem, 4.6vw, 3.5rem)",
+        "line": 1.06,
+        "track": "-0.015em",
         "family": "display",
-        "weight": 700
+        "weight": 400
       },
       "display-l": {
-        "size": "clamp(1.75rem, 3.2vw, 2.6rem)",
-        "line": 1.06,
-        "track": "-0.018em",
+        "size": "clamp(1.7rem, 3vw, 2.4rem)",
+        "line": 1.1,
+        "track": "-0.012em",
         "family": "display",
-        "weight": 700
+        "weight": 400
       },
       "display-m": {
-        "size": "1.16rem",
-        "line": 1.26,
-        "track": "-0.01em",
+        "size": "1.3rem",
+        "line": 1.25,
+        "track": "-0.008em",
         "family": "display",
-        "weight": 700
+        "weight": 400
       },
       "lede": {
-        "size": "1.12rem",
-        "line": 1.55,
-        "track": "0",
-        "family": "text"
-      },
-      "body": {
-        "size": "1rem",
+        "size": "1.08rem",
         "line": 1.6,
         "track": "0",
         "family": "text"
       },
+      "body": {
+        "size": "0.97rem",
+        "line": 1.62,
+        "track": "0",
+        "family": "text"
+      },
       "ui": {
-        "size": "0.9rem",
+        "size": "0.85rem",
         "line": 1.45,
         "track": "0",
         "family": "text"
       },
       "spec": {
-        "size": "0.76rem",
+        "size": "0.74rem",
         "line": 1.5,
         "track": "0.01em",
         "family": "system"
       },
       "pass": {
-        "size": "0.7rem",
+        "size": "0.68rem",
         "line": 1.2,
-        "track": "0.14em",
+        "track": "0.12em",
         "family": "system",
         "transform": "uppercase"
       }
     }
   },
   "shape": {
-    "_": "Soft corners and firm grey edges. The black keyline is kept for emphasis only. A print still has edges, but a die-cut sheet has rounded ones, and a card with a 1.5px black border on every side is the single thing that made the old site read as brutalist.",
+    "_": "One radius scale, three steps, and every element on every page takes one of them: small for a chip, a code span or a tag; control for every button, input and selectable row; surface for every card, panel, tile and drawer. No pills. The fold is the signature: a dog-ear on the top right corner of a surface that holds content, drawn in the stock and the pink tint, never on a control.",
     "keyline": "1px solid #231F20",
     "edge": "1px solid #A8A39A",
     "hairline": "1px solid #C4C0B7",
     "radius": {
-      "none": "0",
-      "sm": "4px",
-      "md": "8px",
-      "lg": "12px",
-      "xl": "18px",
-      "pill": "999px"
+      "sm": "6px",
+      "ctl": "10px",
+      "card": "14px"
+    },
+    "fold": {
+      "size": "18px",
+      "under": "pink-tint",
+      "why": "A sheet with one corner turned shows what it is made of. One per surface, top right, never on a control, never bigger than the type beside it."
     },
     "shadow": {
-      "press": "2px 2px 0 #F8B6BA",
       "lift": "0 1px 2px rgba(35, 31, 32, 0.05), 0 12px 32px rgba(35, 31, 32, 0.08)"
     }
   },
@@ -353,9 +340,9 @@
     "duration": {
       "press": "160ms",
       "state": "180ms",
-      "plate": "600ms",
       "reveal": "520ms",
-      "drawer": "320ms"
+      "drawer": "320ms",
+      "glide": "620ms"
     },
     "_noEaseIn": "There is deliberately no ease-in. It delays the moment being watched most, which is what makes an interface feel sluggish at an identical duration."
   },

@@ -8,6 +8,6 @@
           stroke-width="3" stroke-linecap="round"/>
     <circle cx="23.778" cy="8.222" r="3" fill="#FFE800"/>
   </g>
-  <text x="46" y="27.5" font-family="Syne, Archivo, Helvetica Neue, Arial, sans-serif" font-weight="800" text-transform="uppercase"
-        font-size="26" letter-spacing="-0.26" fill="#131e2f">Oolio Product OS</text>
+  <text x="46" y="27.5" font-family="Newsreader, Georgia, Times New Roman, serif" font-weight="500"
+        font-size="26" letter-spacing="0.13" fill="#131e2f">Oolio Product OS</text>
 </svg>

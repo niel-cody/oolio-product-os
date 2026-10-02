@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { FlightdeckTabs } from "@/components/flightdeck/tabs";
 import "./flightdeck.css";
 
 export const metadata: Metadata = {
@@ -19,22 +19,19 @@ export const metadata: Metadata = {
  * ranked snapshot built once a day; the week is a live calendar read on every request. They
  * are kept apart because merging them would force the slower one's freshness onto the faster
  * one, and availability that is five hours old is worse than none.
+ *
+ * `matches` lists the path prefixes a tab is the home of, so the dashboard chip stays lit on
+ * a dated snapshot and on the "no snapshot yet" page, not only on /app/today itself.
  */
 const TABS = [
-  { href: "/app/today", label: "Dashboard" },
-  { href: "/app/week", label: "Week" },
+  { href: "/app/today", label: "Dashboard", matches: ["/app/today", "/app/d", "/app/none"] },
+  { href: "/app/week", label: "Week", matches: ["/app/week"] },
 ];
 
 export default function FlightdeckLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="fd flex-1">
-      <nav className="fd-tabs" aria-label="Flightdeck views">
-        {TABS.map((t) => (
-          <Link key={t.href} href={t.href}>
-            {t.label}
-          </Link>
-        ))}
-      </nav>
+      <FlightdeckTabs tabs={TABS} />
       {children}
     </div>
   );

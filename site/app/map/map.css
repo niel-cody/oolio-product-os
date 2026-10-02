@@ -14,36 +14,24 @@
   mask-image: linear-gradient(to right, transparent, #000 10px, #000 calc(100% - 10px), transparent);
 }
 .stagestrip::-webkit-scrollbar { display: none; }
-.stagechip {
-  flex: none; display: inline-flex; align-items: center; gap: 6px;
-  height: 28px; padding: 0 10px 0 8px; border-radius: var(--r-pill);
-  background: color-mix(in oklab, var(--stock-2) 88%, transparent); border: var(--hairline);
-  color: var(--soft-ink); font-family: var(--font-text-stack); font-size: 11.5px; font-weight: 500;
-  cursor: pointer; backdrop-filter: blur(3px);
-  transition: background-color var(--dur-state) var(--ease-out), border-color var(--dur-state) var(--ease-out), color var(--dur-state) var(--ease-out);
-}
-.stagechip .n { font-family: var(--font-system-stack); font-size: 9.5px; letter-spacing: .08em; color: var(--muted-ink); }
-.stagechip:hover { background: var(--stock-2); border-color: var(--rule-2); color: var(--ink); }
-.stagechip.on { background: var(--blue-tint); border-color: var(--blue-tint); color: var(--ink); }
-.stagechip.on .n { color: var(--ink); }
-.stagechip:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.stagechip { backdrop-filter: blur(3px); background: color-mix(in oklab, var(--stock-2) 88%, transparent); }
+.stagechip.on { background: var(--blue-tint); }
 
 /* ---- legend ---- */
 #legend {
   position: absolute; bottom: 52px; right: 14px; z-index: 5;
   background: color-mix(in oklab, var(--stock-2) 90%, transparent);
-  border: var(--hairline); border-radius: var(--r-md); padding: 8px 11px; backdrop-filter: blur(3px);
+  border: var(--hairline); border-radius: var(--r-card); padding: 10px 12px; backdrop-filter: blur(3px);
 }
 #legend .lt {
-  font-family: var(--font-system-stack); font-size: 9px; letter-spacing: .14em;
-  color: var(--muted-ink); text-transform: uppercase; margin-bottom: 6px;
+  font-family: var(--font-system-stack); font-size: 0.62rem; letter-spacing: .12em;
+  color: var(--muted-ink); text-transform: uppercase; margin-bottom: 7px;
 }
 #legend .row { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; }
 #legend .k {
   display: flex; align-items: center; gap: 6px;
   font-family: var(--font-text-stack); font-size: 10.5px; color: var(--soft-ink); white-space: nowrap;
 }
-#legend .dot, .ctxeyebrow .dot, .ctxchip .dot, .ctxitem .dot, #tip .dot { width: 8px; height: 8px; border-radius: 999px; flex: none; }
 #legend .dot-gate { background: var(--gate); border: 1px solid var(--ink); }
 #legend .dash { width: 14px; height: 0; border-top: 2px dashed var(--loop); }
 
@@ -59,7 +47,7 @@
 /* ---- tooltip ---- */
 #tip {
   position: absolute; left: 0; top: 0; z-index: 8; width: 280px; pointer-events: none;
-  background: var(--stock-2); border: var(--hairline); border-radius: var(--r-md);
+  background: var(--stock-2); border: var(--edge-line); border-radius: var(--r-card);
   box-shadow: var(--lift-shadow); padding: 10px 12px;
 }
 #tip .t-h { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--ink); }
@@ -74,7 +62,7 @@
 .plate.on .plate-bg { stroke: var(--blue); fill: color-mix(in oklab, var(--blue-tint) 22%, var(--stock)); }
 .plate-rule { stroke: var(--rule); stroke-width: 1; }
 .plate-num { font-family: var(--font-system-stack); font-size: 11px; letter-spacing: .08em; fill: var(--muted-ink); }
-.plate-name { font-family: var(--font-text-stack); font-size: 11.5px; font-weight: 600; letter-spacing: .12em; fill: var(--ink); }
+.plate-name { font-family: var(--font-text-stack); font-size: 11.5px; font-weight: 600; letter-spacing: .1em; fill: var(--ink); }
 .plate-count { font-family: var(--font-system-stack); font-size: 10px; fill: var(--muted-ink); }
 
 .tile { fill: var(--stock-2); stroke: var(--rule-2); stroke-width: 1; transition: stroke .2s, fill .2s; }
@@ -131,34 +119,28 @@ svg.has-sel .node:not(.on):not(.hl) { opacity: .28; }
 }
 
 /* ---- the panel's context area ---- */
-.ctxcard { display: flex; flex-direction: column; gap: 8px; }
+.ctxcard { display: flex; flex-direction: column; gap: 8px; padding: 16px; --fold-sheet: var(--stock-2); }
 .ctxeyebrow { display: flex; align-items: center; gap: 7px; font-family: var(--font-system-stack); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-ink); }
-.ctxtitle { font-family: var(--font-display-stack); font-weight: 700; font-size: 19px; line-height: 1.15; letter-spacing: -0.012em; color: var(--ink); }
+.ctxtitle { font-family: var(--font-display-stack); font-weight: 400; font-size: 22px; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); font-variation-settings: "opsz" 24; padding-right: 18px; }
 .ctxnote { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--font-system-stack); font-size: 10.5px; color: var(--soft-ink); }
-.ctxbadge { font-size: 8.5px; letter-spacing: .08em; color: var(--muted-ink); border: var(--hairline); border-radius: var(--r-sm); padding: 2px 5px; }
+.ctxbadge { font-size: 8.5px; letter-spacing: .08em; color: var(--muted-ink); border: var(--hairline); border-radius: var(--r-sm); padding: 3px 6px; background: var(--stock); }
 .ctxdesc { font-size: 13px; line-height: 1.5; color: var(--soft-ink); margin-top: 2px; }
 .ctxlink {
   align-self: flex-start; margin-top: 4px; display: inline-flex; align-items: center; gap: 6px;
-  height: 32px; padding: 0 12px; border-radius: var(--r-pill); background: var(--pink-tint); color: var(--ink);
-  font-size: 12.5px; font-weight: 600; text-decoration: none;
+  height: 34px; padding: 0 13px; border-radius: var(--r-ctl); background: var(--ink); color: var(--stock-2);
+  font-size: 13px; font-weight: 500; text-decoration: none;
   transition: transform 160ms var(--ease-out), background-color var(--dur-state) var(--ease-out);
 }
-.ctxlink:hover { background: color-mix(in oklab, var(--pink-tint) 80%, var(--pink)); }
+.ctxlink:hover { background: var(--soft-ink); }
 .ctxlink:active { transform: scale(.985); }
 .ctxrow { margin-top: 8px; }
 .ctxchips { display: flex; flex-wrap: wrap; gap: 5px; }
-.ctxchip {
-  display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 9px 0 7px;
-  border: var(--hairline); border-radius: var(--r-pill); background: var(--stock); color: var(--ink);
-  font-family: var(--font-text-stack); font-size: 11.5px; cursor: pointer;
-  transition: border-color var(--dur-state) var(--ease-out), background-color var(--dur-state) var(--ease-out);
-}
-.ctxchip:hover { border-color: var(--rule-2); background: var(--stock-2); }
+.ctxchip { height: 28px; font-size: 12px; background: var(--stock); }
 .ctxlist { display: flex; flex-direction: column; }
 .ctxitem {
   display: grid; grid-template-columns: 8px 1fr; grid-template-rows: auto auto; column-gap: 9px; align-items: center;
-  width: 100%; text-align: left; padding: 7px 6px; border: 0; border-bottom: var(--hairline); background: transparent;
-  border-radius: var(--r-sm); cursor: pointer; font-family: inherit; color: var(--ink);
+  width: 100%; text-align: left; padding: 7px 8px; border: 0; border-bottom: var(--hairline); background: transparent;
+  border-radius: var(--r-ctl); cursor: pointer; font-family: inherit; color: var(--ink);
   transition: background-color var(--dur-state) var(--ease-out);
 }
 .ctxitem:last-child { border-bottom: 0; }
@@ -167,7 +149,7 @@ svg.has-sel .node:not(.on):not(.hl) { opacity: .28; }
 .ctxitem .b { font-size: 12.5px; font-weight: 600; line-height: 1.25; }
 .ctxitem .d { font-family: var(--font-system-stack); font-size: 9.5px; color: var(--muted-ink); margin-top: 1px; }
 .ctxhint p { font-size: 12.5px; line-height: 1.55; color: var(--soft-ink); margin-bottom: 8px; }
-#context .step { width: 100%; text-align: left; background: transparent; border-left: 0; border-right: 0; border-top: 0; cursor: pointer; font-family: inherit; color: var(--ink); border-radius: 0; }
+#context .step { width: 100%; text-align: left; background: transparent; border-left: 0; border-right: 0; border-top: 0; cursor: pointer; font-family: inherit; color: var(--ink); }
 #context .step:hover .b { color: var(--blue); }
 .ctxchip:focus-visible, .ctxitem:focus-visible, #context .step:focus-visible, .ctxlink:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
 

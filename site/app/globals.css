@@ -41,19 +41,22 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  /* The three steps of the one scale, under the names shadcn's primitives reach for. A
+     primitive asking for "xl" gets the surface radius, "md" and "lg" the control radius,
+     "sm" the small one: nothing on the site can round itself to a fourth value. */
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-ctl);
+  --radius-lg: var(--r-ctl);
+  --radius-xl: var(--r-card);
+  --radius-2xl: var(--r-card);
+  --radius-3xl: var(--r-card);
+  --radius-4xl: var(--r-card);
 }
 
 /* shadcn ships a default light :root and a .dark block here. Both are gone: the palette is
-   the ink set, mapped further down this file, and there is no dark mode to switch to —
-   Riso cannot print on dark stock. Leaving them in place left two dead palettes sitting
-   exactly where somebody would look for the real one. */
+   the ink set, mapped further down this file, and there is no dark mode to switch to.
+   Leaving them in place left two dead palettes sitting exactly where somebody would look
+   for the real one. */
 
 @layer base {
   * {
@@ -69,21 +72,23 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-size: 15.5px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
   html {
     @apply font-sans;
   }
+  ::selection { background: var(--blue-tint); color: var(--ink); }
 }
+
 /* ============================================================================
-   The press, wired to shadcn.
+   The sheet, wired to shadcn.
 
    Every value here comes from brand.css, which is generated from
    brand/tokens/brand.tokens.json. Nothing in this block is a colour; it is a mapping from
    the ink set to the vocabulary shadcn's components expect, so a component gets the brand
    without being rewritten and the brand can move without touching a component.
-
-   Light, and not as a preference. Riso ink is translucent and needs a pale sheet to sit on:
-   the process physically cannot print on dark stock. See brand/colour.md.
    ========================================================================== */
 :root {
   --background: var(--stock);
@@ -93,11 +98,10 @@
   --popover: var(--stock-2);
   --popover-foreground: var(--ink);
 
-  /* The primary is the first drum at its tint: Corinthian Pink, a ground with black type
-     on it, 9.62:1. The solid pink draws lines and marks and never a surface, and never a
-     word. brand/colour.md argues it. */
-  --primary: var(--pink-tint);
-  --primary-foreground: var(--k);
+  /* The primary action is the black drum on the stock: calm, certain, the same on every
+     page. The pink tint is a flash, not a button. */
+  --primary: var(--ink);
+  --primary-foreground: var(--stock-2);
 
   --secondary: var(--stock-3);
   --secondary-foreground: var(--ink);
@@ -110,17 +114,16 @@
   --input: var(--rule-2);
   --ring: var(--blue);
 
-  /* Soft corners, 2026-10-02. The squared keylined card was the single thing that made the
-     sheet read as brutalist rather than printed; a die-cut sheet has rounded corners. */
-  --radius: var(--r-md);
+  --radius: var(--r-ctl);
 }
 
+/* ----------------------------------------------------------------------------
+   The furniture. One vocabulary, used on every page, so nothing has to invent its own.
+   -------------------------------------------------------------------------- */
+
 /* Press feedback for anything pressable that is not a <Button>: a link acting as a call to
-   action, a copy button, a card you can click. Instant and slight, because the point is to
-   confirm the interface heard you rather than to be noticed. App-level rather than living
-   with the landing page, because the sign-in page uses it too and importing the landing
-   stylesheet to get one rule would drag the whole page's styles onto every route. */
-.lx-press { transition: transform 160ms var(--ease-out); }
+   action, a copy button, a card you can click. Instant and slight. */
+.lx-press { transition: transform var(--dur-press) var(--ease-out); }
 .lx-press:active { transform: scale(0.985); }
 @media (prefers-reduced-motion: reduce) {
   .lx-press { transition: none; }
@@ -129,57 +132,119 @@
 
 .mono { font-family: var(--font-system-stack); }
 
-/* The pass marker: the brand's most repeated piece of furniture, and it does not vary.
-   Named for what a Riso does — one ink per pass — rather than for where it sits. */
+/* The pass marker: the one label style on the site. It does not vary. */
 .eyebrow {
   font-family: var(--font-system-stack);
-  font-size: 0.7rem; letter-spacing: .14em; text-transform: uppercase;
+  font-size: 0.68rem; letter-spacing: .12em; text-transform: uppercase;
   font-weight: 500; color: var(--muted-ink);
 }
 
-/* A section opens on a black keyline with its pass marker sitting on it. This is the
-   scaffold the whole site is built from, in place of the card-with-a-radius. */
+/* A section opens on a firm rule with its pass marker sitting on it. The scaffold every
+   long page is built from. */
 .sechead {
   display: flex; gap: 20px; align-items: baseline; flex-wrap: wrap;
-  border-top: var(--keyline); padding-top: 12px; margin-bottom: 34px;
+  border-top: var(--edge-line); padding-top: 12px; margin-bottom: 30px;
 }
+
+/* A page's title block: eyebrow, serif title, one lede. Every page that is a page (not
+   a map) opens with exactly this. */
+.page-title {
+  font-family: var(--font-display-stack); font-weight: 400;
+  font-size: clamp(2.1rem, 4vw, 2.9rem); line-height: 1.08; letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 72; text-wrap: balance; color: var(--ink);
+}
+.page-lede { max-width: 60ch; font-size: 1.02rem; line-height: 1.62; color: var(--soft-ink); }
+
+/* A surface: the one card. Lifted a shade, a firm edge, the surface radius. Add .folded
+   when it holds something (a result, a record, a skill), and leave it plain when it is
+   only a container for controls. */
+.surface {
+  background: var(--stock-2);
+  border: var(--edge-line);
+  border-radius: var(--r-card);
+}
+.surface-well {
+  background: color-mix(in oklab, var(--stock-3) 45%, var(--stock));
+  border: var(--hairline);
+  border-radius: var(--r-card);
+}
+
+/* A chip: the one small selectable. Stage chips, folder chips, connection chips, tags.
+   Control radius, control height at the small step, the same on every page. */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 30px; padding: 0 11px; border-radius: var(--r-ctl);
+  background: var(--stock-2); border: var(--hairline); color: var(--soft-ink);
+  font-family: var(--font-text-stack); font-size: 12.5px; font-weight: 500; line-height: 1;
+  cursor: pointer; white-space: nowrap;
+  transition: background-color var(--dur-state) var(--ease-out), border-color var(--dur-state) var(--ease-out), color var(--dur-state) var(--ease-out);
+}
+.chip .n { font-family: var(--font-system-stack); font-size: 10px; letter-spacing: .08em; color: var(--muted-ink); }
+.chip:hover { border-color: var(--rule-2); color: var(--ink); }
+.chip.on, .chip[aria-pressed="true"], .chip[aria-selected="true"] { background: var(--blue-tint); border-color: var(--blue-tint); color: var(--ink); }
+.chip.on .n, .chip[aria-pressed="true"] .n { color: var(--ink); }
+.chip:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.chip-static { cursor: default; }
+.chip-static:hover { border-color: var(--rule); color: var(--soft-ink); }
+
+/* A tag: the small, static label with a tint. The one place a tint is a whole surface. */
+.tag {
+  display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: var(--r-sm);
+  font-family: var(--font-system-stack); font-size: 0.66rem; letter-spacing: .1em; text-transform: uppercase;
+  font-weight: 500; color: var(--ink); background: var(--stock-2); border: var(--hairline); white-space: nowrap;
+}
+.tag-pink { background: var(--pink-tint); border-color: var(--pink-tint); }
+.tag-gate { background: var(--gate); border-color: var(--gate); }
+.tag-blue { background: var(--blue-tint); border-color: var(--blue-tint); }
+.tag-green { background: var(--glaucous); border-color: var(--glaucous); }
+
+/* The ink dot that says who runs a thing. 8px, round, the one circle on the site. */
+.dot { width: 8px; height: 8px; border-radius: 999px; flex: none; display: inline-block; }
+
+/* A link in running text. */
+.link { color: var(--blue); text-decoration: none; }
+.link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* A key/value row, the way a colophon is set. */
+.kv { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px 14px; align-items: baseline; padding: 10px 0; border-bottom: var(--hairline); }
+.kv:last-child { border-bottom: 0; }
+.kv > dt, .kv > .k { font-family: var(--font-system-stack); font-size: 0.66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-ink); }
+
+/* The one focus ring. */
+:where(a, button, [role="button"], input, select, textarea, summary):focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 /* ----------------------------------------------------------------------------
    Sidebar furniture shared by both maps: the list of paths you can trace, and the
-   numbered steps of the one selected. Two pages use it, so it is app-level rather
-   than living in either map's own stylesheet.
+   numbered steps of the one selected.
    -------------------------------------------------------------------------- */
 .flowbtn {
-  text-align: left; background: var(--stock-2); border: var(--edge-line); border-radius: var(--r-md);
-  padding: 8px 11px; color: var(--ink); cursor: pointer; font-family: inherit;
+  text-align: left; background: var(--stock-2); border: var(--hairline); border-radius: var(--r-ctl);
+  padding: 9px 12px; color: var(--ink); cursor: pointer; font-family: inherit;
   transition: background-color var(--dur-state) var(--ease-out), border-color var(--dur-state) var(--ease-out);
   display: flex; align-items: center; gap: 9px; width: 100%;
 }
-.flowbtn:hover { border-color: var(--muted-ink); background: var(--stock-3); }
-.flowbtn.on {
-  border-color: var(--accent-line, var(--blue)); background: var(--stock-3);
-  box-shadow: 0 0 0 1px var(--accent-line, var(--blue)) inset;
-}
-.flowbtn .idx { font-family: var(--font-mono), monospace; font-size: 10px; color: var(--muted-ink); width: 14px; }
-.flowbtn .nm { font-size: 12.5px; font-weight: 500; }
-.flowbtn .ct { margin-left: auto; font-family: var(--font-mono), monospace; font-size: 9px; color: var(--muted-ink); }
+.flowbtn:hover { border-color: var(--rule-2); }
+.flowbtn.on { border-color: var(--accent-line, var(--blue)); background: var(--stock-2); box-shadow: inset 3px 0 0 var(--accent-line, var(--blue)); }
+.flowbtn .idx { font-family: var(--font-system-stack); font-size: 10px; color: var(--muted-ink); width: 16px; }
+.flowbtn .nm { font-size: 13px; font-weight: 500; }
+.flowbtn .ct { margin-left: auto; font-family: var(--font-system-stack); font-size: 10px; color: var(--muted-ink); }
 
 .shd {
-  font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: .14em;
+  font-family: var(--font-system-stack); font-size: 0.66rem; letter-spacing: .12em;
   color: var(--muted-ink); text-transform: uppercase; margin-bottom: 10px;
 }
-.step { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--rule); }
+.step { display: flex; gap: 10px; padding: 8px 0; border-bottom: var(--hairline); }
 .step:last-child { border-bottom: none; }
 .step .n {
-  font-family: var(--font-mono), monospace; font-size: 10px; color: var(--stock);
-  background: var(--sc, var(--blue)); min-width: 19px; height: 19px; border-radius: var(--r-sm);
-  display: flex; align-items: center; justify-content: center; font-weight: 600; margin-top: 1px;
+  font-family: var(--font-system-stack); font-size: 10px; color: var(--stock);
+  background: var(--sc, var(--blue)); min-width: 20px; height: 20px; border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center; font-weight: 500; margin-top: 1px;
 }
-.step .b { font-size: 12.5px; font-weight: 600; line-height: 1.25; }
-.step .d { font-size: 11px; color: var(--muted-ink); line-height: 1.3; margin-top: 2px; font-weight: 400; }
+.step .b { font-size: 13px; font-weight: 600; line-height: 1.3; }
+.step .d { font-size: 11.5px; color: var(--muted-ink); line-height: 1.4; margin-top: 2px; font-weight: 400; }
 
 /* changelog: markdown rendered from CHANGELOG.md */
-.changelog-body { font-size: 14.5px; line-height: 1.65; color: var(--muted-ink); }
+.changelog-body { font-size: 15px; line-height: 1.65; color: var(--soft-ink); }
 .changelog-body p { margin: 0 0 0.85em; }
 .changelog-body ul { margin: 0 0 1em; padding-left: 1.1em; list-style: none; }
 .changelog-body li { position: relative; margin-bottom: 0.6em; padding-left: 0.35em; }
@@ -189,10 +254,10 @@
 }
 .changelog-body strong { color: var(--ink); font-weight: 600; }
 .changelog-body code {
-  font-family: var(--font-mono), monospace; font-size: 0.86em;
-  background: var(--secondary); border: var(--hairline);
+  font-family: var(--font-system-stack); font-size: 0.86em;
+  background: var(--stock-2); border: var(--hairline);
   border-radius: var(--r-sm); padding: 0.1em 0.34em; color: var(--soft-ink);
 }
-.changelog-body a { color: var(--orch); text-decoration: none; }
+.changelog-body a { color: var(--blue); text-decoration: none; }
 .changelog-body a:hover { text-decoration: underline; }
 .changelog-body h3 { color: var(--ink); font-size: 15px; font-weight: 600; margin: 1.4em 0 0.5em; }

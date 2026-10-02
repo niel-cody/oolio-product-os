@@ -63,8 +63,9 @@ export function CardHeader({
 }) {
   return (
     <>
+      {/* The panel heading is the site's one label style; .fd-h2 only zeroes the margin. */}
       <div className="flex items-baseline justify-between gap-2">
-        <h2 className="fd-h2">{title}</h2>
+        <h2 className="eyebrow fd-h2">{title}</h2>
         {caption && <span className="fd-cap">{caption}</span>}
       </div>
       {sub && <p className="fd-cap mt-1 mb-2.5">{sub}</p>}

@@ -28,12 +28,12 @@ export default async function DatedPage({ params }: { params: Promise<{ date: st
       return (
         <div className="fd-wrap max-w-[760px]">
           <div className="eyebrow">Flightdeck</div>
-          <h1 className="mt-2 text-[22px] font-semibold">The snapshot for {date} is malformed</h1>
+          <h1 className="t-display-l mt-2">The snapshot for {date} is malformed</h1>
           <p className="mt-3 text-[14px] leading-relaxed text-[var(--fd-ink-2)]">
             It was found, but it does not match the schema, so rendering it would show you a
             partial day and let you believe it was the whole one.
           </p>
-          <pre className="mono mt-4 overflow-x-auto rounded-lg border border-[var(--fd-hair)] bg-[var(--fd-surface)] p-4 text-[11.5px] leading-relaxed text-[var(--fd-ink-2)]">
+          <pre className="mono mt-4 overflow-x-auto rounded-[var(--r-ctl)] border border-[var(--fd-hair)] bg-[var(--fd-surface)] p-4 text-[11.5px] leading-relaxed text-[var(--fd-ink-2)]">
             {err.problems.join("\n")}
           </pre>
         </div>

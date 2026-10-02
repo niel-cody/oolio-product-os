@@ -64,8 +64,9 @@ becomes a dot in a circle, which means nothing.
 
 ## The lockup
 
-Mark, then a gap of one bead diameter, then **PIXIE DUST INDUSTRIES** in Syne 800, uppercase,
-at `-0.03em` tracking. The wordmark's cap height sits on the mark's centre line.
+Mark, then a gap of one bead diameter, then **Pixie Dust Industries** in Newsreader 500,
+sentence case, at `0.005em` tracking. The wordmark's x-height sits on the mark's centre
+line. Quiet on purpose: the house name is said, not announced.
 
 The house is Pixie Dust Industries and the product is the Product OS. The lockup carries the
 house; the page says which product it is about. On the site that is the tag beside the
@@ -75,19 +76,17 @@ Three sizes, and only three:
 
 | | Mark | Wordmark | Where |
 |---|---|---|---|
-| Large | 30px | 26px | A title slide, the top of a one-pager |
-| Standard | 19px | 14px | The site header, a document header |
-| Small | 15px | 11px | A footer, a signature, a slide corner |
+| Large | 30px | 30px | A title slide, the top of a one-pager |
+| Standard | 19px | 17px | The site header, a document header |
+| Small | 15px | 13px | A footer, a signature, a slide corner |
 
-Syne is a wide face and the house name is three words, so the wordmark runs smaller against
-the mark than a serif would. Measure the lockup, do not scale it from the large size.
+Measure the lockup, do not scale it from the large size.
 
 The mark stands alone wherever the name is already on the surface: a favicon, an avatar, a
 slide corner on slide four, a loading state.
 
-**The wordmark is not misregistered.** The budget is one misregistration per screen and the
-headline spends it, so the lockup in the header is always the clean plate. A misregistered
-wordmark beside a misregistered headline is two signatures on one sheet.
+**The wordmark is printed once**, like every line on the site. Nothing sits behind it and
+nothing is folded beside it: the fold belongs to surfaces, and the lockup is not one.
 
 ## Outlining before it leaves Oolio
 

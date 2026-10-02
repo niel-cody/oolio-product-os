@@ -1,125 +1,137 @@
-/* The systems map's own styles. It shares the map's tokens and its sidebar furniture
-   (.flowbtn, .step, #legend) so the two pages read as one app, and owns everything that
-   is specific to a diagram about systems rather than about a lifecycle. */
+/* The systems map's own styles. It shares the lifecycle map's furniture (.flowbtn, .step,
+   .shd, .eyebrow, .chip, .dot, .folded from globals.css) and mirrors its svg treatment, so the
+   two pages read as one product. Every colour is a token from brand.css and every type class
+   is one of the brand's three voices. Nothing here is a hex. */
 
 .sysstage svg#sysmap { display: block; width: 100%; height: 100%; touch-action: none; }
+.sysstage { background: var(--stock); }
+/* The panel, as the lifecycle map draws it. Declared here as well as in map.css because each
+   route imports only its own stylesheet, and a class the other page owns is not guaranteed
+   to be loaded on this one. */
+.sysroot .mappanel { background: var(--stock-2); border-top: var(--hairline); }
+@media (min-width: 1024px) { .sysroot .mappanel { border-top: 0; border-left: var(--hairline); } }
 
+/* ---- legend: the lifecycle map's, to the letter ---- */
 #syslegend {
-  position: absolute; top: 12px; right: 14px; z-index: 5; background: color-mix(in oklab, var(--stock-2) 92%, transparent);
-  border: var(--keyline); padding: 9px 12px; backdrop-filter: blur(2px);
+  position: absolute; bottom: 52px; right: 14px; z-index: 5;
+  background: color-mix(in oklab, var(--stock-2) 90%, transparent);
+  border: var(--hairline); border-radius: var(--r-card); padding: 8px 11px; backdrop-filter: blur(3px);
 }
 #syslegend .lt {
-  font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: .14em;
+  font-family: var(--font-system-stack); font-size: 9px; letter-spacing: .14em;
   color: var(--muted-ink); text-transform: uppercase; margin-bottom: 6px;
 }
-#syslegend .row { display: flex; gap: 14px; flex-wrap: wrap; }
+#syslegend .row { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; }
 #syslegend .k {
-  display: flex; align-items: center; gap: 5px;
-  font-family: var(--font-mono), monospace; font-size: 9.5px; color: var(--soft-ink);
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-text-stack); font-size: 10.5px; color: var(--soft-ink); white-space: nowrap;
 }
-#syslegend .dot { width: 9px; height: 9px; border-radius: 0; }
-#syslegend .key {
-  margin-top: 7px; padding-top: 7px; border-top: 1px dashed var(--rule);
-}
-#syslegend .key .k { color: var(--muted-ink); }
+#syslegend .key { margin-top: 7px; padding-top: 7px; border-top: var(--hairline); }
+#syslegend .key .k { font-family: var(--font-system-stack); font-size: 9.5px; color: var(--muted-ink); }
 
 #sysroutes { display: flex; flex-direction: column; gap: 6px; }
 
 /* No `display` here: an ID selector would beat Tailwind's `hidden md:flex` and drop the
    stats on top of the map on a phone. Same trap as the lifecycle map's footer. */
 #sysfoot {
-  font-family: var(--font-mono), monospace; font-size: 10px; color: var(--muted-ink);
+  font-family: var(--font-system-stack); font-size: 10px; color: var(--muted-ink);
   letter-spacing: .05em; gap: 16px; flex-wrap: wrap;
 }
 #sysfoot b { color: var(--soft-ink); font-weight: 600; }
 
-/* ---- svg element classes ---- */
+/* ---- svg: the text ---- */
 .sys-band {
-  font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: .18em;
+  font-family: var(--font-system-stack); font-size: 11px; letter-spacing: .18em;
   fill: var(--muted-ink); text-transform: uppercase;
 }
-.sys-label { font-family: var(--font-sans), sans-serif; font-weight: 600; font-size: 14px; fill: var(--ink); }
-.sys-note { font-family: var(--font-mono), monospace; font-size: 9px; fill: var(--muted-ink); }
-.sys-cad { font-family: var(--font-mono), monospace; font-size: 8.5px; font-weight: 500; letter-spacing: .06em; }
-.sys-count { font-family: var(--font-mono), monospace; font-size: 8.5px; letter-spacing: .07em; fill: var(--muted-ink); }
-.core-title { font-family: var(--font-sans), sans-serif; font-weight: 700; font-size: 19px; fill: var(--ink); }
-.core-num { font-family: var(--font-sans), sans-serif; font-weight: 700; font-size: 46px; }
-.core-line { font-family: var(--font-mono), monospace; font-size: 9.5px; fill: var(--muted-ink); }
+.sys-label { font-family: var(--font-text-stack); font-weight: 600; font-size: 12.5px; letter-spacing: -0.005em; fill: var(--ink); }
+.sys-note { font-family: var(--font-system-stack); font-size: 9px; fill: var(--muted-ink); }
+.sys-badge { font-family: var(--font-system-stack); font-size: 8px; letter-spacing: .06em; fill: var(--muted-ink); }
+.sys-line { font-family: var(--font-system-stack); font-size: 9.5px; fill: var(--muted-ink); }
+/* The core's serif. Regular weight, as display type is everywhere on the site: the number
+   is the argument, and a bold serif would be a headline. */
+.core-title { font-family: var(--font-display-stack); font-weight: 400; font-size: 26px; letter-spacing: -0.012em; fill: var(--ink); }
+.core-num { font-family: var(--font-display-stack); font-weight: 400; font-size: 48px; letter-spacing: -0.015em; fill: var(--ink); }
 
-.sw {
-  fill: none; stroke-width: 1.8; stroke-linecap: round; opacity: .38;
-  stroke-dasharray: 5 8; animation: sysflow 3s linear infinite;
-}
-.swire.on .sw, .swire.hl .sw { opacity: 1; stroke-dasharray: none; stroke-width: 2.4; animation: none; }
-.swlbl { opacity: .5; transition: opacity .2s; }
-.swire.on .swlbl, .swire.hl .swlbl { opacity: 1; }
-.sw-lbl { font-family: var(--font-mono), monospace; font-size: 8.5px; letter-spacing: .04em; }
-
+/* ---- svg: the tiles and the plate ---- */
+.stile { fill: var(--stock-2); stroke: var(--rule-2); stroke-width: 1; transition: stroke .2s, fill .2s; }
+.splate { fill: color-mix(in oklab, var(--stock-3) 45%, var(--stock)); stroke: var(--rule); stroke-width: 1; transition: stroke .2s, fill .2s; }
 .snode { cursor: pointer; outline: none; }
-.snode:focus-visible .sbox { filter: drop-shadow(0 0 0 2px var(--orch)); }
+.snode:hover .stile, .snode.hl .stile { stroke: var(--ink); }
+.snode.on .stile { stroke: var(--blue); stroke-width: 1.5; fill: color-mix(in oklab, var(--blue-tint) 28%, var(--stock-2)); }
+.snode:focus-visible .stile { stroke: var(--blue); stroke-width: 2; }
+.snode:hover .splate, .snode.hl .splate { stroke: var(--rule-2); }
+.snode.on .splate { stroke: var(--blue); fill: color-mix(in oklab, var(--blue-tint) 22%, var(--stock)); }
+.snode:focus-visible .splate { stroke: var(--blue); stroke-width: 2; }
 .sbox { transition: opacity .2s; }
 
-@keyframes sysflow { to { stroke-dashoffset: -26; } }
-/* The core is the only always-on thing here, so it is the only thing that breathes. */
-@keyframes corepulse {
-  0%, 100% { stroke-opacity: .07; transform: scale(1); }
-  50%      { stroke-opacity: .3;  transform: scale(1.012); }
+/* ---- svg: the wires ---- */
+.sw {
+  fill: none; stroke-width: 1.6; stroke-linecap: round; opacity: .32;
+  stroke-dasharray: 5 7; animation: sysflow 2.8s linear infinite;
 }
-/* origin must track CORE_X / CORE_Y in systems-engine.js */
-.corehalo { animation: corepulse 3.6s ease-in-out infinite; transform-origin: 770px 476px; }
+.swire.on .sw, .swire.hl .sw { opacity: 1; stroke-dasharray: none; stroke-width: 2.2; animation: none; }
+.swlbl { opacity: .6; transition: opacity .2s; }
+.swire.on .swlbl, .swire.hl .swlbl { opacity: 1; }
+.sw-lbl-bg { fill: var(--stock-2); stroke: var(--rule); stroke-width: 1; }
+.sw-lbl { font-family: var(--font-system-stack); font-size: 8px; fill: var(--ink); }
+@keyframes sysflow { to { stroke-dashoffset: -24; } }
 
-svg.has-sel .swire:not(.on):not(.hl) { opacity: .07; }
-svg.has-sel .snode:not(.on):not(.hl) { opacity: .16; }
+svg.has-sel .swire:not(.on):not(.hl) { opacity: .08; }
+svg.has-sel .snode:not(.on):not(.hl) { opacity: .28; }
 svg.has-sel #sysambient { opacity: .12; }
-.spart { pointer-events: none; }
+.spart { pointer-events: none; opacity: .95; }
 
 @media (prefers-reduced-motion: reduce) {
   .sw { animation: none; }
-  .spart, .corehalo { display: none; }
+  .spart { display: none; }
 }
 
 /* ---- the detail panel ---- */
-.sd-t { font-size: 19px; font-weight: 700; line-height: 1.2; margin: 2px 0 7px; color: var(--sc, var(--ink)); }
-.sd-meta {
-  display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 12px;
-  font-family: var(--font-mono), monospace; font-size: 8.5px; letter-spacing: .1em;
+/* A system's record is a card on the panel, folded like any surface that holds content.
+   The panel is stock-2, so the lifted corner shows stock-2 through. */
+.sd-card {
+  background: var(--stock); border: var(--hairline); border-radius: var(--r-card);
+  padding: 14px 14px 12px; --fold-sheet: var(--stock-2);
 }
-.sd-meta span {
-  border: var(--keyline); border-radius: 0; padding: 3px 6px; color: var(--muted-ink);
-  background: var(--stock-2);
+.sd-eyebrow { display: flex; align-items: center; gap: 7px; }
+.sd-t {
+  font-family: var(--font-display-stack); font-weight: 400; font-size: 20px; line-height: 1.15;
+  letter-spacing: -0.012em; color: var(--ink); margin: 8px 0 8px;
 }
-.sd-p { font-size: 12.5px; line-height: 1.55; color: var(--muted-ink); margin: 0 0 14px; }
-.sd-h {
-  font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--muted-ink); margin: 0 0 7px;
-  border-top: 1px dashed var(--rule); padding-top: 11px;
+.sd-meta { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+.sd-meta span, .sd-tags span {
+  display: inline-flex; align-items: center; height: 22px; padding: 0 7px;
+  border: var(--hairline); border-radius: var(--r-sm); background: var(--stock-2);
+  font-family: var(--font-system-stack); font-size: 9.5px; letter-spacing: .04em; color: var(--soft-ink);
+  white-space: nowrap;
 }
+.sd-p { font-size: 12.5px; line-height: 1.55; color: var(--soft-ink); margin: 0 0 14px; }
+.sd-h { border-top: var(--hairline); padding-top: 11px; }
 .sd-l { list-style: none; margin: 0 0 14px; padding: 0; }
 .sd-l li {
-  position: relative; padding-left: 13px; margin-bottom: 5px;
+  position: relative; padding-left: 14px; margin-bottom: 5px;
   font-size: 12px; line-height: 1.4; color: var(--soft-ink);
 }
 .sd-l li::before {
-  content: ""; position: absolute; left: 0; top: 6.5px;
-  width: 4px; height: 4px; border-radius: 0; background: var(--sc, var(--orch)); opacity: .8;
+  content: ""; position: absolute; left: 0; top: 6px;
+  width: 5px; height: 5px; border-radius: 999px; background: var(--sc, var(--orch)); opacity: .9;
 }
 .sd-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
-.sd-tags span {
-  font-family: var(--font-mono), monospace; font-size: 9px; color: var(--soft-ink);
-  border: var(--keyline); background: var(--stock-2); border-radius: 0; padding: 2.5px 5px;
-}
 .sd-back {
-  font-family: var(--font-mono), monospace; font-size: 9.5px; letter-spacing: .08em;
-  color: var(--muted-ink); background: none; border: none; padding: 4px 0; cursor: pointer;
+  font-family: var(--font-text-stack); font-size: 12.5px; font-weight: 500;
+  background: none; border: none; padding: 4px 0; cursor: pointer;
 }
-.sd-back:hover { color: var(--ink); }
 
 /* the overview copy the panel opens with, and returns to */
-.sd-intro-k { font-size: 15px; font-weight: 600; line-height: 1.35; margin-bottom: 10px; }
-.sd-intro-p { font-size: 12.5px; line-height: 1.55; color: var(--muted-ink); margin: 0 0 10px; }
+.sd-intro-k {
+  font-family: var(--font-display-stack); font-weight: 400; font-size: 20px; line-height: 1.2;
+  letter-spacing: -0.012em; color: var(--ink); margin-bottom: 10px;
+}
+.sd-intro-p { font-size: 12.5px; line-height: 1.55; color: var(--soft-ink); margin: 0 0 10px; }
 .sd-intro-n {
-  font-family: var(--font-mono), monospace; font-size: 10px; line-height: 1.5;
-  color: var(--muted-ink); border-top: 1px dashed var(--rule); padding-top: 10px; margin-top: 4px;
+  font-family: var(--font-system-stack); font-size: 10px; line-height: 1.5;
+  color: var(--muted-ink); border-top: var(--hairline); padding-top: 10px; margin-top: 4px;
 }
 
 @media (min-width: 1024px) {

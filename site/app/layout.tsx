@@ -1,29 +1,28 @@
 import type { Metadata } from "next";
-import { Syne, Archivo, DM_Mono } from "next/font/google";
+import { Newsreader, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import os from "@/data/os.json";
 import { getMember } from "@/lib/members";
 
 /**
- * Three faces, one job each (brand/typography.md).
+ * Three faces, one job each (brand/typography.md). Mincho and Gothic: a quiet serif for the
+ * argument and a precise grotesque for everything a person reads or clicks, which is the
+ * classic Japanese pairing and the calmest one there is.
  *
- *   display  Syne. Drawn for a French art centre, not a startup: wide, slightly wrong
- *            proportions. Reads as an art press rather than a design system, which is
- *            the point of the whole direction.
- *   text     Archivo. A grotesque built for small sizes and dense text. Does nothing
- *            interesting on purpose, so Syne can.
- *   system   DM Mono. Typewriter rather than terminal. Carries every label, ink code,
- *            screen angle, count and slash command.
+ *   display  Newsreader, regular weight, with its optical-size axis so it sets small
+ *            without going spindly. Page titles, section lines, the wordmark.
+ *   text     Geist. Built for interfaces, neutral on purpose, so the serif can speak.
+ *   system   Geist Mono. Every label, count, stamp and slash command.
  *
- * Space Grotesk is gone. It is the face that signals "designed" without doing any designing,
- * and it was one of five unmodified defaults that made the old site read as generated.
+ * Syne and Archivo went on 2026-10-02 with the rest of the first press: Syne at any weight
+ * was a poster, and a site that wants to be read calmly cannot open with a poster.
  *
  * The variables are consumed by app/brand.css, which builds the fallback stacks around them.
  */
-const display = Syne({ variable: "--font-display", subsets: ["latin"], weight: ["600", "700", "800"], display: "swap" });
-const text = Archivo({ variable: "--font-text", subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap" });
-const system = DM_Mono({ variable: "--font-system", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
+const display = Newsreader({ variable: "--font-display", subsets: ["latin"], weight: "variable", style: ["normal", "italic"], axes: ["opsz"], display: "swap" });
+const text = Geist({ variable: "--font-text", subsets: ["latin"], weight: ["400", "500", "600"], display: "swap" });
+const system = Geist_Mono({ variable: "--font-system", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://oolio-product-os.vercel.app";
 

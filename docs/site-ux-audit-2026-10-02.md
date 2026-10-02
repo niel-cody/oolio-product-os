@@ -135,3 +135,30 @@ behind which agents loop, think, connect and hand on. The tests for that are pla
 
 The map's ambient beads, one at a time along one wire, are the one deliberate answer to the
 last question, and they switch off for anyone who has asked for reduced motion.
+
+## Second pass, the same day: one system end to end
+
+The first pass fixed the three big problems and was still not one product. Walking the site
+after it, the inconsistencies were plain: a round chip on the map, a square badge on a skill
+page, a black 1.5px keyline on the landing cards, halftone washes behind the hero, a dotted
+ground under the systems map, Syne shouting on every page, and radii that changed from page
+to page. Each page had been designed well on its own. None of them had been designed together.
+
+The fix was to decide a short system once and make every page read from it:
+
+| Decision | The rule |
+|---|---|
+| Type | Newsreader regular for the argument, Geist for the interface, Geist Mono for the machine. The classic Mincho and Gothic pairing, calm by construction |
+| Radius | Three steps by role: 6px small, 10px control, 14px surface. No pills. The build fails on a fourth value |
+| Button | The black drum for the one primary action per view; a lifted sheet with a firm edge for the secondary |
+| Label | The eyebrow, in the mono, above every title and on every section rule |
+| Surface | The lifted sheet with a firm edge and the surface radius; folded when it holds content |
+| Texture | Grain at eight per cent and nothing else. No dots, no washes, no ghosts |
+| Signature | The fold: an 18px dog-ear on the top right of a surface that holds content, in the stock and the pink tint. One per surface, never on a control |
+
+The fold is how origami runs through every page without a single crane: the hero's findings
+sheet, the map's panel cards, the skill's Run it sheet, each changelog entry, the sign-in
+confirmation, the systems map's detail card. It is small, it is always the same, and it is
+the only decoration the site allows itself.
+
+Everything else on the page is the content and the stock.

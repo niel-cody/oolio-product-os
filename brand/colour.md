@@ -133,11 +133,11 @@ is a tinted ground with black type on it, not coloured type on the stock.
 - A tint may be a ground. A solid may not, except the gate bead.
 - One flash per component. A row has its dot; a card has its chip; a command has its wash. Two
   flashes in one component is a poster.
-- The halftone plates on the landing page are screened in the tints, so they read as a wash
-  rather than a shout.
-- Misregistration is retired. Display type is printed once, in the black drum, with nothing
-  behind it. The pink and blue appear beside a headline, never under it.
-- Grain is at eleven per cent. Nineteen, where it used to sit, was a dirty screen.
+- The fold is the flash most surfaces carry: the pink tint shows on the underside of the
+  turned corner and nowhere else on the card.
+- Nothing is screened, blended or ghosted. Display type is printed once, in the black drum,
+  with nothing behind it.
+- Grain is at eight per cent. Nineteen, where it started, was a dirty screen.
 
 ## Accessibility
 

@@ -48,12 +48,12 @@ export function Dashboard({ snapshot }: { snapshot: Snapshot }) {
           <div className="eyebrow">
             {formatDate(snapshot.for_date, snapshot.timezone)} · {city}
           </div>
-          <h1 className="display mt-2 max-w-[820px] text-[24px] leading-[1.22] tracking-[-0.014em] sm:text-[29px]">
-            {headline.text}
-          </h1>
+          {/* A page title at the small end of the scale; flightdeck.css sets the size. */}
+          <h1 className="page-title mt-2 max-w-[820px]">{headline.text}</h1>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          <span className="fd-tag" style={{ padding: "5px 12px" }}>
+          {/* The load tag carries a sentence, so it takes the chip height rather than the tag height. */}
+          <span className="fd-tag" style={{ height: 30, padding: "0 12px" }}>
             <span
               className="fd-dot"
               style={{ background: LOAD_COLOUR[day.load] ?? "var(--fd-ink-3)", width: 8, height: 8 }}

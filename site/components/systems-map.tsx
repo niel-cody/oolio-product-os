@@ -61,25 +61,20 @@ export function SystemsMap({
         <div id="sysfoot" className="absolute bottom-3 left-4 z-10 hidden md:flex" />
       </div>
 
-      <aside className="flex w-full shrink-0 flex-col border-t border-[var(--line)] bg-[var(--panel)] lg:h-full lg:w-[310px] lg:border-l lg:border-t-0">
-        <div className="flex items-center gap-2 border-b border-[var(--line)] px-4 pb-2.5 pt-3.5">
-          <div>
-            <div className="eyebrow">Data routes</div>
-            <h2 className="mt-1 text-[14px] font-semibold">Follow one end to end</h2>
-          </div>
-          <button
-            data-overview
-            className="mono ml-auto rounded-md border border-[var(--line)] px-2 py-1 text-[9px] tracking-[0.1em] text-[var(--muted-ink)] transition-colors hover:text-[var(--ink)]"
-          >
-            OVERVIEW
+      {/* panel: the lifecycle map's, with one chip to return to the overview copy */}
+      <aside className="mappanel flex w-full shrink-0 flex-col lg:h-full lg:w-[316px]">
+        <div className="flex items-center gap-2 px-4 pb-3 pt-4">
+          <div className="eyebrow">Data routes</div>
+          <button type="button" data-overview className="chip ml-auto">
+            Overview
           </button>
         </div>
 
-        <div id="sysroutes" className="border-b border-[var(--line)] px-3 py-2.5" />
+        <div id="sysroutes" className="px-3 pb-3" />
 
         {/* The engine reads this markup once on mount and restores it when someone asks for
             the overview again, so the copy stays in the config rather than in the engine. */}
-        <div id="sysdetail" className="min-h-0 flex-1 overflow-y-auto px-3.5 pb-6 pt-3.5">
+        <div id="sysdetail" className="min-h-0 flex-1 overflow-y-auto border-t border-[var(--rule)] px-4 pb-6 pt-4">
           <div className="sd-intro-k">{intro.kicker}</div>
           {intro.lede.map((p) => (
             <p key={p} className="sd-intro-p">{p}</p>

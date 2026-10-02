@@ -3,8 +3,16 @@
 import { useRef, useState, useTransition } from "react";
 import { UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { addMember } from "@/app/admin/actions";
 import { ROLES, ROLE_LABEL } from "@/lib/roles";
+
+/**
+ * The same dressing the members table gives its role select, so the two controls that pick
+ * a role are the same shape whether they sit in a row or in a form.
+ */
+const SELECT_CLASS =
+  "mt-1.5 h-9 w-full min-w-0 rounded-[var(--r-ctl)] border border-[var(--rule-2)] bg-[var(--stock-2)] px-3 text-[13px] text-[var(--ink)] transition-colors outline-none hover:border-[var(--muted-ink)] focus-visible:border-[var(--blue)] focus-visible:ring-2 focus-visible:ring-[var(--blue)]/30";
 
 /**
  * Adding somebody to the list.
@@ -12,6 +20,9 @@ import { ROLES, ROLE_LABEL } from "@/lib/roles";
  * Defaults to viewer, which is the least it can grant. A form whose default is the most
  * powerful option gets used carelessly, and the cost of under-granting is one more click
  * while the cost of over-granting is somebody reading a diary that is not theirs.
+ *
+ * A plain surface, not a folded one: this sheet holds controls, and the fold is for a sheet
+ * that holds something.
  */
 export function AddMemberForm() {
   const [pending, start] = useTransition();
@@ -32,37 +43,22 @@ export function AddMemberForm() {
           }
         })
       }
-      className="rounded-xl border border-[var(--line)] bg-[var(--rule)] p-4 sm:p-5"
+      className="surface p-4 sm:p-5"
     >
       <div className="grid gap-3 sm:grid-cols-[1fr_180px_150px_auto] sm:items-end">
         <label className="block">
           <span className="eyebrow">Oolio email</span>
-          <input
-            name="email"
-            type="email"
-            required
-            placeholder="them@oolio.com"
-            className="mono mt-1.5 w-full rounded-md border border-[var(--line)] bg-[var(--panel)] px-3 py-2 text-[13px] text-[var(--ink)] outline-none placeholder:text-[var(--muted-ink)]/60 focus:border-[var(--primary)]"
-          />
+          <Input name="email" type="email" required placeholder="them@oolio.com" className="mono mt-1.5 text-[13px]" />
         </label>
 
         <label className="block">
           <span className="eyebrow">Name (optional)</span>
-          <input
-            name="full_name"
-            type="text"
-            placeholder="Their name"
-            className="mt-1.5 w-full rounded-md border border-[var(--line)] bg-[var(--panel)] px-3 py-2 text-[13px] text-[var(--ink)] outline-none placeholder:text-[var(--muted-ink)]/60 focus:border-[var(--primary)]"
-          />
+          <Input name="full_name" type="text" placeholder="Their name" className="mt-1.5 text-[13px]" />
         </label>
 
         <label className="block">
           <span className="eyebrow">Role</span>
-          <select
-            name="role"
-            defaultValue="viewer"
-            className="mt-1.5 w-full rounded-md border border-[var(--line)] bg-[var(--panel)] px-3 py-2 text-[13px] text-[var(--ink)] outline-none focus:border-[var(--primary)]"
-          >
+          <select name="role" defaultValue="viewer" className={SELECT_CLASS}>
             {ROLES.map((r) => (
               <option key={r} value={r}>
                 {ROLE_LABEL[r]}
@@ -71,8 +67,8 @@ export function AddMemberForm() {
           </select>
         </label>
 
-        <Button type="submit" disabled={pending} className="h-9 px-4 text-[13px]">
-          <UserPlus className="mr-1.5 h-3.5 w-3.5" />
+        <Button type="submit" disabled={pending}>
+          <UserPlus data-icon="inline-start" />
           {pending ? "Adding…" : "Add"}
         </Button>
       </div>
@@ -80,8 +76,8 @@ export function AddMemberForm() {
       {message && (
         <p
           role="status"
-          className={`mt-3 text-[12.5px] leading-relaxed ${
-            message.ok ? "text-[var(--output)]" : "text-[var(--destructive)]"
+          className={`mt-3 text-[13px] leading-relaxed ${
+            message.ok ? "text-[var(--soft-ink)]" : "text-[var(--alarm)]"
           }`}
         >
           {message.text}

@@ -98,7 +98,7 @@ export function ItemPanel({
   panel: Panel;
 }) {
   return (
-    <section className="fd-card px-[18px] pt-4 pb-1.5">
+    <section className="fd-card folded px-[18px] pt-4 pb-1.5">
       <CardHeader
         title={title}
         caption={`${panel.items.length} of ${panel.considered}`}
@@ -133,7 +133,7 @@ function periodLabel(period: string): string {
 export function Trajectory({ rows }: { rows: TrajectoryRow[] }) {
   const unmeasured = rows.filter((r) => r.state === "unmeasured").length;
   return (
-    <section className="fd-card mt-4 px-[18px] py-4">
+    <section className="fd-card folded mt-4 px-[18px] py-4">
       <CardHeader
         title="Trajectory"
         caption={unmeasured ? `${unmeasured} of ${rows.length} unmeasured` : undefined}
@@ -191,7 +191,7 @@ export function Trajectory({ rows }: { rows: TrajectoryRow[] }) {
 
 export function Shipped({ panel }: { panel: ShippedPanel }) {
   return (
-    <section className="fd-card mt-4 px-[18px] py-4">
+    <section className="fd-card folded mt-4 px-[18px] py-4">
       <CardHeader
         title="Shipped"
         caption={`${panel.considered} closed in ${panel.window_days} days · ${panel.groups.length} groups`}
@@ -221,7 +221,7 @@ export function Shipped({ panel }: { panel: ShippedPanel }) {
 
 export function Signals({ panel }: { panel: Panel }) {
   return (
-    <section className="fd-card mt-4 px-[18px] pt-4 pb-1.5">
+    <section className="fd-card folded mt-4 px-[18px] pt-4 pb-1.5">
       <CardHeader
         title="Signals"
         caption={`${panel.items.length} of ${panel.considered}`}
@@ -248,7 +248,7 @@ export function Signals({ panel }: { panel: Panel }) {
 export function Footer({ debt, gaps }: { debt: DebtRow[]; gaps: GapRow[] }) {
   return (
     <div className="mt-4 grid gap-4 lg:grid-cols-[1.6fr_1fr]">
-      <section className="fd-card px-[18px] py-4">
+      <section className="fd-card folded px-[18px] py-4">
         <CardHeader title="Debt" caption="Suppressed on purpose" />
         <div className="mt-1 space-y-2">
           {debt.map((d) => (
@@ -258,7 +258,7 @@ export function Footer({ debt, gaps }: { debt: DebtRow[]; gaps: GapRow[] }) {
           ))}
         </div>
       </section>
-      <section className="fd-card px-[18px] py-4">
+      <section className="fd-card folded px-[18px] py-4">
         <CardHeader title="Gaps" caption="Sources" />
         <div className="mt-1 space-y-2">
           {gaps.map((g) => (
