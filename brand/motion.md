@@ -3,6 +3,11 @@
 The site already holds itself to a strict motion standard and this does not loosen it. What the
 brand adds is one signature animation and the rule that it is the only one with meaning.
 
+## What left
+
+Misregistration, the ghost plates behind the hero and the closing line, retired 2 October
+2026. It was the first press's signature and it read as shouting. Nothing replaces it.
+
 ## The rules
 
 - **Transform and opacity only.** Nothing animates a layout property.

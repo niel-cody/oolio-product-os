@@ -43,9 +43,9 @@ import "./landing.css";
  * leak was invisible in the source — skill ids travelling as React keys. Run it after any
  * change here, and mind the prose too: several gated skills have one-word titles.
  *
- * MISREGISTRATION BUDGET: once per screen, display type only. The hero spends one and the
- * closing line spends the other, and they are ten screens apart. A third would stop reading
- * as a press and start reading as a filter.
+ * NO MISREGISTRATION. The first press misregistered the hero and the closing line, and it
+ * read as shouting. Retired 2026-10-02: display type is printed once, in one ink, and the
+ * magic is in the small marks (the tag, the fold, the gate bead), not in the headline.
  *
  * EVERY MOCK IS DRAWN, NOTHING IS DATA. The findings card, the harness proofs and the brain
  * chips are illustrative copy written here. They say so on the page. Nothing in them is read
@@ -237,16 +237,10 @@ function Hero({
               </div>
             </Reveal>
 
-            {/* The one misregistration on this screen. The ghosts are aria-hidden copies
-                sitting behind the solid plate, so a screen reader hears the line once. */}
+            {/* Set clean. The headline used to carry two misregistration ghosts, which read as
+                shouting; a deliberate house prints its line once. */}
             <Reveal delay={60}>
-              <h1 className="display misreg mt-7 text-[clamp(2.3rem,5vw,4rem)] leading-[0.94] text-[var(--k)]">
-                <span className="ghost2" aria-hidden>
-                  Everything but the deciding.
-                </span>
-                <span className="ghost" aria-hidden>
-                  Everything but the deciding.
-                </span>
+              <h1 className="display mt-7 max-w-[14ch] text-[clamp(2.1rem,4.4vw,3.5rem)] leading-[1.02] text-[var(--k)]">
                 Everything but the deciding.
               </h1>
             </Reveal>
@@ -1502,14 +1496,7 @@ function Door({ signedIn }: { signedIn: boolean }) {
   return (
     <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
       <Reveal>
-        {/* The second and last misregistration on the site. */}
-        <p className="display misreg text-[clamp(2.3rem,5.4vw,4.1rem)] leading-[0.95] text-[var(--k)]">
-          <span className="ghost2" aria-hidden>
-            Learn it once.
-          </span>
-          <span className="ghost" aria-hidden>
-            Learn it once.
-          </span>
+        <p className="display text-[clamp(2.1rem,4.6vw,3.6rem)] leading-[1.02] text-[var(--k)]">
           Learn it once.
         </p>
         <p className="mt-7 max-w-[52ch] text-[15px] leading-[1.65] text-[var(--soft-ink)] sm:text-[16.5px]">

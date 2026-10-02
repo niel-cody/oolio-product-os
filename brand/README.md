@@ -30,18 +30,19 @@ generated from them, and a build fails if the two disagree.
 | **Type** | Syne 700 for the argument, Archivo for the interface, DM Mono for the machine. |
 | **Voice** | British English. Short declarative sentences. Concrete nouns. No buzzwords, no em dashes. |
 
-## The four moves
+## The three moves
 
-Riso on the web is four techniques. Get these right and everything else is ordinary layout;
-get them wrong and it is a filter over a SaaS site. All four are generated into
-[`site/app/brand.css`](../site/app/brand.css) as classes.
+Riso on the web was four techniques and is three. Grain, overprint and halftone are generated
+into [`site/app/brand.css`](../site/app/brand.css) as classes, all turned down so the sheet
+reads as paper first. Misregistration was retired on 2 October 2026: two ghost plates behind
+a headline made it hard to read and loud, and a calm, deliberate house prints its line once.
+You cannot cut a sheet of paper twice.
 
 | | What | Where |
 |---|---|---|
 | **01 Grain** | Fractal noise multiplied over the page in one fixed pass, at 19%. The sheet stays still while the ink moves. | `.sheet`, on `<body>`, once |
 | **02 Overprint** | Translucent ink multiplies where two passes cross, so shapes darken instead of hiding each other. | `.ink` + `.plate` |
 | **03 Halftone** | A Riso screens everything into dots. One angle per drum: 15°, 75°, 45°. | `.halftone-pink` / `-blue` / `-yellow` |
-| **04 Misregistration** | The paper shifts between passes, so the plates never quite line up. | `.misreg`, **once per screen** |
 
 ## The documents
 
@@ -81,8 +82,8 @@ Committing to this has real costs, and they were decided rather than discovered.
 - **Flashes, not surfaces.** Since 2 October 2026 colour lives in dots, beads, rules and small
   pills. A tint may be a ground; a solid may not. The black keyline is emphasis only, and every
   card has a firm grey edge and a soft corner instead. [colour.md](colour.md) has the argument.
-- **Once per screen.** Misregistration is a signature, not a texture. Overdone it stops reading
-  as a press and starts reading as a filter, which lands you back where you started.
+- **Display type is printed once.** No ghosts, no offsets, no second ink behind a headline.
+  The magic is a sprinkling: a tag, a bead, a fold, never the headline itself.
 
 ## What is deliberately not here
 

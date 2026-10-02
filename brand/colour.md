@@ -16,7 +16,7 @@ colour from Sanzo Wada's **A Dictionary of Color Combinations** (1933), chosen b
 book's whole argument is restraint: muted, papery inks that sit together because they were
 printed together. The brief that chose it: papery, minimalist and classic, with small flashes
 of colour that are vivid without being flashy. So the rule that governs everything below is
-**flashes, not surfaces**. Colour lives in dots, beads, rules, ghosts and small pills. The sheet
+**flashes, not surfaces**. Colour lives in dots, beads, rules and small pills. The sheet
 stays the sheet.
 
 ## The stock
@@ -40,7 +40,7 @@ and a soft corner instead. That one change is most of the difference between the
 ## The drums
 
 One ink per pass. Each drum now has two strengths, the way a plate prints at full and at a
-tint: the **solid** draws lines, dots, dashes and ghosts; the **tint** is the only one allowed to
+tint: the **solid** draws lines, dots and dashes; the **tint** is the only one allowed to
 be a surface, and always carries black type.
 
 | Pass | Ink | Hex | On stock | May set copy? |
@@ -52,7 +52,7 @@ be a surface, and always carries black type.
 | 03 | **Cream Yellow** | `#FDBF68` | black on it 9.96:1 | **No** |
 | K | **Black drum** | `#231F20` | 12.57:1 | Yes |
 
-**Pink is the dust.** A dusty magenta for the loops, the misregistration ghost and the smallest
+**Pink is the dust.** A dusty magenta for the loops and the smallest
 marks on the page. Its tint, Corinthian Pink, is the one surface the brand allows itself: the
 primary button, a tag, a wash under a command.
 
@@ -135,8 +135,8 @@ is a tinted ground with black type on it, not coloured type on the stock.
   flashes in one component is a poster.
 - The halftone plates on the landing page are screened in the tints, so they read as a wash
   rather than a shout.
-- Misregistration offsets came in a pixel, and the ghosts sit at about half opacity, because
-  the solid inks are quieter and the ghost no longer needs to travel.
+- Misregistration is retired. Display type is printed once, in the black drum, with nothing
+  behind it. The pink and blue appear beside a headline, never under it.
 - Grain is at eleven per cent. Nineteen, where it used to sit, was a dirty screen.
 
 ## Accessibility

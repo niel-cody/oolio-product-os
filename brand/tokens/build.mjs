@@ -126,10 +126,9 @@ p();
 
 /* ---------------------------------------------------------------- the four moves */
 p("/* ============================================================================");
-p("   THE FOUR MOVES");
+p("   THE MOVES");
 p("");
-p("   Riso on the web is four techniques. Get these right and everything else is ordinary");
-p("   layout; get them wrong and it is a filter over a SaaS site.");
+p(`   ${t.moves._}`);
 p("   ========================================================================== */");
 p();
 p(`/* 01 GRAIN. ${t.moves.grain.why}`);
@@ -163,22 +162,8 @@ for (const [drum, angle] of Object.entries(t.moves.halftone.angles)) {
   p(`.halftone-${drum} { --dot: var(${ink}); --dot-angle: ${angle}deg; --dot-size: ${t.moves.halftone.sizes[drum]}; }`);
 }
 p();
-p(`/* 04 MISREGISTRATION. ${t.moves.misregistration.why}`);
-p(`   Budget: ${t.moves.misregistration.budget}. The ghosts are aria-hidden duplicates of the`);
-p("   text, sitting behind it; a screen reader hears the word once. */");
-p(".misreg { position: relative; display: inline-block; isolation: isolate; }");
-p(".misreg .ghost,");
-p(".misreg .ghost2 {");
-p("  position: absolute;");
-p("  left: 0;");
-p("  top: 0;");
-p("  mix-blend-mode: multiply;");
-p("  -webkit-user-select: none;");
-p("  user-select: none;");
-p("  pointer-events: none;");
-p("}");
-p(`.misreg .ghost { color: var(--pink); transform: ${t.moves.misregistration.offsets.pink}; z-index: -1; opacity: 0.55; }`);
-p(`.misreg .ghost2 { color: var(--blue); transform: ${t.moves.misregistration.offsets.blue}; z-index: -2; opacity: 0.45; }`);
+p(`/* 04 MISREGISTRATION. Retired ${t.moves.misregistration.retired}. ${t.moves.misregistration.why}`);
+p("   No class is generated for it. */");
 p();
 p("/* Texture never touches anything functional. A slash command is there to be copied, so");
 p("   it gets no grain, no halftone and no misregistration — a hard pink shadow is as far as");

@@ -109,10 +109,9 @@
 }
 
 /* ============================================================================
-   THE FOUR MOVES
+   THE MOVES
 
-   Riso on the web is four techniques. Get these right and everything else is ordinary
-   layout; get them wrong and it is a filter over a SaaS site.
+   Riso on the web was four techniques; it is three now. Grain, overprint and halftone remain, all turned down so the sheet reads as paper first. Misregistration was retired on 2026-10-02: ghost plates behind a headline read as shouting, and a deliberate house prints its line once.
    ========================================================================== */
 
 /* 01 GRAIN. Fixed, so it never scrolls with the content: the sheet stays still while the ink moves. Eleven per cent is paper. Nineteen, where it used to sit, was a dirty screen.
@@ -145,22 +144,8 @@
 .halftone-blue { --dot: var(--blue-tint); --dot-angle: 75deg; --dot-size: 9px; }
 .halftone-yellow { --dot: var(--yellow); --dot-angle: 45deg; --dot-size: 6px; }
 
-/* 04 MISREGISTRATION. The paper shifts between passes so the plates never quite line up. It is a signature, not a texture: overdone it stops reading as a press and starts reading as a filter. The offsets came in a pixel; the solid inks are quieter and the ghost no longer needs to travel.
-   Budget: once per screen, display type only. The ghosts are aria-hidden duplicates of the
-   text, sitting behind it; a screen reader hears the word once. */
-.misreg { position: relative; display: inline-block; isolation: isolate; }
-.misreg .ghost,
-.misreg .ghost2 {
-  position: absolute;
-  left: 0;
-  top: 0;
-  mix-blend-mode: multiply;
-  -webkit-user-select: none;
-  user-select: none;
-  pointer-events: none;
-}
-.misreg .ghost { color: var(--pink); transform: translate(2px, -2px); z-index: -1; opacity: 0.55; }
-.misreg .ghost2 { color: var(--blue); transform: translate(-1.5px, 1.5px); z-index: -2; opacity: 0.45; }
+/* 04 MISREGISTRATION. Retired 2026-10-02. Two coloured ghosts behind display type made the headline hard to read and loud, which is the opposite of calm and deliberate. You cannot cut a sheet of paper twice. The class is no longer generated; nothing on the site may reproduce the effect by hand.
+   No class is generated for it. */
 
 /* Texture never touches anything functional. A slash command is there to be copied, so
    it gets no grain, no halftone and no misregistration — a hard pink shadow is as far as

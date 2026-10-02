@@ -11,7 +11,7 @@ cannot drift from this folder.
 | Element | What it is |
 |---|---|
 | Header | Standard lockup on the stock, under the one black keyline on the page |
-| Landing hero | Syne 700, misregistered once, beside a three-tint halftone plate. One pink-tint call to action |
+| Landing hero | Syne 700, printed once and clean, beside a three-tint halftone plate. One pink-tint call to action |
 | The idea beat | The brand story told once, beside the folded sheet (`assets/fold.svg`). The only paper-inspired illustration and the only paper-inspired movement on the site |
 | Body copy | `t-body` in Archivo, never wider than about 56 characters |
 | Furniture | The pass marker in DM Mono, sitting on the keyline that opens each section |
@@ -42,8 +42,7 @@ costs nothing:
 
 ## Decks
 
-- Title slide: the large lockup on the stock, one line of Syne, nothing else. One
-  misregistration, here and nowhere else in the deck.
+- Title slide: the large lockup on the stock, one line of Syne, nothing else, printed once.
 - Content slides: Archivo throughout. Syne only for a section break or a pull quote.
 - One ink per slide beyond the black. If two things are shouting, one of them is wrong.
 - The map is the argument. Screenshot it rather than redrawing it, so the deck cannot show a
@@ -72,7 +71,7 @@ rather than for Product.
 
 - Does every number on it come from the thing it describes, or was one typed?
 - Is Cream Yellow on this page? If so, is it a gate?
-- Is there exactly one misregistration on each screen?
+- Is every headline printed once, in one ink, with nothing behind it?
 - Does any texture touch something a person has to copy or click?
 - Does it read at the smallest size it will actually be seen at?
 - Would deleting the adjectives improve it?

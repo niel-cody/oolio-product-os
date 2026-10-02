@@ -67,7 +67,7 @@ export function SiteHeader({
     <header className="sticky top-0 z-30 border-b border-[var(--k)] bg-[var(--stock)]/92 backdrop-blur">
       <div className="mx-auto flex h-14 w-full max-w-7xl items-center gap-3 px-4 sm:px-6">
         {/* The house lockup: the Gate, then Pixie Dust Industries in Syne 800 uppercase.
-            Not misregistered — the budget is one misregistration per screen and the hero
+            Printed once, like every line on the site since misregistration was retired. The hero
             spends it, so the header carries the clean plate. */}
         {/* Set a step down on a phone. Three words at 14px plus a call to action does not fit
             375px, and the button was the half that fell off the edge. */}
