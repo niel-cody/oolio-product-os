@@ -1,5 +1,5 @@
 {
-  "stamp": "6c528ee",
+  "stamp": "c39c551",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "oolio-pm",
-      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, a daily HubSpot sweep that turns the support queue into cited Insights, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding, and push-to-brain, the explicit end-of-session push that lands what a session established on the page that already owns it. The QA family tests the built product before it ships: a test basis that lines up the sources and proves the metrics are measurable, functional, exploratory, design-conformance, WCAG 2.2 accessibility, synthetic-persona, code-coverage and resilience passes, real-user UAT, one defect standard that reworks stories before merge, and a release gate whose verdict hands GTM only verified claims and learns from what it missed. Forty-five skills.",
+      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, story mockups built in Figma from Oolio components, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, a daily HubSpot sweep that turns the support queue into cited Insights, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding, and push-to-brain, the explicit end-of-session push that lands what a session established on the page that already owns it. The QA family tests the built product before it ships: a test basis that lines up the sources and proves the metrics are measurable, functional, exploratory, design-conformance, WCAG 2.2 accessibility, synthetic-persona, code-coverage and resilience passes, real-user UAT, one defect standard that reworks stories before merge, and a release gate whose verdict hands GTM only verified claims and learns from what it missed. Forty-six skills.",
       "skills": [
         {
           "id": "accessibility-audit",
@@ -577,7 +577,7 @@
           "plugin": "oolio-pm",
           "description": "The front door and router for the oolio-pm skills. Trigger when someone asks \"which skill should I use\", \"where do I start\", \"what can these skills do\", \"what have you got for X\", \"help me choose\", \"I'm new to this\", or describes a product-management task without naming a skill and the right one isn't obvious. Also trigger for \"show me the pipeline\" or \"how do these skills fit together\". Reads the situation, names the one skill (or short chain) that fits, and starts it on request. Do NOT trigger when the user already named a specific skill or their phrasing clearly matches one skill's own triggers — route straight there instead.",
           "title": "PM compass",
-          "lede": "The router. Forty-five skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
+          "lede": "The router. Forty-six skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
           "blurb": "The front door and router for the oolio-pm skills.",
           "when": "You describe a product-management task without naming a skill and the right one isn't obvious. Reads the situation, names the one skill (or short chain) that fits, and starts it on request.",
           "phrases": [
@@ -704,6 +704,21 @@
             "give me a STORM briefing on X"
           ],
           "excludes": []
+        },
+        {
+          "id": "story-mockups",
+          "plugin": "oolio-pm",
+          "description": "Build review-ready Figma mockups from a PRD and its Jira stories, using only Oolio Office components. One Section per story, every state the stories imply (empty, loading, failed, confirmations, toasts), native annotations in the five house categories, and every open question posted as a Figma comment. A fast first pass for product and engineering to review, then the designer fine-tunes. Trigger on \"mock up these stories\", \"build the screens for <epic>\", \"turn this PRD into Figma\", \"high-speed mockups\", \"what would this look like\", or a PRD or story keys handed over with a Figma link. Do NOT trigger to judge whether a design is good (design-council-review), to check a built screen against its design (design-conformance), or for polished design or design-system changes (those go to Design).",
+          "title": "Story mockups: from stories to screens people can argue with",
+          "lede": "A high-speed first pass. It turns a PRD and its stories into Figma screens built from the real Oolio components, so product and engineering can review and comment on something concrete, and the designer starts from a page instead of a blank one. It is not polished design and must never pretend to be: anything it cannot settle from the sources becomes a comment, never a guess on the canvas.",
+          "blurb": "Build review-ready Figma mockups from a PRD and its Jira stories, using only Oolio Office components. One Section per story, every state the stories imply (empty, loading, failed, confirmations, toasts), native annotations in the five house categories, and every open question posted as a Figma comment. A fast first pass for product and engineering to review, then the designer fine-tunes. Trigger on \"mock up these stories\", \"build the screens for <epic>\", \"turn this PRD into Figma\", \"high-speed mockups\", \"what would this look like\", or a PRD or story keys handed over with a Figma link.",
+          "when": "",
+          "phrases": [],
+          "excludes": [
+            "To judge whether a design is good (design-council-review)",
+            "To check a built screen against its design (design-conformance)",
+            "For polished design or design-system changes (those go to Design)"
+          ]
         },
         {
           "id": "test-basis",
@@ -881,14 +896,14 @@
         }
       ],
       "counts": {
-        "skills": 45,
+        "skills": 46,
         "inProgress": 0,
         "archived": 0
       }
     }
   ],
   "totals": {
-    "skills": 45,
+    "skills": 46,
     "plugins": 1,
     "inProgress": 0,
     "archived": 0,
@@ -943,7 +958,7 @@
       "title": "PM Compass",
       "blurb": "The front door and router for the oolio-pm skills.",
       "summary": "The front door and router for the oolio-pm skills.",
-      "lede": "The router. Forty-five skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
+      "lede": "The router. Forty-six skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
       "when": "You describe a product-management task without naming a skill and the right one isn't obvious. Reads the situation, names the one skill (or short chain) that fits, and starts it on request.",
       "phrases": [
         "which skill should I use",
@@ -2484,6 +2499,12 @@
           "kind": "hop"
         },
         {
+          "id": "story-mockups",
+          "label": "Story Mockups",
+          "via": "PRD",
+          "kind": "hop"
+        },
+        {
           "id": "jira-epic-groomer",
           "label": "Jira Epic Groomer",
           "via": "PRD",
@@ -2692,6 +2713,92 @@
         }
       ],
       "prev": "grill-my-prd",
+      "next": "story-mockups"
+    },
+    {
+      "id": "story-mockups",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:story-mockups",
+      "title": "Story Mockups",
+      "blurb": "Build review-ready Figma mockups from a PRD and its Jira stories, using only Oolio Office components. One Section per story, every state the stories imply (empty, loading, failed, confirmations, toasts), native annotations in the five house categories, and every open question posted as a Figma comment. A fast first pass for product and engineering to review, then the designer fine-tunes. Trigger on \"mock up these stories\", \"build the screens for <epic>\", \"turn this PRD into Figma\", \"high-speed mockups\", \"what would this look like\", or a PRD or story keys handed over with a Figma link.",
+      "summary": "Build review-ready Figma mockups from a PRD and its Jira stories, using only Oolio Office components.",
+      "lede": "A high-speed first pass. It turns a PRD and its stories into Figma screens built from the real Oolio components, so product and engineering can review and comment on something concrete, and the designer starts from a page instead of a blank one. It is not polished design and must never pretend to be: anything it cannot settle from the sources becomes a comment, never a guess on the canvas.",
+      "when": "",
+      "phrases": [],
+      "excludes": [
+        "To judge whether a design is good (design-council-review)",
+        "To check a built screen against its design (design-conformance)",
+        "For polished design or design-system changes (those go to Design)"
+      ],
+      "note": "stories → Figma screens",
+      "badge": "CLAUDE·FIGMA",
+      "type": "ai",
+      "stage": "Definition",
+      "feeds": [
+        {
+          "id": "design-council-review",
+          "label": "Design Council",
+          "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "design-conformance",
+          "label": "Design Conformance",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [
+        {
+          "id": "art-prd",
+          "label": "PRD",
+          "via": "",
+          "kind": "artifact"
+        }
+      ],
+      "throughArtifact": [],
+      "fromArtifact": [
+        {
+          "id": "write-prd",
+          "label": "Write PRD",
+          "via": "PRD",
+          "kind": "hop"
+        }
+      ],
+      "loops": [],
+      "systems": [
+        {
+          "id": "figma",
+          "label": "Figma",
+          "band": "source",
+          "access": "read"
+        },
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "confluence",
+          "label": "Confluence",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "github",
+          "label": "GitHub",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "grill-me",
       "next": "jpd-loop"
     },
     {
@@ -2850,7 +2957,7 @@
           "access": "read-write"
         }
       ],
-      "prev": "grill-me",
+      "prev": "story-mockups",
       "next": "convene-vpc"
     },
     {
@@ -3070,6 +3177,12 @@
         }
       ],
       "fedBy": [
+        {
+          "id": "story-mockups",
+          "label": "Story Mockups",
+          "via": "",
+          "kind": "skill"
+        },
         {
           "id": "convene-vpc",
           "label": "Convene VPC",
@@ -3885,7 +3998,14 @@
           "kind": "skill"
         }
       ],
-      "fedBy": [],
+      "fedBy": [
+        {
+          "id": "story-mockups",
+          "label": "Story Mockups",
+          "via": "",
+          "kind": "skill"
+        }
+      ],
       "throughArtifact": [],
       "fromArtifact": [],
       "loops": [],
@@ -5047,6 +5167,16 @@
         "desc": "Interview the user relentlessly about a plan, decision, PRD, or design until reaching shared understanding, resolving each branch of the decision tree. Use when the user wants to stress-test a plan, pressure-test their thinking, get grilled on a design or spec, or says \"grill me\"."
       },
       {
+        "id": "story-mockups",
+        "label": "Story Mockups",
+        "note": "stories → Figma screens",
+        "badge": "CLAUDE·FIGMA",
+        "type": "ai",
+        "col": 6,
+        "row": 4,
+        "desc": "Build review-ready Figma mockups from a PRD and its Jira stories, using only Oolio Office components. One Section per story, every state the stories imply (empty, loading, failed, confirmations, toasts), native annotations in the five house categories, and every open question posted as a Figma comment. A fast first pass for product and engineering to review, then the designer fine-tunes. Trigger on \"mock up these stories\", \"build the screens for <epic>\", \"turn this PRD into Figma\", \"high-speed mockups\", \"what would this look like\", or a PRD or story keys handed over with a Figma link. Do NOT trigger to judge whether a design is good (design-council-review), to check a built screen against its design (design-conformance), or for polished design or design-system changes (those go to Design)."
+      },
+      {
         "id": "jpd-loop",
         "label": "JPD Loop",
         "note": "groom→council→decision",
@@ -5310,6 +5440,10 @@
       },
       {
         "f": "art-prd",
+        "t": "story-mockups"
+      },
+      {
+        "f": "art-prd",
         "t": "jira-epic-groomer"
       },
       {
@@ -5487,6 +5621,14 @@
       {
         "f": "grill-me",
         "t": "jpd-idea-groomer"
+      },
+      {
+        "f": "story-mockups",
+        "t": "design-council-review"
+      },
+      {
+        "f": "story-mockups",
+        "t": "design-conformance"
       },
       {
         "f": "jpd-loop",
@@ -6284,10 +6426,11 @@
           "grill-me",
           "jpd-idea-groomer",
           "jpd-loop",
+          "story-mockups",
           "test-basis",
           "write-prd"
         ],
-        "skillCount": 9
+        "skillCount": 10
       },
       {
         "id": "core",
@@ -6394,12 +6537,13 @@
           "push-to-brain",
           "qa-mission",
           "signal-radar",
+          "story-mockups",
           "test-basis",
           "uat-session-kit",
           "win-loss",
           "write-prd"
         ],
-        "skillCount": 30
+        "skillCount": 31
       },
       {
         "id": "confluence",
@@ -6447,12 +6591,13 @@
           "signal-radar",
           "steering-pack",
           "storm-research",
+          "story-mockups",
           "test-basis",
           "uat-session-kit",
           "win-loss",
           "write-prd"
         ],
-        "skillCount": 30
+        "skillCount": 31
       },
       {
         "id": "github",
@@ -6472,9 +6617,10 @@
         ],
         "detail": "Two repos: the plugin the team installs, and the vault it writes into. Both are versioned by commit rather than by a number someone has to remember to bump, which is why an edit reaches the team without a release.",
         "skills": [
-          "code-qa"
+          "code-qa",
+          "story-mockups"
         ],
-        "skillCount": 1
+        "skillCount": 2
       },
       {
         "id": "brain",
@@ -6511,6 +6657,7 @@
           "resilience-qa",
           "signal-radar",
           "storm-research",
+          "story-mockups",
           "test-basis",
           "uat-session-kit",
           "wiki-ingest",
@@ -6519,7 +6666,7 @@
           "wiki-query",
           "wiki-status"
         ],
-        "skillCount": 23
+        "skillCount": 24
       }
     ],
     "wires": [
@@ -6821,6 +6968,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-10-06",
+      "title": "story-mockups: from stories to screens people can argue with (46 skills)",
+      "heading": "2026-10-06 – story-mockups: from stories to screens people can argue with (46 skills)",
+      "body": "The gap between a groomed PRD and a design review was a blank Figma page. A PM with stories and acceptance criteria had nothing concrete to put in front of engineering until a designer found time, and the first design conversation happened on a document rather than a screen. On 6 October the scheduled reports stories (OR-2824 to OR-2827 under OR-1903) were mocked up by hand from the Oolio components in about a session: 13 frames, 4 sections, 51 annotations, 10 comments. **story-mockups** is that run written down as a skill.\n\n- **What it makes.** One Figma Section per story, the primary screen plus every state the stories imply (empty, loading, could not load, confirmations, toasts, unsaved changes, no permission), a title block and a heading above every frame, native annotations in the five house categories, and every open question posted as a Figma comment through Claude in Chrome. Every acceptance criterion is on a frame or on a not-visualised list that ships with the report.\n- **Components, not drawings.** Every element is the Office component in code, its UI Library twin, or a pattern already on the file; a local component is the last resort and is logged as a design-system gap. No raw primitive where a component exists, no hardcoded colour or size where a variable exists. The design system is re-read on every run from the design and backoffice repos and the library, because keys change when the library is republished and the patterns moved twice in September.\n- **It is a mockup, and it says so.** A fast first pass for product and engineering to review and comment on, then the designer fine-tunes on the same page. Anything the sources cannot settle becomes a comment with a recommended answer, never a guess on the canvas. Dark mode is built light only and flagged, because the library's Dark tokens leave surfaces light.\n- **Where it sits.** Definition, after `write-prd` and the stories: `design-council-review` judges the mockup, `design-conformance` later checks the build against it. The compass routes \"mock this up\" and \"what would it look like\" to it.\n- **Four reference files** carry what the run learnt: how Office composes drawers, create, overlays, copy and status; the component map with the library keys and the three gaps to raise with Design (a SideDrawer twin, a Sticker colour variant, working Dark values); the Plugin API gotchas; and the annotation and comment house style, carried in the plugin so Cowork users without the `figma-annotate` skill get the same rules.\n- **Defaults taken where the handoff left questions.** The skill keeps the name `story-mockups`; it always asks before adding the Figma link to the epic, like every other Jira write in the plugin; the default target is a page per epic inside the product's own Figma file; and the Design asks are drafted in the component map for Niel to raise.\n- **Counts and catalogues.** 45 → **46**. Manifests, both READMEs, the catalogue, `pm-compass` routing, `write-prd`'s next step, and the site map: a new plate in the Definition column fed by the PRD, feeding the Design Council and design conformance."
+    },
     {
       "date": "2026-10-02",
       "title": "One system, end to end: the paper edition of the site",

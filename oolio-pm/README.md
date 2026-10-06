@@ -35,6 +35,7 @@ A single Cowork plugin bundling Oolio's product-management skills. Install it on
 
 - `write-prd` — writes an Oolio PRD from a groomed JPD idea or brief, in the live Oolio PRD format, and publishes it to Confluence.
 - `grill-my-prd` — grills a Confluence PRD one question at a time, then records the outcome as a versioned child page and badged in-place amendments.
+- `story-mockups` — builds review-ready Figma mockups from a PRD and its Jira stories, one Section per story and every implied state, from Oolio Office components only, annotated in the five house categories with open questions as comments. A fast first pass for review, then the designer fine-tunes.
 
 **Quality and release (the QA family)**
 

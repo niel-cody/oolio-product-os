@@ -1,6 +1,6 @@
 # Oolio PM — Skills Catalogue
 
-The plugin ships **45 skills**, organised here by where they sit in the product lifecycle,
+The plugin ships **46 skills**, organised here by where they sit in the product lifecycle,
 signal to shipped. The folders under `oolio-pm/skills/` stay flat (that is what the Claude
 Code plugin loader expects). This document is the map; the categories are a reading aid, not
 a folder structure.
@@ -22,7 +22,7 @@ per-skill version numbers, by design — the plugin versions by commit.
 |---|-------|----------------|--------|
 | 0 | Start here | Find the right skill, or drive any task to done | 2 |
 | 1 | Intake & Discovery | Turn raw signal into shaped, groomed ideas | 11 |
-| 2 | Specs & PRDs | Shape ideas into written, pressure-tested specs | 3 |
+| 2 | Specs & PRDs | Shape ideas into written, pressure-tested specs, then into screens | 4 |
 | 3 | Validation & Councils | Test decisions against the Virtual Product Council | 5 |
 | 4 | Delivery & Steering | Jira hygiene and executive-facing packs | 3 |
 | 4b | Quality & Release | Test the built product, gate the release, hand GTM only what was verified | 11 |
@@ -60,6 +60,7 @@ Shape an idea into a written spec, then pressure-test it.
 - **write-prd** — Write an Oolio PRD from a groomed JPD idea, a brief, or a problem statement, in Oolio's high-level format.
 - **grill-my-prd** — Interview you on a Confluence PRD one question at a time, resolve its decision tree, record a versioned grill page, and amend the PRD in place.
 - **grill-me** — Relentlessly interview you on any plan, decision, PRD, or design until you reach shared understanding.
+- **story-mockups** *(New, October 2026)* — Build review-ready Figma mockups from a PRD and its Jira stories: one Section per story, every state the stories imply, Oolio Office components only, native annotations in the five house categories, open questions as Figma comments. A fast first pass for product and engineering to review, then the designer fine-tunes; `design-council-review` judges it and `design-conformance` later checks the build against it.
 
 ## 3. Validation & Councils
 

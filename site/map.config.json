@@ -267,6 +267,7 @@
       "row": 3,
       "feeds": [
         "grill-my-prd",
+        "story-mockups",
         "jira-epic-groomer"
       ]
     },
@@ -567,6 +568,18 @@
       "feeds": [
         "convene-vpc",
         "jpd-idea-groomer"
+      ]
+    },
+    "story-mockups": {
+      "label": "Story Mockups",
+      "note": "stories → Figma screens",
+      "badge": "CLAUDE·FIGMA",
+      "type": "ai",
+      "stage": "Definition",
+      "row": 4,
+      "feeds": [
+        "design-council-review",
+        "design-conformance"
       ]
     },
     "jpd-loop": {

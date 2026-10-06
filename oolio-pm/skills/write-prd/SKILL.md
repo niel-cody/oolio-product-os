@@ -49,7 +49,7 @@ Ask for the space and parent page if not given (product-area spaces are the norm
 
 ### 5. Hand to the loop
 
-Offer the next step: `grill-my-prd` to pressure-test it (it will hang a versioned decision record under the page you just created), then `convene-vpc` for the council. Note the JPD idea should be linked to the PRD page (paste the URL into the idea's Links panel by hand; the connector cannot create that link).
+Offer the next step: `grill-my-prd` to pressure-test it (it will hang a versioned decision record under the page you just created), then `convene-vpc` for the council; once the stories exist, `story-mockups` turns them into Figma screens for review. Note the JPD idea should be linked to the PRD page (paste the URL into the idea's Links panel by hand; the connector cannot create that link).
 
 ## What this skill does not do
 

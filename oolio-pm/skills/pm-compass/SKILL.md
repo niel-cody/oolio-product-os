@@ -14,7 +14,7 @@ description: >-
 
 # PM compass
 
-The router. Forty-five skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.
+The router. Forty-six skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.
 
 ## How to route
 
@@ -34,6 +34,7 @@ Ask at most one clarifying question, then name the skill. Match on the **situati
 | "Why are we losing deals?" | `win-loss` |
 | A groomed idea that needs a spec | `write-prd` |
 | A plan, PRD, or decision that needs pressure-testing by interview | `grill-me` (PRDs: `grill-my-prd`) |
+| A PRD and its stories that need screens to review: "mock this up", "what would it look like" | `story-mockups` (then `design-council-review` to judge it) |
 | A decision that needs the full challenge panel | `convene-vpc` (or one sub-council directly) |
 | The behavioural, contrarian, or perceived-value read; pricing psychology, loyalty design, a feature reframed | `behavioural-alchemist` (Roy) |
 | Jira epics with weak descriptions or titles | `jira-epic-groomer` / `jira-epic-titler` |
