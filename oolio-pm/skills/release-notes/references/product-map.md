@@ -9,6 +9,10 @@ Where each product's releases come from, where the record is filed, and where th
 | Ngara | `AI` | GitHub Releases and `.changeset/*.md` in `oolio-group/ngara`; no Jira version | "Ngara (Oolio AI)", key `NGA` | Section 8, Release Notes (empty as at 24 September 2026) | `20 Areas/Oolio/Ngara/Releases/<YYYY-MM> <Name>/` | `platform-updates/ngara-<month>-<year>` |
 | Anything else | The Brain's Jira Register, `_system/Jira Register/<KEY> <Name>.md` | Jira version unless the register says otherwise | The register page, or ask | Ask | `20 Areas/Oolio/<Area>/releases/` if the area exists; otherwise ask, never create an area | `platform-updates/<product>-<subject>-<month>-<year>` |
 
+## The person's input wins
+
+A Jira version URL, a project key or a Confluence parent page id supplied in the request overrides this table for that run. Confirm the resolved set back in one line before collecting, and when the input fills a gap in the table (a Products App Release Notes section, a Slack channel), add it here so the next run starts from it.
+
 ## Notes that save a mistake
 
 - **Folder case differs by product.** Insights uses `releases/`, Products App and Ngara use `Releases/`. Use the folder that exists. Never create a sibling with the other case.

@@ -15,6 +15,10 @@ This skill is the September 2026 method written down (Brain: `10 Projects/Oolio/
 
 References, all under `${CLAUDE_PLUGIN_ROOT}/skills/release-notes/references/`. House style: `${CLAUDE_PLUGIN_ROOT}/references/house-style.md`.
 
+## Inputs, and what to confirm before collecting
+
+The person usually hands over three things: a Jira version (a `/projects/<KEY>/versions/<id>` URL or the id), the Jira project key if the id alone is ambiguous, and the Confluence page the release page should sit under (a page id or URL). Take what is given, fill the rest from `references/product-map.md`, and confirm the set back in one line before pulling anything: product, Jira project, version name and date, Confluence space and parent page, Brain folder. Ask once for anything missing or not in the map. Never infer the product from the key alone when the map does not cover it, and never create a Confluence page at a space root because the parent was unknown. A page id the person supplies wins over the map; record it in the map afterwards so the next run does not ask again.
+
 ## Run order
 
 1. **Collect.** Pull the version and every item in it. `references/jira-queries.md` has the JQL, the fields, and the two gotchas that will otherwise cost you a round trip.

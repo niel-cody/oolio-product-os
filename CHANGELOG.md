@@ -16,6 +16,7 @@ A release was a Jira state change nobody outside the team noticed, and a comms e
 - **Eleven reference files.** Voice, method (with notice mode and the anti-patterns already caught), the Jira and Confluence queries, the release record schema, the verification checklist, the product map (Insights, Products App, Ngara: Jira project, Confluence space, Brain folder, slug pattern), worked examples, and one template per artefact. The notice example is a shape, not a precedent, and says so; the first real notice replaces it.
 - **Where it sits.** GTM, after the ship call. `qa-mission` hands it verified claims only; it feeds `metrics-review` with what was announced. Not a launch pack (`gtm-handover`), not a stakeholder update, not defects.
 - **Counts and catalogues.** 46 → **47**. Manifests, both READMEs, the catalogue, `pm-compass` routing, the strict no-em-dash lint, and the site map: a new plate in the GTM column.
+- **Confirm the targets first.** Before collecting, the skill confirms product, Jira project, version, Confluence space and parent page and Brain folder in one line, from the person's input first and the product map second, and asks once for anything missing. A supplied Confluence page id wins over the map and is recorded for the next run.
 
 ## 2026-10-06 – story-mockups: from stories to screens people can argue with (46 skills)
 
