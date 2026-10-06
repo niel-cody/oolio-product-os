@@ -1,5 +1,5 @@
 {
-  "stamp": "c39c551",
+  "stamp": "827852b",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "oolio-pm",
-      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, story mockups built in Figma from Oolio components, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, a daily HubSpot sweep that turns the support queue into cited Insights, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding, and push-to-brain, the explicit end-of-session push that lands what a session established on the page that already owns it. The QA family tests the built product before it ships: a test basis that lines up the sources and proves the metrics are measurable, functional, exploratory, design-conformance, WCAG 2.2 accessibility, synthetic-persona, code-coverage and resilience passes, real-user UAT, one defect standard that reworks stories before merge, and a release gate whose verdict hands GTM only verified claims and learns from what it missed. Forty-six skills.",
+      "description": "Oolio Product Management. The full PM toolkit, signal to shipped: feedback intake into JPD, idea grooming to Oolio's standards, PRD writing and grilling, story mockups built in Figma from Oolio components, validation via the Virtual Product Council and its hospitality personas, Jira hygiene, Steering packs, the GTM suite, release notes written in the house voice and verified against what actually shipped, metrics review, discovery maps for themes too big for one session, and the research house: HubSpot/web/Apify signal synthesis, competitor dossiers, sweeps and battlecards, win/loss mining, a daily HubSpot sweep that turns the support queue into cited Insights, one-off evidence attached as native JPD Insights, plus a compass that routes you to the right skill, drive, which turns a raw, rambling request into a finished result, and Roy the Behavioural Alchemist, the behavioural-economics lens, plus the Brain maintenance skills that keep the my_brain knowledge vault compounding, and push-to-brain, the explicit end-of-session push that lands what a session established on the page that already owns it. The QA family tests the built product before it ships: a test basis that lines up the sources and proves the metrics are measurable, functional, exploratory, design-conformance, WCAG 2.2 accessibility, synthetic-persona, code-coverage and resilience passes, real-user UAT, one defect standard that reworks stories before merge, and a release gate whose verdict hands GTM only verified claims and learns from what it missed. Forty-seven skills.",
       "skills": [
         {
           "id": "accessibility-audit",
@@ -577,7 +577,7 @@
           "plugin": "oolio-pm",
           "description": "The front door and router for the oolio-pm skills. Trigger when someone asks \"which skill should I use\", \"where do I start\", \"what can these skills do\", \"what have you got for X\", \"help me choose\", \"I'm new to this\", or describes a product-management task without naming a skill and the right one isn't obvious. Also trigger for \"show me the pipeline\" or \"how do these skills fit together\". Reads the situation, names the one skill (or short chain) that fits, and starts it on request. Do NOT trigger when the user already named a specific skill or their phrasing clearly matches one skill's own triggers — route straight there instead.",
           "title": "PM compass",
-          "lede": "The router. Forty-six skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
+          "lede": "The router. Forty-seven skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
           "blurb": "The front door and router for the oolio-pm skills.",
           "when": "You describe a product-management task without naming a skill and the right one isn't obvious. Reads the situation, names the one skill (or short chain) that fits, and starts it on request.",
           "phrases": [
@@ -628,6 +628,26 @@
             "A decision",
             "PRD or mockup (convene-vpc)",
             "A deploy checklist (engineering:deploy-checklist)"
+          ]
+        },
+        {
+          "id": "release-notes",
+          "plugin": "oolio-pm",
+          "description": "Turn an Oolio Jira release version into the full comms set, written in Oolio's house voice and verified against what actually shipped. Produces a Teams message for the business, customer page copy for HubSpot, an internal Confluence release page in the product's own space, a short Slack version, and a filed record in the brain. Trigger when the user hands over a Jira version URL or id (a /projects/<KEY>/versions/<id> link, or \"release notes for 23878\"), or says \"write the release notes\", \"do the release comms\", \"we shipped this yesterday\", or pastes a release report. Also handles a product notice, where a capability is withdrawn, paused or changed outside a release. Do NOT trigger for a GTM launch pack (gtm-handover), a stakeholder update (product-management:stakeholder-update), or writing up defects (defect-writer).",
+          "title": "Release notes",
+          "lede": "One release, one record, four audiences. Nothing retyped, nothing drifting.",
+          "blurb": "Turn an Oolio Jira release version into the full comms set, written in Oolio's house voice and verified against what actually shipped. Produces a Teams message for the business, customer page copy for HubSpot, an internal Confluence release page in the product's own space, a short Slack version, and a filed record in the brain.",
+          "when": "You hand over a Jira version URL or id (a /projects/<KEY>/versions/<id> link), or paste a release report. Also handles a product notice, where a capability is withdrawn, paused or changed outside a release.",
+          "phrases": [
+            "release notes for 23878",
+            "write the release notes",
+            "do the release comms",
+            "we shipped this yesterday"
+          ],
+          "excludes": [
+            "For a GTM launch pack (gtm-handover)",
+            "A stakeholder update (product-management:stakeholder-update)",
+            "Writing up defects (defect-writer)"
           ]
         },
         {
@@ -896,14 +916,14 @@
         }
       ],
       "counts": {
-        "skills": 46,
+        "skills": 47,
         "inProgress": 0,
         "archived": 0
       }
     }
   ],
   "totals": {
-    "skills": 46,
+    "skills": 47,
     "plugins": 1,
     "inProgress": 0,
     "archived": 0,
@@ -958,7 +978,7 @@
       "title": "PM Compass",
       "blurb": "The front door and router for the oolio-pm skills.",
       "summary": "The front door and router for the oolio-pm skills.",
-      "lede": "The router. Forty-six skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
+      "lede": "The router. Forty-seven skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.",
       "when": "You describe a product-management task without naming a skill and the right one isn't obvious. Reads the situation, names the one skill (or short chain) that fits, and starts it on request.",
       "phrases": [
         "which skill should I use",
@@ -1008,6 +1028,12 @@
       "fromArtifact": [],
       "loops": [],
       "systems": [
+        {
+          "id": "slack",
+          "label": "Slack",
+          "band": "source",
+          "access": "read"
+        },
         {
           "id": "hubspot",
           "label": "HubSpot",
@@ -3691,6 +3717,12 @@
           "kind": "skill"
         },
         {
+          "id": "release-notes",
+          "label": "Release Notes",
+          "via": "verified claims only",
+          "kind": "skill"
+        },
+        {
           "id": "metrics-review",
           "label": "Metrics Review",
           "via": "metric readiness",
@@ -4678,6 +4710,96 @@
         }
       ],
       "prev": "gtm-playbooks",
+      "next": "release-notes"
+    },
+    {
+      "id": "release-notes",
+      "plugin": "oolio-pm",
+      "command": "/oolio-pm:release-notes",
+      "title": "Release Notes",
+      "blurb": "Turn an Oolio Jira release version into the full comms set, written in Oolio's house voice and verified against what actually shipped. Produces a Teams message for the business, customer page copy for HubSpot, an internal Confluence release page in the product's own space, a short Slack version, and a filed record in the brain.",
+      "summary": "Turn an Oolio Jira release version into the full comms set, written in Oolio's house voice and verified against what actually shipped.",
+      "lede": "One release, one record, four audiences. Nothing retyped, nothing drifting.",
+      "when": "You hand over a Jira version URL or id (a /projects/<KEY>/versions/<id> link), or paste a release report. Also handles a product notice, where a capability is withdrawn, paused or changed outside a release.",
+      "phrases": [
+        "release notes for 23878",
+        "write the release notes",
+        "do the release comms",
+        "we shipped this yesterday"
+      ],
+      "excludes": [
+        "For a GTM launch pack (gtm-handover)",
+        "A stakeholder update (product-management:stakeholder-update)",
+        "Writing up defects (defect-writer)"
+      ],
+      "note": "one record · four audiences",
+      "badge": "CLAUDE·JIRA",
+      "type": "ai",
+      "stage": "GTM",
+      "feeds": [
+        {
+          "id": "metrics-review",
+          "label": "Metrics Review",
+          "via": "what was announced",
+          "kind": "skill"
+        }
+      ],
+      "fedBy": [
+        {
+          "id": "qa-mission",
+          "label": "QA Mission",
+          "via": "verified claims only",
+          "kind": "skill"
+        }
+      ],
+      "throughArtifact": [],
+      "fromArtifact": [],
+      "loops": [],
+      "systems": [
+        {
+          "id": "slack",
+          "label": "Slack",
+          "band": "source",
+          "access": "read"
+        },
+        {
+          "id": "m365",
+          "label": "Microsoft 365",
+          "band": "source",
+          "access": "read"
+        },
+        {
+          "id": "hubspot",
+          "label": "HubSpot",
+          "band": "source",
+          "access": "read"
+        },
+        {
+          "id": "jira",
+          "label": "Jira",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "confluence",
+          "label": "Confluence",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "github",
+          "label": "GitHub",
+          "band": "record",
+          "access": "read-write"
+        },
+        {
+          "id": "brain",
+          "label": "The Brain",
+          "band": "vault",
+          "access": "read-write"
+        }
+      ],
+      "prev": "gtm-marketing",
       "next": "metrics-review"
     },
     {
@@ -4724,6 +4846,12 @@
           "id": "steering-pack",
           "label": "Steering Pack",
           "via": "",
+          "kind": "skill"
+        },
+        {
+          "id": "release-notes",
+          "label": "Release Notes",
+          "via": "what was announced",
           "kind": "skill"
         },
         {
@@ -4788,7 +4916,7 @@
           "access": "read-write"
         }
       ],
-      "prev": "gtm-marketing",
+      "prev": "release-notes",
       "next": null
     }
   ],
@@ -5297,6 +5425,16 @@
         "desc": "Build the Marketing Pack for a single Oolio product launch. Launch announcement, social posts, email sequence, sales note, and campaign brief. Trigger PROACTIVELY when the user asks to \"build the marketing pack\", \"draft launch comms for [product]\", \"do the campaign brief for [product]\", \"write the launch announcement\", \"build the social posts for [product]\", \"draft the email sequence for [product]\", or \"build the marketing assets\". Also trigger when the user pastes a Jira epic key (OR-XXXX, EDU-XXXX) and asks for launch / campaign / customer comms material. Don't trigger for the executive One-Pager or Deck, use gtm-handover. Don't trigger for sales / AM / onboarding playbooks, use gtm-playbooks. Reads pack_content.json produced by gtm-handover and refuses to run if that file is missing."
       },
       {
+        "id": "release-notes",
+        "label": "Release Notes",
+        "note": "one record · four audiences",
+        "badge": "CLAUDE·JIRA",
+        "type": "ai",
+        "col": 12,
+        "row": 4,
+        "desc": "Turn an Oolio Jira release version into the full comms set, written in Oolio's house voice and verified against what actually shipped. Produces a Teams message for the business, customer page copy for HubSpot, an internal Confluence release page in the product's own space, a short Slack version, and a filed record in the brain. Trigger when the user hands over a Jira version URL or id (a /projects/<KEY>/versions/<id> link, or \"release notes for 23878\"), or says \"write the release notes\", \"do the release comms\", \"we shipped this yesterday\", or pastes a release report. Also handles a product notice, where a capability is withdrawn, paused or changed outside a release. Do NOT trigger for a GTM launch pack (gtm-handover), a stakeholder update (product-management:stakeholder-update), or writing up defects (defect-writer)."
+      },
+      {
         "id": "metrics-review",
         "label": "Metrics Review",
         "note": "did it hit its metrics?",
@@ -5717,6 +5855,11 @@
         "t": "art-pack"
       },
       {
+        "f": "release-notes",
+        "t": "metrics-review",
+        "lbl": "what was announced"
+      },
+      {
         "f": "metrics-review",
         "t": "art-scorecard"
       },
@@ -5744,6 +5887,11 @@
       {
         "f": "qa-mission",
         "t": "gtm-handover",
+        "lbl": "verified claims only"
+      },
+      {
+        "f": "qa-mission",
+        "t": "release-notes",
         "lbl": "verified claims only"
       },
       {
@@ -6278,9 +6426,11 @@
           "jira-epic-titler",
           "jpd-loop",
           "jpd-title-standard",
+          "pm-compass",
+          "release-notes",
           "steering-pack"
         ],
-        "skillCount": 11
+        "skillCount": 13
       },
       {
         "id": "m365",
@@ -6300,9 +6450,10 @@
         "writes": [],
         "detail": "What gets extracted is the ask, the decision, the commitment. Not the mail. An inbox copied into a vault is still an inbox.",
         "skills": [
-          "jpd-loop"
+          "jpd-loop",
+          "release-notes"
         ],
-        "skillCount": 1
+        "skillCount": 2
       },
       {
         "id": "hubspot",
@@ -6329,10 +6480,11 @@
           "hubspot-sweep",
           "jpd-loop",
           "pm-compass",
+          "release-notes",
           "signal-radar",
           "win-loss"
         ],
-        "skillCount": 10
+        "skillCount": 11
       },
       {
         "id": "apify",
@@ -6536,6 +6688,7 @@
           "pm-compass",
           "push-to-brain",
           "qa-mission",
+          "release-notes",
           "signal-radar",
           "story-mockups",
           "test-basis",
@@ -6543,7 +6696,7 @@
           "win-loss",
           "write-prd"
         ],
-        "skillCount": 31
+        "skillCount": 32
       },
       {
         "id": "confluence",
@@ -6588,6 +6741,7 @@
           "pm-compass",
           "push-to-brain",
           "qa-mission",
+          "release-notes",
           "signal-radar",
           "steering-pack",
           "storm-research",
@@ -6597,7 +6751,7 @@
           "win-loss",
           "write-prd"
         ],
-        "skillCount": 31
+        "skillCount": 32
       },
       {
         "id": "github",
@@ -6618,9 +6772,10 @@
         "detail": "Two repos: the plugin the team installs, and the vault it writes into. Both are versioned by commit rather than by a number someone has to remember to bump, which is why an edit reaches the team without a release.",
         "skills": [
           "code-qa",
+          "release-notes",
           "story-mockups"
         ],
-        "skillCount": 2
+        "skillCount": 3
       },
       {
         "id": "brain",
@@ -6654,6 +6809,7 @@
           "pm-compass",
           "push-to-brain",
           "qa-mission",
+          "release-notes",
           "resilience-qa",
           "signal-radar",
           "storm-research",
@@ -6666,7 +6822,7 @@
           "wiki-query",
           "wiki-status"
         ],
-        "skillCount": 24
+        "skillCount": 25
       }
     ],
     "wires": [
@@ -6968,6 +7124,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-10-06",
+      "title": "release-notes: one release, one record, four audiences (47 skills)",
+      "heading": "2026-10-06 – release-notes: one release, one record, four audiences (47 skills)",
+      "body": "A release was a Jira state change nobody outside the team noticed, and a comms effort that started from scratch each time. September 2026 produced four releases by hand (Products App mPOS and fixes, Insights saved and scheduled reports, Insights roles and permissions, the Ngara September update), and two of the three Jira ones were announced with items that had not actually shipped and the version not flipped. The method that caught that, written down in the Brain as the Release Launch Pattern, is now **release-notes**, the skill. It is the judgement and the voice; the plumbing (a morning sweep, fan-out on approval) stays out of it by design.\n\n- **What it makes.** From one Jira version: a Teams message for the business, customer page copy for HubSpot, an internal Confluence release page in the product's own space, a short Slack version, and a filed record in the Brain. Same facts, four registers, never a copy and paste of each other. Also a product notice, for a capability withdrawn, paused or changed outside a release.\n- **Status, never membership.** Every item in the version is classified from its status: `Released / GA` is shipped, `Prod-Green - Feature Flagged` is deployed but possibly invisible, everything else is not shipped. A not-shipped item is named as such in Teams and does not exist on the customer page. A flagged item is never announced as available.\n- **The why is a person's.** The skill refuses to draft without one. If the user has not said why the release mattered, it asks one question offering the three shapes that have covered every release so far: a promise being broken, a gap forcing a workaround, a trade the customer should never have had to make.\n- **The next two releases, always.** Taken from the project's unreleased versions in date order, each with its date and one operator sentence, flagged subject to change. The standard from 29 September.\n- **The gate.** Assemble and draft, then stop. Nothing is posted, published or written back to Jira until a person approves. At most three go / no-go caveats in chat, each one a flag from the record.\n- **Grounded on the real thing.** The worked example is the 28 September Insights release (OR version 23878), where Jira was clean and the verification pass still caught two incidents a screenshot showed as fixed and Jira showed otherwise. Two query gotchas found while building are now in the reference: `OR` is a JQL operator, so Insights' project key must be quoted, and the Insights Confluence space alias `in` is a CQL reserved word.\n- **One correction to the brief.** The draft allowed an em dash in a Confluence page title \"where Oolio's title standard requires it\". The Confluence Naming Standard in the Brain says the opposite: the pipe is the only separator, and the em dash is banned outright. Titles follow `<YYYY-MM> <subject> | Release Note`. No em dash anywhere.\n- **Eleven reference files.** Voice, method (with notice mode and the anti-patterns already caught), the Jira and Confluence queries, the release record schema, the verification checklist, the product map (Insights, Products App, Ngara: Jira project, Confluence space, Brain folder, slug pattern), worked examples, and one template per artefact. The notice example is a shape, not a precedent, and says so; the first real notice replaces it.\n- **Where it sits.** GTM, after the ship call. `qa-mission` hands it verified claims only; it feeds `metrics-review` with what was announced. Not a launch pack (`gtm-handover`), not a stakeholder update, not defects.\n- **Counts and catalogues.** 46 → **47**. Manifests, both READMEs, the catalogue, `pm-compass` routing, the strict no-em-dash lint, and the site map: a new plate in the GTM column."
+    },
     {
       "date": "2026-10-06",
       "title": "story-mockups: from stories to screens people can argue with (46 skills)",

@@ -59,6 +59,7 @@ Tests the built product between "the spec is right" and "the numbers moved". One
 - `gtm-handover` — the executive GTM handover: One-Pager and Supporting Deck, and the `pack_content.json` narrative the other GTM skills read.
 - `gtm-playbooks` — the internal Sales, Account Management, and Onboarding playbooks.
 - `gtm-marketing` — the Marketing Pack: launch announcement, social, email sequence, sales note, campaign brief.
+- `release-notes` — one Jira release version into the full comms set, in the house voice and verified against what actually shipped: a Teams message for the business, customer page copy for HubSpot, an internal Confluence release page, a short Slack version, and a filed record in the Brain. Every item classified by status, never by membership of the version; nothing posted, published or written back to Jira without approval. Also writes a product notice.
 
 **Prioritisation and measurement**
 

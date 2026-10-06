@@ -1,6 +1,6 @@
 # Oolio PM — Skills Catalogue
 
-The plugin ships **46 skills**, organised here by where they sit in the product lifecycle,
+The plugin ships **47 skills**, organised here by where they sit in the product lifecycle,
 signal to shipped. The folders under `oolio-pm/skills/` stay flat (that is what the Claude
 Code plugin loader expects). This document is the map; the categories are a reading aid, not
 a folder structure.
@@ -26,7 +26,7 @@ per-skill version numbers, by design — the plugin versions by commit.
 | 3 | Validation & Councils | Test decisions against the Virtual Product Council | 5 |
 | 4 | Delivery & Steering | Jira hygiene and executive-facing packs | 3 |
 | 4b | Quality & Release | Test the built product, gate the release, hand GTM only what was verified | 11 |
-| 5 | GTM | Take a launch to market | 3 |
+| 5 | GTM | Take a launch to market, and tell everyone what shipped | 4 |
 | 6 | Analysis | Close the loop after launch | 1 |
 | 7 | The Brain | Maintain the knowledge engine the research skills read and write | 6 |
 
@@ -105,6 +105,7 @@ Take a single product launch to market.
 - **gtm-handover** — Build the executive GTM handover: the One-Pager and the Supporting Deck. The narrative source for the rest of the suite.
 - **gtm-playbooks** — Build the three internal playbooks: Sales, Account Management, and Onboarding.
 - **gtm-marketing** — Build the Marketing Pack: launch announcement, social posts, email sequence, sales note, and campaign brief.
+- **release-notes** *(New, October 2026)* — Turn a Jira release version into the comms set: Teams message, customer page copy for HubSpot, Confluence release page, Slack version, and a filed record in the Brain. Status decides what is announced, never membership of the version; the why comes from a person, never from ticket titles; the next two releases are named with dates; a person approves before anything goes out. Also handles a product notice.
 
 ## 6. Analysis
 

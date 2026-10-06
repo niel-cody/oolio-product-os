@@ -14,7 +14,7 @@ description: >-
 
 # PM compass
 
-The router. Forty-six skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.
+The router. Forty-seven skills is too many to hold in your head, and the biggest waste is not a missing skill but the right one going unused. This skill turns a described situation into the one skill (or short chain) that fits, explains the hand-off in a sentence, and offers to start it. It never does the destination skill's work itself.
 
 ## How to route
 
@@ -40,6 +40,7 @@ Ask at most one clarifying question, then name the skill. Match on the **situati
 | Jira epics with weak descriptions or titles | `jira-epic-groomer` / `jira-epic-titler` |
 | A Steering or roadmap review to prepare | `steering-pack` |
 | A launch to take to market | `gtm-handover` first, then `gtm-playbooks` / `gtm-marketing` |
+| A Jira version that shipped and needs telling: Teams, the customer page, Confluence, Slack; or a product notice | `release-notes` |
 | A release, epic or PR to test before it ships; "is it ready?" | `qa-mission` (runs the whole QA family and gives the verdict) |
 | "What should we test, and do the sources agree?"; is the spec testable and measurable | `test-basis` |
 | Findings to write up, de-dupe, send back for rework, or ticket | `defect-writer` |

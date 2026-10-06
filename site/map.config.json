@@ -729,6 +729,20 @@
         "art-pack"
       ]
     },
+    "release-notes": {
+      "label": "Release Notes",
+      "note": "one record · four audiences",
+      "badge": "CLAUDE·JIRA",
+      "type": "ai",
+      "stage": "GTM",
+      "row": 4,
+      "feeds": [
+        {
+          "to": "metrics-review",
+          "label": "what was announced"
+        }
+      ]
+    },
     "metrics-review": {
       "label": "Metrics Review",
       "note": "did it hit its metrics?",
@@ -758,6 +772,10 @@
         "defect-writer",
         {
           "to": "gtm-handover",
+          "label": "verified claims only"
+        },
+        {
+          "to": "release-notes",
           "label": "verified claims only"
         },
         {
