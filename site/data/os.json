@@ -1,5 +1,5 @@
 {
-  "stamp": "faa1940",
+  "stamp": "6ea4272",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -7124,6 +7124,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-10-06",
+      "title": "The site has its real address: pixiedustindustries.com",
+      "heading": "2026-10-06 – The site has its real address: pixiedustindustries.com",
+      "body": "Not team-visible beyond the address bar: no skill changed. The domain was attached to the Vercel project on 2 October; today the records at GoDaddy were pointed at Vercel (the apex to Vercel's address, `www` as a CNAME to Vercel, replacing GoDaddy's own Website Builder entries), and the site now answers at **pixiedustindustries.com**, with `www` redirecting to the apex. `NEXT_PUBLIC_SITE_URL` is set to the real domain in Vercel so canonical links, the sitemap and social previews name it; the layout's fallback now says the same, so a build without the variable still gets it right. The README, the site README, PUBLISHING.md and the brand documents no longer name the vercel.app address, which still works but is no longer the front door. The 2 October site audit keeps the old address, as a record of what was true then."
+    },
     {
       "date": "2026-10-06",
       "title": "Site dependencies brought up to date",

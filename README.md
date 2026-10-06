@@ -2,7 +2,7 @@
 
 The Product team's operating system for Cowork and Claude Code: the plugin collection (marketplace) that carries our skills. Other Oolio teams keep their own collections; this one belongs to Product. The human-readable front door is the **Product Operating System** page on Confluence; this repo is the source of truth it describes.
 
-**The site:** [oolio-product-os.vercel.app](https://oolio-product-os.vercel.app) is the front door: what the OS is, every skill, the lifecycle map, and the changelog. Generated from the skills themselves, so it cannot fall behind. See [site/](site/README.md).
+**The site:** [pixiedustindustries.com](https://pixiedustindustries.com) is the front door: what the OS is, every skill, the lifecycle map, and the changelog. Generated from the skills themselves, so it cannot fall behind. See [site/](site/README.md).
 
 **The brand:** [brand/](brand/README.md) holds the ink set, the typography, the mark and the voice. The house is **Pixie Dust Industries** and the product is the **Product OS**; the direction is Risograph, three ink drums on uncoated stock. It is the source rather than a description of one: `brand/tokens/brand.tokens.json` generates the site's stylesheet, and a build fails if the two disagree.
 

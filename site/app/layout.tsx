@@ -24,7 +24,7 @@ const display = Newsreader({ variable: "--font-display", subsets: ["latin"], wei
 const text = Geist({ variable: "--font-text", subsets: ["latin"], weight: ["400", "500", "600"], display: "swap" });
 const system = Geist_Mono({ variable: "--font-system", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://oolio-product-os.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://pixiedustindustries.com";
 
 const DESCRIPTION =
   "The product process, written down and running: " +

@@ -24,7 +24,7 @@ installs it and the next PRD they write is written with it.
 - Not "PDI", "ProductOS", "Product-OS", or any acronym. An acronym is a thing you have to be
   taught; the point of a name is that nobody has to be.
 - **The addresses do not move.** The plugin is `oolio-pm`, the repository is
-  `niel-cody/oolio-product-os`, the site is `oolio-product-os.vercel.app`. Those are package
+  `niel-cody/oolio-product-os`, the site is `pixiedustindustries.com`. Those are package
   ids and URLs, not the brand, and every installed reference and skill namespace depends on
   them. Renaming any of them would break every install for no reader's benefit.
 

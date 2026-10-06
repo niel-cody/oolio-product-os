@@ -1,6 +1,6 @@
 # The Product OS site
 
-Live at **[oolio-product-os.vercel.app](https://oolio-product-os.vercel.app)**.
+Live at **[pixiedustindustries.com](https://pixiedustindustries.com)**.
 
 The front door to the **Oolio Product OS**: what it is, every skill it ships, how the work moves
 end to end, and what changed. A Next.js app, rebuilt on every push, so the site is a **view of the

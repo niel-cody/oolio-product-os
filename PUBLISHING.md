@@ -90,5 +90,5 @@ Claude Code is unaffected throughout and auto-updates properly. Keep using the m
 
 - GitHub access is set up on Niel's Mac (`gh` authenticated), so Cowork/Claude Code can commit and push directly when asked. GitHub Desktop is the buttons-only alternative. Do not run both on the same change.
 - The repo is **private** and lives in Niel's personal account. Access is per-person collaborator invites (section A1), not org membership. It bundles Oolio-internal material, so keep anything genuinely sensitive out of it even so.
-- **The site is still public.** Vercel serves this private repo to `oolio-product-os.vercel.app`, so anything the generator renders is published to the open web regardless of the repo's visibility.
+- **The site is still public.** Vercel serves this private repo to `pixiedustindustries.com`, so anything the generator renders is published to the open web regardless of the repo's visibility.
 - **GitHub App installations scoped to "public repositories only" lost access** when the repo went private, and again on the move to a personal account. If an integration stops firing, re-grant it against `niel-cody/oolio-product-os` rather than debugging the workflow.

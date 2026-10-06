@@ -4,7 +4,7 @@ Where the brand shows up, and what is required of it on each surface.
 
 ## The site
 
-`oolio-product-os.vercel.app`, and the brand's primary expression. It reads
+`pixiedustindustries.com`, and the brand's primary expression. It reads
 [`site/app/brand.css`](../site/app/brand.css), which is generated from the tokens, so the site
 cannot drift from this folder.
 
