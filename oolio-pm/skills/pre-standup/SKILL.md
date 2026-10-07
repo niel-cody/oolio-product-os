@@ -5,13 +5,14 @@ description: >-
   incidents first, then yesterday, today, next and decisions, read from Jira,
   Slack and the Brain. Posts automatically when every check passes; a post that
   fails a check is held as a draft. Covers Insights, Products App, Inventory,
-  Ngara AI and Loyalty & Engagement. Trigger when the user says "run the
-  pre-standup", "post the standup for Insights", "morning post", "pre-standup
-  for all teams", "dry-run the pre-standup" or "what is each team doing today",
-  and when the 07:00 scheduled run fires on the Mac Mini. Do NOT trigger for the
-  weekly stakeholder update (product-management:stakeholder-update), release
-  comms (release-notes), a personal standup from your own activity
-  (engineering:standup), or handling the incident itself.
+  Ngara AI and Loyalty & Engagement. Trigger when the user wants one team's
+  post by hand, a dry run, or the whole set re-run, and says "run the pre-standup", "post the standup for Insights",
+  "morning post", "pre-standup for all teams", "dry-run the pre-standup" or
+  "what is each team doing today". It also fires on its own at 07:00 Sydney on
+  weekdays from the Mac Mini. Do NOT trigger for the weekly
+  stakeholder update (product-management:stakeholder-update), release comms
+  (release-notes), your own standup (engineering:standup), or handling the
+  incident itself.
 ---
 
 # Pre-standup
