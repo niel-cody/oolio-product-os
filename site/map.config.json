@@ -688,6 +688,17 @@
         "jira-epic-groomer"
       ]
     },
+    "pre-standup": {
+      "label": "Pre-Standup",
+      "note": "07:00 · incidents first",
+      "badge": "CLAUDE·JIRA·SLACK",
+      "type": "ai",
+      "stage": "Delivery",
+      "row": 2,
+      "feeds": [
+        "art-brain"
+      ]
+    },
     "gtm-handover": {
       "label": "GTM Handover",
       "note": "one-pager · deck · pack",

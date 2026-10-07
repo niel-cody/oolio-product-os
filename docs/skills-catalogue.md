@@ -1,6 +1,6 @@
 # Oolio PM — Skills Catalogue
 
-The plugin ships **47 skills**, organised here by where they sit in the product lifecycle,
+The plugin ships **48 skills**, organised here by where they sit in the product lifecycle,
 signal to shipped. The folders under `oolio-pm/skills/` stay flat (that is what the Claude
 Code plugin loader expects). This document is the map; the categories are a reading aid, not
 a folder structure.
@@ -24,7 +24,7 @@ per-skill version numbers, by design — the plugin versions by commit.
 | 1 | Intake & Discovery | Turn raw signal into shaped, groomed ideas | 11 |
 | 2 | Specs & PRDs | Shape ideas into written, pressure-tested specs, then into screens | 4 |
 | 3 | Validation & Councils | Test decisions against the Virtual Product Council | 5 |
-| 4 | Delivery & Steering | Jira hygiene and executive-facing packs | 3 |
+| 4 | Delivery & Steering | Jira hygiene, the daily team post, and executive-facing packs | 4 |
 | 4b | Quality & Release | Test the built product, gate the release, hand GTM only what was verified | 11 |
 | 5 | GTM | Take a launch to market, and tell everyone what shipped | 4 |
 | 6 | Analysis | Close the loop after launch | 1 |
@@ -79,6 +79,7 @@ Keep Jira clean and build the packs leadership reads.
 - **jira-epic-groomer** — Groom or backfill a Jira epic description to Oolio's What / Why / Who standard.
 - **jira-epic-titler** — Suggest a stronger epic title using the `[Capability] for [Outcome]` standard.
 - **steering-pack** — Build a Steering-ready review pack over a slice of the JPD backlog: per-idea one-liners, field completeness, VPC verdicts and rubric scores.
+- **pre-standup** *(New, October 2026)* — The daily post per team, 07:00 Sydney on weekdays from the Mac Mini: incidents first with owner, age and days at zero, then yesterday's state changes, each person's in-progress work, the next release dates and any decisions since the last post. Read from Jira, Slack and the Brain; posted automatically when every check passes, held as a draft when one fails; one daily log in the Brain. Every team works towards net zero open incidents.
 
 ## 4b. Quality & Release (the QA family)
 

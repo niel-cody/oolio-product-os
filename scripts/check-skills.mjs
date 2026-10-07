@@ -26,7 +26,7 @@ const STRICT = [
   "oolio-pm/personas-library/test-personas",
   ...["test-basis", "defect-writer", "functional-qa", "exploratory-qa", "code-qa", "design-conformance",
       "accessibility-audit", "persona-uat", "uat-session-kit", "resilience-qa", "qa-mission", "story-mockups",
-      "release-notes"]
+      "release-notes", "pre-standup"]
     .map((s) => `oolio-pm/skills/${s}`),
 ];
 

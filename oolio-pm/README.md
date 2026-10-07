@@ -65,6 +65,7 @@ Tests the built product between "the spec is right" and "the numbers moved". One
 
 - `steering-pack` — builds a Steering-ready review pack over a backlog slice: fitness checks, VPC verdicts, asks, and a recommended order.
 - `metrics-review` — validates a launch against its PRD's success metrics, or runs a recurring product review, from real data (PostHog first).
+- `pre-standup` — the daily post per team, 07:00 Sydney on weekdays, run from the Mac Mini: incidents first (count, owner, age, days at zero), then yesterday's state changes, what each person has in progress today, the next release dates and any decisions since the last post, read from Jira, Slack and the Brain. Posts automatically when every check passes; a post that fails a check is held as a draft. Config for the five teams and the roster ships with the skill.
 
 **Jira authoring helpers**
 

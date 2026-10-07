@@ -1,0 +1,88 @@
+{
+  "_comment": "The teams the pre-standup posts for, and the shared settings the run reads. Edit here, never in the installed copy. Built 7 Oct 2026 from the Pre-Standup framework and runbook in the Brain; the roster is in roster.json.",
+  "schedule": {
+    "time": "07:00",
+    "timezone": "Australia/Sydney",
+    "days": "Monday to Friday",
+    "holidays": "NSW public holidays, listed in scripts/run-context.mjs; refresh each January"
+  },
+  "operator": {
+    "name": "Niel Cody",
+    "jiraAccountId": "557058:5f8953ee-b192-4038-9a19-668d2a66c633",
+    "slackId": "U07AEV7R7DZ",
+    "_note": "Escalations (a P1 or P2 found during the run, a run that could not complete) go to this Slack id as a DM. There is no daily post to Niel, by decision of 7 Oct 2026."
+  },
+  "jira": {
+    "cloudId": "98b2c73a-4f2e-4b23-aca7-dbc5b45b1e24",
+    "site": "https://oolio.atlassian.net",
+    "incidentProject": "INC",
+    "teamField": "cf[10001]",
+    "incidentIssueType": "Incident",
+    "yesterdayStatuses": ["Released / GA", "Prod-Green - Feature Flagged", "Ready for Prod-Green", "Done"],
+    "excludeStatuses": ["Cancelled"],
+    "excludeIssueTypes": ["Epic", "Initiative"],
+    "maxItemsPerPerson": 3
+  },
+  "brain": {
+    "logFolder": "02 Daily Briefs/Pre-Standup",
+    "framework": "20 Areas/Oolio/Product Leadership/frameworks/pre-standup.md",
+    "runbook": "_system/Runbooks/Pre-Standup.md",
+    "decisionSources": [
+      "20 Areas/Oolio/<team>/planning/<quarter>/*Decisions*.md",
+      "20 Areas/Oolio/Product Leadership/frameworks/*Decisions Log.md",
+      "41 Decisions/"
+    ]
+  },
+  "teams": [
+    {
+      "id": "insights",
+      "name": "Insights",
+      "slack": { "channel": "#insights-team", "channelId": "C03P48HMJPK" },
+      "jira": { "projects": ["OR"], "teamFieldValue": "83188983-d1c8-41cc-9ab3-9402f723c669", "board": null },
+      "planPage": { "confluenceId": "1157660675", "title": "Insights FY27 Q2 plan" },
+      "brainFolder": "20 Areas/Oolio/Insights",
+      "baseline": { "date": "2026-10-07", "openIncidents": 2, "oldest": "INC-601" },
+      "holidays": []
+    },
+    {
+      "id": "products-app",
+      "name": "Products App",
+      "slack": { "channel": "#products-app", "channelId": "C085KQBJ3FT" },
+      "jira": { "projects": ["PAPP"], "teamFieldValue": "859b23f9-eb6a-4f58-84f3-632406af1979", "board": null },
+      "planPage": { "confluenceId": null, "title": "Products App FY27 Q2 plan" },
+      "brainFolder": "20 Areas/Oolio/Products App",
+      "baseline": { "date": "2026-10-07", "openIncidents": 8, "oldest": "INC-617" },
+      "holidays": []
+    },
+    {
+      "id": "inventory",
+      "name": "Inventory",
+      "slack": { "channel": "#inventorypod", "channelId": "C0AST4SACG1" },
+      "jira": { "projects": ["STK"], "teamFieldValue": "aa39cbde-8659-4996-ae46-37d3a664c683", "board": null },
+      "planPage": { "confluenceId": null, "title": "Inventory FY27 Q2 plan" },
+      "brainFolder": "20 Areas/Oolio/Inventory",
+      "baseline": { "date": "2026-10-07", "openIncidents": 0, "oldest": null },
+      "holidays": []
+    },
+    {
+      "id": "ngara-ai",
+      "name": "Ngara AI",
+      "slack": { "channel": "#ngara-ai", "channelId": "C09AWTBAA0L" },
+      "jira": { "projects": ["AI"], "teamFieldValue": null, "board": 2556, "_note": "Not registered in Jira Teams, so only the AI-project half of the incident query applies until the team field is set." },
+      "planPage": { "confluenceId": null, "title": "Ngara FY27 Q2 plan" },
+      "brainFolder": "20 Areas/Oolio/Ngara",
+      "baseline": { "date": "2026-10-07", "openIncidents": 0, "oldest": null },
+      "holidays": []
+    },
+    {
+      "id": "loyalty-engagement",
+      "name": "Loyalty & Engagement",
+      "slack": { "channel": "#customer-engagement", "channelId": "C0BHBPUCSBY" },
+      "jira": { "projects": ["LOY"], "teamFieldValue": "0e1c1b45-ec2c-46e1-a020-8c0f175a4962", "board": null },
+      "planPage": { "confluenceId": null, "title": null, "_note": "No plan page yet (open item, 7 Oct 2026). Next comes from Jira versions only until there is one." },
+      "brainFolder": "20 Areas/Oolio/Loyalty & Engagement",
+      "baseline": { "date": "2026-10-07", "openIncidents": 5, "oldest": "INC-780" },
+      "holidays": []
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "_comment": "Who is on each team, keyed on Jira account id. Slack ids were resolved with slack_search_users by name (email search returns nothing). Names differ between Jira and Slack, so the run matches on ids only and never on names. Built 7 Oct 2026 from Jira assignees active in the last 21 to 30 days per project (OR, PAPP, STK, AI, LOY). Re-check monthly: anyone with Jira work in a team project for 14 days who is not here is flagged to Niel in the Friday Update, not added automatically.",
+  "updated": "2026-10-07",
+  "people": [
+    { "jiraAccountId": "634dfb7c01c2ff842c15bbed", "jiraName": "Nga Thuy Nguyen", "slackId": "U046WBW972T", "slackName": "Nga", "role": "PO", "teams": ["insights"], "away": false },
+    { "jiraAccountId": "62bbdf07de439ce00ee3f137", "jiraName": "Nalin Sajwan", "slackId": "U01LW3PH7UL", "slackName": "Nalin", "role": "Lead engineer", "teams": ["insights"], "away": false },
+    { "jiraAccountId": "712020:39735e57-6cc0-4d11-b1ad-f002e3464f93", "jiraName": "Tai Le", "slackId": "U090WL1SH3K", "slackName": "Tai", "role": "Senior backend", "teams": ["insights"], "away": false },
+    { "jiraAccountId": "712020:175e574d-dfab-46b0-9533-a74d725070fc", "jiraName": "Hanh Lap", "slackId": "U08UDLGKU3H", "slackName": "Hanh Nham", "role": "Engineer", "teams": ["insights"], "away": false },
+    { "jiraAccountId": "712020:8b20c630-7308-4d36-87dd-3b90bcf87dd9", "jiraName": "Donghyuk Kim", "slackId": "U07PX6RCQTZ", "slackName": "Tony Kim", "role": "Junior data engineer", "teams": ["insights"], "away": false },
+    { "jiraAccountId": "63853b6c5fc160544e1b1b65", "jiraName": "Anh Lan Nguyen", "slackId": "U04D8Q69PKQ", "slackName": "Annie", "role": "QA", "teams": ["insights"], "away": false },
+    { "jiraAccountId": "712020:eb0eb26f-4d83-4a89-ad7e-cf1c25b238ea", "jiraName": "Thuan Nguyen", "slackId": "U07UC6ANGKF", "slackName": "Nick Thane", "role": "Engineer", "teams": ["products-app"], "away": false },
+    { "jiraAccountId": "62bbdf02174792b4ae092890", "jiraName": "Thanh Quang", "slackId": "U02AXRU5SC9", "slackName": "Thanh", "role": "Engineer", "teams": ["products-app"], "away": false },
+    { "jiraAccountId": "712020:5d9fbc69-795d-4ecd-9651-5709479d748e", "jiraName": "Raymond Quynh", "slackId": "U0ALV2W8PDJ", "slackName": "raymond", "role": "Engineer", "teams": ["products-app"], "away": false },
+    { "jiraAccountId": "712020:4a6e7e6f-9cb9-44dd-a058-aab1cd9c7a06", "jiraName": "Viraj Kulkarni", "slackId": "U09KNBF2HQ8", "slackName": "Viraj Kulkarni", "role": "Senior QA", "teams": ["products-app"], "away": false },
+    { "jiraAccountId": "62bbdf0bd752af0e54ec560a", "jiraName": "Saketh Arrabolu", "slackId": "U067M2TNG", "slackName": "Saketh Reddy", "role": "Design", "teams": ["products-app", "ngara-ai"], "away": false },
+    { "jiraAccountId": "5ba84d078b5ecf6d0bd9d77f", "jiraName": "Umran Ahmed", "slackId": "U0AT9EHJVUY", "slackName": "Umran", "role": "PO", "teams": ["inventory"], "away": false },
+    { "jiraAccountId": "62c60555a152cf9736451b8e", "jiraName": "Nikunj Chotaliya", "slackId": "U03NW5ERTAR", "slackName": "Nikunj Chotaliya", "role": "Senior engineer", "teams": ["inventory"], "away": false },
+    { "jiraAccountId": "712020:153e4977-59eb-47c5-9217-4814bf9a00b8", "jiraName": "Alekya Pottabathini", "slackId": "U0AHFPR9P4M", "slackName": "Alekya Pottabathini", "role": "QA", "teams": ["inventory"], "away": false },
+    { "jiraAccountId": "712020:6a43fdc1-1e59-4eb6-ad93-17b5b455d809", "jiraName": "Ponanna PM", "slackId": "U0ALA1PRZB9", "slackName": "Ponanna P M", "role": "to confirm", "teams": ["inventory"], "away": false },
+    { "jiraAccountId": "712020:67ddb4a4-4e54-4b32-90ec-9248b43130ef", "jiraName": "Hari Bukke", "slackId": "U0AGGCEGEHX", "slackName": "hari bukke", "role": "to confirm", "teams": ["inventory"], "away": false },
+    { "jiraAccountId": "712020:b9407dc8-6a4c-4a56-a10a-ed21f508f898", "jiraName": "Yashan Sumanaratne", "slackId": "U095ZUE6UPL", "slackName": "Yashan", "role": "Engineer", "teams": ["ngara-ai"], "away": false },
+    { "jiraAccountId": "712020:09fa9c6a-6248-46c3-ac77-73d8e2c3684f", "jiraName": "Abhilash Damaraju", "slackId": "U0BCNG23P8B", "slackName": "Abhilash", "role": "Engineer", "teams": ["ngara-ai"], "away": false },
+    { "jiraAccountId": "712020:3f86a6b7-b47b-40db-bc04-9875b18b0f02", "jiraName": "Michelle Piliciauskas", "slackId": "U0AGL8FR59B", "slackName": "Michelle", "role": "QA", "teams": ["ngara-ai"], "away": false },
+    { "jiraAccountId": "557058:116eafdd-dda4-4d79-a4a2-e114d0d8d893", "jiraName": "Ekkavee Veeratianpinyo", "slackId": "U07ATNRRCBT", "slackName": "Ekkavee Veeratianpinyo", "role": "Engineer", "teams": ["loyalty-engagement"], "away": false },
+    { "jiraAccountId": "63fbef050a4a47fb8d20c280", "jiraName": "Aditya Nagar", "slackId": "U04SPGQV5AL", "slackName": "aditya", "role": "Engineer", "teams": ["loyalty-engagement"], "away": false },
+    { "jiraAccountId": "62ecf27b3cc20c06c8af9236", "jiraName": "Dung Nguyen", "slackId": "U03SPM3TRMH", "slackName": "Zuri", "role": "Senior QA automation", "teams": ["loyalty-engagement"], "away": false }
+  ],
+  "leftOutOnPurpose": [
+    "Veerender Rathod and Satadru Raha: appear on a few STK items but are not team members.",
+    "Niel Cody: the operator, not a team member.",
+    "Nga Thuy Nguyen on projects other than OR."
+  ],
+  "nameTraps": [
+    "Thuan Nguyen is \"Nick Thane\" in Slack.",
+    "Dung Nguyen is \"Zuri\".",
+    "Hanh Lap is \"Hanh Nham\".",
+    "Saketh Arrabolu is \"Saketh Reddy\".",
+    "Two people are called Tony: Donghyuk Kim (Insights, U07PX6RCQTZ) and Tran Ngoc Dung (AI team, Slack U02EV5XUFM2, not in this roster). Match on id, never on name."
+  ]
+}
