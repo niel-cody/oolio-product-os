@@ -1,5 +1,5 @@
 {
-  "stamp": "2a75fb1",
+  "stamp": "bf1827d",
   "marketplace": {
     "name": "oolio-product-os",
     "description": "Oolio Product OS: the product operating system plugins."
@@ -400,27 +400,27 @@
         {
           "id": "jira-epic-groomer",
           "plugin": "oolio-pm",
-          "description": "Groom or backfill the description on a Jira epic so it follows Oolio's standard What/Why/Who pattern. Trigger PROACTIVELY whenever the user references a Jira epic key (`OR-XXXX`, `EDU-XXXX`, `IDEA-XXXX` flagged as Epic, etc.) and asks to \"describe\", \"groom\", \"polish\", \"backfill\", \"tidy up\", \"sharpen\", \"rewrite\", or \"write a description for\" the epic. Also trigger when the user asks to standardise epic descriptions across a project, get an epic ready for Steering or roadmap review, or pastes a PRD link and asks for the matching epic description. Prefer this skill over generic writing help whenever an epic-level Jira ticket needs a clean, high-level description. Do NOT trigger for stories, tasks, bugs, sub-tasks, or JPD ideas. Use `jpd-idea-groomer` instead for IDEA / DISC / JPD tickets.",
+          "description": "Groom or backfill a Jira epic description so anyone, inside or outside engineering, can read in a minute what ships, why, who it is for, when it is done and what was decided: What, Why, Who it's for, Definition of done (native tick boxes), Decisions (native decision items), earlier history collapsed, nothing Jira already shows. Trigger PROACTIVELY whenever the user references a Jira epic key (`OR-XXXX`, `PAPP-XXXX`, `EDU-XXXX`) and asks to \"describe\", \"groom\", \"polish\", \"backfill\", \"tidy up\", \"rewrite\", \"add the definition of done\", \"record a decision on\" or \"write a description for\" the epic, wants epic descriptions standardised across a project or an epic ready for Steering, or pastes a PRD and asks for the matching epic description. Do NOT trigger for stories, tasks, bugs, sub-tasks or JPD ideas. Use `jpd-idea-groomer` for IDEA / OHSI / DISC tickets.",
           "title": "Jira Epic Groomer",
-          "lede": "Produce a tight, three-section description for a Jira epic. The structure is **What**, **Why**, **Who it's for**. Final descriptions are not a thesis. They are a high-level steering document that anyone reading the epic for the first time can grasp in under thirty seconds.",
-          "blurb": "Groom or backfill the description on a Jira epic so it follows Oolio's standard What/Why/Who pattern.",
-          "when": "You reference a Jira epic key (`OR-XXXX`, `EDU-XXXX`, `IDEA-XXXX` flagged as Epic, etc.). Also trigger when you ask to standardise epic descriptions across a project, get an epic ready for Steering or roadmap review, or paste a PRD link and ask for the matching epic description. Prefer this skill over generic writing help whenever an epic-level Jira ticket needs a clean, high-level description.",
+          "lede": "Write the description on a Jira epic so that a person who was not in the room can read it in under a minute and come away knowing five things: **what** we are building, **why**, **who** it is for, **when it is done**, and **what has been decided** along the way. Engineers, Steering, Sales, Support and new starters all read the same epic. The description is written for the one who knows least.",
+          "blurb": "Groom or backfill a Jira epic description so anyone, inside or outside engineering, can read in a minute what ships, why, who it is for, when it is done and what was decided: What, Why, Who it's for, Definition of done (native tick boxes), Decisions (native decision items), earlier history collapsed, nothing Jira already shows.",
+          "when": "You reference a Jira epic key (`OR-XXXX`, `PAPP-XXXX`, `EDU-XXXX`), want epic descriptions standardised across a project or an epic ready for Steering, or paste a PRD and ask for the matching epic description.",
           "phrases": [
             "describe",
             "groom",
             "polish",
             "backfill",
             "tidy up",
-            "sharpen",
             "rewrite",
+            "add the definition of done",
+            "record a decision on",
             "write a description for"
           ],
           "excludes": [
             "For stories",
             "Tasks",
             "Bugs",
-            "Sub-tasks",
-            "JPD ideas. Use `jpd-idea-groomer` instead for IDEA / DISC / JPD tickets"
+            "Sub-tasks or JPD ideas. Use `jpd-idea-groomer` for IDEA / OHSI / DISC tickets"
           ]
         },
         {
@@ -3491,28 +3491,28 @@
       "plugin": "oolio-pm",
       "command": "/oolio-pm:jira-epic-groomer",
       "title": "Jira Epic Groomer",
-      "blurb": "Groom or backfill the description on a Jira epic so it follows Oolio's standard What/Why/Who pattern.",
-      "summary": "Groom or backfill the description on a Jira epic so it follows Oolio's standard What/Why/Who pattern.",
-      "lede": "Produce a tight, three-section description for a Jira epic. The structure is **What**, **Why**, **Who it's for**. Final descriptions are not a thesis. They are a high-level steering document that anyone reading the epic for the first time can grasp in under thirty seconds.",
-      "when": "You reference a Jira epic key (`OR-XXXX`, `EDU-XXXX`, `IDEA-XXXX` flagged as Epic, etc.). Also trigger when you ask to standardise epic descriptions across a project, get an epic ready for Steering or roadmap review, or paste a PRD link and ask for the matching epic description. Prefer this skill over generic writing help whenever an epic-level Jira ticket needs a clean, high-level description.",
+      "blurb": "Groom or backfill a Jira epic description so anyone, inside or outside engineering, can read in a minute what ships, why, who it is for, when it is done and what was decided: What, Why, Who it's for, Definition of done (native tick boxes), Decisions (native decision items), earlier history collapsed, nothing Jira already shows.",
+      "summary": "Groom or backfill a Jira epic description so anyone, inside or outside engineering, can read in a minute what ships, why, who it is for, when it is done and what was decided: What, Why, Who it's for, Definition of done (native tick boxes), Decisions (native decision items), earlier history collapsed, nothing Jira already shows.",
+      "lede": "Write the description on a Jira epic so that a person who was not in the room can read it in under a minute and come away knowing five things: **what** we are building, **why**, **who** it is for, **when it is done**, and **what has been decided** along the way. Engineers, Steering, Sales, Support and new starters all read the same epic. The description is written for the one who knows least.",
+      "when": "You reference a Jira epic key (`OR-XXXX`, `PAPP-XXXX`, `EDU-XXXX`), want epic descriptions standardised across a project or an epic ready for Steering, or paste a PRD and ask for the matching epic description.",
       "phrases": [
         "describe",
         "groom",
         "polish",
         "backfill",
         "tidy up",
-        "sharpen",
         "rewrite",
+        "add the definition of done",
+        "record a decision on",
         "write a description for"
       ],
       "excludes": [
         "For stories",
         "Tasks",
         "Bugs",
-        "Sub-tasks",
-        "JPD ideas. Use `jpd-idea-groomer` instead for IDEA / DISC / JPD tickets"
+        "Sub-tasks or JPD ideas. Use `jpd-idea-groomer` for IDEA / OHSI / DISC tickets"
       ],
-      "note": "epic → What/Why/Who",
+      "note": "epic → what, why, who, done, decided",
       "badge": "CLAUDE·JIRA",
       "type": "ai",
       "stage": "Delivery",
@@ -3605,8 +3605,8 @@
       "loops": [],
       "systems": [
         {
-          "id": "slack",
-          "label": "Slack",
+          "id": "figma",
+          "label": "Figma",
           "band": "source",
           "access": "read"
         },
@@ -5493,12 +5493,12 @@
       {
         "id": "jira-epic-groomer",
         "label": "Jira Epic Groomer",
-        "note": "epic → What/Why/Who",
+        "note": "epic → what, why, who, done, decided",
         "badge": "CLAUDE·JIRA",
         "type": "ai",
         "col": 10,
         "row": 0,
-        "desc": "Groom or backfill the description on a Jira epic so it follows Oolio's standard What/Why/Who pattern. Trigger PROACTIVELY whenever the user references a Jira epic key (`OR-XXXX`, `EDU-XXXX`, `IDEA-XXXX` flagged as Epic, etc.) and asks to \"describe\", \"groom\", \"polish\", \"backfill\", \"tidy up\", \"sharpen\", \"rewrite\", or \"write a description for\" the epic. Also trigger when the user asks to standardise epic descriptions across a project, get an epic ready for Steering or roadmap review, or pastes a PRD link and asks for the matching epic description. Prefer this skill over generic writing help whenever an epic-level Jira ticket needs a clean, high-level description. Do NOT trigger for stories, tasks, bugs, sub-tasks, or JPD ideas. Use `jpd-idea-groomer` instead for IDEA / DISC / JPD tickets."
+        "desc": "Groom or backfill a Jira epic description so anyone, inside or outside engineering, can read in a minute what ships, why, who it is for, when it is done and what was decided: What, Why, Who it's for, Definition of done (native tick boxes), Decisions (native decision items), earlier history collapsed, nothing Jira already shows. Trigger PROACTIVELY whenever the user references a Jira epic key (`OR-XXXX`, `PAPP-XXXX`, `EDU-XXXX`) and asks to \"describe\", \"groom\", \"polish\", \"backfill\", \"tidy up\", \"rewrite\", \"add the definition of done\", \"record a decision on\" or \"write a description for\" the epic, wants epic descriptions standardised across a project or an epic ready for Steering, or pastes a PRD and asks for the matching epic description. Do NOT trigger for stories, tasks, bugs, sub-tasks or JPD ideas. Use `jpd-idea-groomer` for IDEA / OHSI / DISC tickets."
       },
       {
         "id": "jira-epic-titler",
@@ -6552,7 +6552,6 @@
           "gtm-handover",
           "gtm-marketing",
           "gtm-playbooks",
-          "jira-epic-groomer",
           "jira-epic-titler",
           "jpd-loop",
           "jpd-title-standard",
@@ -6561,7 +6560,7 @@
           "release-notes",
           "steering-pack"
         ],
-        "skillCount": 14
+        "skillCount": 13
       },
       {
         "id": "m365",
@@ -6707,13 +6706,14 @@
           "design-council-review",
           "discovery-wayfinder",
           "grill-me",
+          "jira-epic-groomer",
           "jpd-idea-groomer",
           "jpd-loop",
           "story-mockups",
           "test-basis",
           "write-prd"
         ],
-        "skillCount": 10
+        "skillCount": 11
       },
       {
         "id": "core",
@@ -7258,6 +7258,12 @@
     ]
   },
   "changelog": [
+    {
+      "date": "2026-10-09",
+      "title": "jira-epic-groomer: five questions, native tick boxes and decision items, history collapsed (48 skills)",
+      "heading": "2026-10-09 – jira-epic-groomer: five questions, native tick boxes and decision items, history collapsed (48 skills)",
+      "body": "An epic is read by people who were not in the room: engineers, Steering, Sales, Support, new starters. The v1 description (What, Why, Who) told them what and why but not when the epic is done or what had been decided along the way, and on a live epic the dated \"Updated...\" paragraphs and the story list had crept to the top and buried the content. The shape was rebuilt by hand on PAPP-860 (Featured products) on 9 October, Niel signed off the result, and the Brain's `jira-epic-groomer` note recorded it as the v2 spec. This commit makes the skill produce it.\n\n- **Five sections, fixed order.** What, Why, Who it's for, **Definition of done**, **Decisions**, then a collapsed **Earlier notes** block. Current content first, history last and out of the way. Anyone inside or outside engineering should be able to read an epic in under a minute and know what we are building, why, who it is for, when it is done and what has been decided.\n- **Definition of done replaces acceptance criteria on the epic.** Acceptance criteria say when a story works and belong on stories. The definition of done says when the epic can be closed: four to seven outcomes a person can verify in the build, each a native Jira tick box, ticked only against evidence and never because a story moved to Done.\n- **Decisions are native decision items**, newest first, one line each with the date first, only for decisions that changed scope, shape or date. A reversed decision is struck through, never deleted. A decision that changes the product also belongs in the PRD's change history; the skill says so when it does.\n- **Nothing Jira already shows.** No story list, no release date, no owner, no status, no PRD or Figma links in the text once attached. One italic line under What for facts with no field of their own. The connector can read remote links but not create them, so the skill checks what is attached and reports the gaps with exact URLs, including a superseded PRD still attached.\n- **Written in ADF.** Tick boxes, decision items and the expand do not exist in markdown. A new reference, `references/epic-description-adf.md`, carries the skeleton, the render markers to check after the push (the `<>` decision marker was observed on PAPP-860; the tick-box and expand renders are expected and to be recorded on first use) and the markdown fallback, which the skill names out loud if Jira flattens a node.\n- **Three modes.** Groom (the full rebuild, also for v1 epics that need the done list and decisions added), Decide (add one decision item in place) and Tick (tick a done item against a QA Review finding, a `qa-mission` verdict or a stated verification, with the evidence appended to the item).\n- **Old history is kept, not deleted.** Anything the new shape drops moves verbatim into the collapsed Earlier notes expand.\n- **Decided while building**, answering the two questions the Brain note left open: the skill reports attachment gaps rather than attaching (no connector tool creates a remote link or a Figma design link), and ticking the done list is a mode of this skill rather than a second skill, so the standard and the evidence rule live in one place.\n- **Not yet proven through the connector.** The ADF push has not been exercised on a live epic in this session; PAPP-860's done list and history are still bullets and paragraphs. Converting them is the first run of the new skill and the first follow-up.\n- **Housekeeping.** Worked example is now PAPP-860. Persona shorthand gains venue managers and diners. The skill joins the strict no-em-dash lint. Plugin README, site overlay note, and the generated site data updated. Still 48 skills."
+    },
     {
       "date": "2026-10-07",
       "title": "pre-standup: the morning post for every team, incidents first (48 skills)",

@@ -668,7 +668,7 @@
     },
     "jira-epic-groomer": {
       "label": "Jira Epic Groomer",
-      "note": "epic → What/Why/Who",
+      "note": "epic → what, why, who, done, decided",
       "badge": "CLAUDE·JIRA",
       "type": "ai",
       "stage": "Delivery",

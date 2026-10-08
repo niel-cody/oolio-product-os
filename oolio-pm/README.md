@@ -69,7 +69,7 @@ Tests the built product between "the spec is right" and "the numbers moved". One
 
 **Jira authoring helpers**
 
-- `jira-epic-groomer` — grooms an epic description to the standard What/Why/Who pattern.
+- `jira-epic-groomer` — grooms an epic description so anyone can read what ships, why, who it is for, when it is done and what was decided: What, Why, Who it's for, Definition of done (native tick boxes), Decisions (native decision items), earlier history collapsed. Written in ADF.
 - `jira-epic-titler` — proposes stronger epic titles to the `[Capability] for [Outcome]` standard.
 
 **Thinking partners**
